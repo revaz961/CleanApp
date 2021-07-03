@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/chooserFragment">
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.cleanapp.SplashScreenFragment"
+        android:name="com.example.cleanapp.ui.splash.SplashScreenFragment"
         android:label="splash_screen_fragment"
-        tools:layout="@layout/splash_screen_fragment" >
+        tools:layout="@layout/splash_screen_fragment">
         <action
             android:id="@+id/action_splashScreenFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -18,5 +18,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.cleanapp.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_chooserFragment"
+            app:destination="@id/chooserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooserFragment"
+        android:name="com.example.cleanapp.ui.collect_details.ChooserFragment"
+        android:label="chooser_fragment"
+        tools:layout="@layout/chooser_fragment" />
 </navigation>

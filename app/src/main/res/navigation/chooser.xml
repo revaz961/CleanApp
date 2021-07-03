@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chooser"
+    app:startDestination="@id/cityChooserFragment">
+
+    <fragment
+        android:id="@+id/cityChooserFragment"
+        android:name="com.example.cleanapp.ui.collect_details.city.CityChooserFragment"
+        android:label="city_chooser_fragment"
+        tools:layout="@layout/city_chooser_fragment">
+        <action
+            android:id="@+id/action_cityChooserFragment_to_categoryChooserFragment"
+            app:destination="@id/categoryChooserFragment"
+            app:enterAnim="@anim/from_top"
+            app:popEnterAnim="@anim/from_top" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryChooserFragment"
+        android:name="com.example.cleanapp.ui.collect_details.category.CategoryChooserFragment"
+        android:label="category_chooser_fragment"
+        tools:layout="@layout/category_chooser_fragment">
+        <action
+            android:id="@+id/action_categoryChooserFragment_to_cityChooserFragment"
+            app:destination="@id/cityChooserFragment"
+            app:enterAnim="@anim/from_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popUpTo="@id/categoryChooserFragment" />
+    </fragment>
+</navigation>

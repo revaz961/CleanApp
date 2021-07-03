@@ -1,4 +1,4 @@
-package com.example.cleanapp
+package com.example.cleanapp.ui.splash
 
 import androidx.lifecycle.ViewModel
 
