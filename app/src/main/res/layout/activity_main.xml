@@ -17,6 +17,6 @@
         app:layout_constraintRight_toRightOf="parent"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/navigation" />
+        app:navGraph="@navigation/chooser" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CleanApp</string>
+    <string name="when_do_you_want_your_place_to_be_cleaned">When do you want your place to be cleaned?</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="would_you_like_to_change_the_rooms">Would you like to change the rooms?</string>
+    <string name="apply">Apply</string>
+    <string name="save_changes">Save changes</string>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chooser"
-    app:startDestination="@id/cityChooserFragment">
+    app:startDestination="@id/chooserDateFragment2">
 
     <fragment
         android:id="@+id/cityChooserFragment"
@@ -15,6 +15,12 @@
             app:destination="@id/categoryChooserFragment"
             app:enterAnim="@anim/from_top"
             app:popEnterAnim="@anim/from_top" />
+        <action
+            android:id="@+id/action_cityChooserFragment_to_chooserDateFragment2"
+            app:destination="@id/chooserDateFragment2" />
+        <action
+            android:id="@+id/action_cityChooserFragment_to_categoryChooserFragment2"
+            app:destination="@id/categoryChooserFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryChooserFragment"
@@ -27,5 +33,26 @@
             app:enterAnim="@anim/from_top"
             app:popEnterAnim="@anim/from_top"
             app:popUpTo="@id/categoryChooserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooserDateFragment2"
+        android:name="com.example.cleanapp.ui.collect_details.date.ChooserDateFragment"
+        android:label="chooser_date_fragment"
+        tools:layout="@layout/chooser_date_fragment" >
+        <action
+            android:id="@+id/action_chooserDateFragment2_to_cityChooserFragment"
+            app:destination="@id/cityChooserFragment" />
+        <action
+            android:id="@+id/action_chooserDateFragment2_to_roomChooserFragment"
+            app:destination="@id/roomChooserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomChooserFragment"
+        android:name="com.example.cleanapp.ui.collect_details.room.RoomChooserFragment"
+        android:label="room_chooser_fragment"
+        tools:layout="@layout/room_chooser_fragment" >
+        <action
+            android:id="@+id/action_roomChooserFragment_to_chooserDateFragment2"
+            app:destination="@id/chooserDateFragment2" />
     </fragment>
 </navigation>
