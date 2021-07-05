@@ -1,4 +1,4 @@
-package com.example.cleanapp
+package com.example.cleanapp.ui.home
 
 import androidx.lifecycle.ViewModel
 

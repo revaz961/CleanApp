@@ -6,4 +6,16 @@
     <string name="would_you_like_to_change_the_rooms">Would you like to change the rooms?</string>
     <string name="apply">Apply</string>
     <string name="save_changes">Save changes</string>
+    <string name="email">Email:</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password:</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="signin">SignIn</string>
+    <string name="signup">SignUp</string>
+    <string name="sing_up">Sing Up</string>
+    <string name="full_name">Full Name:</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
 </resources>
