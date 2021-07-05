@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_blue"
     android:orientation="vertical"
     tools:context=".ui.collect_details.ChooserFragment">
 
     <TextView
         android:id="@+id/instructions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +26,9 @@
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.95"
         app:layout_constraintStart_toStartOf="parent"
-        app:navGraph="@navigation/chooser" />
+        app:navGraph="@navigation/chooser"
+        android:elevation="5dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

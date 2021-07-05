@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.GeneratedAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.CityChooserFragmentBinding
+import com.example.cleanapp.ui.collect_details.ChooserViewModel
 import java.util.*
 
 class CityChooserFragment : Fragment() {
@@ -21,7 +23,7 @@ class CityChooserFragment : Fragment() {
     private var _binding: CityChooserFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: CityChooserViewModel
+    private val viewModel: ChooserViewModel by activityViewModels()
 
     private val cities = mutableListOf("Tbilisi", "Kutaisi", "Batumi", "Borjomi", "Gori", "Rustavi")
     private lateinit var adapter: CitiesAdapter
@@ -56,12 +58,16 @@ class CityChooserFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 filter(s.toString())
             }
-
         })
     }
 
     private fun initRecycler() {
-        adapter = CitiesAdapter(cities)
+        adapter = CitiesAdapter(cities, object : CityClickListener {
+            override fun onCityClick(city: String) {
+                findNavController().navigate(R.id.action_cityChooserFragment_to_categoryChooserFragment)
+            }
+
+        })
         binding.recyclerCities.layoutManager = LinearLayoutManager(requireActivity())
         binding.recyclerCities.adapter = adapter
         adapter.notifyDataSetChanged()
@@ -76,8 +82,6 @@ class CityChooserFragment : Fragment() {
                 filteredCities.add(city)
             }
         }
-
         adapter.filterCities(filteredCities)
     }
-
 }
