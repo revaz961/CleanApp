@@ -1,32 +1,29 @@
 package com.example.cleanapp.ui.splash
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
+import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.databinding.SplashScreenFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SplashScreenFragment : Fragment() {
+@AndroidEntryPoint
+class SplashScreenFragment : BaseFragment<SplashScreenFragmentBinding>(SplashScreenFragmentBinding::inflate) {
 
-    companion object {
-        fun newInstance() = SplashScreenFragment()
+    private val viewModel:SplashScreenViewModel by viewModels()
+
+    override fun start() {
+        observes()
+        viewModel.checkAuth()
     }
 
-    private lateinit var viewModel: SplashScreenViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.splash_screen_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SplashScreenViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun observes(){
+        viewModel.liveData.observe(viewLifecycleOwner,{
+            if(it)
+                findNavController().navigate(R.id.action_splashScreenFragment_to_chooserFragment)
+            else
+                findNavController().navigate(R.id.action_splashScreenFragment_to_SignInFragment)
+        })
     }
 
 }
