@@ -6,6 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.databinding.CityViewHolderBinding
 
 class CitiesAdapter (private var cities: MutableList<String>, private val clickListener: CityClickListener) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
+    fun setItem(list:List<String>){
+        cities.clear()
+        cities.addAll(list)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val itemView = CityViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CityViewHolder(itemView)

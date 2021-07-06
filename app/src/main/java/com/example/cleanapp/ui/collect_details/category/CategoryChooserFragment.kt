@@ -1,39 +1,50 @@
 package com.example.cleanapp.ui.collect_details.category
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.cleanapp.ui.collect_details.city.CityChooserViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
+import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CategoryChooserFragmentBinding
+import com.example.cleanapp.models.ResultHandler
+import com.example.cleanapp.ui.collect_details.ChooserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class CategoryChooserFragment : Fragment() {
+@AndroidEntryPoint
+class CategoryChooserFragment :
+    BaseFragment<CategoryChooserFragmentBinding>(CategoryChooserFragmentBinding::inflate) {
 
-    private var _binding: CategoryChooserFragmentBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: CategoryChooserViewModel by viewModels()
+    private val shareViewModel: ChooserViewModel by activityViewModels()
+    private lateinit var adapter: CategoryAdapter
 
-    private lateinit var viewModel: CityChooserViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = CategoryChooserFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun start() {
+        observes()
+        initRecycler()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.imageButton2.setOnClickListener {
-            findNavController().navigate(R.id.action_categoryChooserFragment_to_cityChooserFragment)
+    private fun initRecycler() {
+        adapter = CategoryAdapter()
+        adapter.chooseCategory = {
+            shareViewModel.setCategory(it)
+            findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment2)
         }
+        binding.rvCategory.adapter = adapter
+        binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.getCategory()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun observes() {
+        viewModel.liveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                    adapter.setItems(it.data!!)
+                }
+            }
+        })
     }
+
 }

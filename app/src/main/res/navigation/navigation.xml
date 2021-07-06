@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/chooserFragment">
 
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -11,14 +11,18 @@
         android:label="splash_screen_fragment"
         tools:layout="@layout/splash_screen_fragment">
         <action
-            android:id="@+id/action_splashScreenFragment_to_chooserFragment2"
+            android:id="@+id/action_splashScreenFragment_to_chooserFragment"
             app:destination="@id/chooserFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.cleanapp.ui.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment"/>
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_chooserFragment"
+            app:destination="@id/chooserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chooserFragment"
         android:name="com.example.cleanapp.ui.collect_details.ChooserFragment"
@@ -28,10 +32,24 @@
         android:id="@+id/SignInFragment"
         android:name="com.example.cleanapp.ui.login.SignInFragment"
         android:label="log_in_fragment"
-        tools:layout="@layout/sign_in_fragment" />
+        tools:layout="@layout/sign_in_fragment" >
+        <action
+            android:id="@+id/action_SignInFragment_to_chooserFragment"
+            app:destination="@id/chooserFragment" />
+        <action
+            android:id="@+id/action_SignInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.cleanapp.ui.signup.SignUpFragment"
         android:label="sign_up_fragment"
-        tools:layout="@layout/sign_up_fragment" />
+        tools:layout="@layout/sign_up_fragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_SignInFragment"
+            app:destination="@id/SignInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_chooserFragment"
+            app:destination="@id/chooserFragment" />
+    </fragment>
 </navigation>

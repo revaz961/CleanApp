@@ -1,19 +1,18 @@
 package com.example.cleanapp.models
 
-
 import com.google.gson.annotations.SerializedName
 
 data class City(
     @SerializedName("city_en")
-    val cityEn: String,
+    val city_en: String="",
     @SerializedName("city_ge")
-    val cityGe: String,
+    val city_ge: String="",
     @SerializedName("city_ru")
-    val cityRu: String,
+    val city_ru: String="",
     @SerializedName("lat")
-    val lat: String,
+    val lat: String="",
     @SerializedName("lng")
-    val lng: String,
+    val lng: String="",
     @SerializedName("region")
-    val region: String
+    val region: String=""
 )
