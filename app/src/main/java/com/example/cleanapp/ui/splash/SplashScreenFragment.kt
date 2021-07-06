@@ -21,8 +21,8 @@ class SplashScreenFragment : BaseFragment<SplashScreenFragmentBinding>(SplashScr
         viewModel.liveData.observe(viewLifecycleOwner,{
             if(it)
                 findNavController().navigate(R.id.action_splashScreenFragment_to_chooserFragment)
-            else
-                findNavController().navigate(R.id.action_splashScreenFragment_to_SignInFragment)
+//            else
+//                findNavController().navigate(R.id.action_splashScreenFragment_to_SignInFragment)
         })
     }
 

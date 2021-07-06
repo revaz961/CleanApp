@@ -1,15 +1,18 @@
 package com.example.cleanapp.ui.collect_details.room
 
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.RoomChooserFragmentBinding
 import com.example.cleanapp.extension.toDateFormat
+import com.example.cleanapp.ui.collect_details.ChooserViewModel
 
 class RoomChooserFragment :
     BaseFragment<RoomChooserFragmentBinding>(RoomChooserFragmentBinding::inflate) {
 
     private val viewModel: RoomChooserViewModel by viewModels()
+    private val chooserViewModel: ChooserViewModel by activityViewModels()
     private lateinit var adapter: RoomCounterAdapter
 
     override fun start() {
@@ -18,8 +21,12 @@ class RoomChooserFragment :
 
     private fun init() {
         initRecycler()
-        val date:Long = requireArguments().getLong("date")
+        val date: Long = requireArguments().getLong("date")
         binding.tvDate.text = date.toDateFormat("MMMM dd, hh:mm aaa")
+        binding.btnApply.setOnClickListener {
+            chooserViewModel.setRoomCount(viewModel.roomCounters)
+            chooserViewModel.setOrderInDb()
+        }
     }
 
     private fun initRecycler() {
@@ -27,7 +34,10 @@ class RoomChooserFragment :
             setItems(viewModel.roomCounters)
 
             increaseClick = { position ->
-                ++viewModel.roomCounters[position].count
+                if (viewModel.roomCounters[position].count < 10)
+                    ++viewModel.roomCounters[position].count
+                else
+                    viewModel.roomCounters[position].count
             }
 
             decreaseClick = { position ->

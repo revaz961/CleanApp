@@ -1,6 +1,5 @@
 package com.example.cleanapp.ui.collect_details.city
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,22 +7,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.GeneratedAdapter
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.CityChooserFragmentBinding
+import com.example.cleanapp.models.City
+import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class CityChooserFragment : Fragment() {
 
     private var _binding: CityChooserFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ChooserViewModel by activityViewModels()
+    private val viewModel: CityChooserViewModel by viewModels()
+    private val sharedViewModel: ChooserViewModel by activityViewModels()
 
     private val cities = mutableListOf("Tbilisi", "Kutaisi", "Batumi", "Borjomi", "Gori", "Rustavi")
     private lateinit var adapter: CitiesAdapter
@@ -47,6 +50,7 @@ class CityChooserFragment : Fragment() {
     }
 
     private fun init() {
+        observes()
         initRecycler()
         binding.inputCity.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -64,6 +68,7 @@ class CityChooserFragment : Fragment() {
     private fun initRecycler() {
         adapter = CitiesAdapter(cities, object : CityClickListener {
             override fun onCityClick(city: String) {
+                sharedViewModel.setCity(City(city))
                 findNavController().navigate(R.id.action_cityChooserFragment_to_categoryChooserFragment)
             }
 
@@ -71,6 +76,7 @@ class CityChooserFragment : Fragment() {
         binding.recyclerCities.layoutManager = LinearLayoutManager(requireActivity())
         binding.recyclerCities.adapter = adapter
         adapter.notifyDataSetChanged()
+        viewModel.getCities()
     }
 
     private fun filter(input: String) {
@@ -83,5 +89,13 @@ class CityChooserFragment : Fragment() {
             }
         }
         adapter.filterCities(filteredCities)
+    }
+
+    private fun observes(){
+        viewModel.liveData.observe(viewLifecycleOwner,{
+            when(it){
+                is ResultHandler.Success -> adapter.setItem(it.data!!.map { it.city_en })
+            }
+        })
     }
 }

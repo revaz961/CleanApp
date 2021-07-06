@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Category(
     @SerializedName("category_en")
-    val categoryEn: String,
+    val category_en: String="",
     @SerializedName("category_ge")
-    val categoryGe: String,
+    val category_ge: String="",
     @SerializedName("category_ru")
-    val categoryRu: String,
+    val category_ru: String="",
     @SerializedName("color")
-    val color: String,
+    val color: String="",
     @SerializedName("image_url")
-    val imageUrl: String
+    val image_url: String=""
 )
