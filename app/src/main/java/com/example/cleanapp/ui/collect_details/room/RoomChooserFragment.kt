@@ -5,7 +5,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.RoomChooserFragmentBinding
-import com.example.cleanapp.extension.toDateFormat
+import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
 
 class RoomChooserFragment :

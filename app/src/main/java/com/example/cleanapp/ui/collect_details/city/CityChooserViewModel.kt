@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.City
 import com.example.cleanapp.models.ResultHandler
+import com.google.android.gms.location.LocationRequest
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.getValue
 import dagger.hilt.android.lifecycle.HiltViewModel

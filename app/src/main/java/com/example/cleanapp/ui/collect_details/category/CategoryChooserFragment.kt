@@ -1,6 +1,7 @@
 package com.example.cleanapp.ui.collect_details.category
 
 
+import android.util.Log.d
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,23 +22,28 @@ class CategoryChooserFragment :
     private lateinit var adapter: CategoryAdapter
 
     override fun start() {
-        observes()
         initRecycler()
+        observes()
     }
 
     private fun initRecycler() {
-        adapter = CategoryAdapter()
-        adapter.chooseCategory = {
-            shareViewModel.setCategory(it)
-            findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment2)
+        adapter = CategoryAdapter().apply {
+            chooseCategory = {
+                shareViewModel.setCategory(it)
+                findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment2)
+                shareViewModel.setFragmentId(it.category_en)
+                d("FRAGID", "${shareViewModel.fragmentIdLiveData.value.toString()}")
+            }
         }
         binding.rvCategory.adapter = adapter
         binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getCategory()
+
     }
 
     private fun observes() {
+
         viewModel.liveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> {
@@ -46,5 +52,30 @@ class CategoryChooserFragment :
             }
         })
     }
+
+
+
+//    private fun initRecycler() {
+//        adapter = RoomCounterAdapter().apply {
+//            setItems(viewModel.roomCounters)
+//
+//            increaseClick = { position ->
+//                if (viewModel.roomCounters[position].count < 10)
+//                    ++viewModel.roomCounters[position].count
+//                else
+//                    viewModel.roomCounters[position].count
+//            }
+//
+//            decreaseClick = { position ->
+//                if (viewModel.roomCounters[position].count > 0)
+//                    --viewModel.roomCounters[position].count
+//                else
+//                    0
+//            }
+//        }
+
+//        binding.rvRoom.adapter = adapter
+//        binding.rvRoom.layoutManager = LinearLayoutManager(requireContext())
+//    }
 
 }

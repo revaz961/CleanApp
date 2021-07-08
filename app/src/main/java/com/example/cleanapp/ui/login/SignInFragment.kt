@@ -2,11 +2,9 @@ package com.example.cleanapp.ui.login
 
 import android.util.Log
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.SignInFragmentBinding
-import com.example.cleanapp.extension.isEmail
+import com.example.cleanapp.extensions.isEmail
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,36 +1,21 @@
 package com.example.cleanapp.ui.collect_details
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ChooserFragmentBinding
-import com.example.cleanapp.ui.collect_details.city.CityChooserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class ChooserFragment : Fragment() {
+@AndroidEntryPoint
+class ChooserFragment : BaseFragment<ChooserFragmentBinding>(ChooserFragmentBinding::inflate) {
 
-    private var _binding: ChooserFragmentBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var viewModel: CityChooserViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = ChooserFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+    private val viewModel: ChooserViewModel by activityViewModels()
+    override fun start() {
+        observes()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun observes() {
+        viewModel.fragmentIdLiveData.observe(viewLifecycleOwner, {
+            binding.chooserInstructions.text = it
+        })
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
 }

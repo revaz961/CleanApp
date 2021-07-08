@@ -1,97 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:overScrollMode="never"
-    android:scrollbars="none">
+    android:background="@drawable/details_bg"
+    android:paddingTop="@dimen/main_margin_TB"
+    android:paddingBottom="@dimen/main_margin_TB">
 
-    <FrameLayout
-        android:layout_width="match_parent"
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"
-        tools:context=".ui.collect_details.date.ChooserDateFragment">
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start_date"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="133dp"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="64dp"
-            android:background="@color/black" />
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Leselidze Apt"
+        android:textColor="@color/orange_light"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="35dp"
-            android:text="@string/when_do_you_want_your_place_to_be_cleaned"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/btnNext"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end_date"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start_date"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddress">
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="133dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="23dp"
-            android:background="@color/black" />
-
-        <FrameLayout
+        <RelativeLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="237dp"
-            android:background="@drawable/top_round"
-            android:backgroundTint="@color/white"
-            android:paddingBottom="20dp">
-
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="28dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_baseline_arrow_back_24" />
-
-            <TextView
-                android:id="@+id/tvAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="22dp"
-                android:text="Leselidze Apt"
-                android:textColor="@color/orange_light"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            android:layout_marginTop="@dimen/main_margin_TB"
+            app:layout_constraintBottom_toTopOf="@+id/btnSkip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddress">
 
             <CalendarView
                 android:id="@+id/Calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="400dp"
-                android:layout_marginEnd="80dp"
-                android:text="Select Time"
-                android:textColor="@color/orange"
-                android:textSize="20sp"
-                android:textStyle="italic" />
+                android:layout_alignTop="@+id/flTimePicker"
+                android:layout_alignBottom="@+id/flTimePicker"
+                android:layout_marginEnd="@dimen/calendar_margin_LR"
+                android:layout_toStartOf="@+id/flTimePicker"
+                android:gravity="center"
+                android:text="@string/select_time"
+                android:theme="@style/Time.Selector" />
 
             <FrameLayout
                 android:id="@+id/flTimePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/Calendar"
+                android:layout_alignParentEnd="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="392dp"
+                android:layout_marginTop="@dimen/calendar_margin_TB"
+                android:layout_marginEnd="@dimen/main_margin_LR"
                 android:background="@drawable/round_border"
                 android:padding="5dp">
 
@@ -114,35 +104,46 @@
                     app:tint="@android:color/holo_blue_dark" />
 
             </FrameLayout>
+        </RelativeLayout>
+    </ScrollView>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSkip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="490dp"
-                android:background="@android:color/transparent"
-                android:text="@string/skip"
-                android:textAllCaps="false"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="20sp" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/skip"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start_date" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="490dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="25dp"
-                android:background="@drawable/round_border"
-                android:backgroundTint="@color/orange"
-                android:text="@string/next"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_border"
+        android:backgroundTint="@color/orange"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end_date" />
 
-        </FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/main_margin_LR" />
 
-    </FrameLayout>
-</ScrollView>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/main_margin_LR" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

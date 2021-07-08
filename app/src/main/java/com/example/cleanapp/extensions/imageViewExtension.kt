@@ -1,4 +1,4 @@
-package com.example.cleanapp.extension
+package com.example.cleanapp.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

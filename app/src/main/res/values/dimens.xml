@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_margin_LR">20dp</dimen>
+    <dimen name="main_margin_TB">15dp</dimen>
+    <dimen name="calendar_margin_TB">60dp</dimen>
+    <dimen name="calendar_margin_LR">40dp</dimen>
+</resources>

@@ -1,4 +1,4 @@
-package com.example.cleanapp.extension
+package com.example.cleanapp.extensions
 
 import java.text.SimpleDateFormat
 import java.util.*

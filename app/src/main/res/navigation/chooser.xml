@@ -13,8 +13,8 @@
         <action
             android:id="@+id/action_cityChooserFragment_to_categoryChooserFragment"
             app:destination="@id/categoryChooserFragment"
-            app:enterAnim="@anim/from_top"
-            app:popEnterAnim="@anim/from_top" />
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top" />
         <action
             android:id="@+id/action_cityChooserFragment_to_categoryChooserFragment2"
             app:destination="@id/categoryChooserFragment" />
@@ -27,8 +27,8 @@
         <action
             android:id="@+id/action_categoryChooserFragment_to_cityChooserFragment"
             app:destination="@id/cityChooserFragment"
-            app:enterAnim="@anim/from_top"
-            app:popEnterAnim="@anim/from_top"
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
             app:popUpTo="@id/categoryChooserFragment" />
         <action
             android:id="@+id/action_categoryChooserFragment_to_chooserDateFragment2"
