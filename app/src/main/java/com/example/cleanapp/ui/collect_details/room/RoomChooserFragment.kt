@@ -2,7 +2,9 @@ package com.example.cleanapp.ui.collect_details.room
 
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.RoomChooserFragmentBinding
 import com.example.cleanapp.extension.toDateFormat
@@ -26,6 +28,10 @@ class RoomChooserFragment :
         binding.btnApply.setOnClickListener {
             chooserViewModel.setRoomCount(viewModel.roomCounters)
             chooserViewModel.setOrderInDb()
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_roomChooserFragment_to_chooserDateFragment2)
         }
     }
 
