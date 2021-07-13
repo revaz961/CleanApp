@@ -1,9 +1,13 @@
 package com.example.cleanapp.ui.collect_details.city
 
 import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log.d
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,9 +20,7 @@ import com.example.cleanapp.databinding.CityChooserFragmentBinding
 import com.example.cleanapp.models.City
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.jar.Manifest
@@ -34,6 +36,7 @@ class CityChooserFragment :
     private lateinit var adapter: CitiesAdapter
 
     //variable to remember if we are tracking location or not
+    //TODO
     private var updateOn = false
 
     //Google API for location services
@@ -42,12 +45,15 @@ class CityChooserFragment :
     //It is a config file for all settings related to FusedLocationProviderClient
     private val locationRequest = LocationRequest.create()
 
+    private lateinit var locationCallback: LocationCallback
+
     companion object {
         const val PERMISSION_FINE_LOCATION = 99
     }
 
 
     override fun start() {
+        updateGPS()
         init()
     }
 
@@ -98,7 +104,7 @@ class CityChooserFragment :
     }
 
     private fun observes() {
-        viewModel.liveData.observe(viewLifecycleOwner, {
+        viewModel.citiesLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> adapter.setItem(it.data!!.map { it.city_en })
             }
@@ -119,9 +125,25 @@ class CityChooserFragment :
 
         locationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
 
+        //Location Call Back - get the timestamp of the location update and display the latitude,
+        // longitude and timestamp
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations) {
+                    updateUIValues(location)
+                }
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
     }
 
     // set location accuracy (LocationRequest.INT)
+    //TODO
     private fun accuracy() {
         //GPS sensor
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -145,16 +167,23 @@ class CityChooserFragment :
             ) == PackageManager.PERMISSION_GRANTED
         //user gave permission
         ) {
-            locationProvider.lastLocation.addOnSuccessListener {
-                TODO("not yet implemented: create class City and update UI")
-            }
+            locationProvider.lastLocation
+                .addOnSuccessListener {
+                    if(it == null) {
+                        d("IT", "NULL")
+                    } else {
+                        updateUIValues(it)
+                    }
+                }
         } else {
             // user didn't give permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
-                requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_FINE_LOCATION)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    PERMISSION_FINE_LOCATION
+                )
             }
         }
-
     }
 
     override fun onRequestPermissionsResult(
@@ -163,12 +192,66 @@ class CityChooserFragment :
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode) {
-            PERMISSION_FINE_LOCATION -> {if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                updateGPS()
-            } else {
-
-            }}
+        when (requestCode) {
+            PERMISSION_FINE_LOCATION -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    updateGPS()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.location_permission),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
+    }
+
+    private fun updateUIValues(location: Location) {
+        val currentLat = location.latitude.toString()
+        val currentLon = location.longitude.toString()
+        val accuracy = location.accuracy
+        d("LOCATION ", "LONGITUDE - $currentLon, LATITUDE - $currentLat, ACCURACY - $accuracy")
+//        binding.inputCity.setText("Lat - $currentLat, Long - $currentLon, accuracy - $accuracy")
+        binding.inputCity.setText(getCityName(location))
+    }
+
+    //TODO
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        locationProvider.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+    private fun stopLocationUpdates() {
+        locationProvider.removeLocationUpdates(locationCallback)
+    }
+
+    private fun getCityName(location: Location) : String {
+        var city = ""
+        val geocoder = Geocoder(requireContext())
+        try {
+            val geoCity = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+            city = geoCity[0].locality.toString().replace("'", "")
+
+        } catch (e: Exception) {
+            d("GEOCODER", "Couldn't get city name")
+        }
+        return city
     }
 }
