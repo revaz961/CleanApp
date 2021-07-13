@@ -13,11 +13,17 @@
         <action
             android:id="@+id/action_cityChooserFragment_to_categoryChooserFragment"
             app:destination="@id/categoryChooserFragment"
-            app:enterAnim="@anim/from_top"
-            app:popEnterAnim="@anim/from_top" />
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom"/>
         <action
             android:id="@+id/action_cityChooserFragment_to_categoryChooserFragment2"
-            app:destination="@id/categoryChooserFragment" />
+            app:destination="@id/categoryChooserFragment"
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom"/>
     </fragment>
     <fragment
         android:id="@+id/categoryChooserFragment"
@@ -29,10 +35,16 @@
             app:destination="@id/cityChooserFragment"
             app:enterAnim="@anim/to_top"
             app:popEnterAnim="@anim/to_top"
-            app:popUpTo="@id/categoryChooserFragment" />
+            app:popUpTo="@id/categoryChooserFragment"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_categoryChooserFragment_to_chooserDateFragment2"
-            app:destination="@id/chooserDateFragment2" />
+            app:destination="@id/chooserDateFragment2"
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom"/>
     </fragment>
     <fragment
         android:id="@+id/chooserDateFragment2"
@@ -41,10 +53,18 @@
         tools:layout="@layout/chooser_date_fragment" >
         <action
             android:id="@+id/action_chooserDateFragment2_to_roomChooserFragment"
-            app:destination="@id/roomChooserFragment" />
+            app:destination="@id/roomChooserFragment"
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom"/>
         <action
             android:id="@+id/action_chooserDateFragment2_to_categoryChooserFragment"
-            app:destination="@id/categoryChooserFragment" />
+            app:destination="@id/categoryChooserFragment"
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom"/>
     </fragment>
     <fragment
         android:id="@+id/roomChooserFragment"
@@ -53,6 +73,10 @@
         tools:layout="@layout/room_chooser_fragment" >
         <action
             android:id="@+id/action_roomChooserFragment_to_chooserDateFragment2"
-            app:destination="@id/chooserDateFragment2" />
+            app:destination="@id/chooserDateFragment2"
+            app:enterAnim="@anim/to_top"
+            app:popEnterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/to_bottom"/>
     </fragment>
 </navigation>

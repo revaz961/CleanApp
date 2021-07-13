@@ -2,6 +2,7 @@ package com.example.cleanapp.ui.collect_details.room
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.postDelayed
 import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.base.BaseAdapter
 import com.example.cleanapp.base.BaseViewHolder
@@ -12,8 +13,8 @@ typealias ButtonClick = (position: Int) -> Int
 
 class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
 
-    lateinit var increaseClick:ButtonClick
-    lateinit var decreaseClick:ButtonClick
+    lateinit var increaseClick: ButtonClick
+    lateinit var decreaseClick: ButtonClick
 
     fun setItems(list: List<RoomCounter>) {
         items.addAll(list)
@@ -41,10 +42,26 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
 
             binding.btnAdd.setOnClickListener {
                 binding.tvCount.text = "${increaseClick(adapterPosition)}"
+                with(it) {
+                    scaleX = 0.8f
+                    scaleY = 0.8f
+                    postDelayed(100L) {
+                        scaleX = 1f
+                        scaleY = 1f
+                    }
+                }
             }
 
             binding.btnRemove.setOnClickListener {
                 binding.tvCount.text = "${decreaseClick(adapterPosition)}"
+                with(it) {
+                    scaleX = 0.8f
+                    scaleY = 0.8f
+                    postDelayed(100L) {
+                        scaleX = 1f
+                        scaleY = 1f
+                    }
+                }
             }
         }
     }

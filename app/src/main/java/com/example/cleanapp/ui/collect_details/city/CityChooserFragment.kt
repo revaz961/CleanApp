@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log.d
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,12 +19,12 @@ import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CityChooserFragmentBinding
 import com.example.cleanapp.models.City
+import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import java.util.jar.Manifest
 
 @AndroidEntryPoint
 class CityChooserFragment :
@@ -79,16 +80,22 @@ class CityChooserFragment :
     private fun initRecycler() {
         adapter = CitiesAdapter(cities, object : CityClickListener {
             override fun onCityClick(city: String) {
-                sharedViewModel.setCity(City(city))
-                sharedViewModel.setFragmentId(city)
-                toCategory()
+//                sharedViewModel.setCity(City(city))
+                sharedViewModel.setFragmentTitle(city)
+                val order = Order(City(city))
+                toCategory(order)
             }
-
         })
         binding.recyclerCities.layoutManager = LinearLayoutManager(requireActivity())
         binding.recyclerCities.adapter = adapter
         adapter.notifyDataSetChanged()
         viewModel.getCities()
+    }
+
+
+    private fun toCategory(order:Order) {
+        findNavController().navigate(R.id.action_cityChooserFragment_to_categoryChooserFragment,
+            bundleOf("order" to order))
     }
 
     private fun filter(input: String) {
@@ -111,9 +118,6 @@ class CityChooserFragment :
         })
     }
 
-    private fun toCategory() {
-        findNavController().navigate(R.id.action_cityChooserFragment_to_categoryChooserFragment)
-    }
 
     private fun getLocation() {
 
@@ -169,7 +173,7 @@ class CityChooserFragment :
         ) {
             locationProvider.lastLocation
                 .addOnSuccessListener {
-                    if(it == null) {
+                    if (it == null) {
                         d("IT", "NULL")
                     } else {
                         updateUIValues(it)
@@ -242,7 +246,7 @@ class CityChooserFragment :
         locationProvider.removeLocationUpdates(locationCallback)
     }
 
-    private fun getCityName(location: Location) : String {
+    private fun getCityName(location: Location): String {
         var city = ""
         val geocoder = Geocoder(requireContext())
         try {

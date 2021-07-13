@@ -5,12 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.splash.SplashScreenFragment">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SPLASH"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
@@ -23,6 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/woman_cleaning"
-        app:lottie_loop="true"/>
+        app:lottie_repeatCount="2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

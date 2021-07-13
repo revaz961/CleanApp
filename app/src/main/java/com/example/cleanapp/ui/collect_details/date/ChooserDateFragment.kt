@@ -1,5 +1,6 @@
 package com.example.cleanapp.ui.collect_details.date
 
+import android.util.Log.d
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.ChooserDateFragmentBinding
 import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.extensions.toDateFormat
+import com.example.cleanapp.models.Order
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -28,7 +31,7 @@ class ChooserDateFragment : BaseFragment<ChooserDateFragmentBinding>(ChooserDate
         initRecyclers()
         observes()
         setListeners()
-    }
+        }
 
     private fun setListeners(){
         binding.btnBack.setOnClickListener {
@@ -36,9 +39,15 @@ class ChooserDateFragment : BaseFragment<ChooserDateFragmentBinding>(ChooserDate
         }
 
         binding.btnNext.setOnClickListener {
-            chooserViewModel.setDate(calendar.timeInMillis)
+
+            val order: Order = arguments?.getParcelable("order") ?: Order()
+            order.date = calendar.timeInMillis
+
+
+            chooserViewModel.setFragmentTitle(order.date!!.toDateFormat("MMMM dd, hh:mm aaa"))
+
             findNavController().navigate(R.id.action_chooserDateFragment2_to_roomChooserFragment,
-                bundleOf("date" to calendar.timeInMillis))
+                bundleOf("order" to order))
         }
 
         binding.Calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->

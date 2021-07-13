@@ -4,39 +4,39 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.RoomChooserFragmentBinding
 import com.example.cleanapp.extensions.toDateFormat
+import com.example.cleanapp.models.Order
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RoomChooserFragment :
     BaseFragment<RoomChooserFragmentBinding>(RoomChooserFragmentBinding::inflate) {
 
     private val viewModel: RoomChooserViewModel by viewModels()
     private val chooserViewModel: ChooserViewModel by activityViewModels()
     private lateinit var adapter: RoomCounterAdapter
+    private lateinit var order: Order
 
     override fun start() {
         init()
     }
 
     private fun init() {
-        initRecycler()
-        val date: Long = requireArguments().getLong("date")
-        binding.tvDate.text = date.toDateFormat("MMMM dd, hh:mm aaa")
-        binding.btnApply.setOnClickListener {
-            chooserViewModel.setRoomCount(viewModel.roomCounters)
-            chooserViewModel.setOrderInDb()
-        }
+        order = arguments?.getParcelable("order") ?: Order()
 
-        binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_roomChooserFragment_to_chooserDateFragment2)
-        }
+        binding.tvDate.text = order.date!!.toDateFormat("MMMM dd, hh:mm aaa")
+
+        initRecycler()
+
+        setListeners()
     }
 
     private fun initRecycler() {
         adapter = RoomCounterAdapter().apply {
+
             setItems(viewModel.roomCounters)
 
             increaseClick = { position ->
@@ -56,6 +56,19 @@ class RoomChooserFragment :
 
         binding.rvRoom.adapter = adapter
         binding.rvRoom.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun setListeners() {
+
+        binding.btnApply.setOnClickListener {
+            order.roomCount = viewModel.roomCounters
+            viewModel.setOrderInDb(order)
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
     }
 
 }

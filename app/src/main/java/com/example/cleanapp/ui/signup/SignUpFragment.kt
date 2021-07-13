@@ -4,6 +4,8 @@ import android.util.Log.d
 import android.widget.RadioButton
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.SignUpFragmentBinding
 import com.example.cleanapp.extensions.isEmail
@@ -27,15 +29,15 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
     }
 
     private fun setListeners() {
-//        binding.btnSignIn.setOnClickListener {
-//            findNavController().navigate(R.id.action_signUpFragment_to_SignInFragment)
-//        }
+        binding.btnSignIn.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_SignInFragment)
+        }
 
         binding.btnSignUp.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editEmail.text.toString().trim()
             if (checkUserInfo())
-                viewModel.signUp(email, password, requireActivity())
+                viewModel.signUp(email, password)
         }
     }
 
@@ -43,7 +45,9 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         val email = binding.editEmail.text.toString().trim()
         val password = binding.editEmail.text.toString().trim()
         val repeatPassword = binding.editEmail.text.toString().trim()
-        return email.isEmail() && password.length > 6 && password == repeatPassword
+        return email.isEmail()
+                && password.trim().length > 6
+                && password.trim() == repeatPassword.trim()
     }
 
     private fun observes() {
@@ -58,9 +62,11 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                         binding.editPhone.text.toString(),
                         (binding.rgGender.children.find { it is RadioButton && it.isChecked } as RadioButton).text.toString()
                     ))
-//                    findNavController().navigate(R.id.action_signUpFragment_to_chooserFragment)
+                    findNavController().navigate(R.id.action_signUpFragment_to_chooserFragment)
                 }
+
                 is ResultHandler.Error -> d("userInfo", it.message)
+
                 is ResultHandler.Loading -> d("userInfo", it.loading.toString())
             }
         })

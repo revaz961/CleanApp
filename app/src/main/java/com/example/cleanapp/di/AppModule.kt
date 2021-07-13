@@ -1,7 +1,5 @@
 package com.example.cleanapp.di
 
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -23,5 +21,4 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFirebaseDbRef() = Firebase.database.reference
-
 }

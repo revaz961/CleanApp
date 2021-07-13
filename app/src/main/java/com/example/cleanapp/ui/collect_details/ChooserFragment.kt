@@ -14,7 +14,7 @@ class ChooserFragment : BaseFragment<ChooserFragmentBinding>(ChooserFragmentBind
     }
 
     private fun observes() {
-        viewModel.fragmentIdLiveData.observe(viewLifecycleOwner, {
+        viewModel.fragmentTitleLiveData.observe(viewLifecycleOwner, {
             binding.chooserInstructions.text = it
         })
     }
