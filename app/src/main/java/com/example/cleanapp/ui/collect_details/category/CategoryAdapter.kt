@@ -6,8 +6,10 @@ import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.base.BaseAdapter
 import com.example.cleanapp.base.BaseViewHolder
 import com.example.cleanapp.databinding.CategoryViewHolderBinding
-import com.example.cleanapp.extension.load
+import com.example.cleanapp.databinding.RoomCounterLayoutBinding
+import com.example.cleanapp.extensions.load
 import com.example.cleanapp.models.Category
+import com.example.cleanapp.models.RoomCounter
 
 typealias ChooseCategory = (category:Category)->Unit
 

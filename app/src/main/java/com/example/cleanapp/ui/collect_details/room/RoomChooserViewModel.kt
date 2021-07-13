@@ -2,6 +2,7 @@ package com.example.cleanapp.ui.collect_details.room
 
 import androidx.lifecycle.ViewModel
 import com.example.cleanapp.models.RoomCounter
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 class RoomChooserViewModel : ViewModel() {
     val roomCounters = mutableListOf<RoomCounter>(

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.City
 import com.example.cleanapp.models.ResultHandler
+import com.google.android.gms.location.LocationRequest
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.getValue
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,15 +17,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityChooserViewModel @Inject constructor(private val dbRef: DatabaseReference) : ViewModel() {
-    private val _liveData = MutableLiveData<ResultHandler<List<City>>>()
-    val liveData: LiveData<ResultHandler<List<City>>> = _liveData
+    private val _citiesLiveData = MutableLiveData<ResultHandler<List<City>>>()
+    val citiesLiveData: LiveData<ResultHandler<List<City>>> = _citiesLiveData
 
 
     fun getCities() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 dbRef.child("cities").get().addOnSuccessListener {
-                    _liveData.postValue(ResultHandler.Success(it.getValue<List<City>>()))
+                    _citiesLiveData.postValue(ResultHandler.Success(it.getValue<List<City>>()))
                 }
             }
         }

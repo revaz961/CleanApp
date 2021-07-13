@@ -4,11 +4,9 @@ import android.util.Log.d
 import android.widget.RadioButton
 import androidx.core.view.children
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.SignUpFragmentBinding
-import com.example.cleanapp.extension.isEmail
+import com.example.cleanapp.extensions.isEmail
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.models.UserProfile
 import dagger.hilt.android.AndroidEntryPoint

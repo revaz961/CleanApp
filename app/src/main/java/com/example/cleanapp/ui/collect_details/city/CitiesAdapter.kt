@@ -3,7 +3,12 @@ package com.example.cleanapp.ui.collect_details.city
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
+import com.example.cleanapp.base.BaseAdapter
+import com.example.cleanapp.base.BaseViewHolder
 import com.example.cleanapp.databinding.CityViewHolderBinding
+import com.example.cleanapp.databinding.RoomCounterLayoutBinding
+import com.example.cleanapp.models.RoomCounter
 
 class CitiesAdapter (private var cities: MutableList<String>, private val clickListener: CityClickListener) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
     fun setItem(list:List<String>){

@@ -5,11 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/details_bg"
-    android:paddingStart="15dp"
-    android:paddingTop="15dp"
-    android:paddingEnd="15dp"
+    android:paddingTop="@dimen/main_margin_TB"
     tools:context=".ui.collect_details.city.CityChooserFragment">
-
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -18,18 +15,18 @@
         android:src="@drawable/ic_baseline_arrow_back_24"
         android:theme="@style/Button.Back"
         app:layout_constraintBottom_toBottomOf="@+id/etFindCity"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start_city"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etFindCity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Where do you live?"
+        android:hint="@string/where_do_you_live"
         app:endIconContentDescription="clear text"
         app:endIconDrawable="@drawable/ic_baseline_cancel_24"
         app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end_city"
         app:layout_constraintStart_toEndOf="@+id/imageButton2"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -44,11 +41,26 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_cities"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end_city"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start_city"
         app:layout_constraintTop_toBottomOf="@+id/etFindCity" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/main_margin_LR" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/main_margin_LR" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

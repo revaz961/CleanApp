@@ -61,4 +61,11 @@ class ChooserViewModel @Inject constructor(
                 _liveData.postValue(ResultHandler.Success(res))
             }
     }
+
+    private var _fragmentIdLiveData = MutableLiveData<String>()
+    val fragmentIdLiveData: LiveData<String> = _fragmentIdLiveData
+
+    fun setFragmentId(str: String) {
+        _fragmentIdLiveData.postValue(str)
+    }
 }
