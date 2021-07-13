@@ -44,6 +44,7 @@
         tools:layout="@layout/chooser_date_fragment">
         <action
             android:id="@+id/action_chooserDateFragment2_to_roomChooserFragment"
+<<<<<<< HEAD
             app:destination="@id/roomChooserFragment"
             app:enterAnim="@anim/from_top"
             app:popEnterAnim="@anim/from_top" />
@@ -52,6 +53,12 @@
             app:destination="@id/categoryChooserFragment"
             app:popUpTo="@id/categoryChooserFragment"
             app:popUpToInclusive="true"/>
+=======
+            app:destination="@id/roomChooserFragment" />
+        <action
+            android:id="@+id/action_chooserDateFragment2_to_categoryChooserFragment"
+            app:destination="@id/categoryChooserFragment" />
+>>>>>>> elene
     </fragment>
     <fragment
         android:id="@+id/roomChooserFragment"

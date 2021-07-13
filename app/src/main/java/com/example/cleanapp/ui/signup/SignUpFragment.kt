@@ -29,9 +29,9 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
     }
 
     private fun setListeners() {
-        binding.btnSignIn.setOnClickListener {
-            findNavController().navigate(R.id.action_signUpFragment_to_SignInFragment)
-        }
+//        binding.btnSignIn.setOnClickListener {
+//            findNavController().navigate(R.id.action_signUpFragment_to_SignInFragment)
+//        }
 
         binding.btnSignUp.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
@@ -60,7 +60,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                         binding.editPhone.text.toString(),
                         (binding.rgGender.children.find { it is RadioButton && it.isChecked } as RadioButton).text.toString()
                     ))
-                    findNavController().navigate(R.id.action_signUpFragment_to_chooserFragment)
+//                    findNavController().navigate(R.id.action_signUpFragment_to_chooserFragment)
                 }
                 is ResultHandler.Error -> d("userInfo", it.message)
                 is ResultHandler.Loading -> d("userInfo", it.loading.toString())
