@@ -35,9 +35,9 @@ class CityChooserFragment :
     private val cities = mutableListOf("Tbilisi", "Kutaisi", "Batumi", "Borjomi", "Gori", "Rustavi")
     private lateinit var adapter: CitiesAdapter
 
-    //variable to remember if we are tracking location or not
+    //remember if we are tracking location or not - shesatania settingebshi
     //TODO
-    private var updateOn = false
+
 
     //Google API for location services
     private lateinit var locationProvider: FusedLocationProviderClient
