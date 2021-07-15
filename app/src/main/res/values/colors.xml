@@ -14,4 +14,21 @@
     <color name="background_blue">#23BAD5</color>
 
     <color name="white_50">#80FFFFFF</color>
+
+<!--    buttons-->
+    <color name="calendar_selected">#FF795B</color>
+    <color name="skip">#4EBFEF</color>
+    <color name="selection">#73CE52</color>
+
+<!--    texts-->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#6D6D6D</color>
+    <color name="text_accent">#FF795B</color>
+
+<!--    categories-->
+    <color name="category_party">#FDD835</color>
+    <color name="category_simples">#00ACC1</color>
+    <color name="category_guests">#8E24AA</color>
+    <color name="category_deep">#F4511E</color>
+    <color name="category_garden">#43A047</color>
 </resources>
