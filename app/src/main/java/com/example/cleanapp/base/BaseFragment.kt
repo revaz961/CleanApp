@@ -1,11 +1,16 @@
 package com.example.cleanapp.base
 
+import android.app.Dialog
 import android.os.Bundle
+import android.renderscript.RenderScript
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.cleanapp.databinding.ErrorDialogLayoutBinding
+import com.example.cleanapp.extensions.init
+
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
 
@@ -34,4 +39,15 @@ abstract class BaseFragment<VB : ViewBinding>(
     }
 
     abstract fun start()
+
+    fun showErrorDialog(message:String){
+        val dialogBinding = ErrorDialogLayoutBinding.inflate(layoutInflater)
+        val dialog = Dialog(requireContext())
+        dialog.init(dialogBinding.root)
+        dialogBinding.tvDescription.text = message
+        dialogBinding.btnClose.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.show()
+    }
 }

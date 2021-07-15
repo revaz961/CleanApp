@@ -36,18 +36,32 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         binding.btnSignUp.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editEmail.text.toString().trim()
-            if (checkUserInfo())
+
+            val errorMessage = checkUserInfo()
+            if (errorMessage.isEmail())
                 viewModel.signUp(email, password)
+            else
+                showErrorDialog(errorMessage)
         }
     }
 
-    private fun checkUserInfo(): Boolean {
+    private fun checkUserInfo(): String {
         val email = binding.editEmail.text.toString().trim()
         val password = binding.editEmail.text.toString().trim()
         val repeatPassword = binding.editEmail.text.toString().trim()
-        return email.isEmail()
-                && password.trim().length > 6
-                && password.trim() == repeatPassword.trim()
+
+        var result = ""
+
+        if(!email.isEmail())
+            result += "Invalid Email\n"
+
+        if(password.length < 6)
+            result += "Invalid Password\n"
+
+        if(repeatPassword != password)
+            result += "Invalid Repeated Password"
+
+        return result
     }
 
     private fun observes() {
@@ -65,7 +79,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                     findNavController().navigate(R.id.action_signUpFragment_to_chooserFragment)
                 }
 
-                is ResultHandler.Error -> d("userInfo", it.message)
+                is ResultHandler.Error -> showErrorDialog(it.message)
 
                 is ResultHandler.Loading -> d("userInfo", it.loading.toString())
             }

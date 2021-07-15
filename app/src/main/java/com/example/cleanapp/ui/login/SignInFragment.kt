@@ -24,8 +24,13 @@ class SignInFragment : BaseFragment<SignInFragmentBinding>(SignInFragmentBinding
         binding.btnSignIn.setOnClickListener {
             val email = binding.editEmail.text.toString()
             val password = binding.editEmail.text.toString()
-            if (checkUserInfo())
+
+            val errorMessage = checkUserInfo()
+
+            if (errorMessage.isEmpty())
                 viewModel.signIn(email, password)
+            else
+                showErrorDialog(errorMessage)
         }
 
         binding.btnSignUp.setOnClickListener {
@@ -33,17 +38,25 @@ class SignInFragment : BaseFragment<SignInFragmentBinding>(SignInFragmentBinding
         }
     }
 
-    private fun checkUserInfo(): Boolean {
+    private fun checkUserInfo(): String {
+        var result = ""
         val email = binding.editEmail.text.toString().trim()
-        val password = binding.editEmail.text.toString().trim()
-        return email.isEmail() && password.trim().length > 6
+        val password = binding.editPassword.text.toString().trim()
+
+        if(!email.isEmail())
+            result += "Invalid Email\n"
+
+        if(password.length < 6)
+            result += "Invalid Password"
+
+        return result
     }
 
     private fun observes() {
         viewModel.liveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> findNavController().navigate(R.id.action_SignInFragment_to_chooserFragment)
-                is ResultHandler.Error -> Log.d("userInfo", it.message)
+                is ResultHandler.Error -> showErrorDialog(it.message)
                 is ResultHandler.Loading -> Log.d("userInfo", it.loading.toString())
             }
         })

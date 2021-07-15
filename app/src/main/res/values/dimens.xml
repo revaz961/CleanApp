@@ -4,4 +4,5 @@
     <dimen name="main_margin_TB">15dp</dimen>
     <dimen name="calendar_margin_TB">60dp</dimen>
     <dimen name="calendar_margin_LR">40dp</dimen>
+    <dimen name="rv_master_iv_side_margin">24dp</dimen>
 </resources>

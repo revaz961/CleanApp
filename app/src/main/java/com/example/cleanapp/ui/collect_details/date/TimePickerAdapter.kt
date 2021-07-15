@@ -1,5 +1,6 @@
 package com.example.cleanapp.ui.collect_details.date
 
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,8 @@ class TimePickerAdapter(private val timeIdentifier: Int) :
             )
         )
     }
+
+
 
     override fun onBindViewHolder(holder: TimePickerViewHolder, position: Int) {
         holder.bind()

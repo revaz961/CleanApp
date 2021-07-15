@@ -1,4 +1,4 @@
-package com.example.cleanapp
+package com.example.cleanapp.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

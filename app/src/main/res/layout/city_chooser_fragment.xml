@@ -9,7 +9,7 @@
     tools:context=".ui.collect_details.city.CityChooserFragment">
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_arrow_back_24"
@@ -26,8 +26,8 @@
         app:endIconContentDescription="clear text"
         app:endIconDrawable="@drawable/ic_baseline_cancel_24"
         app:endIconMode="clear_text"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end_city"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end_city"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -47,7 +47,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_end_city"
         app:layout_constraintStart_toStartOf="@+id/guideline_start_city"
-        app:layout_constraintTop_toBottomOf="@+id/etFindCity" />
+        app:layout_constraintTop_toBottomOf="@+id/etFindCity"
+        android:overScrollMode="never"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start_city"

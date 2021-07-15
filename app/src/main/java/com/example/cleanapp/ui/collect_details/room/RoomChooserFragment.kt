@@ -8,6 +8,7 @@ import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.RoomChooserFragmentBinding
 import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -68,7 +69,14 @@ class RoomChooserFragment :
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
-
     }
 
+    private fun observes(){
+        viewModel.liveData.observe(viewLifecycleOwner,{
+            when(it){
+                is ResultHandler.Success -> {}
+                is ResultHandler.Error -> showErrorDialog(it.message)
+            }
+        })
+    }
 }

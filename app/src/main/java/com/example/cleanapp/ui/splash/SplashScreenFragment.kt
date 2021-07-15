@@ -19,13 +19,13 @@ class SplashScreenFragment :
         viewModel.checkAuth()
     }
 
-    fun goTo(isValiD:Boolean) {
+    private fun goTo(isValiD:Boolean) {
         binding.animationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {}
 
             override fun onAnimationEnd(animation: Animator?) {
                 if(isValiD)
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_chooserFragment)
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
                 else
                     findNavController().navigate(R.id.action_splashScreenFragment_to_SignInFragment)
             }

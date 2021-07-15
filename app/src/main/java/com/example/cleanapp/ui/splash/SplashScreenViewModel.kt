@@ -8,16 +8,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashScreenViewModel @Inject constructor(private val auth:FirebaseAuth) : ViewModel() {
+class SplashScreenViewModel @Inject constructor(private val auth: FirebaseAuth) : ViewModel() {
     private val _liveData = MutableLiveData<Boolean>()
     val liveData: LiveData<Boolean> = _liveData
 
-    fun checkAuth(){
-        if(auth.currentUser == null){
+    fun checkAuth() {
+        if (auth.currentUser == null)
             _liveData.postValue(false)
-        }else{
-//            auth.signOut()
+        else
             _liveData.postValue(true)
-        }
     }
 }

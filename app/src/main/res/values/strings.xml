@@ -24,4 +24,10 @@
     <string name="back_arrow">back_arrow</string>
     <string name="select_time">Select Time</string>
     <string name="location_permission">This app requires permission to be granted in order to work properly</string>
+    <string name="error">Error</string>
+    <string name="close">close</string>
+    <string name="home">home</string>
+    <string name="favorite">favorite</string>
+    <string name="wallet">wallet</string>
+    <string name="order">order</string>
 </resources>

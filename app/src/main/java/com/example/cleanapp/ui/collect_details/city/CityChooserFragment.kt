@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.LocationSettings
@@ -56,6 +57,9 @@ class CityChooserFragment :
     override fun start() {
         updateGPS()
         init()
+        binding.btnBack.setOnClickListener {
+            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+        }
     }
 
 
@@ -80,7 +84,6 @@ class CityChooserFragment :
     private fun initRecycler() {
         adapter = CitiesAdapter(cities, object : CityClickListener {
             override fun onCityClick(city: String) {
-//                sharedViewModel.setCity(City(city))
                 sharedViewModel.setFragmentTitle(city)
                 val order = Order(City(city))
                 toCategory(order)
