@@ -30,4 +30,17 @@
     <string name="favorite">favorite</string>
     <string name="wallet">wallet</string>
     <string name="order">order</string>
+    <string name="reserve">Reserve</string>
+    <string name="per_hour"> / hour</string>
+    <string name="add_to_favorites">Add to favorites</string>
+
+<!--    Reservation-->
+    <string name="reviews">&lt;font face=”sans_serif“ color=”#FF795B”> &lt;b>%1$.1f&lt;/b> &lt;/font> (%2$d reviews)</string>
+
+    <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews)</string>
+
+    &lt;span style="color:#FF795B"> &lt;b>4.9 (15) &lt;/b>Nino&lt;/span>
+
+
+
 </resources>

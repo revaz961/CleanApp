@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.search_results.SearchResultsFragment">
 
-    <TextView
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/epoxy_rv"/>
 
 </FrameLayout>

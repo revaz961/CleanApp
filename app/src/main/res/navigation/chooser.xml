@@ -78,5 +78,13 @@
             app:popEnterAnim="@anim/to_top"
             app:exitAnim="@anim/to_bottom"
             app:popExitAnim="@anim/to_bottom"/>
+        <action
+            android:id="@+id/action_roomChooserFragment_to_masterReserveFragment"
+            app:destination="@id/masterReserveFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/masterReserveFragment"
+        android:name="com.example.cleanapp.ui.home.master_reserve.MasterReserveFragment"
+        android:label="fragment_reserve"
+        tools:layout="@layout/fragment_reserve" />
 </navigation>

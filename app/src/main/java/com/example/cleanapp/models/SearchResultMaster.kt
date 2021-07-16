@@ -8,7 +8,7 @@ data class SearchResultMaster(
     @SerializedName("categories")
     val categories: List<Category>?,
     @SerializedName("reviews")
-    val reviews: List<Review>?,
+    val reviews: List<Comment>?,
     @SerializedName("rating")
     val rating: Double?,
     @SerializedName("n_reviews")
@@ -20,9 +20,11 @@ data class SearchResultMaster(
 
 )
 
-data class Review(
+data class Comment(
     @SerializedName("date")
     val date: String?,
     @SerializedName("comment")
     val comment: String?,
+    @SerializedName("author")
+    val author: String?,
 )

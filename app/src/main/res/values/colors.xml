@@ -21,7 +21,7 @@
     <color name="selection">#73CE52</color>
 
 <!--    texts-->
-    <color name="text_primary">#000000</color>
+    <color name="text_primary">#222222</color>
     <color name="text_secondary">#6D6D6D</color>
     <color name="text_accent">#FF795B</color>
 
@@ -31,4 +31,9 @@
     <color name="category_guests">#8E24AA</color>
     <color name="category_deep">#F4511E</color>
     <color name="category_garden">#43A047</color>
+
+<!--    backgrounds-->
+    <!--    reservation-->
+    <color name="reservation_start">#ACE6FF</color>
+    <color name="reservation_end">#D9D2E2</color>
 </resources>

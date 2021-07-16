@@ -4,6 +4,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.RoomChooserFragmentBinding
 import com.example.cleanapp.extensions.toDateFormat
@@ -64,6 +65,7 @@ class RoomChooserFragment :
         binding.btnApply.setOnClickListener {
             order.roomCount = viewModel.roomCounters
             viewModel.setOrderInDb(order)
+            findNavController().navigate(R.id.action_roomChooserFragment_to_masterReserveFragment)
         }
 
         binding.btnBack.setOnClickListener {
