@@ -24,6 +24,7 @@
     <color name="text_primary">#222222</color>
     <color name="text_secondary">#6D6D6D</color>
     <color name="text_accent">#FF795B</color>
+    <color name="text_btnTransparent">#484848</color>
 
 <!--    categories-->
     <color name="category_party">#FDD835</color>

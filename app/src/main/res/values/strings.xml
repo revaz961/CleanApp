@@ -38,6 +38,8 @@
     <string name="reviews">&lt;font face=”sans_serif“ color=”#FF795B”> &lt;b>%1$.1f&lt;/b> &lt;/font> (%2$d reviews)</string>
 
     <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews)</string>
+    <string name="show_all_comments">Show all comments</string>
+    <string name="warning">To protect your payment, never transfer money or communicate outside of CleanApp</string>
 
     &lt;span style="color:#FF795B"> &lt;b>4.9 (15) &lt;/b>Nino&lt;/span>
 
