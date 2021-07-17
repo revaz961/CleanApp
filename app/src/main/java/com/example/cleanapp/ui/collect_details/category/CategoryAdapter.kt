@@ -38,8 +38,8 @@ class CategoryAdapter : BaseAdapter<Category>() {
     inner class CategoryViewHolder(private val binding: CategoryViewHolderBinding) :
         BaseViewHolder<Category, CategoryViewHolderBinding>(binding) {
         override fun bind(data: Category) {
-            binding.tvCategory.text = data.category_en
-            binding.ivCategory.load(data.image_url)
+            binding.tvCategory.text = data.categoryEn
+            binding.ivCategory.load(data.imageUrl)
 
             binding.root.setOnClickListener {
                 chooseCategory(data)

@@ -16,8 +16,7 @@ data class SearchResultMaster(
     @SerializedName("name")
     val name: String?,
     @SerializedName("own_supplements")
-    val own_supplements: Boolean = false,
-
+    val own_supplements: Boolean = false
 )
 
 data class Comment(

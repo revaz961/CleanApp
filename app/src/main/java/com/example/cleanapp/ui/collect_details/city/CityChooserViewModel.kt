@@ -7,7 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.City
 import com.example.cleanapp.models.ResultHandler
 import com.google.android.gms.location.LocationRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,10 +27,18 @@ class CityChooserViewModel @Inject constructor(private val dbRef: DatabaseRefere
     fun getCities() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                dbRef.child("cities").get().addOnSuccessListener {
-                    _citiesLiveData.postValue(ResultHandler.Success(it.getValue<List<City>>()))
-                }
+                dbRef.child("cities").addListenerForSingleValueEvent(object: ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        _citiesLiveData.postValue(ResultHandler.Success(snapshot.getValue<List<City>>()))
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        _citiesLiveData.postValue(ResultHandler.Error(null,error.message))
+                    }
+
+                })
             }
         }
     }
 }
+
