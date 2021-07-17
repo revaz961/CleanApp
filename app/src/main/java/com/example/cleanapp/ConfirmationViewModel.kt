@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.home.confirmation
+package com.example.cleanapp
 
 import androidx.lifecycle.ViewModel
 
