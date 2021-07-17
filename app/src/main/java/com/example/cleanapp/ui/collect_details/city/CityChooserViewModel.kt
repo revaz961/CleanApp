@@ -41,4 +41,3 @@ class CityChooserViewModel @Inject constructor(private val dbRef: DatabaseRefere
         }
     }
 }
-
