@@ -40,7 +40,7 @@ class CategoryChooserFragment :
                 val order:Order = arguments?.getParcelable("order") ?: Order()
                 order.categoryId = it
 
-                shareViewModel.setFragmentTitle(it.category_en)
+                shareViewModel.setFragmentTitle(it.categoryEn)
 
                 findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment2,
                 bundleOf("order" to order))

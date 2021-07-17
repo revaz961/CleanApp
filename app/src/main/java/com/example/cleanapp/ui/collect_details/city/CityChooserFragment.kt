@@ -116,7 +116,8 @@ class CityChooserFragment :
     private fun observes() {
         viewModel.citiesLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> adapter.setItem(it.data!!.map { it.city_en })
+                is ResultHandler.Success -> adapter.setItem(it.data!!.map { it.cityEn })
+                is ResultHandler.Error -> showErrorDialog(it.message)
             }
         })
     }

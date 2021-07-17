@@ -19,7 +19,7 @@
             android:id="@+id/action_splashScreenFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/splashScreenFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -30,9 +30,9 @@
             android:id="@+id/action_homeFragment_to_chooserFragment"
             app:destination="@id/chooserFragment"
             app:enterAnim="@anim/to_top"
-            app:popEnterAnim="@anim/to_top"
             app:exitAnim="@anim/to_bottom"
-            app:popExitAnim="@anim/to_bottom"/>
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/chooserFragment"
@@ -66,4 +66,8 @@
     <action
         android:id="@+id/action_global_chooserFragment"
         app:destination="@id/chooserFragment" />
+
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment" />
 </navigation>
