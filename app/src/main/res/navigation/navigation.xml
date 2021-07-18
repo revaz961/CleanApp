@@ -45,11 +45,13 @@
         android:label="log_in_fragment"
         tools:layout="@layout/sign_in_fragment">
         <action
-            android:id="@+id/action_SignInFragment_to_chooserFragment"
-            app:destination="@id/chooserFragment" />
-        <action
             android:id="@+id/action_SignInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/navigation"/>
+        <action
+            android:id="@+id/action_SignInFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/navigation"/>
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -58,10 +60,8 @@
         tools:layout="@layout/sign_up_fragment">
         <action
             android:id="@+id/action_signUpFragment_to_SignInFragment"
-            app:destination="@id/SignInFragment" />
-        <action
-            android:id="@+id/action_signUpFragment_to_chooserFragment"
-            app:destination="@id/chooserFragment" />
+            app:destination="@id/SignInFragment"
+            app:popUpTo="@id/navigation"/>
     </fragment>
     <action
         android:id="@+id/action_global_chooserFragment"
@@ -69,5 +69,6 @@
 
     <action
         android:id="@+id/action_global_homeFragment"
-        app:destination="@id/homeFragment" />
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/navigation"/>
 </navigation>

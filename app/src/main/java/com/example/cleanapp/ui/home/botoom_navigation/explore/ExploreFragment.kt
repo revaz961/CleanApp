@@ -34,13 +34,13 @@ class ExploreFragment : BaseFragment<ExploreFragmentBinding>(ExploreFragmentBind
         masterAdapter = MasterAdapter()
         binding.rvMaster.adapter = masterAdapter
         binding.rvMaster.layoutManager = LinearLayoutManager(requireContext())
-        exploreViewModel.getMaster()
+        exploreViewModel.getMaster("tbilisi_garden")
     }
 
     private fun observes() {
         exploreViewModel.exploreLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> masterAdapter.setItems(it.data!!)
+                is ResultHandler.Success -> masterAdapter.addItem(it.data!!)
             }
         })
     }
