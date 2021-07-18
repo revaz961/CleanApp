@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.home.master_details
+package com.example.cleanapp.ui.home.master_reserve.aditional_actions.cancellation
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.cleanapp.R
 
-class MasterDetailsFragment : Fragment() {
+class CancellationFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MasterDetailsFragment()
+        fun newInstance() = CancellationFragment()
     }
 
-    private lateinit var viewModel: MasterDetailsViewModel
+    private lateinit var viewModel: CancellationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.master_details_fragment, container, false)
+        return inflater.inflate(R.layout.cancellation_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MasterDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CancellationViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

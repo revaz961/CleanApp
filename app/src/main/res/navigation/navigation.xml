@@ -62,6 +62,9 @@
             android:id="@+id/action_signUpFragment_to_SignInFragment"
             app:destination="@id/SignInFragment"
             app:popUpTo="@id/navigation"/>
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpMasterFragment"
+            app:destination="@id/signUpMasterFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_chooserFragment"
@@ -71,4 +74,13 @@
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"/>
+    <fragment
+        android:id="@+id/signUpMasterFragment"
+        android:name="com.example.cleanapp.SignUpMasterFragment"
+        android:label="sign_up_master_fragment"
+        tools:layout="@layout/sign_up_master_fragment" >
+        <action
+            android:id="@+id/action_signUpMasterFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment><action android:id="@+id/action_global_SignInFragment" app:destination="@id/SignInFragment"/><action android:id="@+id/action_global_signUpMasterFragment" app:destination="@id/signUpMasterFragment"/>
 </navigation>

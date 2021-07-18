@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.home.confirmation
+package com.example.cleanapp.ui.home.master_reserve.aditional_actions.availability
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.cleanapp.R
 
-class ConfirmationFragment : Fragment() {
+class AvailabilityFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ConfirmationFragment()
+        fun newInstance() = AvailabilityFragment()
     }
 
-    private lateinit var viewModel: ConfirmationViewModel
+    private lateinit var viewModel: AvailabilityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.confirmation_fragment2, container, false)
+        return inflater.inflate(R.layout.availability_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ConfirmationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AvailabilityViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

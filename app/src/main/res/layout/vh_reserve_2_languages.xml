@@ -11,8 +11,7 @@
         android:id="@+id/tvLanguages"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="3"
-        android:text="TextView"
+        android:maxLines="1"
         android:textColor="@color/text_secondary"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -23,8 +22,6 @@
         android:id="@+id/tvResponseRate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="3"
-        android:text="TextView"
         android:textColor="@color/text_secondary"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -42,18 +39,18 @@
         android:textAlignment="center"
         android:textColor="@color/text_primary"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/btnAllComments"
-        app:layout_constraintStart_toStartOf="@+id/btnAllComments"
-        app:layout_constraintTop_toBottomOf="@+id/btnAllComments" />
+        app:layout_constraintEnd_toEndOf="@+id/btnContactMaster"
+        app:layout_constraintStart_toStartOf="@+id/btnContactMaster"
+        app:layout_constraintTop_toBottomOf="@+id/btnContactMaster" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAllComments"
+        android:id="@+id/btnContactMaster"
         style="@style/Button.Transparent.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/btn_transparent"
-        android:text="@string/show_all_comments"
+        android:text="@string/contact_master"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@+id/tvResponseRate" />

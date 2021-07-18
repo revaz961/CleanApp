@@ -30,19 +30,32 @@
     <string name="favorite">favorite</string>
     <string name="wallet">wallet</string>
     <string name="order">order</string>
-    <string name="reserve">Reserve</string>
-    <string name="per_hour"> / hour</string>
     <string name="add_to_favorites">Add to favorites</string>
+    <string name="per_hour">&lt;font face=”sans_serif“ color=”#222222”> %1$d ₾ &lt;/font> / hour</string>
 
 <!--    Reservation-->
     <string name="reviews">&lt;font face=”sans_serif“ color=”#FF795B”> &lt;b>%1$.1f&lt;/b> &lt;/font> (%2$d reviews)</string>
+<!--    <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews)</string>-->
 
     <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews) %3$s </string>
     <string name="price">&lt;span style="color:#000000"> &lt;b> %1$d &lt;/b>&lt;/span> / hour </string>
     <string name="show_all_comments">Show all comments</string>
     <string name="warning">To protect your payment, never transfer money or communicate outside of CleanApp</string>
-    <string name="choose_what_you_want">Choose what you want</string>
+    <string name="report_this_user">Report this user</string>
+    <string name="more_masters">More masters</string>
+    <string name="reserve">Reserve</string>
+    <string name="contact_master">Contact master</string>
+    <string name="languages">Languages: %1$s</string>
+    <string name="response_rate">Response rate: %1$s%</string>
+    <string name="availability">Availability</string>
+    <string name="cancellation">Cancellation policy</string>
+    <string name="orders">orders</string>
+    <string name="what_to_clean">What to clean?</string>
 
-    &lt;span style="color:#FF795B"> &lt;b>4.9 (15) &lt;/b>Nino&lt;/span>
+    <plurals name="cancellation_policy">
+        <item quantity="one">>Free cancellation %d day prior</item>
+        <item quantity="other">>Free cancellation %d days prior</item>
+    </plurals>
+
 
 </resources>

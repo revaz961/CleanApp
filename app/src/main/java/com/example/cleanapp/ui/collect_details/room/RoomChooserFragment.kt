@@ -64,8 +64,7 @@ class RoomChooserFragment :
 
         binding.btnApply.setOnClickListener {
             order.roomCount = viewModel.roomCounters
-            viewModel.setOrderInDb(order)
-            findNavController().navigate(R.id.action_roomChooserFragment_to_masterReserveFragment)
+            findNavController().navigate(R.id.action_roomChooserFragment_to_cityChooserFragment)
         }
 
         binding.btnBack.setOnClickListener {

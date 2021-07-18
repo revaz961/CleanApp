@@ -14,8 +14,8 @@
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/controller"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/view"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
+        android:id="@+id/btnReserve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/main_margin_LR"
@@ -39,11 +39,9 @@
 
     <TextView
         android:id="@+id/tvPrice"
+        style="@style/Text.BigLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="30₾"
-        android:textColor="@color/text_primary"
-        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvDateTime"
         app:layout_constraintStart_toStartOf="@+id/tvDateTime"
@@ -51,24 +49,11 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/per_hour"
-        android:textColor="@color/text_secondary"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
-        app:layout_constraintStart_toEndOf="@+id/tvPrice"
-        app:layout_constraintTop_toTopOf="@+id/tvPrice" />
-
-    <TextView
         android:id="@+id/tvDateTime"
+        style="@style/Text.MediumLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin_LR"
-        android:text="May 21, 08:30AM"
-        android:textColor="@color/text_secondary"
-        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
