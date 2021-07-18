@@ -5,7 +5,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.HomeFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
     override fun start() {
         initBottom()

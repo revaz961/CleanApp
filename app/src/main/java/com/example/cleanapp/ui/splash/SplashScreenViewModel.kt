@@ -15,9 +15,7 @@ class SplashScreenViewModel @Inject constructor(private val auth: FirebaseAuth) 
     fun checkAuth() {
         if (auth.currentUser == null)
             _liveData.postValue(false)
-        else {
-            auth.signOut()
+        else
             _liveData.postValue(true)
-        }
     }
 }

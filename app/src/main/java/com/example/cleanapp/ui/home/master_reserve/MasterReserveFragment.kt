@@ -1,9 +1,14 @@
 package com.example.cleanapp.ui.home.master_reserve
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -93,4 +98,5 @@ class MasterReserveFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

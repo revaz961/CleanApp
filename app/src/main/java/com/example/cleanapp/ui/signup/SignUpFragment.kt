@@ -26,6 +26,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
     private fun init() {
         observes()
         setListeners()
+        (binding.rgGender.children.find { it is RadioButton } as RadioButton).isChecked = true
     }
 
     private fun setListeners() {
@@ -38,7 +39,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
             val password = binding.editEmail.text.toString().trim()
 
             val errorMessage = checkUserInfo()
-            if (errorMessage.isEmail())
+            if (errorMessage.isEmpty())
                 viewModel.signUp(email, password)
             else
                 showErrorDialog(errorMessage)
@@ -72,7 +73,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                         it.data!!.uid,
                         it.data.email!!,
                         binding.editFullName.text.toString().trim(),
-                        binding.editAge.text.toString().trim().toInt(),
+                        if(binding.editAge.text!!.isNotEmpty())binding.editAge.text.toString().trim().toInt() else 0,
                         binding.editPhone.text.toString(),
                         (binding.rgGender.children.find { it is RadioButton && it.isChecked } as RadioButton).text.toString()
                     ))
