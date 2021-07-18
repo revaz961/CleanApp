@@ -5,78 +5,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/splashScreenFragment">
 
-    <action
-        android:id="@+id/action_masterReserveFragment_to_confirmationFragment"
-        app:destination="@id/confirmationFragment" />
-    <action
-        android:id="@+id/action_masterReserveFragment_to_cancellationFragment"
-        app:destination="@id/cancellationFragment" />
-    <action
-        android:id="@+id/action_masterReserveFragment_to_allCommentsFragment"
-        app:destination="@id/allCommentsFragment" />
-    <action
-        android:id="@+id/action_masterReserveFragment_to_reportFragment"
-        app:destination="@id/reportFragment" />
-    <fragment
-        android:id="@+id/allCommentsFragment"
-        android:name="com.example.cleanapp.AllCommentsFragment"
-        android:label="all_comments_fragment"
-        tools:layout="@layout/all_comments_fragment" />
-    <fragment
-        android:id="@+id/availabilityFragment"
-        android:name="com.example.cleanapp.AvailabilityFragment"
-        android:label="availability_fragment"
-        tools:layout="@layout/availability_fragment" />
-    <fragment
-        android:id="@+id/contactMasterFragment"
-        android:name="com.example.cleanapp.ContactMasterFragment"
-        android:label="contact_master_fragment"
-        tools:layout="@layout/contact_master_fragment" />
-    <fragment
-        android:id="@+id/reportFragment"
-        android:name="com.example.cleanapp.ReportFragment"
-        android:label="report_fragment"
-        tools:layout="@layout/report_fragment" />
-    <action
-        android:id="@+id/action_masterReserveFragment_to_contactMasterFragment"
-        app:destination="@id/contactMasterFragment" />
-    <fragment
-        android:id="@+id/confirmationFragment"
-        android:name="com.example.cleanapp.ConfirmationFragment"
-        android:label="confirmation_fragment2"
-        tools:layout="@layout/confirmation_fragment2" />
-    <fragment
-        android:id="@+id/masterReserveFragment"
-        android:name="com.example.cleanapp.ui.home.master_reserve.MasterReserveFragment"
-        android:label="fragment_reserve"
-        tools:layout="@layout/fragment_reserve">
-        <action
-            android:id="@+id/action_masterReserveFragment_to_allCommentsFragment"
-            app:destination="@id/allCommentsFragment" />
-        <action
-            android:id="@+id/action_masterReserveFragment_to_contactMasterFragment"
-            app:destination="@id/contactMasterFragment" />
-        <action
-            android:id="@+id/action_masterReserveFragment_to_availabilityFragment"
-            app:destination="@id/availabilityFragment" />
-        <action
-            android:id="@+id/action_masterReserveFragment_to_cancellationFragment"
-            app:destination="@id/cancellationFragment" />
-        <action
-            android:id="@+id/action_masterReserveFragment_to_reportFragment"
-            app:destination="@id/reportFragment" />
-        <action
-            android:id="@+id/action_masterReserveFragment_to_confirmationFragment"
-            app:destination="@id/confirmationFragment" />
-    </fragment>
-    <action
-        android:id="@+id/action_masterReserveFragment_to_availabilityFragment"
-        app:destination="@id/availabilityFragment" />
-    <fragment
-        android:id="@+id/cancellationFragment"
-        android:name="com.example.cleanapp.CancellationFragment"
-        android:label="cancellation_fragment"
-        tools:layout="@layout/cancellation_fragment" />
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.example.cleanapp.ui.splash.SplashScreenFragment"
@@ -134,6 +62,9 @@
             android:id="@+id/action_signUpFragment_to_SignInFragment"
             app:destination="@id/SignInFragment"
             app:popUpTo="@id/navigation"/>
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpMasterFragment"
+            app:destination="@id/signUpMasterFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_chooserFragment"
@@ -143,4 +74,13 @@
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
         app:popUpTo="@id/navigation"/>
+    <fragment
+        android:id="@+id/signUpMasterFragment"
+        android:name="com.example.cleanapp.SignUpMasterFragment"
+        android:label="sign_up_master_fragment"
+        tools:layout="@layout/sign_up_master_fragment" >
+        <action
+            android:id="@+id/action_signUpMasterFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment><action android:id="@+id/action_global_SignInFragment" app:destination="@id/SignInFragment"/><action android:id="@+id/action_global_signUpMasterFragment" app:destination="@id/signUpMasterFragment"/>
 </navigation>

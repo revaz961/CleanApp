@@ -2,6 +2,6 @@ package com.example.cleanapp
 
 import androidx.lifecycle.ViewModel
 
-class AllCommentsViewModel : ViewModel() {
+class OrdersViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

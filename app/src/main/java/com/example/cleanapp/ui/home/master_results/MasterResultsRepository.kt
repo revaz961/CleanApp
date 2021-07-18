@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.home.botoom_navigation.explore
+package com.example.cleanapp.ui.home.master_results
 
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.MasterCategory
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 typealias OnLoad = (Master) -> Unit
 
-class ExploreRepository @Inject constructor(
+class MasterResultsRepository @Inject constructor(
     private val auth: FirebaseAuth,
     private val dbRef: DatabaseReference
 ) {

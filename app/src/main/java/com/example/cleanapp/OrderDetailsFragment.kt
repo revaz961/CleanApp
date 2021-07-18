@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.home.botoom_navigation.favorite
+package com.example.cleanapp
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,26 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.cleanapp.R
 
-class FavoriteFragment : Fragment() {
+class OrderDetailsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = FavoriteFragment()
+        fun newInstance() = OrderDetailsFragment()
     }
 
-    private lateinit var viewModel: FavoriteViewModel
+    private lateinit var viewModel: OrderDetailsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.favorite_fragment, container, false)
+        return inflater.inflate(R.layout.order_details_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(OrderDetailsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

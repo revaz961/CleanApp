@@ -3,6 +3,7 @@ package com.example.cleanapp.ui.collect_details.category
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
@@ -29,7 +30,7 @@ class CategoryChooserFragment :
 
     private fun setListeners(){
         binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
+            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
         }
     }
 
@@ -37,12 +38,13 @@ class CategoryChooserFragment :
         adapter = CategoryAdapter().apply {
             chooseCategory = {
 
-                val order:Order = arguments?.getParcelable("order") ?: Order()
+                val order = Order()
                 order.categoryId = it
 
                 shareViewModel.setFragmentTitle(it.categoryEn)
 
-                findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment2,
+
+                findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment,
                 bundleOf("order" to order))
 
             }

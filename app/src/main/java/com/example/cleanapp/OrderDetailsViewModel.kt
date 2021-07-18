@@ -2,6 +2,6 @@ package com.example.cleanapp
 
 import androidx.lifecycle.ViewModel
 
-class AvailabilityViewModel : ViewModel() {
+class OrderDetailsViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

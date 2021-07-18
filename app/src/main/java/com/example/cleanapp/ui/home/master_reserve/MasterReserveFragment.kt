@@ -1,14 +1,9 @@
 package com.example.cleanapp.ui.home.master_reserve
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Html.FROM_HTML_MODE_LEGACY
-import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,7 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
-import com.example.cleanapp.extensions.setTextById
 import com.example.cleanapp.models.Master
 
 class MasterReserveFragment : Fragment() {
@@ -45,7 +39,7 @@ class MasterReserveFragment : Fragment() {
     }
 
     private fun setData() {
-        master = Master(null, null, null, 4.9, 15, "rezi", true, null, 3, listOf("Georgian, Russian"))
+        master = Master(null, null, null)
         moremasters = mutableListOf()
 
     }

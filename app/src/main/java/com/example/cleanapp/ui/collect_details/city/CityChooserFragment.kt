@@ -58,7 +58,7 @@ class CityChooserFragment :
         updateGPS()
         init()
         binding.btnBack.setOnClickListener {
-            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+            findNavController().navigateUp()
         }
     }
 
@@ -85,7 +85,7 @@ class CityChooserFragment :
         adapter = CitiesAdapter(cities, object : CityClickListener {
             override fun onCityClick(city: String) {
                 sharedViewModel.setFragmentTitle(city)
-                val order = Order(City(city))
+                val order = arguments?.getParcelable("order") ?: Order()
                 toCategory(order)
             }
         })
@@ -97,7 +97,7 @@ class CityChooserFragment :
 
 
     private fun toCategory(order:Order) {
-        findNavController().navigate(R.id.action_cityChooserFragment_to_categoryChooserFragment,
+        findNavController().navigate(R.id.action_cityChooserFragment_to_masterResultsFragment,
             bundleOf("order" to order))
     }
 

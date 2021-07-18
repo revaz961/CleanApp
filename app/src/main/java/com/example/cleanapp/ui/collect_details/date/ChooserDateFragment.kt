@@ -1,16 +1,12 @@
 package com.example.cleanapp.ui.collect_details.date
 
 import android.annotation.SuppressLint
-import android.util.Log.d
-import android.view.MotionEvent
-import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.ChooserDateFragmentBinding
 import com.example.cleanapp.base.BaseFragment
@@ -62,7 +58,7 @@ class ChooserDateFragment :
             chooserViewModel.setFragmentTitle(order.date!!.toDateFormat("MMMM dd, hh:mm aaa"))
 
             findNavController().navigate(
-                R.id.action_chooserDateFragment2_to_roomChooserFragment,
+                R.id.action_chooserDateFragment_to_roomChooserFragment,
                 bundleOf("order" to order)
             )
         }

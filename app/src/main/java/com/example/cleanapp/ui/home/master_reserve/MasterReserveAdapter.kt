@@ -81,14 +81,14 @@ class MasterReserveController(
         @RequiresApi(Build.VERSION_CODES.N)
         override fun VhReserve1ReviewsBinding.bind() {
             val stars = master.rating
-            val nReviews = master.n_reviews
+            val nReviews = master.nReviews
             tvReviews.setResourceHtmlText(R.string.reviews2, stars, nReviews)
 
-            val recentReview = master.recentReviews?.get(0)
-            imgAuthor.load(recentReview?.imageUrl)
-            tvAuthorName.text = recentReview?.author
-            tvCommentDate.text = recentReview?.atDate
-            tvComment.text = recentReview?.comment
+//            val recentReview = master.recentReviews?.get(0)
+//            imgAuthor.load(recentReview?.imageUrl)
+//            tvAuthorName.text = recentReview?.author
+//            tvCommentDate.text = recentReview?.atDate
+//            tvComment.text = recentReview?.comment
 
             btnAllComments.setOnClickListener {
                 masterReserveClickListener.onClick(ReservationClickTypes.SHOW_COMMENTS.type)

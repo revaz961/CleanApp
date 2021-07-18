@@ -35,7 +35,7 @@
 
 <!--    Reservation-->
     <string name="reviews">&lt;font face=”sans_serif“ color=”#FF795B”> &lt;b>%1$.1f&lt;/b> &lt;/font> (%2$d reviews)</string>
-    <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews)</string>
+<!--    <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews)</string>-->
 
     <string name="reviews2">&lt;span style="color:#FF795B"> &lt;b> %1$.1f &lt;/b>&lt;/span> (%2$d reviews) %3$s </string>
     <string name="price">&lt;span style="color:#000000"> &lt;b> %1$d &lt;/b>&lt;/span> / hour </string>
@@ -49,6 +49,8 @@
     <string name="response_rate">Response rate: %1$s%</string>
     <string name="availability">Availability</string>
     <string name="cancellation">Cancellation policy</string>
+    <string name="orders">orders</string>
+    <string name="what_to_clean">What to clean?</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>

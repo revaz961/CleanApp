@@ -7,24 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class CancellationFragment : Fragment() {
+class SignUpMasterFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CancellationFragment()
+        fun newInstance() = SignUpMasterFragment()
     }
 
-    private lateinit var viewModel: CancellationViewModel
+    private lateinit var viewModel: SignUpMasterViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.cancellation_fragment, container, false)
+        return inflater.inflate(R.layout.sign_up_master_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CancellationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignUpMasterViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
