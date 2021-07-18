@@ -39,7 +39,7 @@ class MasterReserveFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val stars = 4.9
         val reviews = 5
-        val styled = Html.fromHtml(getString(R.string.reviews2, stars, reviews ), FROM_HTML_MODE_LEGACY)
+        val styled = Html.fromHtml(getString(R.string.reviews2, stars, reviews,"" ), FROM_HTML_MODE_LEGACY)
         binding.tvReviews.text = styled
     }
 
