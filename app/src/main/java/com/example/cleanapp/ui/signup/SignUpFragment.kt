@@ -77,7 +77,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                         binding.editPhone.text.toString(),
                         (binding.rgGender.children.find { it is RadioButton && it.isChecked } as RadioButton).text.toString()
                     ))
-                    findNavController().navigate(R.id.action_signUpFragment_to_chooserFragment)
+                    findNavController().navigate(R.id.action_global_homeFragment)
                 }
 
                 is ResultHandler.Error -> showErrorDialog(it.message)

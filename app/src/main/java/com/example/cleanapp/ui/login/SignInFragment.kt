@@ -55,7 +55,7 @@ class SignInFragment : BaseFragment<SignInFragmentBinding>(SignInFragmentBinding
     private fun observes() {
         viewModel.liveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> findNavController().navigate(R.id.action_SignInFragment_to_chooserFragment)
+                is ResultHandler.Success -> findNavController().navigate(R.id.action_SignInFragment_to_homeFragment)
                 is ResultHandler.Error -> showErrorDialog(it.message)
                 is ResultHandler.Loading -> Log.d("userInfo", it.loading.toString())
             }

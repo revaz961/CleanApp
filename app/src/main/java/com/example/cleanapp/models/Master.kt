@@ -10,17 +10,15 @@ data class Master(
     @set:PropertyName("img_url")
     var imgUrl: String? = null,
 
-    @SerializedName("categories")
-    val categories: List<MasterCategory>? = null,
+    var categories: List<MasterCategory>? = null,
 
-    var recentReviews: Review? = null,
+    var reviews: Review? = null,
 
-    @SerializedName("rating")
-    val rating: Double? = null,
+    val rating: Float? = null,
 
     @get:PropertyName("n_reviews")
     @set:PropertyName("n_reviews")
-    var n_reviews: Int = 0,
+    var nReviews: Int = 0,
 
     @SerializedName("name")
     val name: String? = null,
@@ -69,6 +67,6 @@ data class Comment(
 )
 
 data class MasterCategory(
-    val category: Int? = null,
+    val category: Category? = null,
     val price: Int = 0,
 )

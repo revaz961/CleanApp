@@ -13,8 +13,13 @@ import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
 
-class MasterAdapter:
+class MasterAdapter :
     BaseAdapter<Master>() {
+
+    fun addItem(master: Master) {
+        items.add(master)
+        notifyItemInserted(items.size - 1)
+    }
 
     fun setItems(items: List<Master>) {
         this.items.clear()
@@ -41,15 +46,15 @@ class MasterAdapter:
 
         override fun bind(data: Master) {
 
-            binding.tvDescription.text = data.recentReviews?.comments?.fold("") { acc, review ->
+            binding.tvDescription.text = data.reviews?.comments?.fold("") { acc, review ->
                 "$acc \n ${review.dateAt?.toDateFormat("MMMM YYYY")} ${review.comment}\n"
             }?.trim() ?: ""
 
             binding.tvMaster.setResourceHtmlText(
                 R.string.reviews2,
                 data.rating!!,
-                data.n_reviews,
-                data.name?:""
+                data.nReviews,
+                data.name ?: ""
             )
 
             data.categories?.get(0)?.let {
