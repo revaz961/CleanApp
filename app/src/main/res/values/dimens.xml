@@ -5,4 +5,9 @@
     <dimen name="calendar_margin_TB">60dp</dimen>
     <dimen name="calendar_margin_LR">40dp</dimen>
     <dimen name="rv_master_iv_side_margin">24dp</dimen>
+
+<!--  rezi  -->
+
+    <dimen name="auth_padding_LR">50dp</dimen>
+    <dimen name="auth_padding_TB">80dp</dimen>
 </resources>

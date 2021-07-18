@@ -41,6 +41,7 @@
     <string name="price">&lt;span style="color:#000000"> &lt;b> %1$d &lt;/b>&lt;/span> / hour </string>
     <string name="show_all_comments">Show all comments</string>
     <string name="warning">To protect your payment, never transfer money or communicate outside of CleanApp</string>
+    <string name="choose_what_you_want">Choose what you want</string>
 
     &lt;span style="color:#FF795B"> &lt;b>4.9 (15) &lt;/b>Nino&lt;/span>
 

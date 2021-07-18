@@ -5,12 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.botoom_navigation.explore.ExploreFragment"
-    android:background="@drawable/shadow">
+    android:background="@drawable/bg_main_gradient">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#64FFFFFF"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnChooser"
@@ -23,9 +19,9 @@
         android:drawableStart="@drawable/ic_search"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
-        android:text="Choose what you want"
-        android:textSize="20sp"
-        android:drawableTint="@color/orange"
+        android:text="@string/choose_what_you_want"
+        android:textSize="18sp"
+        app:drawableTint="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
