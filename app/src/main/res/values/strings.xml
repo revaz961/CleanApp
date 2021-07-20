@@ -10,7 +10,6 @@
     <string name="sign_in">Sign In</string>
     <string name="password">Password:</string>
     <string name="remember_me">Remember Me</string>
-    <string name="signin">SignIn</string>
     <string name="signup">SignUp</string>
     <string name="sing_up">Sing Up</string>
     <string name="full_name">Full Name:</string>
@@ -51,6 +50,12 @@
     <string name="cancellation">Cancellation policy</string>
     <string name="orders">orders</string>
     <string name="what_to_clean">What to clean?</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="i_agree_with_the_terms_amp_conditions"><![CDATA[I agree with the Terms & Conditions]]></string>
+    <string name="create_account">Create account</string>
+    <string name="create_master_s_account">Create master’s account</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>

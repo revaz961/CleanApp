@@ -1,82 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+ <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.login.SignInFragment"
-    android:background="@drawable/bg_main_gradient"
-    android:paddingTop="@dimen/auth_padding_TB"
-    android:paddingBottom="@dimen/auth_padding_TB"
-    android:paddingStart="@dimen/auth_padding_LR"
-    android:paddingEnd="@dimen/auth_padding_LR"
-    >
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="65dp"
-        android:text="@string/sign_in"
-        android:textSize="40sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/editEmail"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxWidth="300dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/round_border"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:lines="1"
-        android:padding="20dp"
-        android:textSize="20sp" />
+        android:background="@drawable/bg_main_gradient"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/auth_padding_LR"
+        android:paddingTop="@dimen/auth_padding_TB"
+        android:paddingEnd="@dimen/auth_padding_LR"
+        android:paddingBottom="@dimen/auth_padding_TB"
+        tools:context=".ui.login.SignInFragment">
 
-    <EditText
-        android:id="@+id/editPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/round_border"
-        android:ems="13"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:lines="1"
-        android:padding="20dp"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginBottom="65dp"
+            android:text="@string/sign_in"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_border"
+            android:ems="15"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:padding="@dimen/auth_padding_small"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/round_border"
+            android:ems="15"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:padding="@dimen/auth_padding_small"
+            android:textSize="20sp" />
 
 
-    <CheckBox
-        android:id="@+id/checkRemember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/remember_me" />
+        <CheckBox
+            android:id="@+id/checkRemember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/auth_margin_small"
+            android:text="@string/remember_me" />
 
-    <Button
-        android:id="@+id/btnSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="60dp"
-        android:text="@string/signin"
-        android:textAllCaps="false" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/auth_margin_large"
+            android:background="@drawable/btn_round_green"
+            android:ems="15"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="200dp"
-        android:text="@string/signup"
-        android:textAllCaps="false" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:text="@string/forgot_password"
+            android:textStyle="bold"
+            android:textColor="@color/text_auth_primary"
+            android:layout_marginTop="@dimen/auth_margin_small"
+            />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/text_auth_primary"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            android:text="@string/don_t_have_an_account_sign_up"
+            android:layout_marginTop="@dimen/auth_margin_medium"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

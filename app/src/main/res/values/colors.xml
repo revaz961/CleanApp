@@ -19,12 +19,15 @@
     <color name="calendar_selected">#FF795B</color>
     <color name="skip">#4EBFEF</color>
     <color name="selection">#73CE52</color>
+    <color name="btn_blue">#5B89FF</color>
 
 <!--    texts-->
     <color name="text_primary">#222222</color>
     <color name="text_secondary">#6D6D6D</color>
     <color name="text_accent">#FF795B</color>
     <color name="text_btnTransparent">#484848</color>
+    <color name="text_auth_primary">#3B5566</color>
+    <color name="text_auth_secondary">#8E8E8E</color>
 
 <!--    categories-->
     <color name="category_party">#FDD835</color>
