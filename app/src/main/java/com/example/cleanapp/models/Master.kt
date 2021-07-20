@@ -1,8 +1,11 @@
 package com.example.cleanapp.models
 
+import android.os.Parcelable
 import com.google.firebase.database.PropertyName
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Master(
     val uid: String? = null,
 
@@ -36,8 +39,9 @@ data class Master(
     var cancelPeriod: Int? = null,
 
     var languages: List<String>? = null
-)
+):Parcelable
 
+@Parcelize
 data class Review(
     @get:PropertyName("comments")
     @set:PropertyName("comments")
@@ -46,8 +50,9 @@ data class Review(
     @get:PropertyName("stars")
     @set:PropertyName("stars")
     var stars: List<Float>? = null
-)
+):Parcelable
 
+@Parcelize
 data class Comment(
     @get:PropertyName("img_url")
     @set:PropertyName("img_url")
@@ -64,9 +69,10 @@ data class Comment(
     @get:PropertyName("comment")
     @set:PropertyName("comment")
     var comment: String? = null,
-)
+):Parcelable
 
+@Parcelize
 data class MasterCategory(
     val category: Category? = null,
     val price: Int = 0,
-)
+): Parcelable

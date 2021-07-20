@@ -24,7 +24,7 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<RoomCounter, ViewBinding> {
+    ): BaseViewHolder<ViewBinding> {
         return CounterViewHolder(
             RoomCounterLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -35,13 +35,15 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
     }
 
     inner class CounterViewHolder(private val binding: RoomCounterLayoutBinding) :
-        BaseViewHolder<RoomCounter, RoomCounterLayoutBinding>(binding) {
-        override fun bind(data: RoomCounter) {
+        BaseViewHolder<RoomCounterLayoutBinding>(binding) {
+        private lateinit var data: RoomCounter
+        override fun bind() {
+            data = items[absoluteAdapterPosition]
             binding.tvRoom.text = data.room
             binding.tvCount.text = data.count.toString()
 
             binding.btnAdd.setOnClickListener {
-                binding.tvCount.text = "${increaseClick(adapterPosition)}"
+                binding.tvCount.text = "${increaseClick(absoluteAdapterPosition)}"
                 with(it) {
                     scaleX = 0.8f
                     scaleY = 0.8f
@@ -53,7 +55,7 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
             }
 
             binding.btnRemove.setOnClickListener {
-                binding.tvCount.text = "${decreaseClick(adapterPosition)}"
+                binding.tvCount.text = "${decreaseClick(absoluteAdapterPosition)}"
                 with(it) {
                     scaleX = 0.8f
                     scaleY = 0.8f

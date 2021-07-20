@@ -1,26 +1,39 @@
 package com.example.cleanapp.ui.home.master_reserve
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.models.Master
+import com.example.cleanapp.models.Order
+import com.example.cleanapp.ui.home.master_results.MasterAdapter
+import com.example.cleanapp.ui.home.master_results.MasterClickListener
 
 class MasterReserveFragment : Fragment() {
 
     private var _binding: FragmentReserveBinding? = null
     private val binding get() = _binding!!
-    private lateinit var controller: MasterReserveController
+    private lateinit var adapter: MasterReserveAdapter
 
     private lateinit var master: Master
     private lateinit var moremasters: MutableList<Master>
+
+    private val viewTypeOrder = listOf(
+        ReservationViewTypes.HEADER.type,
+        ReservationViewTypes.REVIEWS.type,
+        ReservationViewTypes.LANGUAGES.type,
+        ReservationViewTypes.INFO_EDIT.type,
+        ReservationViewTypes.REPORT.type)
 
     private val viewModel: MasterReserveViewModel by viewModels()
 
@@ -39,14 +52,16 @@ class MasterReserveFragment : Fragment() {
     }
 
     private fun setData() {
-        master = Master(null, null, null)
+        master = arguments?.getParcelable("master") ?: Master()
         moremasters = mutableListOf()
+
 
     }
 
     private fun init() {
-        controller =
-            MasterReserveController(master, moremasters, object : MasterReserveClickListener {
+        d("MASTER", master.toString())
+        adapter =
+            MasterReserveAdapter(master, moremasters, object : MasterReserveClickListener {
                 override fun onClick(type: Int, subType: Int) {
                     when (type) {
                         ReservationClickTypes.SHOW_COMMENTS.type -> {
@@ -68,9 +83,11 @@ class MasterReserveFragment : Fragment() {
                 }
 
             })
+        adapter.setItems(viewTypeOrder)
 
-        binding.controller.setController(controller)
-        binding.controller.addItemDecoration(
+        binding.recycler.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.recycler.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
                 RecyclerView.VERTICAL
