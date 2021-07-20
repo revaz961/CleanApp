@@ -128,6 +128,7 @@
             android:textSize="16sp"
             android:layout_marginTop="@dimen/auth_margin_medium"
             android:text="@string/create_account"
+            android:padding="@dimen/auth_padding_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/checkAgree" />
@@ -141,10 +142,24 @@
             android:text="@string/create_master_s_account"
             android:ems="15"
             android:backgroundTint="@color/btn_blue"
+            android:padding="@dimen/auth_padding_small"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnCreateUser" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_margin_small"
+            android:background="@android:color/transparent"
+            android:text="@string/already_have_an_account_sign_in"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/btnCreateMaster"
+            app:layout_constraintStart_toStartOf="@id/btnCreateMaster"
+            app:layout_constraintTop_toBottomOf="@id/btnCreateMaster" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

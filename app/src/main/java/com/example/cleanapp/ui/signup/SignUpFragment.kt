@@ -1,8 +1,6 @@
 package com.example.cleanapp.ui.signup
 
 import android.util.Log.d
-import android.widget.RadioButton
-import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
@@ -26,7 +24,6 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
     private fun init() {
         observes()
         setListeners()
-        (binding.rgGender.children.find { it is RadioButton } as RadioButton).isChecked = true
     }
 
     private fun setListeners() {
@@ -34,9 +31,11 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
             findNavController().navigate(R.id.action_signUpFragment_to_SignInFragment)
         }
 
-        binding.btnSignUp.setOnClickListener {
+        binding.btnCreateUser.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editEmail.text.toString().trim()
+            val name = binding.editName.text.toString().trim()
+
 
             val errorMessage = checkUserInfo()
             if (errorMessage.isEmpty())
@@ -48,18 +47,22 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
 
     private fun checkUserInfo(): String {
         val email = binding.editEmail.text.toString().trim()
+        val name = binding.editName.text.toString().trim()
         val password = binding.editEmail.text.toString().trim()
         val repeatPassword = binding.editEmail.text.toString().trim()
 
         var result = ""
 
-        if(!email.isEmail())
+        if (!email.isEmail())
             result += "Invalid Email\n"
 
-        if(password.length < 6)
+        if (name.length < 3)
+            result += "Invalid Name\n"
+
+        if (password.length < 6)
             result += "Invalid Password\n"
 
-        if(repeatPassword != password)
+        if (repeatPassword != password)
             result += "Invalid Repeated Password"
 
         return result
@@ -72,10 +75,8 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                     viewModel.setUserProfile(UserProfile(
                         it.data!!.uid,
                         it.data.email!!,
-                        binding.editFullName.text.toString().trim(),
-                        if(binding.editAge.text!!.isNotEmpty())binding.editAge.text.toString().trim().toInt() else 0,
-                        binding.editPhone.text.toString(),
-                        (binding.rgGender.children.find { it is RadioButton && it.isChecked } as RadioButton).text.toString()
+                        binding.editName.text.toString().trim(),
+                        binding.editPhone.text.toString()
                     ))
                     findNavController().navigate(R.id.action_global_homeFragment)
                 }
