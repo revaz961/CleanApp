@@ -1,6 +1,7 @@
-package com.example.cleanapp.ui.home.botoom_navigation.explore
+package com.example.cleanapp.ui.home.master_results
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.R
@@ -13,7 +14,7 @@ import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
 
-class MasterAdapter :
+class MasterAdapter(private val masterClickListener: MasterClickListener) :
     BaseAdapter<Master>() {
 
     fun addItem(master: Master) {
@@ -30,7 +31,7 @@ class MasterAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<Master, ViewBinding> {
+    ): BaseViewHolder<ViewBinding> {
         return ViewHolder(
             RecyclerMasterItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -42,10 +43,10 @@ class MasterAdapter :
 
 
     inner class ViewHolder(private val binding: RecyclerMasterItemBinding) :
-        BaseViewHolder<Master, RecyclerMasterItemBinding>(binding) {
-
-        override fun bind(data: Master) {
-
+        BaseViewHolder<RecyclerMasterItemBinding>(binding), View.OnClickListener {
+        lateinit var data: Master
+        override fun bind() {
+            data = items[absoluteAdapterPosition]
             binding.tvDescription.text = data.reviews?.comments?.fold("") { acc, review ->
                 "$acc \n ${review.dateAt?.toDateFormat("MMMM YYYY")} ${review.comment}\n"
             }?.trim() ?: ""
@@ -64,13 +65,16 @@ class MasterAdapter :
                 )
             }
 
-            binding.ivMaster.setOnClickListener {
-                binding.tvDescription.collapse()
-            }
+            binding.ivMaster.setOnClickListener(this)
 
             binding.ivStar.setOnClickListener {
                 binding.tvDescription.expand()
+                binding.tvDescription.collapse()
             }
+        }
+
+        override fun onClick(v: View?) {
+            masterClickListener.onClick(items[absoluteAdapterPosition])
         }
     }
 }
