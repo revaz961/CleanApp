@@ -31,7 +31,7 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<ViewBinding> {
+    ): BaseViewHolder<Master, ViewBinding> {
         return ViewHolder(
             RecyclerMasterItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -43,10 +43,8 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
 
 
     inner class ViewHolder(private val binding: RecyclerMasterItemBinding) :
-        BaseViewHolder<RecyclerMasterItemBinding>(binding), View.OnClickListener {
-        lateinit var data: Master
-        override fun bind() {
-            data = items[absoluteAdapterPosition]
+        BaseViewHolder<Master, RecyclerMasterItemBinding>(binding), View.OnClickListener {
+        override fun bind(data: Master) {
             binding.tvDescription.text = data.reviews?.comments?.fold("") { acc, review ->
                 "$acc \n ${review.dateAt?.toDateFormat("MMMM YYYY")} ${review.comment}\n"
             }?.trim() ?: ""

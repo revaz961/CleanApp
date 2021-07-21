@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_masterReserveFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_masterReserveFragment_self"
+            app:destination="@id/masterReserveFragment" />
     </fragment>
     <fragment
         android:id="@+id/availabilityFragment"

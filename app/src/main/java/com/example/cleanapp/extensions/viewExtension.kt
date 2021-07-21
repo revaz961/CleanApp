@@ -64,15 +64,6 @@ fun View.collapse() {
     }
 }
 
-fun View.slideUp(duration:Long,height:Float = this.height.toFloat() * 3/4) {
-    TranslateAnimation(
-        0f,
-        0f,
-        0f,
-        height
-    ).apply {
-        this.duration = duration
-        fillAfter = true
-        start()
-    }
+fun View.slideUp(duration: Long, height: Float = this.height.toFloat() * 3 / 4) {
+    animate().translationY(-height * 3 / 4)
 }

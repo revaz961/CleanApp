@@ -24,7 +24,7 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<ViewBinding> {
+    ): BaseViewHolder<RoomCounter,ViewBinding> {
         return CounterViewHolder(
             RoomCounterLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -35,10 +35,8 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
     }
 
     inner class CounterViewHolder(private val binding: RoomCounterLayoutBinding) :
-        BaseViewHolder<RoomCounterLayoutBinding>(binding) {
-        private lateinit var data: RoomCounter
-        override fun bind() {
-            data = items[absoluteAdapterPosition]
+        BaseViewHolder<RoomCounter,RoomCounterLayoutBinding>(binding) {
+        override fun bind(data: RoomCounter) {
             binding.tvRoom.text = data.room
             binding.tvCount.text = data.count.toString()
 

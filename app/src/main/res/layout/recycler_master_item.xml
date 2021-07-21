@@ -30,6 +30,41 @@
         android:background="@color/orange"
         android:src="@drawable/master"/>
 
+    <LinearLayout
+        android:id="@+id/llBookmarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/ivMaster"
+        app:layout_constraintStart_toStartOf="@id/ivMaster"
+        app:layout_constraintEnd_toEndOf="@id/ivMaster"
+        app:layout_constraintHorizontal_bias="0.8"
+        >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_bookmark"
+            android:background="@android:color/transparent"
+            android:translationY="-15dp"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_bookmark"
+            app:tint="@color/calendar_selected"
+            android:background="@android:color/transparent"
+            android:translationY="-15dp"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_bookmark"
+            android:background="@android:color/transparent"
+            app:tint="@color/background_blue"
+            android:translationY="-15dp"
+            />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="0dp"

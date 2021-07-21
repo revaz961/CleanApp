@@ -1,16 +1,14 @@
 package com.example.cleanapp.base
 
-
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-
 abstract class BaseAdapterViewType<T>() :
-    RecyclerView.Adapter<BaseViewHolder<ViewBinding>>() {
+    RecyclerView.Adapter<BaseViewHolderType<ViewBinding>>() {
 
     protected val items = mutableListOf<T>()
 
-    override fun onBindViewHolder(holder: BaseViewHolder<ViewBinding>, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolderType<ViewBinding>, position: Int) {
         holder.bind()
     }
 

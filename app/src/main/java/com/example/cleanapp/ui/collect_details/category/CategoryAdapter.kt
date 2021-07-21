@@ -23,7 +23,7 @@ class CategoryAdapter : BaseAdapter<Category>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<ViewBinding> {
+    ): BaseViewHolder<Category,ViewBinding> {
         return CategoryViewHolder(
             CategoryViewHolderBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -34,10 +34,8 @@ class CategoryAdapter : BaseAdapter<Category>() {
     }
 
     inner class CategoryViewHolder(private val binding: CategoryViewHolderBinding) :
-        BaseViewHolder<CategoryViewHolderBinding>(binding) {
-        lateinit var data: Category
-        override fun bind() {
-            data = items[absoluteAdapterPosition]
+        BaseViewHolder<Category,CategoryViewHolderBinding>(binding) {
+        override fun bind(data: Category) {
             binding.tvCategory.text = data.categoryEn
             binding.ivCategory.load(data.imageUrl)
 
