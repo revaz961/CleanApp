@@ -7,6 +7,8 @@ import com.example.cleanapp.base.BaseAdapter
 import com.example.cleanapp.base.BaseViewHolder
 import com.example.cleanapp.databinding.CategoryViewHolderBinding
 import com.example.cleanapp.extensions.load
+import com.example.cleanapp.extensions.setBorder
+import com.example.cleanapp.extensions.textColor
 import com.example.cleanapp.models.Category
 
 typealias ChooseCategory = (category:Category)->Unit
@@ -37,7 +39,9 @@ class CategoryAdapter : BaseAdapter<Category>() {
         BaseViewHolder<Category,CategoryViewHolderBinding>(binding) {
         override fun bind(data: Category) {
             binding.tvCategory.text = data.categoryEn
+            binding.tvCategory.textColor(data.color)
             binding.ivCategory.load(data.imageUrl)
+            binding.root.setBorder(5,data.color,50f)
 
             binding.root.setOnClickListener {
                 chooseCategory(data)

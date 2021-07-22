@@ -3,15 +3,13 @@ package com.example.cleanapp.ui.home.master_results
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseAdapter
 import com.example.cleanapp.base.BaseViewHolder
 import com.example.cleanapp.databinding.RecyclerMasterItemBinding
-import com.example.cleanapp.extensions.collapse
-import com.example.cleanapp.extensions.expand
-import com.example.cleanapp.extensions.setResourceHtmlText
-import com.example.cleanapp.extensions.toDateFormat
+import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Master
 
 class MasterAdapter(private val masterClickListener: MasterClickListener) :
@@ -65,9 +63,14 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
 
             binding.ivMaster.setOnClickListener(this)
 
+            binding.llBookmarks.children.forEach {
+                it.setOnClickListener { bookmark ->
+                    bookmark.slide()
+                }
+            }
+
             binding.ivStar.setOnClickListener {
-                binding.tvDescription.expand()
-                binding.tvDescription.collapse()
+                binding.tvDescription.collapseIf()
             }
         }
 

@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/auth_margin_large"
-            android:background="@drawable/btn_round_green"
+            android:background="@drawable/btn_round"
             android:ems="15"
             android:text="@string/sign_in"
             android:textAllCaps="false"
