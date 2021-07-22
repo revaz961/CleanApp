@@ -123,7 +123,7 @@
             android:id="@+id/btnCreateUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_round_green"
+            android:background="@drawable/btn_round"
             android:ems="15"
             android:textSize="16sp"
             android:layout_marginTop="@dimen/auth_margin_medium"
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/auth_margin_small"
-            android:background="@drawable/btn_round_green"
+            android:background="@drawable/btn_round"
             android:text="@string/create_master_s_account"
             android:ems="15"
             android:backgroundTint="@color/btn_blue"
@@ -160,7 +160,6 @@
             app:layout_constraintEnd_toEndOf="@id/btnCreateMaster"
             app:layout_constraintStart_toStartOf="@id/btnCreateMaster"
             app:layout_constraintTop_toBottomOf="@id/btnCreateMaster" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

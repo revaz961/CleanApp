@@ -2,7 +2,6 @@ package com.example.cleanapp.ui.home.master_reserve
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.base.BaseAdapterViewType

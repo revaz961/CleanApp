@@ -1,8 +1,13 @@
 package com.example.cleanapp.extensions
 
 import android.animation.ValueAnimator
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.View
 import android.view.animation.TranslateAnimation
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import com.example.cleanapp.R
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -64,6 +69,26 @@ fun View.collapse() {
     }
 }
 
-fun View.slideUp(duration: Long, height: Float = this.height.toFloat() * 3 / 4) {
-    animate().translationY(-height * 3 / 4)
+fun View.collapseIf(isValid: Boolean = height != 0) {
+    if (isValid)
+        collapse()
+    else
+        expand()
+}
+
+fun View.slide(multiplier: Float = 3 / 5f, duration: Long = 300) {
+    val translate = -height * multiplier
+    animate().duration = duration
+    if (translationY == 0f)
+        animate().translationY(translate)
+    else
+        animate().translationY(0f)
+}
+
+fun View.setBorder(width: Int = 1, color: String = "#FFFFFF", radius: Float = 20f) {
+    val shape = GradientDrawable()
+    shape.setStroke(width, Color.parseColor(color))
+    shape.cornerRadius = radius
+    shape.setColor(Color.parseColor("#99FFFFFF"))
+    background = shape
 }

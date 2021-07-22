@@ -33,7 +33,9 @@ class MasterReserveFragment : Fragment() {
         ReservationViewTypes.REVIEWS.type,
         ReservationViewTypes.LANGUAGES.type,
         ReservationViewTypes.INFO_EDIT.type,
-        ReservationViewTypes.REPORT.type)
+        ReservationViewTypes.REPORT.type,
+        ReservationViewTypes.MORE.type
+    )
 
     private val viewModel: MasterReserveViewModel by viewModels()
 
@@ -53,7 +55,7 @@ class MasterReserveFragment : Fragment() {
 
     private fun setData() {
         master = arguments?.getParcelable("master") ?: Master()
-        moremasters = mutableListOf()
+        moremasters = mutableListOf(master,master,master,master)
 
 
     }
@@ -81,7 +83,6 @@ class MasterReserveFragment : Fragment() {
                         }
                     }
                 }
-
             })
         adapter.setItems(viewTypeOrder)
 
