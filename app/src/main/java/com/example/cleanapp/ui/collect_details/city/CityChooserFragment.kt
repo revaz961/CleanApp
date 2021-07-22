@@ -34,7 +34,7 @@ class CityChooserFragment :
     private val viewModel: CityChooserViewModel by viewModels()
     private val sharedViewModel: ChooserViewModel by activityViewModels()
 
-    private val cities = mutableListOf("Tbilisi", "Kutaisi", "Batumi", "Borjomi", "Gori", "Rustavi")
+    private val cities = mutableListOf<City>()
     private lateinit var adapter: CitiesAdapter
 
     //remember if we are tracking location or not - shesatania settingebshi
