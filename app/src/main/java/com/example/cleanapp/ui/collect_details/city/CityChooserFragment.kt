@@ -9,13 +9,11 @@ import android.text.TextWatcher
 import android.util.Log.d
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cleanapp.LocationSettings
+import com.example.cleanapp.utils.LocationSettings
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CityChooserFragmentBinding

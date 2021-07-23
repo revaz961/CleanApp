@@ -26,7 +26,9 @@ import com.example.cleanapp.ui.collect_details.category.CategoryAdapter
 import com.example.cleanapp.ui.collect_details.category.CategoryChooserViewModel
 import com.example.cleanapp.ui.collect_details.city.CityChooserViewModel
 import com.example.cleanapp.ui.home.master_reserve.MasterReserveAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::inflate) {
 
     private val viewModel: InboxViewModel by viewModels()
@@ -40,16 +42,12 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
     private fun initRecycler() {
         adapter = MessagesAdapter().apply {
             chooseMessage = {
-
                 findNavController().navigate(R.id.action_inboxFragment_to_chatFragment,
                     bundleOf("chat" to it)
                 )
-
             }
         }
-
         viewModel.getChats()
-
     }
 
     private fun observes() {
@@ -61,5 +59,4 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
             }
         })
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.cleanapp
+package com.example.cleanapp.utils
 
 object LocationSettings {
     const val DEFAULT_UPDATE_INTERVAL : Long = 30000

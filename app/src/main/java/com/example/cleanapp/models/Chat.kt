@@ -1,7 +1,10 @@
 package com.example.cleanapp.models
 
+import android.os.Parcelable
 import com.google.firebase.database.PropertyName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Chat(
 
     @get:PropertyName("at_date")
@@ -20,9 +23,9 @@ data class Chat(
     @set:PropertyName("last_message_image")
     var lastMessageImage: String = "",
 
-    var receiver:String = "",
+    var receiver: String = "",
 
-    var sender:String = "",
+    var sender: String = "",
 
     @get:PropertyName("all_message")
     @set:PropertyName("all_message")
@@ -31,8 +34,9 @@ data class Chat(
     @get:PropertyName("is_read")
     @set:PropertyName("is_read")
     var isRead: Boolean = false
-)
+) : Parcelable
 
+@Parcelize
 data class Message(
     var message: String = "",
 
@@ -42,11 +46,11 @@ data class Message(
 
     @get:PropertyName("at_date")
     @set:PropertyName("at_date")
-    var atDate:Long? = null,
+    var atDate: Long? = null,
 
     var author: String = "",
 
     @get:PropertyName("author_image")
     @set:PropertyName("author_image")
     var authorImage: String = ""
-)
+) : Parcelable
