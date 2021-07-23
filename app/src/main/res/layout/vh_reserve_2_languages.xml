@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_transparent"
-    android:paddingTop="10dp"
-    android:paddingBottom="40dp">
+    android:paddingTop="@dimen/main_padding_small"
+    android:paddingBottom="40dp"
+    android:layout_marginBottom="@dimen/main_margin_extra_small">
 
     <TextView
         android:id="@+id/tvLanguages"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_secondary"
         android:textSize="18sp"
+        android:text="@string/response_rate_100"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineStart"
