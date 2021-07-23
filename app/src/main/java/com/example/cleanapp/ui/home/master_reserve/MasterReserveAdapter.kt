@@ -4,9 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
+import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseAdapterViewType
 import com.example.cleanapp.base.BaseViewHolderType
 import com.example.cleanapp.databinding.*
+import com.example.cleanapp.extensions.load
+import com.example.cleanapp.extensions.setResourceHtmlText
+import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.ui.home.master_results.MasterAdapter
 import com.example.cleanapp.ui.home.master_results.MasterClickListener
@@ -97,21 +101,36 @@ class MasterReserveAdapter(
     inner class ViewHolderHeader(private val binding: VhReserve0HeaderBinding) :
         BaseViewHolderType<VhReserve0HeaderBinding>(binding) {
         override fun bind() {
+            binding.rvCaegories.adapter = MasterCategoryAdapter().apply {
+                setItem(selectedMaster.categories!!)
+            }
+            binding.rvCaegories.layoutManager = LinearLayoutManager(binding.root.context)
 
+            binding.tvName.text = selectedMaster.name
+            binding.imgMaster.load(selectedMaster.imgUrl)
         }
-
     }
 
     inner class ViewHolderReviews(private val binding: VhReserve1ReviewsBinding) :
         BaseViewHolderType<VhReserve1ReviewsBinding>(binding) {
         override fun bind() {
-
+            binding.tvReviews.setResourceHtmlText(R.string.reviews,selectedMaster.rating,selectedMaster.nReviews)
+            selectedMaster.lastComments?.get(0)?.let{
+                binding.tvAuthorName.text = it.author ?: ""
+                binding.imgAuthor.load(it.imageUrl)
+                binding.tvCommentDate.text = it.dateAt?.toDateFormat("MMMM YYYY") ?: ""
+                binding.tvComment.text = it.comment
+            }
         }
     }
 
     inner class ViewHolderLanguages(private val binding: VhReserve2LanguagesBinding) :
         BaseViewHolderType<VhReserve2LanguagesBinding>(binding) {
         override fun bind() {
+            binding.tvLanguages.setResourceHtmlText(R.string.languages,
+                selectedMaster.languages?.fold(""){acc, s ->
+                    "$acc, $s"
+                }?.drop(1))
 
         }
     }

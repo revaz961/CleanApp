@@ -7,26 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.cleanapp.R
+import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.databinding.AvailabilityFragmentBinding
 
-class AvailabilityFragment : Fragment() {
+class AvailabilityFragment : BaseFragment<AvailabilityFragmentBinding>(AvailabilityFragmentBinding::inflate) {
+    override fun start() {
 
-    companion object {
-        fun newInstance() = AvailabilityFragment()
-    }
-
-    private lateinit var viewModel: AvailabilityViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.availability_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AvailabilityViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
