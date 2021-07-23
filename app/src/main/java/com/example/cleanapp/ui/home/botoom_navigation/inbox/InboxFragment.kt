@@ -6,27 +6,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
+import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.databinding.CityChooserFragmentBinding
+import com.example.cleanapp.databinding.FragmentReserveBinding
+import com.example.cleanapp.databinding.InboxFragmentBinding
+import com.example.cleanapp.models.Master
+import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.ResultHandler
+import com.example.cleanapp.ui.collect_details.ChooserViewModel
+import com.example.cleanapp.ui.collect_details.category.CategoryAdapter
+import com.example.cleanapp.ui.collect_details.category.CategoryChooserViewModel
+import com.example.cleanapp.ui.collect_details.city.CityChooserViewModel
+import com.example.cleanapp.ui.home.master_reserve.MasterReserveAdapter
 
-class InboxFragment : Fragment() {
+class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::inflate) {
 
-    companion object {
-        fun newInstance() = InboxFragment()
+    private val viewModel: InboxViewModel by viewModels()
+    private lateinit var adapter: MessagesAdapter
+
+    override fun start() {
+        initRecycler()
+        observes()
     }
 
-    private lateinit var viewModel: InboxViewModel
+    private fun initRecycler() {
+        adapter = MessagesAdapter().apply {
+            chooseMessage = {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.inbox_fragment, container, false)
+                val order = Order()
+                order.categoryId = it
+
+                shareViewModel.setFragmentTitle(it.categoryEn)
+
+
+                findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment,
+                    bundleOf("order" to order)
+                )
+
+            }
+        }
+        binding.rvCategory.adapter = adapter
+        binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.getCategory()
+
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(InboxViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun observes() {
+        viewModel.liveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                    adapter.setItems(it.data!!)
+                }
+            }
+        })
     }
 
 }

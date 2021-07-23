@@ -83,16 +83,16 @@ class CityChooserFragment :
 
     private fun initRecycler() {
         adapter =
-            CitiesAdapter(cities.map { it.cityEn }.toMutableList(), object : CityClickListener {
-                override fun onCityClick(city: String) {
-                    sharedViewModel.setFragmentTitle(city)
+            CitiesAdapter(cities.map { it.cityEn }.toMutableList()).apply {
+                clickListener = {
+                    sharedViewModel.setFragmentTitle(it)
                     val order = arguments?.getParcelable("order") ?: Order()
                     navigateTo(
                         R.id.action_chooserFragment_to_masterReservationContainerFragment,
                         order
                     )
                 }
-            })
+            }
         binding.recyclerCities.layoutManager = LinearLayoutManager(requireActivity())
         binding.recyclerCities.adapter = adapter
         adapter.notifyDataSetChanged()

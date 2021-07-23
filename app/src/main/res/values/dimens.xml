@@ -13,4 +13,9 @@
     <dimen name="auth_margin_medium">60dp</dimen>
     <dimen name="auth_margin_large">80dp</dimen>
     <dimen name="auth_padding_small">20dp</dimen>
+
+    <dimen name="main_margin_extra_small">5dp</dimen>
+    <dimen name="main_margin_small">20dp</dimen>
+    <dimen name="main_margin_medium">40dp</dimen>
+    <dimen name="main_margin_large">60dp</dimen>
 </resources>

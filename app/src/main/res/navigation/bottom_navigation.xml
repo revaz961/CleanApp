@@ -14,7 +14,11 @@
         android:id="@+id/inboxFragment"
         android:name="com.example.cleanapp.ui.home.botoom_navigation.inbox.InboxFragment"
         android:label="inbox_fragment"
-        tools:layout="@layout/inbox_fragment" />
+        tools:layout="@layout/inbox_fragment" >
+        <action
+            android:id="@+id/action_inboxFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.cleanapp.ui.home.botoom_navigation.profile.ProfileFragment"
@@ -37,5 +41,14 @@
         <action
             android:id="@+id/action_orderDetailsFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.cleanapp.ChatFragment"
+        android:label="chat_fragment"
+        tools:layout="@layout/chat_fragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment" />
     </fragment>
 </navigation>
