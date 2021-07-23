@@ -1,28 +1,31 @@
-package com.example.cleanapp.ui.home.master_results
+package com.example.cleanapp.ui.home.botoom_navigation.inbox
 
 import com.example.cleanapp.models.Comment
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.MasterCategory
 import com.example.cleanapp.models.Review
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.getValue
 import javax.inject.Inject
 
 typealias OnLoad = (Master) -> Unit
 
-class MasterResultsRepository @Inject constructor(
+class InboxRepository @Inject constructor(
     private val auth: FirebaseAuth,
     private val dbRef: DatabaseReference
 ) {
-    fun getMasters(query: String, action: OnLoad) {
-
-        dbRef.child("master_city_category").orderByChild(query).equalTo(true)
+    fun getMessages(action: OnLoad) {
+        val uid = auth.currentUser!!.uid
+        dbRef.child("messages/$uid")
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     dbRef.child("masters/${snapshot.key}").get().addOnSuccessListener {
                         val syncList = mutableListOf(false, false, false)
-                        val master = it.getValue<Master>()
+                        val chat = it.getValue<Chat>()
                         val key = it.key
                         dbRef.child("reviews/$key").get().addOnSuccessListener {
                             master?.reviews = it.getValue<Review>()
