@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/main_margin_small">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgMessageAuthor"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/Circular" />
+
+    <TextView
+        android:id="@+id/tvMessageAuthorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Text.MediumDark"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/main_margin_small"
+        app:layout_constraintBottom_toTopOf="@+id/tvMessageContent"
+        app:layout_constraintStart_toEndOf="@+id/imgMessageAuthor"
+        app:layout_constraintTop_toTopOf="@+id/imgMessageAuthor"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvMessageContent"
+        style="@style/Text.SmallerLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_marginEnd="@dimen/auth_padding_LR"
+        android:gravity="start"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMessageAuthor"
+        app:layout_constraintEnd_toStartOf="@+id/imgRead"
+        app:layout_constraintStart_toStartOf="@+id/tvMessageAuthorName"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessageAuthorName" />
+
+    <ImageView
+        android:id="@+id/imgRead"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMessageAuthor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgMessageAuthor"
+        app:srcCompat="@drawable/ic_orange_circle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
