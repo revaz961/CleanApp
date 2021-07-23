@@ -1,6 +1,8 @@
 package com.example.cleanapp.ui.collect_details
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ChooserFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +18,9 @@ class ChooserFragment : BaseFragment<ChooserFragmentBinding>(ChooserFragmentBind
     private fun observes() {
         viewModel.fragmentTitleLiveData.observe(viewLifecycleOwner, {
             binding.chooserInstructions.text = it
+        })
+        viewModel.navigateLiveData.observe(viewLifecycleOwner, {
+            findNavController().navigate(it.first, bundleOf("order" to it.second))
         })
     }
 }
