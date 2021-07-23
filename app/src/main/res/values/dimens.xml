@@ -6,11 +6,6 @@
     <dimen name="calendar_margin_LR">40dp</dimen>
     <dimen name="rv_master_iv_side_margin">24dp</dimen>
 
-    <dimen name="main_margin_extra_small">5dp</dimen>
-    <dimen name="main_margin_small">20dp</dimen>
-    <dimen name="main_margin_medium">40dp</dimen>
-    <dimen name="main_margin_large">60dp</dimen>
-
     <dimen name="main_padding_extra_small">5dp</dimen>
     <dimen name="main_padding_small">20dp</dimen>
     <dimen name="main_padding_medium">40dp</dimen>

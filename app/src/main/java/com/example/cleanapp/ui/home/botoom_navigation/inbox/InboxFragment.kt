@@ -17,6 +17,7 @@ import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CityChooserFragmentBinding
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.databinding.InboxFragmentBinding
+import com.example.cleanapp.models.Chat
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
@@ -40,27 +41,19 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
         adapter = MessagesAdapter().apply {
             chooseMessage = {
 
-                val order = Order()
-                order.categoryId = it
-
-                shareViewModel.setFragmentTitle(it.categoryEn)
-
-
-                findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment,
-                    bundleOf("order" to order)
+                findNavController().navigate(R.id.action_inboxFragment_to_chatFragment,
+                    bundleOf("chat" to it)
                 )
 
             }
         }
-        binding.rvCategory.adapter = adapter
-        binding.rvCategory.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.getCategory()
+        viewModel.getChats()
 
     }
 
     private fun observes() {
-        viewModel.liveData.observe(viewLifecycleOwner, {
+        viewModel.chatsLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> {
                     adapter.setItems(it.data!!)
