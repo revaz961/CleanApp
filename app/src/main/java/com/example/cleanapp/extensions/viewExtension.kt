@@ -1,6 +1,7 @@
 package com.example.cleanapp.extensions
 
 import android.animation.ValueAnimator
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
@@ -91,4 +92,9 @@ fun View.setBorder(width: Int = 1, color: String = "#FFFFFF", radius: Float = 20
     shape.cornerRadius = radius
     shape.setColor(Color.parseColor("#99FFFFFF"))
     background = shape
+}
+
+fun View.setTintColor(hexColor:String){
+    val color = Color.parseColor(hexColor)
+    backgroundTintList = ColorStateList.valueOf(color)
 }

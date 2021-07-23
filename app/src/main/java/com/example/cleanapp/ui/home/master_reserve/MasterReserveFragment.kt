@@ -93,7 +93,7 @@ class MasterReserveFragment : Fragment() {
         )
 
         with(binding) {
-            tvPrice.setResourceHtmlText(R.string.per_hour, master.categories.)
+            master.categories?.get(0)?.let { tvPrice.setResourceHtmlText(R.string.per_hour, it.price) }
             tvDateTime.text = "TODO"
             btnReserve.setOnClickListener {
                 findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment)

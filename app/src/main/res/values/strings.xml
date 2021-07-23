@@ -58,6 +58,7 @@
     <string name="create_master_s_account">Create master’s account</string>
     <string name="already_have_an_account_sign_in">Already have an account? Sign in</string>
     <string name="messages">Messages</string>
+    <string name="response_rate_100">Response rate: 100%</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>

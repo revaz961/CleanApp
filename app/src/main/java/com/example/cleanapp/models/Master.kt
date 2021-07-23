@@ -17,6 +17,10 @@ data class Master(
 
     var reviews: Review? = null,
 
+    @get:PropertyName("last_comment")
+    @set:PropertyName("last_comment")
+    var lastComments: List<Comment>? = null,
+
     val rating: Float? = null,
 
     @get:PropertyName("n_reviews")
@@ -39,7 +43,7 @@ data class Master(
     var cancelPeriod: Int? = null,
 
     var languages: List<String>? = null
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class Review(
@@ -50,7 +54,7 @@ data class Review(
     @get:PropertyName("stars")
     @set:PropertyName("stars")
     var stars: List<Float>? = null
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class Comment(
@@ -69,10 +73,10 @@ data class Comment(
     @get:PropertyName("comment")
     @set:PropertyName("comment")
     var comment: String? = null,
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class MasterCategory(
     val category: Category? = null,
     val price: Int = 0,
-): Parcelable
+) : Parcelable
