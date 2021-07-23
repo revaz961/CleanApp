@@ -33,9 +33,7 @@ class InboxRepository @Inject constructor(
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {}
-
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
-
                 override fun onCancelled(error: DatabaseError) {}
             })
     }
