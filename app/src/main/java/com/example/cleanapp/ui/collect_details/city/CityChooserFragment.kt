@@ -34,7 +34,7 @@ class CityChooserFragment :
     private val viewModel: CityChooserViewModel by viewModels()
     private val sharedViewModel: ChooserViewModel by activityViewModels()
 
-    private val cities = mutableListOf("Tbilisi", "Kutaisi", "Batumi", "Borjomi", "Gori", "Rustavi")
+    private val cities = mutableListOf<City>()
     private lateinit var adapter: CitiesAdapter
 
     //remember if we are tracking location or not - shesatania settingebshi
@@ -82,32 +82,34 @@ class CityChooserFragment :
     }
 
     private fun initRecycler() {
-        adapter = CitiesAdapter(cities, object : CityClickListener {
-            override fun onCityClick(city: String) {
-                sharedViewModel.setFragmentTitle(city)
-                val order = arguments?.getParcelable("order") ?: Order()
-                toCategory(order)
-            }
-        })
+        adapter =
+            CitiesAdapter(cities.map { it.cityEn }.toMutableList(), object : CityClickListener {
+                override fun onCityClick(city: String) {
+                    sharedViewModel.setFragmentTitle(city)
+                    val order = arguments?.getParcelable("order") ?: Order()
+                    navigateTo(
+                        R.id.action_chooserFragment_to_masterReservationContainerFragment,
+                        order
+                    )
+                }
+            })
         binding.recyclerCities.layoutManager = LinearLayoutManager(requireActivity())
         binding.recyclerCities.adapter = adapter
         adapter.notifyDataSetChanged()
         viewModel.getCities()
     }
 
-
-    private fun toCategory(order:Order) {
-        findNavController().navigate(R.id.action_cityChooserFragment_to_masterResultsFragment,
-            bundleOf("order" to order))
+    private fun navigateTo(id: Int, order: Order) {
+        sharedViewModel.navigate(id, order)
     }
 
     private fun filter(input: String) {
         val filteredCities = mutableListOf<String>()
         for (city in cities) {
-            if (city.lowercase(Locale.getDefault())
+            if (city.cityEn.lowercase(Locale.getDefault())
                     .contains(input.lowercase(Locale.getDefault()))
             ) {
-                filteredCities.add(city)
+                filteredCities.add(city.cityEn)
             }
         }
         adapter.filterCities(filteredCities)

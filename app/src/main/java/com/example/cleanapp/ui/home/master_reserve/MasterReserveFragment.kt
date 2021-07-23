@@ -5,7 +5,6 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,10 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
+import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.models.Master
-import com.example.cleanapp.models.Order
-import com.example.cleanapp.ui.home.master_results.MasterAdapter
-import com.example.cleanapp.ui.home.master_results.MasterClickListener
 
 class MasterReserveFragment : Fragment() {
 
@@ -96,8 +93,7 @@ class MasterReserveFragment : Fragment() {
         )
 
         with(binding) {
-            tvPrice.text = getString(R.string.per_hour)
-//            tvPrice.setTextById(R.string.per_hour)
+            tvPrice.setResourceHtmlText(R.string.per_hour, master.categories.)
             tvDateTime.text = "TODO"
             btnReserve.setOnClickListener {
                 findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment)

@@ -38,7 +38,11 @@
         android:id="@+id/chooserFragment"
         android:name="com.example.cleanapp.ui.collect_details.ChooserFragment"
         android:label="chooser_fragment"
-        tools:layout="@layout/chooser_fragment" />
+        tools:layout="@layout/chooser_fragment" >
+        <action
+            android:id="@+id/action_chooserFragment_to_masterReservationContainerFragment"
+            app:destination="@id/masterReservationContainerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/SignInFragment"
         android:name="com.example.cleanapp.ui.login.SignInFragment"
@@ -83,4 +87,9 @@
             android:id="@+id/action_signUpMasterFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
     </fragment><action android:id="@+id/action_global_SignInFragment" app:destination="@id/SignInFragment"/><action android:id="@+id/action_global_signUpMasterFragment" app:destination="@id/signUpMasterFragment"/>
+    <fragment
+        android:id="@+id/masterReservationContainerFragment"
+        android:name="com.example.cleanapp.MasterReservationContainerFragment"
+        android:label="master_reservation_container_fragment"
+        tools:layout="@layout/master_reservation_container_fragment" />
 </navigation>
