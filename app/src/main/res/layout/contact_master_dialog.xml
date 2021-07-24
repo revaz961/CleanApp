@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_main_gradient_stroke_round"
+    android:orientation="vertical"
+    android:padding="@dimen/main_margin_large"
+    tools:context=".ui.home.master_reserve.aditional_actions.contact_master.ContactMasterFragment">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button2"
+        style="@style/Text.MediumDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_white_stroke"
+        android:text="@string/call_your_master" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button3"
+        style="@style/Text.MediumDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_small"
+        android:background="@drawable/btn_white_stroke"
+        android:text="@string/open_chat" />
+</LinearLayout>

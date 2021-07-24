@@ -1,13 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.master_reserve.aditional_actions.cancellation.CancellationFragment">
+    android:orientation="vertical"
+    android:paddingTop="@dimen/main_margin_TB"
+    tools:context=".ui.home.master_reserve.aditional_actions.all_comments.AllCommentsFragment">
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_margin_LR"
+        android:contentDescription="@string/back_arrow"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/textView9"
+        style="@style/Text.BigAccentDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/cancellation_policy"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/Text.BigLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_large"
+        android:text="@string/cancel_by"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/tvDateFullRefund"
+        style="@style/Text.MediumDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/Text.MediumLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_margin_LR"
+        android:text="Full refund"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDateFullRefund"
+        app:layout_constraintStart_toEndOf="@+id/tvDateFullRefund"
+        app:layout_constraintTop_toTopOf="@+id/tvDateFullRefund" />
+
+    <TextView
+        android:id="@+id/tvDateSemiRefund"
+        style="@style/Text.MediumDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/tvDateFullRefund" />
+
+    <TextView
+        style="@style/Text.MediumLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_margin_LR"
+        android:text="@string/_50_refund"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDateSemiRefund"
+        app:layout_constraintStart_toEndOf="@+id/tvDateFullRefund"
+        app:layout_constraintTop_toTopOf="@+id/tvDateSemiRefund" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/btn_transparent_red"
+        android:layout_marginBottom="@dimen/main_padding_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

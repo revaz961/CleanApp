@@ -9,7 +9,7 @@
     android:id="@+id/contactMasterFragment"
     android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.contact_master.ContactMasterFragment"
     android:label="contact_master_fragment"
-    tools:layout="@layout/contact_master_fragment" />
+    tools:layout="@layout/contact_master_dialog" />
 <fragment
     android:id="@+id/masterReserveFragment"
     android:name="com.example.cleanapp.ui.home.master_reserve.MasterReserveFragment"
@@ -60,7 +60,7 @@
     android:id="@+id/confirmationFragment"
     android:name="com.example.cleanapp.ui.home.confirmation.ConfirmationFragment"
     android:label="confirmation_fragment2"
-    tools:layout="@layout/confirmation_fragment2" />
+    tools:layout="@layout/confirmation_fragment" />
 <fragment
     android:id="@+id/availabilityFragment"
     android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.availability.AvailabilityFragment"

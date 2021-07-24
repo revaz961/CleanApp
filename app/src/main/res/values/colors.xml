@@ -28,6 +28,7 @@
     <color name="text_btnTransparent">#484848</color>
     <color name="text_auth_primary">#3B5566</color>
     <color name="text_auth_secondary">#8E8E8E</color>
+    <color name="text_red">#E04646</color>
 
 <!--    categories-->
     <color name="category_party">#FDD835</color>

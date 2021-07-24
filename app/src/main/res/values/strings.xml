@@ -60,6 +60,13 @@
     <string name="messages">Messages</string>
     <string name="response_rate_100">Response rate: 100%</string>
     <string name="all_comments">All comments</string>
+    <string name="cancellation_policy">Cancellation policy</string>
+    <string name="cancel_by">Cancel by</string>
+    <string name="_50_refund">50% refund</string>
+    <string name="cancel">Cancel</string>
+    <string name="call_your_master">Call your master</string>
+    <string name="open_chat">Open chat</string>
+    <string name="category_date">%1$s - %2$s</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>
