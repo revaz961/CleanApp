@@ -59,6 +59,10 @@
     <string name="already_have_an_account_sign_in">Already have an account? Sign in</string>
     <string name="messages">Messages</string>
     <string name="response_rate_100">Response rate: 100%</string>
+    <string name="start_as_master">Start As Master</string>
+    <string name="master">master</string>
+    <string name="chooser_city">Choose City:</string>
+    <string name="city">City:</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>
