@@ -1,10 +1,19 @@
 package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.opengl.ETC1.getWidth
+import android.os.Build
+import android.util.DisplayMetrics
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.viewModels
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
@@ -14,7 +23,12 @@ import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.utils.OrderStatusEnum
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.lang.Exception
 
 @AndroidEntryPoint
 class OrderDetailsFragment :
@@ -82,7 +96,7 @@ class OrderDetailsFragment :
                 tvCancelReservation.gone()
             }
             btnSavePdf.setOnClickListener {
-                savePdf(it)
+                savePdf(binding.root)
             }
         }
     }
@@ -104,11 +118,53 @@ class OrderDetailsFragment :
         }
     }
 
-    private fun savePdf(view: View) {
-        val bitmap = loadBitmap(binding.root, binding.root.width, binding.root.height)
+    private fun savePdf(layout: LinearLayout) {
+        val bitmap = loadBitmap(layout, layout.width, layout.height)
     }
 
-    private fun loadBitmap(layout: LinearLayout, width: Int, height: Int) {
+    private fun loadBitmap(layout: LinearLayout, width: Int, height: Int) : Bitmap {
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        layout.draw(canvas)
+        return  bitmap
+    }
+
+    private fun createPdf() {
+        val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE)
+        val displayMetrics = DisplayMetrics()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().display?.getRealMetrics(displayMetrics)
+        }else{
+            requireActivity().windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+        }
+
+        val convertWidth = displayMetrics.widthPixels
+        val convertHeight = displayMetrics.heightPixels
+
+        val pdfDocument = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(convertWidth, convertHeight, 1).create()
+        val page = pdfDocument.startPage(pageInfo)
+        val canvas = page.canvas
+        val paint = Paint()
+        canvas.drawPaint(paint)
+        bitmap = Bitmap.createScaledBitmap(bitmap, convertWidth, convertHeight, true)
+        canvas.drawBitmap(bitmap, 0, 0, null)
+        pdfDocument.finishPage(page)
+
+        //target pdf download
+        val targetPdf = "/sdcard/reservation.pdf"
+        val file = File(targetPdf)
+        try {
+            pdfDocument.writeTo(FileOutputStream(file))
+        } catch (e : IOException) {
+            e.printStackTrace()
+            makeText(requireContext(), "try again", Toast.LENGTH_SHORT).show()
+
+            //close the document
+            pdfDocument.close()
+            makeText(requireContext(), "Pdf downloaded", Toast.LENGTH_SHORT).show()
+        }
 
     }
 }
