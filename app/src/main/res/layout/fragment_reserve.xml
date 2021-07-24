@@ -50,7 +50,7 @@
 
     <TextView
         android:id="@+id/tvDateTime"
-        style="@style/Text.MediumLight"
+        style="@style/tvServiceFee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin_LR"

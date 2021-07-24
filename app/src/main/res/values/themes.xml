@@ -57,6 +57,17 @@
         <item name="android:textSize">50sp</item>
     </style>
 
+    <style name="Text.BigAccentDark" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.BigAccentLight" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
     <style name="Text.BigDark" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:textSize">24sp</item>
@@ -74,7 +85,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Text.MediumLight" parent="Widget.AppCompat.TextView">
+    <style name="tvServiceFee" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/text_secondary</item>
         <item name="android:textSize">18sp</item>
     </style>

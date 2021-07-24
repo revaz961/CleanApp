@@ -1,7 +1,6 @@
 package com.example.cleanapp.repository
 
 import com.example.cleanapp.models.Order
-import com.example.cleanapp.models.ResultHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import javax.inject.Inject
@@ -14,7 +13,7 @@ class ChooserRepository @Inject constructor(
         dbRef.child("users")
             .child(auth.currentUser!!.uid)
             .child("order")
-            .setValue(order) { error, ref ->
+            .setValue(order) { error, _ ->
                 val message = error?.message ?: ""
                 val isValid = error != null
                 action(isValid,message)

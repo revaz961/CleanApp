@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrdersFragment">
+    android:paddingTop="@dimen/main_margin_TB"
+    tools:context=".ui.home.botoom_navigation.orders.OrdersFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/rvOrders"/>
 
 </FrameLayout>

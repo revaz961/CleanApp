@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.home.master_reserve
+package com.example.cleanapp.utils
 
 enum class ReservationClickTypes (val type : Int) {
     SHOW_COMMENTS(0),

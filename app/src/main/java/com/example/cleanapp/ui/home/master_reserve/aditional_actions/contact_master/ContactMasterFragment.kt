@@ -20,7 +20,7 @@ class ContactMasterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.contact_master_fragment, container, false)
+        return inflater.inflate(R.layout.contact_master_dialog, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

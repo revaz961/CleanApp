@@ -14,6 +14,7 @@ import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.ui.home.master_results.MasterAdapter
 import com.example.cleanapp.ui.home.master_results.MasterClickListener
+import com.example.cleanapp.utils.ReservationViewTypes
 
 
 class MasterReserveAdapter(

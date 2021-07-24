@@ -2,19 +2,12 @@ package com.example.cleanapp.models
 
 import android.os.Parcelable
 import com.google.firebase.database.PropertyName
-import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Master(
-    val uid: String? = null,
-
-    @get:PropertyName("img_url")
-    @set:PropertyName("img_url")
-    var imgUrl: String? = null,
-
+    var user: User? = null,
     var categories: List<MasterCategory>? = null,
-
     var reviews: Review? = null,
 
     @get:PropertyName("last_comment")
@@ -27,9 +20,6 @@ data class Master(
     @set:PropertyName("n_reviews")
     var nReviews: Int = 0,
 
-    @SerializedName("name")
-    val name: String? = null,
-
     @get:PropertyName("own_supplements")
     @set:PropertyName("own_supplements")
     var ownSupplements: Boolean = false,
@@ -40,9 +30,10 @@ data class Master(
 
     @get:PropertyName("cancel_period")
     @set:PropertyName("cancel_period")
-    var cancelPeriod: Int? = null,
+    var cancelPeriod: Int? = 1,
 
     var languages: List<String>? = null
+
 ) : Parcelable
 
 @Parcelize

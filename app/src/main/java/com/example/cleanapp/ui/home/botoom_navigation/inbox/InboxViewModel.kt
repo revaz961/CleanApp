@@ -21,5 +21,4 @@ class InboxViewModel @Inject constructor(private val inboxRepo: InboxRepository)
             _chatsLiveData.postValue(ResultHandler.Success(it))
         }
     }
-
 }

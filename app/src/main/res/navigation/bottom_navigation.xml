@@ -26,7 +26,7 @@
         tools:layout="@layout/profile_fragment" />
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="com.example.cleanapp.OrdersFragment"
+        android:name="com.example.cleanapp.ui.home.botoom_navigation.orders.OrdersFragment"
         android:label="orders_fragment"
         tools:layout="@layout/orders_fragment" >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderDetailsFragment"
-        android:name="com.example.cleanapp.OrderDetailsFragment"
+        android:name="com.example.cleanapp.ui.home.botoom_navigation.orders.order_details.OrderDetailsFragment"
         android:label="order_details_fragment"
         tools:layout="@layout/order_details_fragment" >
         <action

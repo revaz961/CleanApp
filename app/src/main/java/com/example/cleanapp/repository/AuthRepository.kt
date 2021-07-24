@@ -28,6 +28,6 @@ class AuthRepository @Inject constructor(
     }
 
     fun setUserProfile(profile: User) {
-        dbRef.child("users").child("${auth.currentUser!!.uid}").setValue(profile)
+        dbRef.child("users").child(auth.currentUser!!.uid).setValue(profile)
     }
 }
