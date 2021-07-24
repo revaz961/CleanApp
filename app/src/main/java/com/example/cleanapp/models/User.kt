@@ -20,5 +20,4 @@ data class User(
     @get:PropertyName("is_master")
     @set:PropertyName("is_master")
     var isMaster: Boolean = false
-
 ) : Parcelable
