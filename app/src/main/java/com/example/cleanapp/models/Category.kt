@@ -1,6 +1,8 @@
 package com.example.cleanapp.models
 
 import android.os.Parcelable
+import com.google.firebase.database.Exclude
+import com.google.firebase.database.IgnoreExtraProperties
 import com.google.firebase.database.PropertyName
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -25,5 +27,8 @@ data class Category(
 
     @get:PropertyName("image_url")
     @set:PropertyName("image_url")
-    var imageUrl: String=""
+    var imageUrl: String="",
+
+    @Exclude
+    var isChecked:Boolean = false
 ):Parcelable

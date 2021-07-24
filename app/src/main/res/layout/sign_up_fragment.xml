@@ -34,14 +34,28 @@
             android:layout_marginTop="@dimen/auth_margin_medium"
             android:background="@drawable/round_border"
             android:ems="15"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
+            android:hint="@string/name"
             android:lines="1"
             android:padding="@dimen/auth_padding_small"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSignUp" />
+
+        <EditText
+            android:id="@+id/editSurname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_padding_small"
+            android:background="@drawable/round_border"
+            android:ems="15"
+            android:hint="@string/surname"
+            android:lines="1"
+            android:padding="@dimen/auth_padding_small"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editName" />
 
         <EditText
             android:id="@+id/editEmail"
@@ -57,7 +71,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editName" />
+            app:layout_constraintTop_toBottomOf="@id/editSureName" />
 
 
         <EditText
@@ -105,6 +119,7 @@
             android:padding="@dimen/auth_padding_small"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editRepeatPassword" />
 

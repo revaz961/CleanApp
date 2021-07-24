@@ -1,4 +1,4 @@
-package com.example.cleanapp.ui.sign_up_master
+package com.example.cleanapp.ui.sign_up_master.adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater

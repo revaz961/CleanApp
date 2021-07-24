@@ -11,16 +11,15 @@
     android:background="@drawable/error_dialog">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivError"
+        android:id="@+id/ivIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/ic_location_city_black_24dp"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/main_margin_small"
         android:tint="@color/background_blue"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCityChooser"
+        android:id="@+id/rvChooser"
         android:layout_width="wrap_content"
         android:minWidth="250dp"
         android:layout_height="250dp"
@@ -31,7 +30,6 @@
         android:id="@+id/btnChoose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/main_margin_small"
         />
