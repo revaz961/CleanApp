@@ -1,8 +1,6 @@
 package com.example.cleanapp.ui.sign_up_master
 
 import android.app.Dialog
-import android.widget.CheckBox
-import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
@@ -26,9 +24,10 @@ class SignUpMasterFragment :
     private lateinit var cityAdapter: ChooserCityAdapter
     private lateinit var categoryAdapter: ChooserCategoryAdapter
     private lateinit var languageAdapter: ChooserLanguageAdapter
-    private lateinit var master:Master
+    private var master = Master()
 
     override fun start() {
+        master.user = arguments?.getParcelable("user")
         observers()
         initAdapters()
         setListeners()
@@ -63,6 +62,16 @@ class SignUpMasterFragment :
                     R.color.gray_light
             )
         }
+
+        binding.btnCreateMaster.setOnClickListener {
+            val city = viewModel.selectedCity
+            val categories = viewModel.categories.filter { it.isChecked }
+            val languages = viewModel.languages.filter { it.second }.map { it.first }
+            val haveSupplement = viewModel.haveSupplement
+            master.languages = languages
+            master.categories = categories
+            master.ownSupplements = haveSupplement
+        }
     }
 
     private fun initAdapters() {
@@ -81,7 +90,8 @@ class SignUpMasterFragment :
         val dialog = Dialog(requireContext())
         dialog.init(dialogBinding.root)
         cityAdapter.onClick = {
-            binding.editCity.setText(it.cityEn)
+            binding.editCity.text = it.cityEn
+            viewModel.selectedCity = it
             dialog.cancel()
             binding.editCity.clearFocus()
         }

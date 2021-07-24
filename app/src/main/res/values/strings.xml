@@ -91,6 +91,7 @@
     <string name="have_own_cleaning_supplements">have own cleaning supplements</string>
     <string name="name">Name:</string>
     <string name="surname">Surname:</string>
+    <string name="_0">0</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>

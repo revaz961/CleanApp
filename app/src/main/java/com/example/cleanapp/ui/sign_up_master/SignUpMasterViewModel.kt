@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cleanapp.models.Category
 import com.example.cleanapp.models.City
+import com.example.cleanapp.models.MasterCategory
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,9 +15,10 @@ class SignUpMasterViewModel @Inject constructor(private val signUpMasterRepo: Si
     ViewModel() {
 
     val cities = mutableListOf<City>()
-    val categories = mutableListOf<Category>()
+    val categories = mutableListOf<MasterCategory>()
     val languages = mutableListOf<Pair<String, Boolean>>()
     var haveSupplement = false
+    var selectedCity: City? = null
 
     private val _citiesLiveData = MutableLiveData<ResultHandler<List<City>>>()
     val citiesLiveData: LiveData<ResultHandler<List<City>>> = _citiesLiveData

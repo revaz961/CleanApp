@@ -20,14 +20,16 @@
         android:layout_marginEnd="@dimen/main_margin_extra_small"
         />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivCategory"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:shapeAppearanceOverlay="@style/Circular"
-        android:scaleType="centerCrop"
+    <EditText
+        android:id="@+id/editPrice"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:maxLength="3"
+        android:gravity="center"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
+        android:hint="@string/_0"
         android:layout_marginEnd="@dimen/main_margin_extra_small"
         />
 

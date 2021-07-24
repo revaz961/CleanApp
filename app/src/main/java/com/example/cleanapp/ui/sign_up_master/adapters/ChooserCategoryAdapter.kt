@@ -35,7 +35,6 @@ class ChooserCategoryAdapter : BaseAdapter<Category>() {
         override fun bind(data: Category) {
             binding.checkCategory.text = data.categoryEn
             binding.checkCategory.isChecked = data.isChecked
-            binding.ivCategory.load(data.imageUrl)
             binding.checkCategory.setOnCheckedChangeListener { buttonView, isChecked ->
                 items[absoluteAdapterPosition].isChecked = isChecked
             }
