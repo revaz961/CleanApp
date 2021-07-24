@@ -1,6 +1,6 @@
 package com.example.cleanapp.repository
 
-import com.example.cleanapp.models.UserProfile
+import com.example.cleanapp.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -27,7 +27,7 @@ class AuthRepository @Inject constructor(
             }
     }
 
-    fun setUserProfile(profile: UserProfile) {
-        dbRef.child("users").child("${auth.currentUser!!.uid}").setValue(profile)
+    fun setUserProfile(profile: User) {
+        dbRef.child("users").child(auth.currentUser!!.uid).setValue(profile)
     }
 }

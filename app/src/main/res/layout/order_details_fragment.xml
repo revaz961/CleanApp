@@ -1,13 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderDetailsFragment">
+    android:orientation="vertical"
+    android:padding="@dimen/main_margin_TB"
+    android:overScrollMode="ifContentScrolls"
+    tools:context=".ui.home.botoom_navigation.orders.order_details.OrderDetailsFragment">
 
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/main_margin_small">
+
+            <View
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:background="@color/gray_dark"
+                app:layout_constraintTop_toBottomOf="@+id/tvTotal"
+                tools:layout_editor_absoluteX="-16dp" />
+
+            <TextView
+                android:id="@+id/tvTotalValue"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTotal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTotal" />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="@string/total"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line5" />
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:background="@color/gray_dark"
+                app:layout_constraintTop_toBottomOf="@+id/tvServiceFee"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/tvServiceFee"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_extra_small"
+                android:text="@string/service_fee"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCategoryFee" />
+
+            <TextView
+                android:id="@+id/tvServiceFeeValue"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tvServiceFee"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCategoryFee" />
+
+            <TextView
+                android:id="@+id/tvCategoryFee"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="@string/cleaning_fee"
+                app:layout_constraintEnd_toStartOf="@+id/tvCategoryFeeValue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvYouPaid" />
+
+            <TextView
+                android:id="@+id/tvCategoryFeeValue"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCategoryFee"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvCategoryFee"
+                app:layout_constraintTop_toTopOf="@+id/tvCategoryFee" />
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/back_arrow"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvOrderStatus"
+                style="@style/Text.SmallerLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="@string/ongoing"
+                android:textColor="@color/selection"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+            <TextView
+                android:id="@+id/tvFullname"
+                style="@style/Text.BigDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="Nino Ninidze"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus" />
+
+            <TextView
+                android:id="@+id/tvYouPaid"
+                style="@style/Text.BigDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_medium"
+                android:text="@string/you_paid"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line4" />
+
+            <TextView
+                android:id="@+id/tvCatPrice"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_extra_small"
+                android:text="after party &#183; 654gel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFullname" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_extra_small"
+                android:text="Tbilis, Leselidzestr 45"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCatPrice" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgAuthor"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@color/orange"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvFullname"
+                app:shapeAppearanceOverlay="@style/Circular" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRating"
+                app:layout_constraintEnd_toStartOf="@+id/tvRating"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/imgAuthor"
+                app:layout_constraintTop_toTopOf="@+id/tvRating" />
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_margin_extra_small"
+                android:layout_marginTop="@dimen/main_margin_extra_small"
+                android:text="4.9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imgAuthor" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:background="@color/gray_dark"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+
+            <TextView
+                android:id="@+id/tvReservationDate"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="@string/reservation_date"
+                app:layout_constraintEnd_toStartOf="@+id/tvReservationDateValue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+            <TextView
+                android:id="@+id/tvReservationDateValue"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tvReservationDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvReservationDate"
+                app:layout_constraintTop_toTopOf="@+id/tvReservationDate" />
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:background="@color/gray_dark"
+                app:layout_constraintTop_toBottomOf="@+id/tvCleaningDay"
+                tools:layout_editor_absoluteX="-2dp" />
+
+            <TextView
+                android:id="@+id/tvCleaningTimeValue"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCleaningTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvCleaningTime"
+                app:layout_constraintTop_toTopOf="@+id/tvCleaningTime" />
+
+            <TextView
+                android:id="@+id/tvCleaningTime"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="@string/cleaning_time"
+                app:layout_constraintEnd_toStartOf="@+id/tvCleaningTimeValue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:background="@color/gray_dark"
+                app:layout_constraintTop_toBottomOf="@+id/tvCleaningTime"
+                tools:layout_editor_absoluteX="-1dp" />
+
+            <TextView
+                android:id="@+id/tvCleaningDayValue"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCleaningDay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvCleaningDay"
+                app:layout_constraintTop_toTopOf="@+id/tvCleaningDay" />
+
+
+            <TextView
+                android:id="@+id/tvCleaningDay"
+                style="@style/tvServiceFee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="Cleaning day"
+                app:layout_constraintEnd_toStartOf="@+id/tvCleaningDayValue"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:background="@color/gray_dark"
+                app:layout_constraintTop_toBottomOf="@+id/tvReservationDate"
+                tools:layout_editor_absoluteX="-7dp" />
+
+            <TextView
+                android:id="@+id/tvCancelReservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_reservation"
+                android:textColor="@color/text_red"
+                android:textStyle="italic"
+                android:layout_marginTop="@dimen/main_margin_small"
+                app:layout_constraintTop_toBottomOf="@id/line6"
+                app:layout_constraintEnd_toEndOf="@+id/line6"
+                app:layout_constraintStart_toStartOf="@+id/line6"
+                tools:layout_editor_absoluteY="623dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="@dimen/main_margin_small"
+        android:id="@+id/btnSavePdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_blue"
+        android:text="save pdf"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</LinearLayout>

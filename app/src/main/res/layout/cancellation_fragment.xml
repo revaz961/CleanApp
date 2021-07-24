@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvOrderDet"
         style="@style/Text.BigAccentDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,14 +29,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tvMasterFullName"
         style="@style/Text.BigLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_margin_large"
         android:text="@string/cancel_by"
         app:layout_constraintStart_toStartOf="@+id/btnBack"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOrderDet" />
 
     <TextView
         android:id="@+id/tvDateFullRefund"
@@ -46,12 +46,12 @@
         android:layout_marginTop="36dp"
         android:text="TextView"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toStartOf="@+id/tvMasterFullName"
+        app:layout_constraintTop_toBottomOf="@+id/tvMasterFullName" />
 
     <TextView
         android:id="@+id/textView12"
-        style="@style/Text.MediumLight"
+        style="@style/tvServiceFee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin_LR"
@@ -68,11 +68,11 @@
         android:text="TextView"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/main_margin_TB"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/tvMasterFullName"
         app:layout_constraintTop_toBottomOf="@+id/tvDateFullRefund" />
 
     <TextView
-        style="@style/Text.MediumLight"
+        style="@style/tvServiceFee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin_LR"
@@ -81,16 +81,4 @@
         app:layout_constraintStart_toEndOf="@+id/tvDateFullRefund"
         app:layout_constraintTop_toTopOf="@+id/tvDateSemiRefund" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:background="@drawable/btn_transparent_red"
-        android:layout_marginBottom="@dimen/main_padding_large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

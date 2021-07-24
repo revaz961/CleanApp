@@ -5,10 +5,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
-import android.view.animation.TranslateAnimation
-import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
-import com.example.cleanapp.R
 
 fun View.show() {
     visibility = View.VISIBLE

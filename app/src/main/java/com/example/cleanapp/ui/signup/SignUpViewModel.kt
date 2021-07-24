@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.ResultHandler
-import com.example.cleanapp.models.UserProfile
+import com.example.cleanapp.models.User
 import com.example.cleanapp.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,7 +46,7 @@ class SignUpViewModel @Inject constructor(
 
     }
 
-    fun setUserProfile(profile: UserProfile) {
+    fun setUserProfile(profile: User) {
         authRepository.setUserProfile(profile)
     }
 }

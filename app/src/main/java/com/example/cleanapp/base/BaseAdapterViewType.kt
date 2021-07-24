@@ -3,7 +3,7 @@ package com.example.cleanapp.base
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseAdapterViewType<T>() :
+abstract class BaseAdapterViewType<T> :
     RecyclerView.Adapter<BaseViewHolderType<ViewBinding>>() {
 
     protected val items = mutableListOf<T>()

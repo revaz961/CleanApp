@@ -8,7 +8,7 @@ import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.SignUpFragmentBinding
 import com.example.cleanapp.extensions.isEmail
 import com.example.cleanapp.models.ResultHandler
-import com.example.cleanapp.models.UserProfile
+import com.example.cleanapp.models.User
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -76,7 +76,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         viewModel.liveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> {
-                    viewModel.setUserProfile(UserProfile(
+                    viewModel.setUserProfile(User(
                         it.data!!.uid,
                         it.data.email!!,
                         binding.editName.text.toString().trim(),

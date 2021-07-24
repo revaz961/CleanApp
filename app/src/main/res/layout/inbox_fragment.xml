@@ -36,7 +36,7 @@
         android:background="@drawable/ic_orange_circle"
         android:gravity="center"
         android:text="1"
-        style="@style/Text.MediumLight"
+        style="@style/tvServiceFee"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"

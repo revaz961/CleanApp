@@ -15,6 +15,8 @@ import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.models.Master
+import com.example.cleanapp.utils.ReservationClickTypes
+import com.example.cleanapp.utils.ReservationViewTypes
 
 class MasterReserveFragment : Fragment() {
 

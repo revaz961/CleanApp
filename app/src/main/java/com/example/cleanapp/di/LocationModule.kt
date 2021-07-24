@@ -6,11 +6,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class LocationModule {
 
     @Provides
-    fun provideLocationRequest() = LocationRequest.create()
+    fun provideLocationRequest(): LocationRequest = LocationRequest.create()
 }

@@ -5,14 +5,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/main_margin_TB">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/category_date"
-        android:layout_margin="@dimen/main_margin_TB"
-        android:layout_gravity="center_vertical"
-        style="@style/Text.MediumLight"
-        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/main_margin_small">
+
+        <TextView
+            android:id="@+id/tvCatDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/category_date"
+            android:layout_gravity="center_vertical"
+            style="@style/tvServiceFee"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="price"
+            android:layout_gravity="center_vertical"
+            style="@style/tvServiceFee"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

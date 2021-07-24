@@ -70,6 +70,6 @@
     android:id="@+id/cancellationFragment"
     android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.cancellation.CancellationFragment"
     android:label="cancellation_fragment"
-    tools:layout="@layout/cancellation_fragment" />
+    tools:layout="@layout/cancellation_fragment" /><action android:id="@+id/action_global_masterReserveFragment" app:destination="@id/masterReserveFragment"/>
 
 </navigation>

@@ -13,5 +13,5 @@ fun ImageView.load(
         .load(url ?: "")
         .placeholder(placeholder)
         .error(error)
-        .into(this);
+        .into(this)
 }
