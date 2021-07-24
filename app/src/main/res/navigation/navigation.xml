@@ -80,7 +80,7 @@
         app:popUpTo="@id/navigation"/>
     <fragment
         android:id="@+id/signUpMasterFragment"
-        android:name="com.example.cleanapp.SignUpMasterFragment"
+        android:name="com.example.cleanapp.ui.sign_up_master.SignUpMasterFragment"
         android:label="sign_up_master_fragment"
         tools:layout="@layout/sign_up_master_fragment" >
         <action

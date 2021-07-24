@@ -40,7 +40,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     abstract fun start()
 
-    fun showErrorDialog(message:String){
+    fun showErrorDialog(message: String) {
         val dialogBinding = ErrorDialogLayoutBinding.inflate(layoutInflater)
         val dialog = Dialog(requireContext())
         dialog.init(dialogBinding.root)

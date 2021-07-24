@@ -43,6 +43,10 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
             else
                 showErrorDialog(errorMessage)
         }
+
+        binding.btnCreateMaster.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_signUpMasterFragment)
+        }
     }
 
     private fun checkUserInfo(): String {
