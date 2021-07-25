@@ -23,28 +23,28 @@ class ConfirmationFragment : BaseFragment<ConfirmationFragmentBinding>(Confirmat
     private lateinit var adapter: ConfirmationAdapter
 
     override fun start() {
-        initRecycler()
-        observes()
+//        initRecycler()
+//        observes()
     }
 
-    private fun initRecycler() {
-        adapter = ConfirmationAdapter().apply {
-            sendMessage = {
-                findNavController().navigate(R.id.action_ordersFragment_to_orderDetailsFragment,
-                    bundleOf("order" to it)
-                )
-            }
-        }
-        viewModel.getOrders()
-    }
-
-    private fun observes() {
-        viewModel.ordersLiveData.observe(viewLifecycleOwner, {
-            when (it) {
-                is ResultHandler.Success -> {
-                    adapter.setItems(it.data!!)
-                }
-            }
-        })
-    }
+//    private fun initRecycler() {
+//        adapter = ConfirmationAdapter().apply {
+//            sendMessage = {
+//                findNavController().navigate(R.id.action_ordersFragment_to_orderDetailsFragment,
+//                    bundleOf("order" to it)
+//                )
+//            }
+//        }
+//        viewModel.getOrders()
+//    }
+//
+//    private fun observes() {
+//        viewModel.ordersLiveData.observe(viewLifecycleOwner, {
+//            when (it) {
+//                is ResultHandler.Success -> {
+//                    adapter.setItems(it.data!!)
+//                }
+//            }
+//        })
+//    }
 }

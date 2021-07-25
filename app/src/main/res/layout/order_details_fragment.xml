@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tvTotalValue"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/tvTotal"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
@@ -60,7 +60,7 @@
 
             <TextView
                 android:id="@+id/tvServiceFee"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_extra_small"
@@ -71,7 +71,7 @@
 
             <TextView
                 android:id="@+id/tvServiceFeeValue"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -81,7 +81,7 @@
 
             <TextView
                 android:id="@+id/tvCategoryFee"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/tvCategoryFeeValue"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -149,7 +149,7 @@
 
             <TextView
                 android:id="@+id/tvCatPrice"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_extra_small"
@@ -159,7 +159,7 @@
 
             <TextView
                 android:id="@+id/tvAddress"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_extra_small"
@@ -212,7 +212,7 @@
 
             <TextView
                 android:id="@+id/tvReservationDate"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
@@ -225,7 +225,7 @@
 
             <TextView
                 android:id="@+id/tvReservationDateValue"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -246,7 +246,7 @@
 
             <TextView
                 android:id="@+id/tvCleaningTimeValue"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -257,7 +257,7 @@
 
             <TextView
                 android:id="@+id/tvCleaningTime"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
@@ -279,7 +279,7 @@
 
             <TextView
                 android:id="@+id/tvCleaningDayValue"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -292,7 +292,7 @@
 
             <TextView
                 android:id="@+id/tvCleaningDay"
-                style="@style/tvServiceFee"
+                style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
