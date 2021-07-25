@@ -47,12 +47,23 @@ class SignUpMasterRepository @Inject constructor(private val dbRef: DatabaseRefe
         })
     }
 
-    fun setMaster(master: Master, action: () -> Unit){
+    fun setMaster(master: Master, action: () -> Unit) {
         val key = master.user!!.uid
         val user = master.user!!
-        val childUpdates = hashMapOf<String,Any>("/masters/$key" to master, "/users/$key" to user)
+        val childUpdates = hashMapOf<String, Any>("/masters/$key" to master, "/users/$key" to user)
         dbRef.updateChildren(childUpdates).addOnSuccessListener {
-            action()
+            dbRef.child("masters_category/$key").setValue(master.categories).addOnSuccessListener {
+                action()
+            }
+
+            val city = master.city!!.cityEn.lowercase()
+            val map = hashMapOf<String,Any>()
+            master.categories?.forEach {
+                val category = it.category?.categoryEn?.lowercase()?.replace(' ','_')
+                map["${city}_$category"] = true
+            }
+
+            dbRef.child("master_city_category/$key").updateChildren(map)
         }
     }
 }

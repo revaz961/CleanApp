@@ -16,5 +16,6 @@ enum class ReservationViewTypes (val type: Int) {
     LANGUAGES(2),
     INFO_EDIT(3),
     REPORT(4),
-    MORE(5)
+    MORE(5),
+    CANCELLATION(6)
 }

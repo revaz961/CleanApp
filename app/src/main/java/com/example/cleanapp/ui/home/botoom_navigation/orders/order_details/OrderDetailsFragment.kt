@@ -1,8 +1,6 @@
 package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.opengl.ETC1.getWidth
 import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
@@ -56,7 +54,7 @@ class OrderDetailsFragment :
                     master.user!!.surname
                 )
             }
-            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.categoryId, order.price)
+            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.category, order.price)
             tvAddress.text = order.address
 
             imgAuthor.load(master.user?.imgUrl)

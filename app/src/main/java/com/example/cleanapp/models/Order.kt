@@ -9,11 +9,11 @@ data class Order(
 
     @get:PropertyName("city_id")
     @set:PropertyName("city_id")
-    var cityId: City? = null,
+    var city: City? = null,
 
     @get:PropertyName("category_id")
     @set:PropertyName("category_id")
-    var categoryId: Category? = null,
+    var category: Category? = null,
 
     @get:PropertyName("date")
     @set:PropertyName("date")

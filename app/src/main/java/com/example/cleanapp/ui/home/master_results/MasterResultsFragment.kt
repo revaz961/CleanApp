@@ -8,6 +8,7 @@ import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.MasterResultsFragmentBinding
 import com.example.cleanapp.models.Master
+import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,28 +18,37 @@ class MasterResultsFragment :
 
     private val masterResultsViewModel: MasterResultsViewModel by viewModels()
     private lateinit var masterAdapter: MasterAdapter
+    private lateinit var order: Order
 
     override fun start() {
+        order = arguments?.getParcelable<Order>("order")!!
         observes()
         initRecycler()
     }
 
     private fun initRecycler() {
-        masterAdapter = MasterAdapter(object : MasterClickListener{
+        masterAdapter = MasterAdapter(object : MasterClickListener {
             override fun onClick(master: Master) {
-                findNavController().navigate(R.id.action_masterResultsFragment_to_masterReserveFragment, bundleOf("master" to master))
+                findNavController().navigate(
+                    R.id.action_masterResultsFragment_to_masterReserveFragment,
+                    bundleOf("master" to master, "order" to order)
+                )
             }
 
         })
         binding.rvMaster.adapter = masterAdapter
         binding.rvMaster.layoutManager = LinearLayoutManager(requireContext())
-        masterResultsViewModel.getMaster("tbilisi_garden")
+//        masterResultsViewModel.getMaster("tbilisi_garden")
+        val query = "${order.city?.cityEn?.lowercase()}_${
+            order.category?.categoryEn?.lowercase()?.replace(' ', '_')
+        }"
+        masterResultsViewModel.getMaster(query)
     }
 
     private fun observes() {
         masterResultsViewModel.exploreLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> masterAdapter.addItem(it.data!!)
+                is ResultHandler.Success -> masterAdapter.setItems(it.data!!)
             }
         })
     }

@@ -49,8 +49,8 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
 
             binding.tvMaster.setResourceHtmlText(
                 R.string.reviews2,
-                data.rating!!,
-                data.nReviews,
+                data.rating ?: 0f,
+                data.nReviews ?: 0,
                 data.user?.name ?: ""
             )
 

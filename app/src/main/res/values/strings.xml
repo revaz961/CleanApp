@@ -30,7 +30,7 @@
     <string name="wallet">wallet</string>
     <string name="order">order</string>
     <string name="add_to_favorites">Add to favorites</string>
-    <string name="per_hour">&lt;font face=”sans_serif“ color=”#222222”> %1$d ₾ &lt;/font> / hour</string>
+    <string name="per_hour">&lt;font face=”sans_serif“ color=”#222222”> %1$.2f ₾ &lt;/font> / hour</string>
 
     <!--    Reservation-->
     <string name="reviews">&lt;font face=”sans_serif“ color=”#FF795B”> &lt;b>%1$.1f&lt;/b> &lt;/font> (%2$d reviews)</string>
@@ -46,7 +46,6 @@
     <string name="contact_master">Contact master</string>
     <string name="languages">Languages: %1$s</string>
     <string name="response_rate">Response rate: %1$s%</string>
-    <string name="availability">Availability</string>
     <string name="cancellation">Cancellation policy</string>
     <string name="orders">orders</string>
     <string name="what_to_clean">What to clean?</string>
@@ -91,7 +90,8 @@
     <string name="have_own_cleaning_supplements">have own cleaning supplements</string>
     <string name="name">Name:</string>
     <string name="surname">Surname:</string>
-    <string name="_0">0</string>
+    <string name="_0">0.00</string>
+    <string name="availability">Availability</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>
