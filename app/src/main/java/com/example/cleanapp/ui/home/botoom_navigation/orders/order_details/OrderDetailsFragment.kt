@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Environment
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.Toast.makeText
@@ -70,7 +71,7 @@ class OrderDetailsFragment :
                     master.user!!.surname
                 )
             }
-            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.categoryId, order.price)
+            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.category, order.price)
             tvAddress.text = order.address
 
             imgAuthor.load(master.user?.imgUrl)

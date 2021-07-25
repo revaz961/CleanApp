@@ -55,6 +55,11 @@
     <action
         android:id="@+id/action_masterResultsFragment_to_masterReserveFragment"
         app:destination="@id/masterReserveFragment" />
+    <argument
+        android:name="order"
+        app:argType="com.example.cleanapp.models.Order"
+        app:nullable="true"
+        android:defaultValue="@null" />
 </fragment>
 <fragment
     android:id="@+id/confirmationFragment"

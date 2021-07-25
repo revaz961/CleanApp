@@ -1,5 +1,6 @@
 package com.example.cleanapp.ui.collect_details.room
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -64,7 +65,7 @@ class RoomChooserFragment :
 
         binding.btnApply.setOnClickListener {
             order.roomCount = viewModel.roomCounters
-            findNavController().navigate(R.id.action_roomChooserFragment_to_cityChooserFragment)
+            findNavController().navigate(R.id.action_roomChooserFragment_to_cityChooserFragment, bundleOf("order" to order))
         }
 
         binding.btnBack.setOnClickListener {

@@ -34,6 +34,7 @@ class CityChooserFragment :
 
     private val cities = mutableListOf<City>()
     private lateinit var adapter: CitiesAdapter
+    private lateinit var order: Order
 
     //remember if we are tracking location or not - shesatania settingebshi
     //TODO
@@ -62,6 +63,7 @@ class CityChooserFragment :
 
 
     private fun init() {
+        order = arguments?.getParcelable("order") ?: Order()
         observes()
         initRecycler()
         binding.inputCity.addTextChangedListener(object : TextWatcher {
@@ -81,10 +83,10 @@ class CityChooserFragment :
 
     private fun initRecycler() {
         adapter =
-            CitiesAdapter(cities.map { it.cityEn }.toMutableList()).apply {
-                clickListener = {
-                    sharedViewModel.setFragmentTitle(it)
-                    val order = arguments?.getParcelable("order") ?: Order()
+            CitiesAdapter(cities).apply {
+                clickListener = { city ->
+                    sharedViewModel.setFragmentTitle(city.cityEn)
+                    order.city = city
                     navigateTo(
                         R.id.action_chooserFragment_to_masterReservationContainerFragment,
                         order
@@ -102,12 +104,12 @@ class CityChooserFragment :
     }
 
     private fun filter(input: String) {
-        val filteredCities = mutableListOf<String>()
+        val filteredCities = mutableListOf<City>()
         for (city in cities) {
             if (city.cityEn.lowercase(Locale.getDefault())
                     .contains(input.lowercase(Locale.getDefault()))
             ) {
-                filteredCities.add(city.cityEn)
+                filteredCities.add(city)
             }
         }
         adapter.filterCities(filteredCities)
@@ -116,7 +118,7 @@ class CityChooserFragment :
     private fun observes() {
         viewModel.citiesLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> adapter.setItem(it.data!!.map { it.cityEn })
+                is ResultHandler.Success -> adapter.setItem(it.data!!)
                 is ResultHandler.Error -> showErrorDialog(it.message)
             }
         })

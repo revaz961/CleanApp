@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.databinding.CityViewHolderBinding
+import com.example.cleanapp.models.City
 
-typealias CityClick = (city : String) -> Unit
+typealias CityClick = (city : City) -> Unit
 
-class CitiesAdapter (private var cities: MutableList<String>) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
+class CitiesAdapter (private var cities: MutableList<City>) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
 
     lateinit var clickListener: CityClick
 
-    fun setItem(list:List<String>){
+    fun setItem(list:List<City>){
         cities.clear()
         cities.addAll(list)
         notifyDataSetChanged()
@@ -29,17 +30,17 @@ class CitiesAdapter (private var cities: MutableList<String>) : RecyclerView.Ada
     override fun getItemCount() = cities.size
 
     inner class CityViewHolder(private val binding: CityViewHolderBinding) : RecyclerView.ViewHolder(binding.root) {
-        private lateinit var model: String
+        private lateinit var model: City
         fun bind() {
             model = cities[adapterPosition]
-            binding.cityName.text = model
+            binding.cityName.text = model.cityEn
             binding.cityName.setOnClickListener {
                 clickListener(model)
             }
         }
     }
 
-    fun filterCities(filteredCities: MutableList<String>) {
+    fun filterCities(filteredCities: MutableList<City>) {
         cities = filteredCities
         notifyDataSetChanged()
     }

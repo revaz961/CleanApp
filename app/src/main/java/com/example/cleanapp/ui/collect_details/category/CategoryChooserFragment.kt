@@ -61,7 +61,7 @@ class CategoryChooserFragment :
             chooseCategory = {
 
                 val order = Order()
-                order.categoryId = it
+                order.category = it
 
                 shareViewModel.setFragmentTitle(it.categoryEn)
 

@@ -15,6 +15,7 @@ import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.models.Master
+import com.example.cleanapp.models.Order
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
 
@@ -23,6 +24,7 @@ class MasterReserveFragment : Fragment() {
     private var _binding: FragmentReserveBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: MasterReserveAdapter
+    private lateinit var order: Order
 
     private lateinit var master: Master
     private lateinit var moremasters: MutableList<Master>
@@ -32,6 +34,7 @@ class MasterReserveFragment : Fragment() {
         ReservationViewTypes.REVIEWS.type,
         ReservationViewTypes.LANGUAGES.type,
         ReservationViewTypes.INFO_EDIT.type,
+        ReservationViewTypes.CANCELLATION.type,
         ReservationViewTypes.REPORT.type,
         ReservationViewTypes.MORE.type
     )
@@ -54,15 +57,17 @@ class MasterReserveFragment : Fragment() {
 
     private fun setData() {
         master = arguments?.getParcelable("master") ?: Master()
-        moremasters = mutableListOf(master,master,master,master)
+        moremasters = mutableListOf(master, master, master, master)
 
 
     }
 
     private fun init() {
+        order = arguments?.getParcelable<Order>("order")!!
+
         d("MASTER", master.toString())
         adapter =
-            MasterReserveAdapter(master, moremasters, object : MasterReserveClickListener {
+            MasterReserveAdapter(master, moremasters, order, object : MasterReserveClickListener {
                 override fun onClick(type: Int, subType: Int) {
                     when (type) {
                         ReservationClickTypes.SHOW_COMMENTS.type -> {
@@ -95,7 +100,8 @@ class MasterReserveFragment : Fragment() {
         )
 
         with(binding) {
-            master.categories?.get(0)?.let { tvPrice.setResourceHtmlText(R.string.per_hour, it.price) }
+            master.categories?.get(0)
+                ?.let { tvPrice.setResourceHtmlText(R.string.per_hour, it.price) }
             tvDateTime.text = "TODO"
             btnReserve.setOnClickListener {
                 findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment)

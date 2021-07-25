@@ -8,6 +8,9 @@ import kotlinx.parcelize.Parcelize
 data class Master(
     var user: User? = null,
     var categories: List<MasterCategory>? = null,
+
+    var city:City? = null,
+
     var reviews: Review? = null,
 
     @get:PropertyName("last_comment")

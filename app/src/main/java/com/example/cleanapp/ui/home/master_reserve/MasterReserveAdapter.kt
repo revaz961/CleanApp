@@ -12,6 +12,7 @@ import com.example.cleanapp.extensions.load
 import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
+import com.example.cleanapp.models.Order
 import com.example.cleanapp.ui.home.master_results.MasterAdapter
 import com.example.cleanapp.ui.home.master_results.MasterClickListener
 import com.example.cleanapp.utils.ReservationViewTypes
@@ -20,6 +21,7 @@ import com.example.cleanapp.utils.ReservationViewTypes
 class MasterReserveAdapter(
     private var selectedMaster: Master,
     private val moreMasters: MutableList<Master>,
+    private val order: Order,
     private val masterReserveClickListener: MasterReserveClickListener
 ) :
     BaseAdapterViewType<Int>() {
@@ -71,6 +73,15 @@ class MasterReserveAdapter(
                     )
                 )
             }
+            ReservationViewTypes.CANCELLATION.type -> {
+                ViewHolderCancellation(
+                    VhReserve3InfoEditBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
             ReservationViewTypes.REPORT.type -> {
                 ViewHolderReport(
                     VhReserve4ReportBinding.inflate(
@@ -108,7 +119,7 @@ class MasterReserveAdapter(
             binding.rvCaegories.layoutManager = LinearLayoutManager(binding.root.context)
 
             binding.tvName.text = selectedMaster.user?.name ?: ""
-            binding.imgMaster.load(selectedMaster.user?.imgUrl?:"")
+            binding.imgMaster.load(selectedMaster.user?.imgUrl ?: "")
         }
     }
 
@@ -132,7 +143,8 @@ class MasterReserveAdapter(
     inner class ViewHolderLanguages(private val binding: VhReserve2LanguagesBinding) :
         BaseViewHolderType<VhReserve2LanguagesBinding>(binding) {
         override fun bind() {
-            binding.tvLanguages.setResourceHtmlText(R.string.languages,
+            binding.tvLanguages.setResourceHtmlText(
+                R.string.languages,
                 selectedMaster.languages?.fold("") { acc, s ->
                     "$acc, $s"
                 }?.drop(1) ?: "Georgian"
@@ -143,7 +155,18 @@ class MasterReserveAdapter(
     inner class ViewHolderInfoEdit(private val binding: VhReserve3InfoEditBinding) :
         BaseViewHolderType<VhReserve3InfoEditBinding>(binding) {
         override fun bind() {
+            binding.tvTitle.setText(R.string.availability)
+            binding.tvDescription.text = order.date?.toDateFormat("MMMM dd, K:mm a")
+        }
+    }
 
+    inner class ViewHolderCancellation(private val binding: VhReserve3InfoEditBinding) :
+        BaseViewHolderType<VhReserve3InfoEditBinding>(binding) {
+        override fun bind() {
+            binding.tvTitle.setText(R.string.cancellation_policy)
+            val cancellationDate =
+                order.date!! + selectedMaster.cancelPeriod!! * 60 * 60 * 24 * 1000
+            binding.tvDescription.text = cancellationDate.toDateFormat("MMMM dd, K:mm a")
         }
     }
 

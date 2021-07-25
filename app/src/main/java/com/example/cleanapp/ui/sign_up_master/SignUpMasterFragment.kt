@@ -2,6 +2,7 @@ package com.example.cleanapp.ui.sign_up_master
 
 import android.app.Dialog
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
@@ -71,6 +72,7 @@ class SignUpMasterFragment :
             master.languages = languages
             master.categories = categories
             master.ownSupplements = haveSupplement
+            master.city = city
             viewModel.setMaster(master)
         }
     }
@@ -167,6 +169,12 @@ class SignUpMasterFragment :
         viewModel.languagesLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> languageAdapter.setItems(it.data!!)
+            }
+        })
+
+        viewModel.masterCreateLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> if(it.data!!) findNavController().navigate(R.id.action_signUpMasterFragment_to_homeFragment)
             }
         })
     }

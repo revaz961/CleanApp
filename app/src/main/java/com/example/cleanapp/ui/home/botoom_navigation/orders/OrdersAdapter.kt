@@ -46,7 +46,7 @@ class OrdersAdapter : BaseAdapter<Order>() {
                 chooseOrder(data)
             }
 
-            val category = data.categoryId!!.categoryEn
+            val category = data.category!!.categoryEn
             val date = data.date!!.toDateFormat("MMMM DD")
             binding.tvCatDate.setTextById(R.string.category_date, category, date)
 
