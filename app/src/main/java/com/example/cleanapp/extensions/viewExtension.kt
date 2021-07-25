@@ -4,7 +4,13 @@ import android.animation.ValueAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.view.View
+import android.view.animation.TranslateAnimation
+import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import com.example.cleanapp.R
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -92,5 +98,11 @@ fun View.setBorder(width: Int = 1, color: String = "#FFFFFF", radius: Float = 20
 
 fun View.setTintColor(hexColor:String){
     val color = Color.parseColor(hexColor)
+    backgroundTintList = ColorStateList.valueOf(color)
+}
+
+
+fun View.setTintColor(id:Int){
+    val color = ContextCompat.getColor(context,id)
     backgroundTintList = ColorStateList.valueOf(color)
 }

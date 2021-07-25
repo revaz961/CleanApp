@@ -1,117 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:scrollbars="none"
-tools:context=".ui.signup.SignUpFragment">
-
-<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_main_gradient"
-    android:paddingStart="@dimen/auth_padding_LR"
-    android:paddingTop="@dimen/auth_padding_TB"
-    android:paddingEnd="@dimen/auth_padding_LR"
-    android:paddingBottom="@dimen/auth_padding_TB">
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".ui.signup.SignUpFragment">
 
-    <TextView
-        android:id="@+id/tvMaster"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/master"
-        android:textColor="@color/text_auth_primary"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/editCity"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/bg_main_gradient"
+        android:paddingBottom="@dimen/auth_padding_TB">
 
-    <EditText
-        android:id="@+id/editCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/auth_margin_medium"
-        android:gravity="center"
-        android:background="@drawable/round_border"
-        android:ems="15"
-        android:hint="@string/city"
-        android:lines="1"
-        android:padding="@dimen/auth_padding_small"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMaster" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:layout_marginEnd="@dimen/main_margin_small"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/back_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
-    <EditText
-        android:id="@+id/editCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/auth_margin_small"
-        android:background="@drawable/round_border"
-        android:ems="15"
-        android:gravity="center"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:lines="1"
-        android:padding="@dimen/auth_padding_small"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editCity" />
+        <TextView
+            android:id="@+id/tvMaster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_margin_large"
+            android:text="@string/master"
+            android:textColor="@color/text_auth_primary"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/editCity"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/editCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_margin_medium"
+            android:background="@drawable/round_border"
+            android:ellipsize="end"
+            android:ems="15"
+            android:gravity="center"
+            android:hint="@string/city"
+            android:lines="1"
+            android:padding="@dimen/auth_padding_small"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/tvMaster" />
 
-    <EditText
-        android:id="@+id/editLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/auth_margin_small"
-        android:background="@drawable/round_border"
-        android:ems="15"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:gravity="center"
-        android:lines="1"
-        android:padding="@dimen/auth_padding_small"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editCategory" />
-
-    <EditText
-        android:id="@+id/editRepeatPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/auth_margin_small"
-        android:background="@drawable/round_border"
-        android:ems="15"
-        android:hint="@string/repeat_password"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:lines="1"
-        android:padding="@dimen/auth_padding_small"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editLanguage" />
+        <TextView
+            android:id="@+id/editCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_margin_small"
+            android:background="@drawable/round_border"
+            android:ellipsize="end"
+            android:ems="15"
+            android:gravity="center"
+            android:hint="@string/category"
+            android:lines="1"
+            android:padding="@dimen/auth_padding_small"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/editCity" />
 
 
-    <CheckBox
-        android:id="@+id/checkSupplement"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/auth_margin_small"
-        android:background="@drawable/round_border"
-        android:text="have own cleaning supplements"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textAlignment="center"
-        android:padding="@dimen/auth_padding_small"
-        android:ems="15"
-        app:layout_constraintEnd_toEndOf="@id/editRepeatPassword"
-        app:layout_constraintStart_toStartOf="@id/editRepeatPassword"
-        app:layout_constraintTop_toBottomOf="@id/editRepeatPassword" />
+        <TextView
+            android:id="@+id/editLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_margin_small"
+            android:background="@drawable/round_border"
+            android:ems="15"
+            android:gravity="center"
+            android:hint="@string/language"
+            android:lines="1"
+            android:padding="@dimen/auth_padding_small"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/editCategory" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSupplement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/auth_margin_small"
+            android:background="@drawable/round_border"
+            android:backgroundTint="@color/gray_light"
+            android:ems="15"
+            android:padding="@dimen/main_padding_extra_small"
+            android:text="@string/have_own_cleaning_supplements"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/editLanguage"
+            app:layout_constraintStart_toStartOf="@id/editLanguage"
+            app:layout_constraintTop_toBottomOf="@id/editLanguage" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreateMaster"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@drawable/round_border"
+            android:backgroundTint="@color/btn_blue"
+            android:ems="15"
+            android:padding="@dimen/main_padding_small"
+            android:text="@string/create_master_s_account"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/editLanguage"
+            app:layout_constraintStart_toStartOf="@id/editLanguage"
+            app:layout_constraintTop_toBottomOf="@id/btnSupplement" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/auth_margin_LR" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/auth_margin_LR" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -107,8 +107,8 @@ class MasterReserveAdapter(
             }
             binding.rvCaegories.layoutManager = LinearLayoutManager(binding.root.context)
 
-            binding.tvName.text = selectedMaster.name
-            binding.imgMaster.load(selectedMaster.imgUrl)
+            binding.tvName.text = selectedMaster.user?.name ?: ""
+            binding.imgMaster.load(selectedMaster.user?.imgUrl?:"")
         }
     }
 

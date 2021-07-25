@@ -52,7 +52,7 @@
     <string name="what_to_clean">What to clean?</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
-    <string name="repeat_password">Repeat password</string>
+    <string name="repeat_password">Repeat password:</string>
     <string name="i_agree_with_the_terms_amp_conditions"><![CDATA[I agree with the Terms & Conditions]]></string>
     <string name="create_account">Create account</string>
     <string name="create_master_s_account">Create master’s account</string>
@@ -85,6 +85,13 @@
     <string name="total">Total</string>
     <string name="cancel_reservation">Cancel reservation</string>
     <string name="finished">Finished</string>
+    <string name="category">Category:</string>
+    <string name="choose">Choose</string>
+    <string name="language">Language:</string>
+    <string name="have_own_cleaning_supplements">have own cleaning supplements</string>
+    <string name="name">Name:</string>
+    <string name="surname">Surname:</string>
+    <string name="_0">0</string>
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>

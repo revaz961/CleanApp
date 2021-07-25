@@ -41,7 +41,7 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
             binding.tvCount.text = data.count.toString()
 
             binding.btnAdd.setOnClickListener {
-                binding.tvCount.text = "${increaseClick(absoluteAdapterPosition)}"
+                binding.tvCount.text = "${increaseClick(adapterPosition)}"
                 with(it) {
                     scaleX = 0.8f
                     scaleY = 0.8f
@@ -53,7 +53,7 @@ class RoomCounterAdapter : BaseAdapter<RoomCounter>() {
             }
 
             binding.btnRemove.setOnClickListener {
-                binding.tvCount.text = "${decreaseClick(absoluteAdapterPosition)}"
+                binding.tvCount.text = "${decreaseClick(adapterPosition)}"
                 with(it) {
                     scaleX = 0.8f
                     scaleY = 0.8f
