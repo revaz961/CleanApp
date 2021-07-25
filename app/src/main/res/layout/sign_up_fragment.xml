@@ -118,6 +118,7 @@
             android:lines="1"
             android:padding="@dimen/auth_padding_small"
             android:textSize="20sp"
+            android:maxLength="9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"

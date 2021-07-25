@@ -82,7 +82,7 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
             result += "Invalid Repeated Password"
 
         if (phoneNumber.length != 9)
-            result += "Invalid Name\n"
+            result += "Invalid number\n"
 
 
 
