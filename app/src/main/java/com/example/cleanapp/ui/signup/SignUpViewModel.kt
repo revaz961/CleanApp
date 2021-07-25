@@ -48,7 +48,7 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    private fun registerAsMaster(email: String, password: String) {
+    fun registerAsMaster(email: String, password: String) {
 
         authRepository.register(email, password) { user, errorMessage ->
             if (user != null)

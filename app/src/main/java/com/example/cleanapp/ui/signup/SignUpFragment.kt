@@ -47,14 +47,12 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         binding.btnCreateMaster.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editEmail.text.toString().trim()
-
             val errorMessage = checkUserInfo()
 
             if (errorMessage.isEmpty())
-                viewModel.signUp(email, password)
+                viewModel.registerAsMaster(email, password)
             else
                 showErrorDialog(errorMessage)
-
         }
     }
 

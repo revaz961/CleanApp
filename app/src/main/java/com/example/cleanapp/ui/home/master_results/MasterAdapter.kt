@@ -51,7 +51,7 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
                 R.string.reviews2,
                 data.rating!!,
                 data.nReviews,
-                data.name ?: ""
+                data.user?.name ?: ""
             )
 
             data.categories?.get(0)?.let {
@@ -75,7 +75,7 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
         }
 
         override fun onClick(v: View?) {
-            masterClickListener.onClick(items[absoluteAdapterPosition])
+            masterClickListener.onClick(items[adapterPosition])
         }
     }
 }

@@ -36,8 +36,8 @@ class ChooserLanguageAdapter : BaseAdapter<Pair<String, Boolean>>() {
             binding.checkLanguage.text = data.first
             binding.checkLanguage.isChecked = data.second
             binding.checkLanguage.setOnCheckedChangeListener { buttonView, isChecked ->
-                items[absoluteAdapterPosition] = Pair(data.first, isChecked)
-                onCheckLanguage(absoluteAdapterPosition, items[absoluteAdapterPosition])
+                items[adapterPosition] = Pair(data.first, isChecked)
+                onCheckLanguage(adapterPosition, items[adapterPosition])
             }
         }
     }

@@ -65,12 +65,13 @@ class SignUpMasterFragment :
 
         binding.btnCreateMaster.setOnClickListener {
             val city = viewModel.selectedCity
-            val categories = viewModel.categories.filter { it.isChecked }
+            val categories = viewModel.categories.filter { it.category?.isChecked!! }
             val languages = viewModel.languages.filter { it.second }.map { it.first }
             val haveSupplement = viewModel.haveSupplement
             master.languages = languages
             master.categories = categories
             master.ownSupplements = haveSupplement
+            viewModel.setMaster(master)
         }
     }
 
@@ -117,8 +118,8 @@ class SignUpMasterFragment :
 
         dialogBinding.btnChoose.setOnClickListener {
             dialog.cancel()
-            val text = viewModel.categories.filter { it.isChecked }.fold("") { acc, category ->
-                "$acc, ${category.categoryEn}"
+            val text = viewModel.categories.filter { it.category!!.isChecked }.fold("") { acc, categoryMaster ->
+                "$acc, ${categoryMaster.category!!.categoryEn}"
             }.drop(1)
             binding.editCategory.text = text
         }

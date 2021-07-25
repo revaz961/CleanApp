@@ -69,5 +69,5 @@ data class Comment(
 @Parcelize
 data class MasterCategory(
     val category: Category? = null,
-    val price: Int = 0,
+    var price: Float = 0f,
 ) : Parcelable

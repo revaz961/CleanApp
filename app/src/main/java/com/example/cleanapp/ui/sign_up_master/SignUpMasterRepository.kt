@@ -2,6 +2,7 @@ package com.example.cleanapp.ui.sign_up_master
 
 import com.example.cleanapp.models.Category
 import com.example.cleanapp.models.City
+import com.example.cleanapp.models.Master
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -44,5 +45,14 @@ class SignUpMasterRepository @Inject constructor(private val dbRef: DatabaseRefe
             }
 
         })
+    }
+
+    fun setMaster(master: Master, action: () -> Unit){
+        val key = master.user!!.uid
+        val user = master.user!!
+        val childUpdates = hashMapOf<String,Any>("/masters/$key" to master, "/users/$key" to user)
+        dbRef.updateChildren(childUpdates).addOnSuccessListener {
+            action()
+        }
     }
 }

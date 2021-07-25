@@ -38,7 +38,7 @@ class ChooserCityAdapter : BaseAdapter<City>() {
             binding.cityName.text = data.cityEn
             binding.cityName.setTextColor(Color.WHITE)
             binding.root.setOnClickListener {
-                onClick(items[absoluteAdapterPosition])
+                onClick(items[adapterPosition])
             }
         }
     }
