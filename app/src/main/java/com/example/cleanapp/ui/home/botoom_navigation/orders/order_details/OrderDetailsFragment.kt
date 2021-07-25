@@ -1,6 +1,7 @@
 package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 
 import android.content.ActivityNotFoundException
+import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -11,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.util.DisplayMetrics
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.Toast.makeText
@@ -26,7 +28,6 @@ import com.example.cleanapp.utils.OrderStatusEnum
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 
 @AndroidEntryPoint
 class OrderDetailsFragment :
@@ -151,25 +152,26 @@ class OrderDetailsFragment :
         canvas.drawBitmap(bitmap, 0.0f, 0.0f, null)
         pdfDocument.finishPage(page)
 
-        //target pdf download
-        val targetPdf = "${Environment.getExternalStorageDirectory().path}/reservation.pdf"
-        val file = File(targetPdf)
+        val file = File(getFilePath())
+
+        if (file.exists()) {
+            Log.d("PDF", "FILE EXISTS")
+            openPdf(file.path)
+        } else {
+            Log.d("PDF", "FILE Doesnt EXIST")
+        }
         try {
-            pdfDocument.writeTo(FileOutputStream(file))
-        } catch (e: IOException) {
+            val out = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            out.flush()
+            out.close()
+        } catch (e: Exception) {
             e.printStackTrace()
-            makeText(requireContext(), "Something went wrong, try again", Toast.LENGTH_SHORT).show()
-
-            //close the document
-            pdfDocument.close()
-            makeText(requireContext(), "Pdf downloaded", Toast.LENGTH_SHORT).show()
-
-            openPdf()
         }
     }
 
-    private fun openPdf() {
-        val file = File("${Environment.getExternalStorageDirectory().path}/reservation.pdf")
+    private fun openPdf(path: String) {
+        val file = File(path)
         if (file.exists()) {
             val intent = Intent(Intent.ACTION_VIEW)
             val uri = Uri.fromFile(file)
@@ -180,7 +182,15 @@ class OrderDetailsFragment :
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
                 makeText(requireContext(), "Cannot open pdf file", Toast.LENGTH_SHORT).show()
+                Log.d("PDF", "ERROR OPEN")
             }
         }
+    }
+
+    private fun getFilePath() : String {
+        val contextWrapper = ContextWrapper(context)
+        val documentDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+        val file = File(documentDirectory, "reservation.pdf")
+        return file.path
     }
 }
