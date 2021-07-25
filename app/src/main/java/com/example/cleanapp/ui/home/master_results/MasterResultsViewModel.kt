@@ -15,6 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MasterResultsViewModel @Inject constructor(private val masterResultsRepo: MasterResultsRepository): ViewModel() {
 
+    val masters = mutableListOf<Master>()
+
     private val _exploreLiveData = MutableLiveData<ResultHandler<List<Master>>>()
     val exploreLiveData: LiveData<ResultHandler<List<Master>>> = _exploreLiveData
 
@@ -22,7 +24,9 @@ class MasterResultsViewModel @Inject constructor(private val masterResultsRepo: 
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 masterResultsRepo.getMasters(query) {
-                    _exploreLiveData.postValue(ResultHandler.Success(it))
+                    masters.clear()
+                    masters.addAll(it)
+                    _exploreLiveData.postValue(ResultHandler.Success(masters))
                 }
             }
         }

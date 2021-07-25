@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.extensions.setResourceHtmlText
+import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.utils.ReservationClickTypes
@@ -27,7 +28,7 @@ class MasterReserveFragment : Fragment() {
     private lateinit var order: Order
 
     private lateinit var master: Master
-    private lateinit var moremasters: MutableList<Master>
+    private var moreMasters = mutableListOf<Master>()
 
     private val viewTypeOrder = listOf(
         ReservationViewTypes.HEADER.type,
@@ -57,8 +58,8 @@ class MasterReserveFragment : Fragment() {
 
     private fun setData() {
         master = arguments?.getParcelable("master") ?: Master()
-        moremasters = mutableListOf(master, master, master, master)
-
+        moreMasters.addAll(arguments?.getParcelableArrayList<Master>("moreMasters")!!.toList())
+        moreMasters.remove(master)
 
     }
 
@@ -67,7 +68,7 @@ class MasterReserveFragment : Fragment() {
 
         d("MASTER", master.toString())
         adapter =
-            MasterReserveAdapter(master, moremasters, order, object : MasterReserveClickListener {
+            MasterReserveAdapter(master, moreMasters, order, object : MasterReserveClickListener {
                 override fun onClick(type: Int, subType: Int) {
                     when (type) {
                         ReservationClickTypes.SHOW_COMMENTS.type -> {
@@ -90,6 +91,10 @@ class MasterReserveFragment : Fragment() {
             })
         adapter.setItems(viewTypeOrder)
 
+        adapter.onSelectMaster={
+            binding.recycler.scrollToPosition(0)
+        }
+
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.addItemDecoration(
@@ -102,12 +107,11 @@ class MasterReserveFragment : Fragment() {
         with(binding) {
             master.categories?.get(0)
                 ?.let { tvPrice.setResourceHtmlText(R.string.per_hour, it.price) }
-            tvDateTime.text = "TODO"
+            tvDateTime.text = order.date?.toDateFormat("MMMM dd, K:mm a")
             btnReserve.setOnClickListener {
                 findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment)
             }
         }
-
     }
 
     override fun onDestroyView() {
