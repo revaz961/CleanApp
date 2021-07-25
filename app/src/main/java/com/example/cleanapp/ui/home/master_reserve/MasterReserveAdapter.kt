@@ -137,7 +137,6 @@ class MasterReserveAdapter(
                     "$acc, $s"
                 }?.drop(1) ?: "Georgian"
             )
-
         }
     }
 
