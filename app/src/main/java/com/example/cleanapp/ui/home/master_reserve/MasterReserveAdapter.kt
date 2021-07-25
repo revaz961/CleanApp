@@ -26,6 +26,8 @@ class MasterReserveAdapter(
 ) :
     BaseAdapterViewType<Int>() {
 
+    lateinit var onSelectMaster: () -> Unit
+
     fun setItems(viewTypeOrder: List<Int>) {
         this.items.clear()
         this.items.addAll(viewTypeOrder)
@@ -185,6 +187,7 @@ class MasterReserveAdapter(
                     moreMasters.remove(master)
                     moreMasters.add(selectedMaster)
                     selectedMaster = master
+                    onSelectMaster()
                     notifyDataSetChanged()
                 }
             })

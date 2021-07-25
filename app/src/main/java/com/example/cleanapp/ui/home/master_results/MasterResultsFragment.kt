@@ -11,6 +11,7 @@ import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.ArrayList
 
 @AndroidEntryPoint
 class MasterResultsFragment :
@@ -29,9 +30,15 @@ class MasterResultsFragment :
     private fun initRecycler() {
         masterAdapter = MasterAdapter(object : MasterClickListener {
             override fun onClick(master: Master) {
+
+                val arr = ArrayList<Master>(masterResultsViewModel.masters)
                 findNavController().navigate(
                     R.id.action_masterResultsFragment_to_masterReserveFragment,
-                    bundleOf("master" to master, "order" to order)
+                    bundleOf(
+                        "master" to master,
+                        "order" to order,
+                        "moreMasters" to arr
+                    )
                 )
             }
 
