@@ -121,6 +121,8 @@
         I also agree to pay the total amount shown which includes Service Fees.</string>
     <string name="confirm_and_pay">Confirm and pay</string>
     <string name="message_sent">&lt;span style="color:#5B89FF"> &lt;b>Message sent!&lt;/b>&lt;/span>,</string>
+    <string name="card_holder">Card Holder</string>
+    <string name="add_new_card">Add new card</string>
 
 
     <plurals name="cancellation_policy">
