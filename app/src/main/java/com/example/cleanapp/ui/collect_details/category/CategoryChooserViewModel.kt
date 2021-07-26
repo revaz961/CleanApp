@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.Category
 import com.example.cleanapp.models.ResultHandler
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.getValue
+import com.example.cleanapp.ui.collect_details.ChooserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,17 +14,17 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryChooserViewModel @Inject constructor(private val dbRef: DatabaseReference) :
+class CategoryChooserViewModel @Inject constructor(private val chooserRepo: ChooserRepository) :
     ViewModel() {
-    private val _liveData = MutableLiveData<ResultHandler<List<Category>>>()
-    val liveData: LiveData<ResultHandler<List<Category>>> = _liveData
+    private val _categoryLiveData = MutableLiveData<ResultHandler<List<Category>>>()
+    val categoryLiveData: LiveData<ResultHandler<List<Category>>> = _categoryLiveData
 
 
     fun getCategory() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                dbRef.child("categories").get().addOnSuccessListener {
-                    _liveData.postValue(ResultHandler.Success(it.getValue<List<Category>>()))
+                chooserRepo.getCategory {
+                    _categoryLiveData.postValue(it)
                 }
             }
         }

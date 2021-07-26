@@ -32,6 +32,8 @@ class RoomChooserFragment :
 
         binding.tvDate.text = order.date!!.toDateFormat("MMMM dd, hh:mm aaa")
 
+        observes()
+
         initRecycler()
 
         setListeners()
@@ -59,6 +61,7 @@ class RoomChooserFragment :
 
         binding.rvRoom.adapter = adapter
         binding.rvRoom.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.getRooms()
     }
 
     private fun setListeners() {
@@ -80,11 +83,13 @@ class RoomChooserFragment :
     }
 
     private fun observes() {
-        viewModel.liveData.observe(viewLifecycleOwner, {
+        viewModel.roomLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> {
-                }
+                is ResultHandler.Success -> adapter.setItems(it.data!!)
+
                 is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {}
             }
         })
     }

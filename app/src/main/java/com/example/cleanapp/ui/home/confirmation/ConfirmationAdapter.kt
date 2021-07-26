@@ -12,12 +12,13 @@ import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.User
 import com.example.cleanapp.utils.ConfirmationViewTypes
 import java.util.*
 
 class ConfirmationAdapter(
     private val master: Master,
-    private val order: Order,
+    private val order: Order
 ) :
     BaseAdapterViewType<Int>() {
 
@@ -30,6 +31,12 @@ class ConfirmationAdapter(
     fun setItems(viewTypeOrder: List<Int>) {
         this.items.clear()
         this.items.addAll(viewTypeOrder)
+        notifyDataSetChanged()
+    }
+
+    fun setCards(cards:List<Card>){
+        this.cards.clear()
+        this.cards.addAll(cards)
         notifyDataSetChanged()
     }
 
@@ -149,7 +156,10 @@ class ConfirmationAdapter(
                         ?: 0
                 tvCatPriceValue.setTextById(R.string.price_value, categoryPrice)
 
-                tvDurationValue.setTextById(R.string.n_hours, order.duration?.minuteToHoursFloat()?:0f)
+                tvDurationValue.setTextById(
+                    R.string.n_hours,
+                    order.duration?.minuteToHoursFloat() ?: 0f
+                )
 
                 tvCleaningPriceValue.setTextById(R.string.price_value, order.price)
                 val serviceFee = order.price * 0.18f
@@ -173,6 +183,7 @@ class ConfirmationAdapter(
                     setCurrentCard(it)
                 }
             }
+            binding.rvCards.collapseIf(cards.isNullOrEmpty())
             binding.rvCards.layoutManager = LinearLayoutManager(binding.root.context)
         }
     }

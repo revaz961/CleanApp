@@ -1,6 +1,5 @@
 package com.example.cleanapp.ui.home.master_results
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,21 +25,14 @@ class MasterResultsViewModel @Inject constructor(private val masterResultsRepo: 
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 masterResultsRepo.getMasters(query) {
-                    masters.clear()
-                    masters.addAll(it)
-                    _exploreLiveData.postValue(ResultHandler.Success(masters))
+                    if(it is ResultHandler.Success) {
+                        masters.clear()
+                        masters.addAll(it.data!!)
+                    }
+                    _exploreLiveData.postValue(it)
                 }
             }
         }
     }
 
-    fun getImage(path: String, uri: Uri) {
-
-    }
-
-    fun setMaster(master: Master) {
-        masterResultsRepo.setMasters(master) {
-//            getMaster()
-        }
-    }
 }

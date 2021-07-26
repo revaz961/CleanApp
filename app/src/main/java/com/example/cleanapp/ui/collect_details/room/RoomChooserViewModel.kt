@@ -3,36 +3,38 @@ package com.example.cleanapp.ui.collect_details.room
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cleanapp.models.Order
+import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.models.RoomCounter
-import com.example.cleanapp.repository.ChooserRepository
+import com.example.cleanapp.ui.collect_details.ChooserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class RoomChooserViewModel @Inject constructor(
-    private val chooserRepository: ChooserRepository
+    private val chooserRepo: ChooserRepository
 ) : ViewModel() {
 
-    private val _liveData = MutableLiveData<ResultHandler<Order>>()
-    val liveData:LiveData<ResultHandler<Order>> = _liveData
+    val roomCounters = mutableListOf<RoomCounter>()
 
-    val roomCounters = mutableListOf<RoomCounter>(
-        RoomCounter("Bedroom", 0),
-        RoomCounter("Kitchen", 0),
-        RoomCounter("Living Room", 0),
-        RoomCounter("Entrance", 0),
-        RoomCounter("Additional Rooms", 0),
-        RoomCounter("Balcony", 0)
-    )
+    private val _roomLiveData = MutableLiveData<ResultHandler<List<RoomCounter>>>()
+    val roomLiveData: LiveData<ResultHandler<List<RoomCounter>>> = _roomLiveData
 
-    fun setOrderInDb(order: Order) {
-        chooserRepository.setOrderInDb(order){isValid,errorMessage ->
-            if (isValid) {
-                _liveData.postValue(ResultHandler.Success(order))
-            } else {
-                _liveData.postValue(ResultHandler.Error(order, errorMessage))
+    fun getRooms() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+
+                chooserRepo.getRooms {
+                    if (it is ResultHandler.Success) {
+                        roomCounters.clear()
+                        roomCounters.addAll(it.data!!)
+                    }
+                    _roomLiveData.postValue(it)
+                }
+
             }
         }
     }

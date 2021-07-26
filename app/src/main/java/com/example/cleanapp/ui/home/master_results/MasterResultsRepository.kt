@@ -1,20 +1,14 @@
 package com.example.cleanapp.ui.home.master_results
 
-import android.net.Uri
-import com.example.cleanapp.models.Comment
-import com.example.cleanapp.models.Master
-import com.example.cleanapp.models.MasterCategory
-import com.example.cleanapp.models.Review
+import com.example.cleanapp.models.*
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.storage.StorageReference
 import javax.inject.Inject
 
-typealias OnLoad = (List<Master>) -> Unit
+typealias OnLoad = (ResultHandler<List<Master>>) -> Unit
 
 class MasterResultsRepository @Inject constructor(
-    private val dbRef: DatabaseReference,
-    private val storage: StorageReference
+    private val dbRef: DatabaseReference
 ) {
     fun getMasters(query: String, action: OnLoad) {
         var masterCount = 0
@@ -43,7 +37,7 @@ class MasterResultsRepository @Inject constructor(
                                         }.addOnCompleteListener {
                                             syncList[0] = true
                                             if (syncList.all { it } && masters.size == masterCount)
-                                                action(masters)
+                                                action(ResultHandler.Success(masters))
                                         }
 
                                         dbRef.child("reviews/$key/comments").orderByKey()
@@ -53,7 +47,7 @@ class MasterResultsRepository @Inject constructor(
                                             }.addOnCompleteListener {
                                                 syncList[1] = true
                                                 if (syncList.all { it } && masters.size == masterCount)
-                                                    action(masters)
+                                                    action(ResultHandler.Success(masters))
                                             }
 
                                         dbRef.child("masters_category/$key").get()
@@ -63,7 +57,7 @@ class MasterResultsRepository @Inject constructor(
                                             }.addOnCompleteListener {
                                                 syncList[2] = true
                                                 if (syncList.all { it } && masters.size == masterCount)
-                                                    action(masters)
+                                                    action(ResultHandler.Success(masters))
                                             }
                                     }
                             }
@@ -71,36 +65,24 @@ class MasterResultsRepository @Inject constructor(
                             override fun onChildChanged(
                                 snapshot: DataSnapshot,
                                 previousChildName: String?
-                            ) {
-                            }
+                            ) {}
 
                             override fun onChildRemoved(snapshot: DataSnapshot) {}
 
                             override fun onChildMoved(
                                 snapshot: DataSnapshot,
                                 previousChildName: String?
-                            ) {
-                            }
+                            ) {}
 
-                            override fun onCancelled(error: DatabaseError) {}
+                            override fun onCancelled(error: DatabaseError) {
+                                action(ResultHandler.Error(null, error.message))
+                            }
                         })
                 }
 
-                override fun onCancelled(error: DatabaseError) {}
-
+                override fun onCancelled(error: DatabaseError) {
+                    action(ResultHandler.Error(null, error.message))
+                }
             })
-    }
-
-    fun setMasters(master: Master, action: () -> Unit) {
-        dbRef.child("masters").push().setValue(master) { error, ref ->
-            action()
-        }
-    }
-
-    fun getImage(path:String,action:(Uri)->Unit){
-        val uri:Uri? = null
-        storage.child("images/$path/profile").getFile(uri!!).addOnSuccessListener {
-            action(uri)
-        }
     }
 }

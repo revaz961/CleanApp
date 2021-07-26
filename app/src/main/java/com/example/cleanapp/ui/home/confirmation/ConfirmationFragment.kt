@@ -1,12 +1,10 @@
 package com.example.cleanapp.ui.home.confirmation
 
 import android.app.Dialog
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
-import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
@@ -17,8 +15,11 @@ import com.example.cleanapp.extensions.init
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.utils.ConfirmationViewTypes
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ConfirmationFragment :
     BaseFragment<ConfirmationFragmentBinding>(ConfirmationFragmentBinding::inflate) {
 
@@ -57,13 +58,29 @@ class ConfirmationFragment :
     }
 
     private fun observes() {
-//        viewModel.cardsLiveData.observe(viewLifecycleOwner, {
-//            when (it) {
-//                is ResultHandler.Success -> {
-//                    adapter.setCards(it.data!!)
-//                }
-//            }
-//        })
+        viewModel.cardsLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> adapter.setCards(it.data!!)
+
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {
+                }
+            }
+        })
+
+        viewModel.cardAddLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                    adapter.setCards(viewModel.cards)
+                }
+
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {
+                }
+            }
+        })
     }
 
     private fun createCard() {
@@ -86,8 +103,6 @@ class ConfirmationFragment :
             window?.attributes?.windowAnimations = R.style.DialogAnimation
             window?.setGravity(Gravity.BOTTOM)
             bindingDialog.btnClose.setOnClickListener {
-                val card = Card()
-                viewModel.addCard(card)
             }
         }
 
@@ -107,26 +122,31 @@ class ConfirmationFragment :
                 dialog.dismiss()
             }
             btnAdd.setOnClickListener {
-//                createCard(binding, dialog)
-            }
-            var count = 0
-            etCardNumberInput.doAfterTextChanged {
+                val holder = binding.etCardHolderInput.text.toString().trim()
+                val cardNumber = binding.etCardNumberInput.text.toString().trim()
+                val valid = binding.etValidInput.text.toString().trim()
+                val cvv = binding.etCvvInput.text.toString().trim()
+                    val card = Card(cardNumber, holder, valid, cvv)
+                    viewModel.addCard(card)
+                    dialog.cancel()
 
-                val inputLength = it.toString().length
-                if (count <= inputLength && inputLength == 4 ||
+            }
+            etCardNumberInput.doOnTextChanged { text, start, before, count ->
+                val inputLength = text.toString().length
+                if (before == 0 && inputLength == 4 ||
                     inputLength == 9 || inputLength == 14
                 ) {
 
-                    binding.etCardNumberInput.setText(it.toString() + " ")
+                    binding.etCardNumberInput.setText(text.toString() + " ")
 
                     val pos = binding.etCardNumberInput.text?.length
                     binding.etCardNumberInput.setSelection(pos!!)
 
-                } else if (count >= inputLength && (inputLength == 4 ||
+                } else if (before > 0 && (inputLength == 4 ||
                             inputLength == 9 || inputLength == 14)
                 ) {
                     binding.etCardNumberInput.setText(
-                        binding.etCardNumberInput.text.toString().dropLast(1)
+                        binding.etCardNumberInput.text.toString().dropLast(2)
                     )
 //                            .substring(0, binding.etCardNumberInput.text
 //                                .toString().length - 1))
@@ -135,12 +155,11 @@ class ConfirmationFragment :
                     binding.etCardNumberInput.setSelection(pos!!)
 
                 }
-                count = binding.etCardNumberInput.text.toString().length
             }
         }
     }
 
-    private fun validateInput(holder: String, number: String, valid: String, cvv: String) {
+    private fun validateInput(holder: String, number: String, valid: String, cvv: String): Boolean {
         var result = true
         val num = number.replace(" ", "")
         val validThrough = valid.replace("/", "")
@@ -159,6 +178,8 @@ class ConfirmationFragment :
         if (!cvv.isDigitsOnly()) {
             result = false
         }
+
+        return result
     }
 
 }

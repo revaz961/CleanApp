@@ -31,7 +31,7 @@ class MasterResultsFragment :
         masterAdapter = MasterAdapter(object : MasterClickListener {
             override fun onClick(master: Master) {
 
-                val arr = ArrayList<Master>(masterResultsViewModel.masters)
+                val arr = ArrayList(masterResultsViewModel.masters)
                 findNavController().navigate(
                     R.id.action_masterResultsFragment_to_masterReserveFragment,
                     bundleOf(
@@ -45,7 +45,6 @@ class MasterResultsFragment :
         })
         binding.rvMaster.adapter = masterAdapter
         binding.rvMaster.layoutManager = LinearLayoutManager(requireContext())
-//        masterResultsViewModel.getMaster("tbilisi_garden")
         val query = "${order.city?.cityEn?.lowercase()}_${
             order.category?.categoryEn?.lowercase()?.replace(' ', '_')
         }"
@@ -56,6 +55,10 @@ class MasterResultsFragment :
         masterResultsViewModel.exploreLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> masterAdapter.setItems(it.data!!)
+
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {}
             }
         })
     }

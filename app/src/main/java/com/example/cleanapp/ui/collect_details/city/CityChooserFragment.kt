@@ -13,7 +13,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cleanapp.utils.LocationSettings
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CityChooserFragmentBinding
@@ -21,6 +20,7 @@ import com.example.cleanapp.models.City
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
+import com.example.cleanapp.utils.LocationSettings
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -119,7 +119,10 @@ class CityChooserFragment :
         viewModel.citiesLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> adapter.setItem(it.data!!)
+
                 is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> { }
             }
         })
     }

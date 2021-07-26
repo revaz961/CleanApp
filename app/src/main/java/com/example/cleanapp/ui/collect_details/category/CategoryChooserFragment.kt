@@ -1,20 +1,6 @@
 package com.example.cleanapp.ui.collect_details.category
 
-import android.content.ActivityNotFoundException
-import android.content.ContextWrapper
-import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.util.DisplayMetrics
-import android.util.Log.d
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -28,10 +14,6 @@ import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class CategoryChooserFragment :
@@ -49,7 +31,7 @@ class CategoryChooserFragment :
         setListeners()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.btnBack.setOnClickListener {
 //            saveAsPdf(binding.root)
             requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
@@ -66,8 +48,10 @@ class CategoryChooserFragment :
                 shareViewModel.setFragmentTitle(it.categoryEn)
 
 
-                findNavController().navigate(R.id.action_categoryChooserFragment_to_chooserDateFragment,
-                bundleOf("order" to order))
+                findNavController().navigate(
+                    R.id.action_categoryChooserFragment_to_chooserDateFragment,
+                    bundleOf("order" to order)
+                )
 
             }
         }
@@ -79,11 +63,13 @@ class CategoryChooserFragment :
     }
 
     private fun observes() {
-        viewModel.liveData.observe(viewLifecycleOwner, {
+        viewModel.categoryLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> {
-                    adapter.setItems(it.data!!)
-                }
+                is ResultHandler.Success -> adapter.setItems(it.data!!)
+
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {}
             }
         })
     }
