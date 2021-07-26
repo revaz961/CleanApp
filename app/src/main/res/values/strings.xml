@@ -66,7 +66,7 @@
     <string name="call_your_master">Call your master</string>
     <string name="open_chat">Open chat</string>
     <string name="category_date">%1$s &#183; %2$s</string>
-    <string name="price_value">%1$.2f&#8382;</string>
+    <string name="price_value">%1$.2f &#8382;</string>
     <string name="start_as_master">Start As Master</string>
     <string name="master">master</string>
     <string name="chooser_city">Choose City:</string>
@@ -92,6 +92,36 @@
     <string name="surname">Surname:</string>
     <string name="_0">0.00</string>
     <string name="availability">Availability</string>
+
+    <string name="rating_name">%1$.1f %2$s</string>
+    <string name="arrival_details">Arrival details</string>
+    <string name="date_and_time">Date and time</string>
+    <string name="address">Address</string>
+    <string name="todo">todo</string>
+    <string name="price_details">Price details</string>
+    <string name="category_price">Category price</string>
+    <string name="hours_needed">Hours needed</string>
+    <string name="n_hours">%1$.1f hours</string>
+    <string name="cleaning_price">Cleaning price</string>
+    <string name="add_card">&#43; Add card</string>
+    <string name="card_digits">&#183;&#183;&#183;&#183; %1$d</string>
+    <string name="edit">&lt;u>Edit&lt;/u></string>
+    <string name="message_your_master">Message your master</string>
+    <string name="descript_important_details">Let your master know all the important details</string>
+    <string name="registration_year">Joined %1$d</string>
+    <string name="chat_intro">Hi %1$s!..</string>
+    <string name="cancellation_details">Free cancellation %1$d days prior to master\'s arrival day. After that, you will be charged with 30% of total reservation price plus service fee. </string>
+    <string name="cancellation_learn_more">Make sure this master\'s cancellation policy works for you. &lt;u>Learn more&lt;/u></string>
+    <string name="agree_policies">By selecting the button below, I agree to the
+        &lt;span style="color:#2062CB"> &lt;u>Safety Rules&lt;/u>&lt;/span>,
+        &lt;span style="color:#2062CB"> &lt;u>Cancellation Policy&lt;/u>&lt;/span>,
+        &lt;span style="color:#2062CB"> &lt;u>CleanApp\’s social-distancing and other COVID-19-related guidelines&lt;/u>&lt;/span>,
+        and the
+        &lt;span style="color:#2062CB"> &lt;u>Client Refund Policy&lt;/u>&lt;/span>.
+        I also agree to pay the total amount shown which includes Service Fees.</string>
+    <string name="confirm_and_pay">Confirm and pay</string>
+    <string name="message_sent">&lt;span style="color:#5B89FF"> &lt;b>Message sent!&lt;/b>&lt;/span>,</string>
+
 
     <plurals name="cancellation_policy">
         <item quantity="one">>Free cancellation %d day prior</item>

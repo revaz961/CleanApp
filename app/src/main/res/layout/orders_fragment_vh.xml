@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/category_date"
             android:layout_gravity="center_vertical"
-            style="@style/tvServiceFee"
+            style="@style/Text.SmallLight"
             android:textStyle="bold"
             android:layout_weight="1"/>
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="price"
             android:layout_gravity="center_vertical"
-            style="@style/tvServiceFee"
+            style="@style/Text.SmallLight"
             android:textStyle="bold"/>
 
     </LinearLayout>

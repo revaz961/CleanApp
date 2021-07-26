@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/main_margin_LR"
+    android:paddingTop="@dimen/main_margin_TB"
+    android:paddingEnd="@dimen/main_margin_LR"
+    android:paddingBottom="@dimen/main_margin_TB"
+    android:background="@drawable/bg_transparent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Text.BigDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_details"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCatPrice"
+        style="@style/Text.MediumLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/category_price"
+        app:layout_constraintEnd_toStartOf="@+id/tvCatPriceValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvCatPriceValue"
+        style="@style/Text.MediumLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_value"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCatPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCatPrice" />
+
+    <TextView
+        android:id="@+id/tvDuration"
+        style="@style/Text.MediumLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_extra_small"
+        android:text="@string/hours_needed"
+        app:layout_constraintEnd_toStartOf="@+id/tvDurationValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCatPrice" />
+
+    <TextView
+        android:id="@+id/tvDurationValue"
+        style="@style/Text.MediumLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/n_hours"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDuration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvDuration" />
+
+
+    <TextView
+        android:id="@+id/tvCleaningPrice"
+        style="@style/Text.MediumLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/cleaning_price"
+        app:layout_constraintEnd_toStartOf="@+id/tvCleaningPriceValue"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDuration" />
+
+    <TextView
+        android:id="@+id/tvCleaningPriceValue"
+        style="@style/Text.MediumLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_value"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCleaningPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCleaningPrice" />
+
+    <TextView
+        android:id="@+id/tvServiceFee"
+        style="@style/Text.MediumLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/service_fee"
+        app:layout_constraintEnd_toStartOf="@+id/tvServiceFeeValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCleaningPrice" />
+
+    <TextView
+        android:id="@+id/tvServiceFeeValue"
+        style="@style/Text.MediumLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_value"
+        app:layout_constraintBottom_toBottomOf="@+id/tvServiceFee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvServiceFee" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        style="@style/Text.MediumDark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/total"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvServiceFeeValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvServiceFee" />
+
+    <TextView
+        android:id="@+id/tvTotalValue"
+        style="@style/Text.MediumDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_value"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTotal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

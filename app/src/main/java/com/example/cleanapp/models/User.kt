@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.firebase.database.PropertyName
 import kotlinx.parcelize.Parcelize
 
+
 @Parcelize
 data class User(
     val uid: String? = null,

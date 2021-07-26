@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/main_margin_extra_small"
+    android:background="@drawable/bg_transparent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/main_margin_LR"
+    android:paddingTop="@dimen/main_margin_TB"
+    android:paddingEnd="@dimen/main_margin_LR"
+    android:paddingBottom="@dimen/main_margin_TB">
+
+
+    <TextView
+        style="@style/Text.BigDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancellation_policy"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCancellationDetails"
+        style="@style/Text.SmallLight"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/cancellation_details" />
+
+    <TextView
+        android:id="@+id/tvCancellationLearnMore"
+        style="@style/Text.MediumDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/cancellation_learn_more" />
+
+</LinearLayout>

@@ -129,13 +129,13 @@ class MasterReserveAdapter(
     inner class ViewHolderReviews(private val binding: VhReserve1ReviewsBinding) :
         BaseViewHolderType<VhReserve1ReviewsBinding>(binding) {
         override fun bind() {
-            binding.tvReviews.setResourceHtmlText(
+            binding.tvRatingName.setResourceHtmlText(
                 R.string.reviews,
                 selectedMaster.rating,
                 selectedMaster.nReviews
             )
             selectedMaster.lastComments?.get(0)?.let {
-                binding.tvAuthorName.text = it.author ?: ""
+                binding.tvMasterName.text = it.author ?: ""
                 binding.imgAuthor.load(it.imageUrl)
                 binding.tvCommentDate.text = it.dateAt?.toDateFormat("MMMM YYYY") ?: ""
                 binding.tvComment.text = it.comment
@@ -152,7 +152,6 @@ class MasterReserveAdapter(
                     "$acc, $s"
                 }?.drop(1) ?: "Georgian"
             )
-
         }
     }
 

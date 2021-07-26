@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_transparent"
+    android:paddingStart="@dimen/main_margin_LR"
+    android:paddingTop="@dimen/main_margin_TB"
+    android:paddingEnd="@dimen/main_margin_LR"
+    android:paddingBottom="@dimen/main_margin_TB">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/Text.BigDark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/message_your_master"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        style="@style/Text.SmallLight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_extra_small"
+        android:text="@string/descript_important_details"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgAuthor"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/main_margin_medium"
+        android:scaleType="centerCrop"
+        android:src="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:shapeAppearanceOverlay="@style/Circular" />
+
+    <TextView
+        android:id="@+id/tvMasterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_margin_LR"
+        android:text="Lali"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvJoinDate"
+        app:layout_constraintStart_toEndOf="@+id/imgAuthor"
+        app:layout_constraintTop_toTopOf="@+id/imgAuthor" />
+
+    <TextView
+        android:id="@+id/tvJoinDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registration_year"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgAuthor"
+        app:layout_constraintStart_toStartOf="@+id/tvMasterName"
+        app:layout_constraintTop_toBottomOf="@+id/tvMasterName" />
+
+    <EditText
+        android:id="@+id/etMessage"
+        style="@style/Text.SmallDark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_medium"
+        android:background="@drawable/ic_chat_bg"
+        android:gravity="start"
+        android:inputType="textPersonName"
+        android:padding="@dimen/main_margin_small"
+        android:paddingBottom="@dimen/main_margin_medium"
+        android:text="@string/chat_intro"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgAuthor" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSend"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/main_margin_small"
+        android:layout_marginBottom="@dimen/main_margin_small"
+        android:background="@drawable/ic_send"
+        android:backgroundTint="@color/btn_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/etMessage"
+        app:layout_constraintEnd_toEndOf="@+id/etMessage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

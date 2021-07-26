@@ -4,38 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shadow"
+    android:background="@drawable/bg_main_gradient"
     tools:context=".ui.home.botoom_navigation.explore.ExploreFragment">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#64FFFFFF" />
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_illustration"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnChooser"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/main_margin_medium"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/round_border"
+        android:background="@drawable/round_border_dark_blue"
         android:drawableStart="@drawable/ic_search"
-        app:drawableTint="@color/orange"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
+        app:drawableTint="@color/white"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text="@string/what_to_clean"
-        android:textSize="20sp"
+        style="@style/Text.MediumLight"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMaster"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnChooser" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

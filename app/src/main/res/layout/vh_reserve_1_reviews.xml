@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/ic_star" />
 
     <TextView
-        android:id="@+id/tvReviews"
+        android:id="@+id/tvRatingName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -37,7 +37,7 @@
         app:shapeAppearanceOverlay="@style/Circular" />
 
     <TextView
-        android:id="@+id/tvAuthorName"
+        android:id="@+id/tvMasterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin_LR"
@@ -45,19 +45,19 @@
         android:textColor="@color/text_primary"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvCommentDate"
+        app:layout_constraintBottom_toTopOf="@+id/tvJoinDate"
         app:layout_constraintStart_toEndOf="@+id/imgAuthor"
         app:layout_constraintTop_toTopOf="@+id/imgAuthor" />
 
     <TextView
-        android:id="@+id/tvCommentDate"
+        android:id="@+id/tvJoinDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Apr 2021"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgAuthor"
-        app:layout_constraintStart_toStartOf="@+id/tvAuthorName"
-        app:layout_constraintTop_toBottomOf="@+id/tvAuthorName" />
+        app:layout_constraintStart_toStartOf="@+id/tvMasterName"
+        app:layout_constraintTop_toBottomOf="@+id/tvMasterName" />
 
     <TextView
         android:id="@+id/tvComment"

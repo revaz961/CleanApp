@@ -1,8 +1,22 @@
 package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 
+import android.content.ActivityNotFoundException
+import android.content.ContextWrapper
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.viewModels
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
@@ -13,6 +27,8 @@ import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.utils.OrderStatusEnum
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class OrderDetailsFragment :
@@ -21,6 +37,7 @@ class OrderDetailsFragment :
     private val viewModel: OrderDetailsViewModel by viewModels()
     private lateinit var order: Order
     private lateinit var master: Master
+    private lateinit var bitmap: Bitmap
 
     override fun start() {
         order = arguments?.getParcelable("order")!!
@@ -80,7 +97,7 @@ class OrderDetailsFragment :
                 tvCancelReservation.gone()
             }
             btnSavePdf.setOnClickListener {
-                savePdf(it)
+                saveAsPdf(binding.root)
             }
         }
     }
@@ -102,11 +119,79 @@ class OrderDetailsFragment :
         }
     }
 
-    private fun savePdf(view: View) {
-        val bitmap = loadBitmap(binding.root, binding.root.width, binding.root.height)
+    private fun saveAsPdf(layout: LinearLayout) {
+        bitmap = loadBitmap(layout, layout.width, layout.height)
+        createPdf()
     }
 
-    private fun loadBitmap(layout: LinearLayout, width: Int, height: Int) {
+    private fun loadBitmap(layout: LinearLayout, width: Int, height: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        layout.draw(canvas)
+        return bitmap
+    }
 
+    private fun createPdf() {
+        val displayMetrics = DisplayMetrics()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().display?.getRealMetrics(displayMetrics)
+        } else {
+            requireActivity().windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+        }
+
+        val convertWidth = displayMetrics.widthPixels
+        val convertHeight = displayMetrics.heightPixels
+
+        val pdfDocument = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(convertWidth, convertHeight, 1).create()
+        val page = pdfDocument.startPage(pageInfo)
+        val canvas = page.canvas
+        val paint = Paint()
+        canvas.drawPaint(paint)
+        bitmap = Bitmap.createScaledBitmap(bitmap, convertWidth, convertHeight, true)
+        canvas.drawBitmap(bitmap, 0.0f, 0.0f, null)
+        pdfDocument.finishPage(page)
+
+        val file = File(getFilePath())
+
+        if (file.exists()) {
+            Log.d("PDF", "FILE EXISTS")
+            openPdf(file.path)
+        } else {
+            Log.d("PDF", "FILE Doesnt EXIST")
+        }
+        try {
+            val out = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            out.flush()
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun openPdf(path: String) {
+        val file = File(path)
+        if (file.exists()) {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val uri = Uri.fromFile(file)
+            intent.setDataAndType(uri, "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                makeText(requireContext(), "Cannot open pdf file", Toast.LENGTH_SHORT).show()
+                Log.d("PDF", "ERROR OPEN")
+            }
+        }
+    }
+
+    private fun getFilePath() : String {
+        val contextWrapper = ContextWrapper(context)
+        val documentDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+        val file = File(documentDirectory, "reservation.pdf")
+        return file.path
     }
 }
