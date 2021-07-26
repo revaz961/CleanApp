@@ -135,5 +135,10 @@
         <item quantity="other">>Free cancellation %d days prior</item>
     </plurals>
 
+    <string name="category_title">Choose service category</string>
+    <string name="date_title">When do you want your place to get cleaned?</string>
+    <string name="rooms_title">How many rooms do you want to clean?</string>
+    <string name="city_title">Whic city are you in?</string>
+
 
 </resources>
