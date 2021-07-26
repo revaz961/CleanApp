@@ -125,6 +125,9 @@
     <string name="add_new_card">Add new card</string>
     <string name="entire_apartment">Entire apartment %1$s</string>
     <string name="pay_with">Pay with</string>
+    <string name="card_number">Card number</string>
+    <string name="cvv">CVV</string>
+    <string name="card_add">Add card</string>
 
 
     <plurals name="cancellation_policy">

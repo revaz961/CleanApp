@@ -3,43 +3,154 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/main_margin_TB"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
     android:paddingStart="@dimen/main_margin_LR"
+    android:paddingTop="@dimen/main_margin_TB"
     android:paddingEnd="@dimen/main_margin_LR"
     android:paddingBottom="@dimen/main_margin_medium"
     tools:context=".ui.home.confirmation.card.NewCardFragment">
 
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/outlinedTextField"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="@string/card_holder"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            />-->
-
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
     <TextView
         android:id="@+id/tvTitle"
+        style="@style/Text.BigDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_card"
-        style="@style/Text.BigDark"
         android:layout_marginTop="@dimen/main_margin_TB"
+        android:text="@string/add_new_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnClose" />
 
     <ImageButton
         android:id="@+id/btnClose"
-        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:src="@drawable/ic_close"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etCardHolder"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        android:textColorHint="@color/gray_dark"
+        app:hintTextColor="@color/gray_dark"
+        app:boxStrokeColor="@color/gray_light"
+        app:boxStrokeErrorColor="@color/orange_light"
+        app:boxStrokeWidthFocused="2dp"
+
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:hint="@string/card_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etCardHolderInput" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etCardNumber"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        android:hint="@string/card_number"
+        app:counterEnabled="true"
+
+        android:textColorHint="@color/gray_dark"
+        app:hintTextColor="@color/gray_dark"
+        app:boxStrokeColor="@color/gray_light"
+        app:boxStrokeErrorColor="@color/orange_light"
+        app:boxStrokeWidthFocused="2dp"
+
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCardHolder">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="19"
+            android:id="@+id/etCardNumberInput" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etValid"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Valid thru"
+
+        android:textColorHint="@color/gray_dark"
+        app:hintTextColor="@color/gray_dark"
+        app:boxStrokeColor="@color/gray_light"
+        app:boxStrokeErrorColor="@color/orange_light"
+        app:boxStrokeWidthFocused="2dp"
+
+        android:layout_marginEnd="@dimen/main_margin_small"
+        app:layout_constraintEnd_toStartOf="@+id/etCVV"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etCVV">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="5"
+            android:id="@+id/etValidInput" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/etCVV"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/cvv"
+        app:errorEnabled="true"
+
+        android:textColorHint="@color/gray_dark"
+        app:hintTextColor="@color/gray_dark"
+        app:boxStrokeColor="@color/gray_light"
+        app:boxStrokeErrorColor="@color/orange_light"
+        app:boxStrokeWidthFocused="2dp"
+
+        android:layout_marginTop="@dimen/main_margin_TB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etValid"
+        app:layout_constraintTop_toBottomOf="@+id/etCardNumber">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:maxLength="3"
+            android:layout_height="wrap_content"
+            android:id="@+id/etCvvInput" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/card_add"
+        style="@style/Text.MediumLight"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/main_margin_medium"
+        android:textStyle="bold"
+        android:background="@drawable/ic_btn_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etValid" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
