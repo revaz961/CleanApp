@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.FragmentReserveBinding
+import com.example.cleanapp.extensions.minuteToHoursFloat
+import com.example.cleanapp.extensions.roundToDecimal
 import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
+import kotlin.math.roundToInt
 
 class MasterReserveFragment : Fragment() {
 
@@ -93,7 +96,7 @@ class MasterReserveFragment : Fragment() {
             })
         adapter.setItems(viewTypeOrder)
 
-        adapter.onSelectMaster={
+        adapter.onSelectMaster = {
             binding.recycler.scrollToPosition(0)
         }
 
@@ -107,11 +110,20 @@ class MasterReserveFragment : Fragment() {
         )
 
         with(binding) {
-            master.categories?.get(0)
-                ?.let { tvPrice.setResourceHtmlText(R.string.per_hour, it.price) }
+
+            master.categories?.find { it.category?.categoryEn == order.category?.categoryEn }
+                ?.let {
+                    tvPrice.setResourceHtmlText(R.string.per_hour, it.price)
+                    val price = order.duration!!.minuteToHoursFloat() * it.price
+                    order.price = price.roundToDecimal()
+                }
             tvDateTime.text = order.date?.toDateFormat("MMMM dd, K:mm a")
             btnReserve.setOnClickListener {
-                findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment, bundleOf("order" to order, "master" to master))
+
+                findNavController().navigate(
+                    R.id.action_masterReserveFragment_to_confirmationFragment,
+                    bundleOf("order" to order, "master" to master)
+                )
             }
         }
     }

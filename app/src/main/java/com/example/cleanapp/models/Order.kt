@@ -25,7 +25,7 @@ data class Order(
 
     @get:PropertyName("price")
     @set:PropertyName("price")
-    var price: Double = 0.00,
+    var price: Float = 0.00f,
 
     @get:PropertyName("status")
     @set:PropertyName("status")

@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.confirmation.ConfirmationFragment">
+    tools:context=".ui.home.confirmation.ConfirmationFragment"
+    android:background="@drawable/reservation_background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvConfirmation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         />
 
 </FrameLayout>

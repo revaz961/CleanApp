@@ -44,6 +44,11 @@
         <item name="background">@android:color/transparent</item>
     </style>
 
+    <style name="RoundSquare">
+        <item name="cornerSize">20%</item>
+        <item name="background">@android:color/transparent</item>
+    </style>
+
     <style name="Button.Transparent.Text" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/text_btnTransparent</item>
         <item name="android:textSize">18sp</item>

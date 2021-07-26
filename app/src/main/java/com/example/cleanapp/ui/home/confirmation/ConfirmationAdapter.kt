@@ -11,7 +11,6 @@ import com.example.cleanapp.databinding.*
 import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
-import com.example.cleanapp.models.Message
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.utils.ConfirmationViewTypes
 import java.util.*
@@ -116,11 +115,17 @@ class ConfirmationAdapter(
         BaseViewHolderType<VhConfirm0HeaderBinding>(binding) {
         override fun bind() {
             with(binding) {
-                imgAuthor.loadFromStorage(master.user?.imgUrl?: "")
-                tvRooms.text = order.roomCount?.fold("") { acc, roomCounter ->
-                    "$acc\n${roomCounter.room} - ${roomCounter.count}"
-                }
-                tvRatingName.setTextById(R.string.rating_name, master.rating, master.user?.name)
+                imgAuthor.loadFromStorage(master.user?.imgUrl ?: "")
+                tvRooms.setTextById(R.string.entire_apartment,
+                    order.roomCount?.fold("") { acc, roomCounter ->
+                        "$acc \n${roomCounter.room} - ${roomCounter.count}"
+                    }
+                )
+                tvRatingName.setTextById(
+                    R.string.rating_name,
+                    master.rating ?: 0f,
+                    master.user?.name
+                )
             }
         }
     }
@@ -130,7 +135,7 @@ class ConfirmationAdapter(
         override fun bind() {
             with(binding) {
                 tvDateTimeValue.text = order.date?.toDateFormat("MMMM dd, K:mm a") ?: "error"
-                tvAddressValue.text = order.address
+                tvAddressValue.text = order.city?.cityEn ?: "Unknown"
             }
         }
     }
@@ -139,14 +144,18 @@ class ConfirmationAdapter(
         BaseViewHolderType<VhConfirm2PriceDetailsBinding>(binding) {
         override fun bind() {
             with(binding) {
-                tvCatPriceValue.setTextById(R.string.price_value, order.price)
-                tvDurationValue.setTextById(R.string.n_hours, order.duration)
-                val cleaningPrice = order.price * (order.duration?:1)
-                tvCleaningPriceValue.setTextById(R.string.price_value, cleaningPrice)
-                val serviceFee = cleaningPrice * 0.18
-                tvServiceFee.setTextById(R.string.price_value, serviceFee)
-                val total = cleaningPrice + serviceFee
-                tvTotalValue.setTextById(R.string.price_value, total)
+                val categoryPrice =
+                    master.categories?.find { it.category?.categoryEn == order.category?.categoryEn }?.price
+                        ?: 0
+                tvCatPriceValue.setTextById(R.string.price_value, categoryPrice)
+
+                tvDurationValue.setTextById(R.string.n_hours, order.duration?.minuteToHoursFloat()?:0f)
+
+                tvCleaningPriceValue.setTextById(R.string.price_value, order.price)
+                val serviceFee = order.price * 0.18f
+                tvServiceFeeValue.setTextById(R.string.price_value, serviceFee.roundToDecimal())
+                val total = order.price + serviceFee
+                tvTotalValue.setTextById(R.string.price_value, total.roundToDecimal())
             }
         }
     }
@@ -172,8 +181,8 @@ class ConfirmationAdapter(
         BaseViewHolderType<VhConfirm4MessageMasterBinding>(binding) {
         override fun bind() {
             with(binding) {
-                imgAuthor.load(master.user?.imgUrl)
-                tvMasterName.text = master.user?.name ?: "error"
+                imgAuthor.loadFromStorage(master.user?.imgUrl!!)
+                tvMasterName.text = master.user?.name ?: "unknown"
                 master.user?.let {
                     it.registrationDate?.let { it1 ->
                         tvJoinDate.setTextById(
@@ -206,7 +215,7 @@ class ConfirmationAdapter(
         override fun bind() {
             binding.tvCancellationDetails.setResourceHtmlText(
                 R.string.cancellation_details,
-                master.cancelPeriod?: 1
+                master.cancelPeriod ?: 1
             )
 
         }

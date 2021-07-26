@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/main_margin_extra_small"
     android:background="@drawable/bg_transparent"
     android:orientation="vertical"
     android:paddingStart="@dimen/main_margin_LR"
     android:paddingTop="@dimen/main_margin_TB"
     android:paddingEnd="@dimen/main_margin_LR"
-    android:paddingBottom="@dimen/main_margin_TB"
-    android:layout_marginBottom="@dimen/main_margin_extra_small">
+    android:paddingBottom="@dimen/main_margin_TB">
 
 
     <TextView
@@ -20,34 +20,34 @@
 
     <TextView
         android:id="@+id/tvDateTime"
-        android:layout_marginTop="@dimen/main_margin_TB"
         style="@style/Text.MediumDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
         android:text="@string/date_and_time" />
 
     <TextView
         android:id="@+id/tvDateTimeValue"
         style="@style/Text.SmallLight"
-        android:layout_marginTop="@dimen/main_margin_extra_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_extra_small"
         android:text="@string/todo" />
 
     <TextView
         android:id="@+id/tvAddress"
-        android:layout_marginTop="@dimen/main_margin_TB"
         style="@style/Text.MediumDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_TB"
         android:text="@string/address" />
 
     <TextView
         android:id="@+id/tvAddressValue"
         style="@style/Text.SmallLight"
-        android:layout_marginTop="@dimen/main_margin_extra_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/main_margin_extra_small"
         android:text="@string/todo" />
 
 </LinearLayout>

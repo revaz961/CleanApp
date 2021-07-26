@@ -32,8 +32,11 @@
             android:id="@+id/action_chooserDateFragment_to_roomChooserFragment"
             app:destination="@id/roomChooserFragment" />
         <action
-            android:id="@+id/action_chooserDateFragment2_to_categoryChooserFragment"
+            android:id="@+id/action_chooserDateFragment_to_categoryChooserFragment"
             app:destination="@id/categoryChooserFragment" />
+        <action
+            android:id="@+id/action_chooserDateFragment_to_cityChooserFragment"
+            app:destination="@id/cityChooserFragment" />
     </fragment>
     <fragment
         android:id="@+id/roomChooserFragment"

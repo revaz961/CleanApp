@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_transparent"
     android:paddingTop="@dimen/main_margin_TB"
-    android:paddingBottom="@dimen/main_margin_TB">
+    android:paddingBottom="@dimen/main_margin_TB"
+    android:layout_marginBottom="@dimen/main_margin_extra_small">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin_LR"
         android:layout_marginEnd="@dimen/main_margin_LR"
-        android:text="@string/price_details"
+        android:text="@string/pay_with"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

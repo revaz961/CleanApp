@@ -123,6 +123,8 @@
     <string name="message_sent">&lt;span style="color:#5B89FF"> &lt;b>Message sent!&lt;/b>&lt;/span>,</string>
     <string name="card_holder">Card Holder</string>
     <string name="add_new_card">Add new card</string>
+    <string name="entire_apartment">Entire apartment %1$s</string>
+    <string name="pay_with">Pay with</string>
 
 
     <plurals name="cancellation_policy">

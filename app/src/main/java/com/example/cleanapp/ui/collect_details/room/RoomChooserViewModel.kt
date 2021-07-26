@@ -24,8 +24,7 @@ class RoomChooserViewModel @Inject constructor(
         RoomCounter("Living Room", 0),
         RoomCounter("Entrance", 0),
         RoomCounter("Additional Rooms", 0),
-        RoomCounter("Balcony", 0),
-        RoomCounter("Garden", 0)
+        RoomCounter("Balcony", 0)
     )
 
     fun setOrderInDb(order: Order) {

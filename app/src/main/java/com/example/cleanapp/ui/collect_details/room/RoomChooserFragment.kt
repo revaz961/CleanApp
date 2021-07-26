@@ -64,8 +64,14 @@ class RoomChooserFragment :
     private fun setListeners() {
 
         binding.btnApply.setOnClickListener {
-            order.roomCount = viewModel.roomCounters
-            findNavController().navigate(R.id.action_roomChooserFragment_to_cityChooserFragment, bundleOf("order" to order))
+            order.roomCount = viewModel.roomCounters.filter { it.count != 0 }
+            order.duration = order.roomCount?.fold(0) { acc, roomCounter ->
+                acc + roomCounter.count * order.category!!.categoryDuration
+            }
+            findNavController().navigate(
+                R.id.action_roomChooserFragment_to_cityChooserFragment,
+                bundleOf("order" to order)
+            )
         }
 
         binding.btnBack.setOnClickListener {
@@ -73,10 +79,11 @@ class RoomChooserFragment :
         }
     }
 
-    private fun observes(){
-        viewModel.liveData.observe(viewLifecycleOwner,{
-            when(it){
-                is ResultHandler.Success -> {}
+    private fun observes() {
+        viewModel.liveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                }
                 is ResultHandler.Error -> showErrorDialog(it.message)
             }
         })
