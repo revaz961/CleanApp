@@ -124,6 +124,8 @@
     <string name="card_holder">Card Holder</string>
     <string name="add_new_card">Add new card</string>
     <string name="card_number">Card number</string>
+    <string name="cvv">CVV</string>
+    <string name="card_add">Add card</string>
 
 
     <plurals name="cancellation_policy">
