@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.google.firebase.database.PropertyName
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
 data class User(
     val uid: String? = null,
@@ -19,5 +18,9 @@ data class User(
 
     @get:PropertyName("is_master")
     @set:PropertyName("is_master")
-    var isMaster: Boolean = false
+    var isMaster: Boolean? = null,
+
+    @get:PropertyName("registration_date")
+    @set:PropertyName("registration_date")
+    var registrationDate:Long? = null
 ) : Parcelable

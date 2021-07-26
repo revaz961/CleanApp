@@ -73,6 +73,7 @@ class SignUpMasterFragment :
             master.categories = categories
             master.ownSupplements = haveSupplement
             master.city = city
+            master.user!!.isMaster = true
             viewModel.setMaster(master)
         }
     }

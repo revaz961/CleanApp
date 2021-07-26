@@ -27,6 +27,19 @@
             app:layout_constraintStart_toStartOf="@id/editName"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btnImage"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_add_circle"
+            app:layout_constraintTop_toTopOf="@id/tvSignUp"
+            app:shapeAppearanceOverlay="@style/Circular"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/tvSignUp"
+            app:layout_constraintStart_toEndOf="@id/tvSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <EditText
             android:id="@+id/editName"
             android:layout_width="wrap_content"
@@ -73,7 +86,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editSurname" />
 
-
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="wrap_content"
@@ -118,6 +130,7 @@
             android:lines="1"
             android:padding="@dimen/auth_padding_small"
             android:textSize="20sp"
+            android:maxLength="9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"

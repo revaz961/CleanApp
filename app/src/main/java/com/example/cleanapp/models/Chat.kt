@@ -7,29 +7,21 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Chat(
 
-    @get:PropertyName("at_date")
-    @set:PropertyName("at_date")
-    var atDate: Long = 0,
+    var timestamp: Long = 0,
 
     @get:PropertyName("last_message")
     @set:PropertyName("last_message")
     var lastMessage: Message? = null,
 
-    @get:PropertyName("last_message_author")
-    @set:PropertyName("last_message_author")
-    var lastMessageAuthor: String = "",
+    @get:PropertyName("sender_image")
+    @set:PropertyName("sender_image")
+    var senderImage: String = "",
 
-    @get:PropertyName("last_message_image")
-    @set:PropertyName("last_message_image")
-    var lastMessageImage: String = "",
-
-    var receiver: String = "",
+    @get:PropertyName("sender_name")
+    @set:PropertyName("sender_name")
+    var senderName: String = "",
 
     var sender: String = "",
-
-    @get:PropertyName("all_message")
-    @set:PropertyName("all_message")
-    var allMessages: List<Message>? = null,
 
     @get:PropertyName("is_read")
     @set:PropertyName("is_read")
@@ -40,17 +32,21 @@ data class Chat(
 data class Message(
     var message: String = "",
 
-    @get:PropertyName("author_id")
-    @set:PropertyName("author_id")
-    var authorId: String = "",
+    @get:PropertyName("sender_id")
+    @set:PropertyName("sender_id")
+    var senderId: String = "",
 
-    @get:PropertyName("at_date")
-    @set:PropertyName("at_date")
-    var atDate: Long? = null,
+    var timestamp: Long? = null,
 
-    var author: String = "",
+    @get:PropertyName("sender_name")
+    @set:PropertyName("sender_name")
+    var senderName: String = "",
 
-    @get:PropertyName("author_image")
-    @set:PropertyName("author_image")
-    var authorImage: String = ""
+    @get:PropertyName("sender_image")
+    @set:PropertyName("sender_image")
+    var senderImage: String = "",
+
+    @get:PropertyName("is_read")
+    @set:PropertyName("is_read")
+    var isRead:Boolean = false
 ) : Parcelable
