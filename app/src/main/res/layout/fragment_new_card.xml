@@ -8,7 +8,6 @@
     android:paddingStart="@dimen/main_margin_LR"
     android:paddingEnd="@dimen/main_margin_LR"
     android:paddingBottom="@dimen/main_margin_medium"
-    android:background="@dra"
     tools:context=".ui.home.confirmation.card.NewCardFragment">
 
 

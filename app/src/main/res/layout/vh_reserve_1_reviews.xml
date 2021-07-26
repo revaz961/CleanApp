@@ -45,12 +45,12 @@
         android:textColor="@color/text_primary"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvJoinDate"
+        app:layout_constraintBottom_toTopOf="@+id/tvCommentDate"
         app:layout_constraintStart_toEndOf="@+id/imgAuthor"
         app:layout_constraintTop_toTopOf="@+id/imgAuthor" />
 
     <TextView
-        android:id="@+id/tvJoinDate"
+        android:id="@+id/tvCommentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Apr 2021"

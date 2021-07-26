@@ -23,5 +23,7 @@ data class User(
 
     @get:PropertyName("registration_date")
     @set:PropertyName("registration_date")
-    var registrationDate:Long? = null
+    var registrationDate: Long? = null,
+
+    var cards: MutableList<Card>? = null
 ) : Parcelable

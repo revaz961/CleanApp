@@ -26,5 +26,19 @@ enum class ConfirmationViewTypes (val type: Int) {
     CREDIT_CARDS(3),
     MESSAGE_MASTER(4),
     CANCELLATION(5),
-    FOOTER(6)
+    FOOTER(6);
+
+    companion object {
+        fun toTypeList(): List<Int> {
+            return listOf(
+                HEADER.type,
+                ARRIVAL_DETAILS.type,
+                PRICE_DETAILS.type,
+                CREDIT_CARDS.type,
+                MESSAGE_MASTER.type,
+                CANCELLATION.type,
+                FOOTER.type
+            )
+        }
+    }
 }
