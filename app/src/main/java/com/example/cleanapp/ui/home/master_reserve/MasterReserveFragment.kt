@@ -5,6 +5,7 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -109,7 +110,7 @@ class MasterReserveFragment : Fragment() {
                 ?.let { tvPrice.setResourceHtmlText(R.string.per_hour, it.price) }
             tvDateTime.text = order.date?.toDateFormat("MMMM dd, K:mm a")
             btnReserve.setOnClickListener {
-                findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment)
+                findNavController().navigate(R.id.action_masterReserveFragment_to_confirmationFragment, bundleOf("order" to order, "master" to master))
             }
         }
     }

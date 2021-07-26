@@ -6,8 +6,7 @@ enum class ReservationClickTypes (val type : Int) {
     AVAILABILITY(2),
     CANCELLATION(3),
     REPORT(4),
-    MORE_MASTERS(5),
-    RESERVE(6)
+    MORE_MASTERS(5)
 }
 
 enum class ReservationViewTypes (val type: Int) {
@@ -18,4 +17,14 @@ enum class ReservationViewTypes (val type: Int) {
     REPORT(4),
     MORE(5),
     CANCELLATION(6)
+}
+
+enum class ConfirmationViewTypes (val type: Int) {
+    HEADER(0),
+    ARRIVAL_DETAILS(1),
+    PRICE_DETAILS(2),
+    CREDIT_CARDS(3),
+    MESSAGE_MASTER(4),
+    CANCELLATION(5),
+    FOOTER(6)
 }
