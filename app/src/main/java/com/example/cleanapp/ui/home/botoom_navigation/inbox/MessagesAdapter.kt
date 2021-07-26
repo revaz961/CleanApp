@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.base.BaseAdapter
 import com.example.cleanapp.base.BaseViewHolder
-import com.example.cleanapp.databinding.InboxFragmentViewholderBinding
+import com.example.cleanapp.databinding.VhInboxBinding
 import com.example.cleanapp.extensions.hide
 import com.example.cleanapp.extensions.load
 import com.example.cleanapp.extensions.show
@@ -27,7 +27,7 @@ class MessagesAdapter : BaseAdapter<Chat>() {
         viewType: Int
     ): BaseViewHolder<Chat, ViewBinding> {
         return MessageViewHolder(
-            InboxFragmentViewholderBinding.inflate(
+            VhInboxBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -35,8 +35,8 @@ class MessagesAdapter : BaseAdapter<Chat>() {
         )
     }
 
-    inner class MessageViewHolder(private val binding: InboxFragmentViewholderBinding) :
-        BaseViewHolder<Chat, InboxFragmentViewholderBinding>(binding) {
+    inner class MessageViewHolder(private val binding: VhInboxBinding) :
+        BaseViewHolder<Chat, VhInboxBinding>(binding) {
         override fun bind(data: Chat) {
             if (data.isRead) binding.imgRead.show() else binding.imgRead.hide()
             binding.imgMessageAuthor.load(data.senderImage)
