@@ -8,9 +8,10 @@ import com.example.cleanapp.models.City
 
 typealias CityClick = (city : City) -> Unit
 
-class CitiesAdapter (private var cities: MutableList<City>) : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
+class CitiesAdapter () : RecyclerView.Adapter<CitiesAdapter.CityViewHolder>() {
 
     lateinit var clickListener: CityClick
+    private var cities = mutableListOf<City>()
 
     fun setItem(list:List<City>){
         cities.clear()

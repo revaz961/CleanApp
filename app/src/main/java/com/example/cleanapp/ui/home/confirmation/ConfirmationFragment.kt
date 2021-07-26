@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
@@ -17,6 +16,7 @@ import com.example.cleanapp.extensions.init
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
+import com.example.cleanapp.utils.CardSystemEnum
 import com.example.cleanapp.utils.ConfirmationViewTypes
 
 class ConfirmationFragment :
@@ -109,56 +109,126 @@ class ConfirmationFragment :
             btnAdd.setOnClickListener {
 //                createCard(binding, dialog)
             }
-            var count = 0
-            etCardNumberInput.doAfterTextChanged {
-
-                val inputLength = it.toString().length
-                if (count <= inputLength && inputLength == 4 ||
-                    inputLength == 9 || inputLength == 14
+            etCardNumberInput.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
                 ) {
-
-                    binding.etCardNumberInput.setText(it.toString() + " ")
-
-                    val pos = binding.etCardNumberInput.text?.length
-                    binding.etCardNumberInput.setSelection(pos!!)
-
-                } else if (count >= inputLength && (inputLength == 4 ||
-                            inputLength == 9 || inputLength == 14)
-                ) {
-                    binding.etCardNumberInput.setText(
-                        binding.etCardNumberInput.text.toString().dropLast(1)
-                    )
-//                            .substring(0, binding.etCardNumberInput.text
-//                                .toString().length - 1))
-
-                    val pos = binding.etCardNumberInput.text?.length
-                    binding.etCardNumberInput.setSelection(pos!!)
-
                 }
-                count = binding.etCardNumberInput.text.toString().length
-            }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
+                    validateInput(binding)
+                    val inputLength = s.toString().length
+                    if ((inputLength == 4 ||
+                                inputLength == 9 || inputLength == 14) && before == 0
+                    ) {
+                        binding.etCardNumberInput.setText(s.toString() + " ")
+
+                        val pos = binding.etCardNumberInput.text?.length
+                        binding.etCardNumberInput.setSelection(pos!!)
+
+                    } else if ((inputLength == 4 ||
+                                inputLength == 9 || inputLength == 14) && before == 1
+                    ) {
+                        binding.etCardNumberInput.setText(
+                            binding.etCardNumberInput.text.toString().dropLast(1)
+                        )
+                        val pos = binding.etCardNumberInput.text?.length
+                        binding.etCardNumberInput.setSelection(pos!!)
+
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+
+            etValidInput.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
+                    validateInput(binding)
+                    val inputLength = s.toString().length
+                    if (inputLength == 2 && before == 0) {
+                        binding.etValidInput.setText(s.toString() + "/")
+
+                        val pos = binding.etValidInput.text?.length
+                        binding.etValidInput.setSelection(pos!!)
+
+                    } else if (inputLength == 2 && before == 1) {
+                        binding.etValidInput.setText(
+                            binding.etValidInput.text.toString().dropLast(1)
+                        )
+                        val pos = binding.etValidInput.text?.length
+                        binding.etValidInput.setSelection(pos!!)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+
+            etCardHolderInput.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
+                    validateInput(binding)
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
         }
     }
 
-    private fun validateInput(holder: String, number: String, valid: String, cvv: String) {
+
+    private fun validateInput(binding: FragmentNewCardBinding) {
         var result = true
-        val num = number.replace(" ", "")
-        val validThrough = valid.replace("/", "")
+        val number = (binding.etCardNumberInput.text ?: "").toString().replace(" ", "")
+        val valid = (binding.etValidInput.text ?: "").toString().replace("/", "")
+        val cvv = (binding.etCvvInput.text ?: "").toString()
+        val holder = (binding.etCardHolderInput.text ?: "").toString().trim()
 
-        if (!holder.trim().contains(" ")) {
+        /** Check card holder name */
+        if (!holder.contains(" ") && !holder.matches("^[a-zA-Z]*$".toRegex())) {
             result = false
-        }
-        if (!num.isDigitsOnly() || num.length != 16) {
-            result = false
-        }
-        if (!validThrough.isDigitsOnly() || validThrough.substring(0, 1)
-                .toInt() > 12 || validThrough.substring(2).toInt() < 21
+            binding.etCardHolderInput.error = getString(R.string.error)
+        } else
+            binding.etCardHolderInput.error = null
+
+        /** Check card number */
+        if (number.isEmpty() || !number.isDigitsOnly() || number.length != 16
         ) {
+            binding.etCardNumberInput.error = getString(R.string.error)
             result = false
-        }
-        if (!cvv.isDigitsOnly()) {
-            result = false
-        }
-    }
+        } else
+            binding.etCardNumberInput.error = null
 
+        /** Check card expiration date */
+        if (valid.isNotEmpty() && (!valid.isDigitsOnly() || valid.substring(0, 1).toInt() > 12
+                    || (valid.length > 2 && valid.substring(2).toInt() < 21))
+        ) {
+            binding.etValidInput.error = getString(R.string.error)
+            result = false
+        } else
+            binding.etValidInput.error = null
+
+        /** Check card expiration date */
+        if (!cvv.isDigitsOnly()) {
+            binding.etCvvInput.error = getString(R.string.error)
+            result = false
+        } else
+            binding.etCvvInput.error = null
+
+        binding.btnAdd.isClickable = result
+    }
 }

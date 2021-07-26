@@ -32,7 +32,7 @@ class CityChooserFragment :
     private val viewModel: CityChooserViewModel by viewModels()
     private val sharedViewModel: ChooserViewModel by activityViewModels()
 
-    private val cities = mutableListOf<City>()
+    private var cities = mutableListOf<City>()
     private lateinit var adapter: CitiesAdapter
     private lateinit var order: Order
 
@@ -54,8 +54,9 @@ class CityChooserFragment :
 
 
     override fun start() {
-        updateGPS()
+
         init()
+        updateGPS()
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -83,7 +84,7 @@ class CityChooserFragment :
 
     private fun initRecycler() {
         adapter =
-            CitiesAdapter(cities).apply {
+            CitiesAdapter().apply {
                 clickListener = { city ->
                     sharedViewModel.setFragmentTitle(city.cityEn)
                     order.city = city
@@ -104,6 +105,7 @@ class CityChooserFragment :
     }
 
     private fun filter(input: String) {
+        d("FILTER ", "$input ${cities.size}")
         val filteredCities = mutableListOf<City>()
         for (city in cities) {
             if (city.cityEn.lowercase(Locale.getDefault())
@@ -118,7 +120,10 @@ class CityChooserFragment :
     private fun observes() {
         viewModel.citiesLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> adapter.setItem(it.data!!)
+                is ResultHandler.Success -> {
+                    cities = it.data!!.toMutableList()
+                    adapter.setItem(it.data!!)
+                }
                 is ResultHandler.Error -> showErrorDialog(it.message)
             }
         })
@@ -222,7 +227,6 @@ class CityChooserFragment :
         val currentLon = location.longitude.toString()
         val accuracy = location.accuracy
         d("LOCATION ", "LONGITUDE - $currentLon, LATITUDE - $currentLat, ACCURACY - $accuracy")
-//        binding.inputCity.setText("Lat - $currentLat, Long - $currentLon, accuracy - $accuracy")
         binding.inputCity.setText(getCityName(location))
     }
 
