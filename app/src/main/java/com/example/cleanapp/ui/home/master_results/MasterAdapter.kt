@@ -62,6 +62,7 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
             }
 
             binding.ivMaster.setOnClickListener(this)
+            data.user?.imgUrl?.let { binding.ivMaster.loadFromStorage(it) }
 
             binding.llBookmarks.children.forEach {
                 it.setOnClickListener { bookmark ->

@@ -9,6 +9,7 @@ import com.example.cleanapp.base.BaseAdapterViewType
 import com.example.cleanapp.base.BaseViewHolderType
 import com.example.cleanapp.databinding.*
 import com.example.cleanapp.extensions.load
+import com.example.cleanapp.extensions.loadFromStorage
 import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Master
@@ -121,7 +122,7 @@ class MasterReserveAdapter(
             binding.rvCaegories.layoutManager = LinearLayoutManager(binding.root.context)
 
             binding.tvName.text = selectedMaster.user?.name ?: ""
-            binding.imgMaster.load(selectedMaster.user?.imgUrl ?: "")
+            selectedMaster.user?.uid?.let { binding.imgMaster.loadFromStorage(it) }
         }
     }
 

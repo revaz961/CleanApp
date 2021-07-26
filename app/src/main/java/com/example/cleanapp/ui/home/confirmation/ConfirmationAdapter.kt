@@ -34,10 +34,6 @@ class ConfirmationAdapter(
         notifyDataSetChanged()
     }
 
-    fun setCards(cards: List<Card>) {
-        this.cards.addAll(cards)
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -120,7 +116,7 @@ class ConfirmationAdapter(
         BaseViewHolderType<VhConfirm0HeaderBinding>(binding) {
         override fun bind() {
             with(binding) {
-                imageView.load(master.user?.imgUrl)
+                imgAuthor.loadFromStorage(master.user?.imgUrl?: "")
                 tvRooms.text = order.roomCount?.fold("") { acc, roomCounter ->
                     "$acc\n${roomCounter.room} - ${roomCounter.count}"
                 }
@@ -145,7 +141,7 @@ class ConfirmationAdapter(
             with(binding) {
                 tvCatPriceValue.setTextById(R.string.price_value, order.price)
                 tvDurationValue.setTextById(R.string.n_hours, order.duration)
-                val cleaningPrice = order.price * order.duration!!
+                val cleaningPrice = order.price * (order.duration?:1)
                 tvCleaningPriceValue.setTextById(R.string.price_value, cleaningPrice)
                 val serviceFee = cleaningPrice * 0.18
                 tvServiceFee.setTextById(R.string.price_value, serviceFee)
@@ -208,9 +204,9 @@ class ConfirmationAdapter(
     inner class ViewHolderCancel(private val binding: VhConfirm5CancellationBinding) :
         BaseViewHolderType<VhConfirm5CancellationBinding>(binding) {
         override fun bind() {
-            binding.tvCancellationDetails.setTextById(
+            binding.tvCancellationDetails.setResourceHtmlText(
                 R.string.cancellation_details,
-                master.cancelPeriod
+                master.cancelPeriod?: 1
             )
 
         }
@@ -219,6 +215,7 @@ class ConfirmationAdapter(
     inner class ViewHolderFooter(private val binding: VhConfirm6FooterBinding) :
         BaseViewHolderType<VhConfirm6FooterBinding>(binding) {
         override fun bind() {
+            binding.tvCancellationDetails.setResourceHtmlText(R.string.agree_policies)
             binding.btnConfirm.setOnClickListener {
                 confirm()
             }

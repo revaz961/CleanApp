@@ -1,5 +1,8 @@
 package com.example.cleanapp.ui.signup
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.util.Log.d
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -11,12 +14,16 @@ import com.example.cleanapp.extensions.isEmail
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.models.User
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding::inflate) {
-
+companion object{
+    const val REQUEST_CODE = 1
+}
     private val viewModel: SignUpViewModel by viewModels()
+    private var uri :Uri? = null
 
     override fun start() {
         init()
@@ -27,7 +34,22 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         setListeners()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+            uri = data?.data!!
+            binding.btnImage.setImageURI(uri)
+        }
+    }
+
     private fun setListeners() {
+
+        binding.btnImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE)
+        }
+
         binding.btnSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_SignInFragment)
         }
@@ -63,8 +85,12 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         val password = binding.editEmail.text.toString().trim()
         val repeatPassword = binding.editEmail.text.toString().trim()
         val phoneNumber = binding.editPhone.text.toString().trim()
+        val termAndCondition = binding.checkAgree.isChecked
 
         var result = ""
+
+        if(uri == null)
+            result+= "Add Image\n"
 
         if (name.length < 3)
             result += "Invalid Name\n"
@@ -84,6 +110,8 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
         if (phoneNumber.length != 9)
             result += "Invalid number\n"
 
+        if(!termAndCondition)
+            result+="Agree Term And Condition\n"
 
 
         return result
@@ -98,8 +126,12 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                         it.data.email!!,
                         binding.editName.text.toString().trim(),
                         binding.editSurname.text.toString().trim(),
-                        binding.editPhone.text.toString()
+                        binding.editPhone.text.toString(),
+                        it.data.uid,
+                        false,
+                        Calendar.getInstance().timeInMillis
                     ))
+                    viewModel.uploadImage(uri!!)
                     findNavController().navigate(R.id.action_global_homeFragment)
                 }
 
@@ -117,9 +149,15 @@ class SignUpFragment : BaseFragment<SignUpFragmentBinding>(SignUpFragmentBinding
                         it.data.email!!,
                         binding.editName.text.toString().trim(),
                         binding.editSurname.text.toString().trim(),
-                        binding.editPhone.text.toString()
+                        binding.editPhone.text.toString(),
+                        it.data.uid,
+                        false,
+                        Calendar.getInstance().timeInMillis
                     )
+
                     viewModel.setUserProfile(user)
+                    viewModel.uploadImage(uri!!)
+
                     findNavController().navigate(R.id.action_signUpFragment_to_signUpMasterFragment,
                         bundleOf("user" to user))
                 }

@@ -1,17 +1,20 @@
 package com.example.cleanapp.ui.home.master_results
 
+import android.net.Uri
 import com.example.cleanapp.models.Comment
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.MasterCategory
 import com.example.cleanapp.models.Review
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import com.google.firebase.storage.StorageReference
 import javax.inject.Inject
 
 typealias OnLoad = (List<Master>) -> Unit
 
 class MasterResultsRepository @Inject constructor(
-    private val dbRef: DatabaseReference
+    private val dbRef: DatabaseReference,
+    private val storage: StorageReference
 ) {
     fun getMasters(query: String, action: OnLoad) {
         var masterCount = 0
@@ -32,11 +35,11 @@ class MasterResultsRepository @Inject constructor(
                                     .addOnSuccessListener { dataSnapshot ->
                                         val syncList = mutableListOf(false, false, false)
                                         val master = dataSnapshot.getValue<Master>()
-                                        masters.add(master!!)
+                                        master?.let { masters.add(it) }
                                         val key = dataSnapshot.key
 
                                         dbRef.child("reviews/$key").get().addOnSuccessListener {
-                                            master.reviews = it.getValue<Review>()
+                                            master?.reviews = it.getValue<Review>()
                                         }.addOnCompleteListener {
                                             syncList[0] = true
                                             if (syncList.all { it } && masters.size == masterCount)
@@ -46,7 +49,7 @@ class MasterResultsRepository @Inject constructor(
                                         dbRef.child("reviews/$key/comments").orderByKey()
                                             .limitToFirst(1).get()
                                             .addOnSuccessListener {
-                                                master.lastComments = it.getValue<List<Comment>>()
+                                                master?.lastComments = it.getValue<List<Comment>>()
                                             }.addOnCompleteListener {
                                                 syncList[1] = true
                                                 if (syncList.all { it } && masters.size == masterCount)
@@ -55,7 +58,7 @@ class MasterResultsRepository @Inject constructor(
 
                                         dbRef.child("masters_category/$key").get()
                                             .addOnSuccessListener {
-                                                master.categories =
+                                                master?.categories =
                                                     it.getValue<List<MasterCategory>>()
                                             }.addOnCompleteListener {
                                                 syncList[2] = true
@@ -91,6 +94,13 @@ class MasterResultsRepository @Inject constructor(
     fun setMasters(master: Master, action: () -> Unit) {
         dbRef.child("masters").push().setValue(master) { error, ref ->
             action()
+        }
+    }
+
+    fun getImage(path:String,action:(Uri)->Unit){
+        val uri:Uri? = null
+        storage.child("images/$path/profile").getFile(uri!!).addOnSuccessListener {
+            action(uri)
         }
     }
 }

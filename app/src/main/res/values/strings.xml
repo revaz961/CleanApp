@@ -108,9 +108,9 @@
     <string name="edit">&lt;u>Edit&lt;/u></string>
     <string name="message_your_master">Message your master</string>
     <string name="descript_important_details">Let your master know all the important details</string>
-    <string name="registration_year">Joined %1$d</string>
+    <string name="registration_year">Joined %1$s</string>
     <string name="chat_intro">Hi %1$s!..</string>
-    <string name="cancellation_details">Free cancellation %1$d days prior to master\'s arrival day. After that, you will be charged with 30% of total reservation price plus service fee. </string>
+    <string name="cancellation_details">Free cancellation %1$d days prior to master\'s arrival day. After that, you will be charged with 30 of total reservation price plus service fee. </string>
     <string name="cancellation_learn_more">Make sure this master\'s cancellation policy works for you. &lt;u>Learn more&lt;/u></string>
     <string name="agree_policies">By selecting the button below, I agree to the
         &lt;span style="color:#2062CB"> &lt;u>Safety Rules&lt;/u>&lt;/span>,

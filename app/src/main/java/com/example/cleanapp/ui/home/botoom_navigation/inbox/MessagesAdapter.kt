@@ -39,8 +39,8 @@ class MessagesAdapter : BaseAdapter<Chat>() {
         BaseViewHolder<Chat, InboxFragmentViewholderBinding>(binding) {
         override fun bind(data: Chat) {
             if (data.isRead) binding.imgRead.show() else binding.imgRead.hide()
-            binding.imgMessageAuthor.load(data.lastMessageImage)
-            binding.tvMessageAuthorName.text = data.lastMessageAuthor
+            binding.imgMessageAuthor.load(data.senderImage)
+            binding.tvMessageAuthorName.text = data.senderName
             binding.tvMessageContent.text = data.lastMessage?.message
             binding.root.setOnClickListener {
                 chooseMessage(data)

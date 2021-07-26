@@ -1,5 +1,6 @@
 package com.example.cleanapp.ui.signup
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -60,5 +61,10 @@ class SignUpViewModel @Inject constructor(
 
     fun setUserProfile(profile: User) {
         authRepository.setUserProfile(profile)
+    }
+
+
+    fun uploadImage(uri: Uri){
+        authRepository.uploadImage(uri)
     }
 }

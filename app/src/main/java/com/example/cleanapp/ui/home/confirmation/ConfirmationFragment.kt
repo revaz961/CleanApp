@@ -5,13 +5,17 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ConfirmationFragmentBinding
 import com.example.cleanapp.databinding.FragmentNewCardBinding
+import com.example.cleanapp.extensions.init
+import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
+import com.example.cleanapp.utils.ConfirmationViewTypes
 
 class ConfirmationFragment : BaseFragment<ConfirmationFragmentBinding>(ConfirmationFragmentBinding::inflate) {
 
@@ -32,7 +36,6 @@ class ConfirmationFragment : BaseFragment<ConfirmationFragmentBinding>(Confirmat
             }
             addCard = {
                 createCard()
-                viewModel.addCard(it)
             }
             confirm = {
                 viewModel.confirmOrder(order)
@@ -40,17 +43,24 @@ class ConfirmationFragment : BaseFragment<ConfirmationFragmentBinding>(Confirmat
             setCurrentCard = {
                 viewModel.currentCard = it
             }
+            setItems(
+                ConfirmationViewTypes.toTypeList()
+            )
         }
+
+        binding.rvConfirmation.adapter = adapter
+        binding.rvConfirmation.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     private fun observes() {
-        viewModel.cardsLiveData.observe(viewLifecycleOwner, {
-            when (it) {
-                is ResultHandler.Success -> {
-                    adapter.setCards(it.data!!)
-                }
-            }
-        })
+//        viewModel.cardsLiveData.observe(viewLifecycleOwner, {
+//            when (it) {
+//                is ResultHandler.Success -> {
+//                    adapter.setCards(it.data!!)
+//                }
+//            }
+//        })
     }
 
     private fun createCard() {
@@ -58,22 +68,27 @@ class ConfirmationFragment : BaseFragment<ConfirmationFragmentBinding>(Confirmat
     }
 
     private fun showDialog() {
+        val bindingDialog = FragmentNewCardBinding.inflate(layoutInflater)
         val cardDialog = Dialog(requireContext())
-        cardDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        cardDialog.setContentView(R.layout.fragment_new_card)
+        cardDialog.init(bindingDialog.root,
+            width = ViewGroup.LayoutParams.MATCH_PARENT)
 
         //todo set listeners
 
         cardDialog.show()
         with(cardDialog) {
 
-            window?.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//            window?.setLayout(
+//                ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT
+//            )
+
             window?.attributes?.windowAnimations = R.style.DialogAnimation
             window?.setGravity(Gravity.BOTTOM)
+            bindingDialog.btnClose.setOnClickListener {
+                val card = Card()
+                viewModel.addCard(card)
+            }
         }
     }
 }

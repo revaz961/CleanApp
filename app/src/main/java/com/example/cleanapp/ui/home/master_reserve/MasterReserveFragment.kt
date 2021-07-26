@@ -88,6 +88,7 @@ class MasterReserveFragment : Fragment() {
                             findNavController().navigate(R.id.action_masterReserveFragment_to_reportFragment)
                         }
                     }
+
                 }
             })
         adapter.setItems(viewTypeOrder)
@@ -119,5 +120,4 @@ class MasterReserveFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
