@@ -1,16 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/main_margin_LR"
+    android:paddingTop="@dimen/main_margin_TB"
+    android:paddingEnd="@dimen/main_margin_LR"
     tools:context=".ui.home.botoom_navigation.profile.ProfileFragment">
 
-    <Button
-        android:id="@+id/signOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="sign out"
-        />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:paddingBottom="@dimen/main_margin_large">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgAuthor2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Circular" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/Text.BigAccentDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile"
+            app:layout_constraintBottom_toBottomOf="@+id/imgAuthor2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgAuthor2" />
+
+        <TextView
+            android:id="@+id/tvPersonalInfo"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_medium"
+            android:text="@string/personal_information"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvPayments"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgAuthor2"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvPayments"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_TB"
+            android:text="@string/payments_and_payouts"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvNotifications"
+            app:layout_constraintStart_toStartOf="@+id/tvPersonalInfo"
+            app:layout_constraintTop_toBottomOf="@+id/tvPersonalInfo" />
+
+        <TextView
+            android:id="@+id/tvNotifications"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_TB"
+            android:text="@string/notifications"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvChangeLanguage"
+            app:layout_constraintStart_toStartOf="@+id/tvPayments"
+            app:layout_constraintTop_toBottomOf="@+id/tvPayments" />
+
+        <TextView
+            android:id="@+id/tvChangeLanguage"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_TB"
+            android:text="@string/change_language"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvSwitchToMaster"
+            app:layout_constraintStart_toStartOf="@+id/tvNotifications"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotifications" />
+
+        <TextView
+            android:id="@+id/tvSwitchToMaster"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_TB"
+            android:text="@string/switch_to_master"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvGuidebook"
+            app:layout_constraintStart_toStartOf="@+id/tvChangeLanguage"
+            app:layout_constraintTop_toBottomOf="@+id/tvChangeLanguage" />
+
+        <TextView
+            android:id="@+id/tvGuidebook"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_TB"
+            android:text="@string/your_guidebook"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvContactSupport"
+            app:layout_constraintStart_toStartOf="@+id/tvSwitchToMaster"
+            app:layout_constraintTop_toBottomOf="@+id/tvSwitchToMaster" />
+
+        <TextView
+            android:id="@+id/tvContactSupport"
+            style="@style/Text.MediumLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_TB"
+            android:text="@string/contact_support"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="@+id/tvGuidebook"
+            app:layout_constraintTop_toBottomOf="@+id/tvGuidebook" />
+
+        <TextView
+            android:id="@+id/tvSignOut"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_large"
+            android:text="@string/sign_out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContactSupport" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

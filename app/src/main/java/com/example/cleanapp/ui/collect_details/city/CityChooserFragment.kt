@@ -58,6 +58,7 @@ class CityChooserFragment :
         init()
         updateGPS()
         binding.btnBack.setOnClickListener {
+            sharedViewModel.setFragmentTitle(getString(R.string.rooms_title))
             findNavController().navigateUp()
         }
     }
@@ -68,17 +69,12 @@ class CityChooserFragment :
         observes()
         initRecycler()
         binding.inputCity.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 filter(s.toString())
             }
         })
-
         getLocation()
     }
 
@@ -124,11 +120,9 @@ class CityChooserFragment :
                     cities = it.data!!.toMutableList()
                     adapter.setItem(it.data!!)
                 }
-                is ResultHandler.Success -> adapter.setItem(it.data!!)
-
                 is ResultHandler.Error -> showErrorDialog(it.message)
 
-                is ResultHandler.Loading -> { }
+                is ResultHandler.Loading -> {}
             }
         })
     }

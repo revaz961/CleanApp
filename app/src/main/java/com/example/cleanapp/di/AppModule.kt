@@ -25,4 +25,5 @@ class AppModule {
     @Provides
     @Singleton
     fun provideFirebaseStorage() = Firebase.storage.reference
+
 }

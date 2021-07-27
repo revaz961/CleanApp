@@ -2,6 +2,7 @@ package com.example.cleanapp.ui.collect_details
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
