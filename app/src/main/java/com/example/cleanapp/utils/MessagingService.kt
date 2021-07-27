@@ -23,8 +23,8 @@ import javax.inject.Inject
 
 
 class MessagingService @Inject constructor(
-    private val userRepo: UserRepository,
-    @ActivityContext private val context: Context
+//    private val userRepo: UserRepository,
+//    @ActivityContext private val context: Context
 ) : FirebaseMessagingService() {
 
     companion object {
@@ -51,7 +51,7 @@ class MessagingService @Inject constructor(
                 // Handle message within 10 seconds
                 handleNow()
 
-                sendNotification(remoteMessage)
+//                sendNotification(remoteMessage)
             }
             // Check if message contains a notification payload.
             if (remoteMessage.notification != null) {
@@ -61,9 +61,9 @@ class MessagingService @Inject constructor(
     }
 
     private fun scheduleJob() {
-        // [START dispatch_job]
-        val work = OneTimeWorkRequest.Builder(MyWorker::class.java).build()
-        WorkManager.getInstance(context).beginWith(work).enqueue()
+//        // [START dispatch_job]
+//        val work = OneTimeWorkRequest.Builder(MyWorker::class.java).build()
+//        WorkManager.getInstance(context).beginWith(work).enqueue()
 
     }
 
@@ -73,38 +73,38 @@ class MessagingService @Inject constructor(
     }
 
     private fun sendRegistrationToServer(token: String) {
-        userRepo.sendRegistrationToServer(token)
+//        userRepo.sendRegistrationToServer(token)
     }
 
-    private fun sendNotification(remoteMessage: RemoteMessage) {
-        val intent = Intent(context, MainActivity::class.java)
-        val pendingIntent =
-            PendingIntent.getActivity(context, REQ_CODE, intent, PendingIntent.FLAG_ONE_SHOT)
-
-        val channelId = getString(R.string.default_notification_channel_id)
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.ic_send)
-            .setContentTitle(remoteMessage.notification?.title)
-            .setContentText(remoteMessage.notification?.body)
-            .setAutoCancel(true)
-            .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
-
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
-        notificationManager.notify(REQ_CODE, notificationBuilder.build())
-    }
+//    private fun sendNotification(remoteMessage: RemoteMessage) {
+//        val intent = Intent(context, MainActivity::class.java)
+//        val pendingIntent =
+//            PendingIntent.getActivity(context, REQ_CODE, intent, PendingIntent.FLAG_ONE_SHOT)
+//
+//        val channelId = getString(R.string.default_notification_channel_id)
+//        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+//        val notificationBuilder = NotificationCompat.Builder(context, channelId)
+//            .setSmallIcon(R.drawable.ic_send)
+//            .setContentTitle(remoteMessage.notification?.title)
+//            .setContentText(remoteMessage.notification?.body)
+//            .setAutoCancel(true)
+//            .setSound(defaultSoundUri)
+//            .setContentIntent(pendingIntent)
+//
+//        val notificationManager =
+//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//
+//        // Since android Oreo notification channel is needed.
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val channel = NotificationChannel(
+//                channelId,
+//                "Channel human readable title",
+//                NotificationManager.IMPORTANCE_DEFAULT
+//            )
+//            notificationManager.createNotificationChannel(channel)
+//        }
+//        notificationManager.notify(REQ_CODE, notificationBuilder.build())
+//    }
 
 //    If you are sending Only Notification Payload then the above method works.
 //    But if you want to send only Data Payload or both Data and Notification payload then
