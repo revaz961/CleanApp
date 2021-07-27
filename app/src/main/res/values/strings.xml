@@ -78,7 +78,7 @@
     <string name="cat_price">%1$s &#183; %2$.2f&#8382;</string>
     <string name="reservation_date">Reservation date</string>
     <string name="you_paid">You paid</string>
-    <string name="cleaning_fee">%1$.2f&#8382; x %2$0.1f hours</string>
+    <string name="cleaning_fee">%1$.2f&#8382; x %2$.1f hours</string>
     <string name="service_fee">Service fee</string>
     <string name="cleaning_time">Cleaning time</string>
     <string name="total">Total</string>
@@ -104,7 +104,7 @@
     <string name="n_hours">%1$.1f hours</string>
     <string name="cleaning_price">Cleaning price</string>
     <string name="add_card">&#43; Add card</string>
-    <string name="card_digits">&#183;&#183;&#183;&#183; %1$d</string>
+    <string name="card_digits">&#183;&#183;&#183;&#183; %1$s</string>
     <string name="edit">&lt;u>Edit&lt;/u></string>
     <string name="message_your_master">Message your master</string>
     <string name="descript_important_details">Let your master know all the important details</string>

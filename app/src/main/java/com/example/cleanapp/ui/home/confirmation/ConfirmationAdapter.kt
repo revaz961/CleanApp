@@ -12,7 +12,6 @@ import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
-import com.example.cleanapp.models.User
 import com.example.cleanapp.utils.ConfirmationViewTypes
 import java.util.*
 
@@ -27,6 +26,7 @@ class ConfirmationAdapter(
     lateinit var confirm: () -> Unit
     lateinit var setCurrentCard: (Card) -> Unit
     private val cards = mutableListOf<Card>()
+    private val cardAdapter = CardsAdapter()
 
     fun setItems(viewTypeOrder: List<Int>) {
         this.items.clear()
@@ -34,10 +34,10 @@ class ConfirmationAdapter(
         notifyDataSetChanged()
     }
 
-    fun setCards(cards:List<Card>){
+    fun setCards(cards: List<Card>) {
         this.cards.clear()
         this.cards.addAll(cards)
-        notifyDataSetChanged()
+        cardAdapter.setItem(this.cards)
     }
 
     override fun onCreateViewHolder(
@@ -176,14 +176,14 @@ class ConfirmationAdapter(
             binding.tvAddCard.setOnClickListener {
                 addCard()
             }
-            binding.rvCards.adapter = CardsAdapter().apply {
-                setItem(cards)
+            binding.rvCards.adapter = cardAdapter.apply {
                 selectCard = {
-                    binding.root.setBorder(1, "#000000", 20f)
                     setCurrentCard(it)
                 }
             }
-            binding.rvCards.collapseIf(cards.isNullOrEmpty())
+            binding.btnCardCollapse.setOnClickListener {
+                binding.rvCards.collapseIf()
+            }
             binding.rvCards.layoutManager = LinearLayoutManager(binding.root.context)
         }
     }
@@ -228,6 +228,8 @@ class ConfirmationAdapter(
                 R.string.cancellation_details,
                 master.cancelPeriod ?: 1
             )
+
+            binding.tvCancellationLearnMore.setResourceHtmlText(R.string.cancellation_learn_more)
 
         }
     }

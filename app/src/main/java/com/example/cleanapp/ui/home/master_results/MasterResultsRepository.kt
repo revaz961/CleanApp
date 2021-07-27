@@ -19,6 +19,16 @@ class MasterResultsRepository @Inject constructor(
                 override fun onDataChange(snapshot: DataSnapshot) {
                     masterCount = snapshot.childrenCount.toInt()
 
+                    if(masterCount == 0){
+                        dbRef.child("masters").get().addOnSuccessListener {
+                            val map = it.getValue<HashMap<String,Master>>()
+                            val values = map?.values?.toList()
+                            masters.addAll(values!!)
+                            action(ResultHandler.Success(masters))
+                        }
+                        return
+                    }
+
                     dbRef.child("master_city_category").orderByChild(query).equalTo(true)
                         .addChildEventListener(object : ChildEventListener {
                             override fun onChildAdded(

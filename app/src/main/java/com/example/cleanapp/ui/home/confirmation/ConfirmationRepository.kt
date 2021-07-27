@@ -27,9 +27,7 @@ class ConfirmationRepository @Inject constructor(
 
     fun addCard(card: Card, action: OnLoad) {
         val uid = auth.currentUser!!.uid
-        val key = dbRef.push().key
-        val map = hashMapOf<String, Any>("users/$uid/cards/$key" to card,"masters/$uid/user/cards/$key" to card)
-        dbRef.updateChildren(map).addOnSuccessListener {
+        dbRef.child("cards/$uid").push().setValue(card).addOnSuccessListener {
             action(ResultHandler.Success(true))
         }.addOnFailureListener {
             action(ResultHandler.Error(null,it.message!!))
@@ -48,7 +46,7 @@ class ConfirmationRepository @Inject constructor(
 
     fun getCards(action: OnCardsLoad) {
         val uid = auth.currentUser!!.uid
-        dbRef.child("users/$uid/cards").get().addOnSuccessListener {
+        dbRef.child("cards/$uid").get().addOnSuccessListener {
             val map = it.getValue<HashMap<String,Card>>()
             val values = map!!.values.toList()
             action(ResultHandler.Success(values))

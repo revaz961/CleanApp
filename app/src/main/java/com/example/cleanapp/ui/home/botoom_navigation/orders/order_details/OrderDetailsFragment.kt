@@ -1,22 +1,7 @@
 package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 
-import android.content.ActivityNotFoundException
-import android.content.ContextWrapper
-import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.util.DisplayMetrics
-import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.fragment.app.viewModels
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
@@ -27,8 +12,6 @@ import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.utils.OrderStatusEnum
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
-import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class OrderDetailsFragment :
@@ -42,7 +25,6 @@ class OrderDetailsFragment :
     override fun start() {
         order = arguments?.getParcelable("order")!!
         order.masterUid?.let { viewModel.getMaster(it) }
-        initView()
         observes()
     }
 
@@ -71,23 +53,27 @@ class OrderDetailsFragment :
                     master.user!!.surname
                 )
             }
-            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.category, order.price)
+            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.category?.categoryEn, order.price)
             tvAddress.text = order.address
 
-            imgAuthor.load(master.user?.imgUrl)
+            imgAuthor.loadFromStorage(master.user?.imgUrl!!)
             tvRating.text = master.rating.toString()
 
-            tvReservationDateValue.text = order.reservationDate?.toDateFormat("MMM DD") ?: "error"
-            tvCleaningDayValue.text = order.date?.toDateFormat("MMM DD") ?: "error"
+            tvReservationDateValue.text = order.reservationDate?.toDateFormat("MMM dd") ?: "error"
+            tvCleaningDayValue.text = order.date?.toDateFormat("MMM dd") ?: "error"
             tvCleaningTimeValue.text = order.date?.toDateFormat("h:mm a") ?: "error"
 
-            val cleaningFee = order.price * order.duration!!
-            val serviceFee = cleaningFee * 0.2
+            val cleaningFee = order.price * order.duration!!.minuteToHoursFloat()
+            val serviceFee = cleaningFee * 0.2f
             val totalFee = cleaningFee + serviceFee
-            tvCategoryFee.setResourceHtmlText(R.string.cleaning_fee, order.price, order.duration)
-            tvServiceFeeValue.text = cleaningFee.toString()
-            tvServiceFeeValue.text = serviceFee.toString()
-            tvTotalValue.text = totalFee.toString()
+            tvCategoryFee.setResourceHtmlText(
+                R.string.cleaning_fee,
+                order.price,
+                order.duration!!.minuteToHoursFloat()
+            )
+            tvServiceFeeValue.text = cleaningFee.roundToDecimal().toString()
+            tvServiceFeeValue.text = serviceFee.roundToDecimal().toString()
+            tvTotalValue.text = totalFee.roundToDecimal().toString()
 
             if (order.status == OrderStatusEnum.ONGOING.status) {
                 tvCancelReservation.setOnClickListener {
@@ -113,6 +99,7 @@ class OrderDetailsFragment :
                 when (it) {
                     is ResultHandler.Success -> {
                         master = it.data!!
+                        initView()
                     }
                 }
             })

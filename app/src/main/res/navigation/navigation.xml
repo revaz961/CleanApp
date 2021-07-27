@@ -38,10 +38,14 @@
         android:id="@+id/chooserFragment"
         android:name="com.example.cleanapp.ui.collect_details.ChooserFragment"
         android:label="chooser_fragment"
-        tools:layout="@layout/chooser_fragment" >
+        tools:layout="@layout/chooser_fragment">
         <action
             android:id="@+id/action_chooserFragment_to_masterReservationContainerFragment"
-            app:destination="@id/masterReservationContainerFragment" />
+            app:destination="@id/masterReservationContainerFragment"
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/SignInFragment"
@@ -51,11 +55,19 @@
         <action
             android:id="@+id/action_SignInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
-            app:popUpTo="@id/navigation"/>
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom"
+            app:popUpTo="@id/navigation" />
         <action
             android:id="@+id/action_SignInFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/navigation"/>
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom"
+            app:popUpTo="@id/navigation" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -65,31 +77,69 @@
         <action
             android:id="@+id/action_signUpFragment_to_SignInFragment"
             app:destination="@id/SignInFragment"
-            app:popUpTo="@id/navigation"/>
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom"
+            app:popUpTo="@id/navigation" />
         <action
             android:id="@+id/action_signUpFragment_to_signUpMasterFragment"
-            app:destination="@id/signUpMasterFragment" />
+            app:destination="@id/signUpMasterFragment"
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <action
         android:id="@+id/action_global_chooserFragment"
-        app:destination="@id/chooserFragment" />
+        app:destination="@id/chooserFragment"
+        app:enterAnim="@anim/to_top"
+        app:exitAnim="@anim/to_bottom"
+        app:popEnterAnim="@anim/to_top"
+        app:popExitAnim="@anim/to_bottom" />
 
     <action
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
-        app:popUpTo="@id/navigation"/>
+        app:enterAnim="@anim/to_top"
+        app:exitAnim="@anim/to_bottom"
+        app:popEnterAnim="@anim/to_top"
+        app:popExitAnim="@anim/to_bottom"
+        app:popUpTo="@id/navigation" />
     <fragment
         android:id="@+id/signUpMasterFragment"
         android:name="com.example.cleanapp.ui.sign_up_master.SignUpMasterFragment"
         android:label="sign_up_master_fragment"
-        tools:layout="@layout/sign_up_master_fragment" >
+        tools:layout="@layout/sign_up_master_fragment">
         <action
             android:id="@+id/action_signUpMasterFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_signUpMasterFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment><action android:id="@+id/action_global_SignInFragment" app:destination="@id/SignInFragment"/><action android:id="@+id/action_global_signUpMasterFragment" app:destination="@id/signUpMasterFragment"/>
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/to_top"
+            app:exitAnim="@anim/to_bottom"
+            app:popEnterAnim="@anim/to_top"
+            app:popExitAnim="@anim/to_bottom" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_SignInFragment"
+        app:destination="@id/SignInFragment"
+        app:enterAnim="@anim/to_top"
+        app:exitAnim="@anim/to_bottom"
+        app:popEnterAnim="@anim/to_top"
+        app:popExitAnim="@anim/to_bottom" />
+    <action
+        android:id="@+id/action_global_signUpMasterFragment"
+        app:destination="@id/signUpMasterFragment"
+        app:enterAnim="@anim/to_top"
+        app:exitAnim="@anim/to_bottom"
+        app:popEnterAnim="@anim/to_top"
+        app:popExitAnim="@anim/to_bottom" />
     <fragment
         android:id="@+id/masterReservationContainerFragment"
         android:name="com.example.cleanapp.MasterReservationContainerFragment"

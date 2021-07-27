@@ -19,7 +19,7 @@ class OrderDetailsViewModel @Inject constructor(private val ordersDetailsRepo: O
 
     fun getMaster(uid: String) {
         ordersDetailsRepo.getMaster(uid) {
-            _orderDetailsLiveData.postValue(ResultHandler.Success(it))
+            _orderDetailsLiveData.postValue(it)
         }
     }
 

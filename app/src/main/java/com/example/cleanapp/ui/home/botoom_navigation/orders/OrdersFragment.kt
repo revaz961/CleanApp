@@ -3,6 +3,7 @@ package com.example.cleanapp.ui.home.botoom_navigation.orders
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.OrdersFragmentBinding
@@ -28,6 +29,10 @@ class OrdersFragment : BaseFragment<OrdersFragmentBinding>(OrdersFragmentBinding
                 )
             }
         }
+
+        binding.rvOrders.adapter = adapter
+        binding.rvOrders.layoutManager = LinearLayoutManager(requireContext())
+
         viewModel.getOrders()
     }
 

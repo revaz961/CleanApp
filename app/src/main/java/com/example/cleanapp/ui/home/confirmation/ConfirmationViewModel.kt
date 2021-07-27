@@ -1,17 +1,25 @@
 package com.example.cleanapp.ui.home.confirmation
 
+import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class ConfirmationViewModel @Inject constructor(
-    private val confirmationRepo: ConfirmationRepository
+    private val confirmationRepo: ConfirmationRepository,
+    private val auth: FirebaseAuth
 ) : ViewModel() {
 
     private val _confirmationLiveData = MutableLiveData<ResultHandler<Boolean>>()
@@ -30,28 +38,44 @@ class ConfirmationViewModel @Inject constructor(
 
     var cards = mutableListOf<Card>()
 
+    fun getUserId() = auth.currentUser?.uid
+
     fun confirmOrder(order: Order) {
-        confirmationRepo.confirmOrder(order) {
-            _confirmationLiveData.postValue(it)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                confirmationRepo.confirmOrder(order) {
+                    _confirmationLiveData.postValue(it)
+                }
+            }
         }
     }
 
     fun getCards() {
-        confirmationRepo.getCards {
-            if (it is ResultHandler.Success) {
-                cards.clear()
-                cards.addAll(it.data!!)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+//                delay(1000)
+                confirmationRepo.getCards {
+                    if (it is ResultHandler.Success) {
+                        cards.clear()
+                        cards.addAll(it.data!!)
+                        d("cardsLog","in viewmodel size:${cards.size}")
+                    }
+                    _cardsLiveData.postValue(it)
+                }
             }
-            _cardsLiveData.postValue(it)
         }
     }
 
     fun addCard(card: Card) {
-        confirmationRepo.addCard(card) {
-            if (it is ResultHandler.Success)
-                cards.add(card)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                confirmationRepo.addCard(card) {
+                    if (it is ResultHandler.Success)
+                        cards.add(card)
 
-            _cardAddLiveData.postValue(it)
+                    _cardAddLiveData.postValue(it)
+                }
+            }
         }
     }
 

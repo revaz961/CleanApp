@@ -1,10 +1,12 @@
 package com.example.cleanapp.ui.home.confirmation
 
 import android.app.Dialog
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
@@ -15,10 +17,10 @@ import com.example.cleanapp.extensions.init
 import com.example.cleanapp.models.Card
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
-import com.example.cleanapp.utils.CardSystemEnum
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.utils.ConfirmationViewTypes
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class ConfirmationFragment :
@@ -43,6 +45,9 @@ class ConfirmationFragment :
                 showCardDialog()
             }
             confirm = {
+                order.masterUid = master.user?.uid
+                order.clientUid = viewModel.getUserId()
+                order.reservationDate = Date().time
                 viewModel.confirmOrder(order)
             }
             setCurrentCard = {
@@ -55,13 +60,17 @@ class ConfirmationFragment :
 
         binding.rvConfirmation.adapter = adapter
         binding.rvConfirmation.layoutManager = LinearLayoutManager(requireContext())
-
+        viewModel.getCards()
     }
 
     private fun observes() {
         viewModel.cardsLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> adapter.setCards(it.data!!)
+                is ResultHandler.Success -> {
+                    adapter.setCards(it.data!!)
+
+                    Log.d("cardsLog", "in observes size:${it.data.size}")
+                }
 
                 is ResultHandler.Error -> showErrorDialog(it.message)
 
@@ -72,9 +81,7 @@ class ConfirmationFragment :
 
         viewModel.cardAddLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> {
-                    adapter.setCards(viewModel.cards)
-                }
+                is ResultHandler.Success -> adapter.setCards(viewModel.cards)
 
                 is ResultHandler.Error -> showErrorDialog(it.message)
 
@@ -123,7 +130,19 @@ class ConfirmationFragment :
                 dialog.dismiss()
             }
             btnAdd.setOnClickListener {
-//                createCard(binding, dialog)
+                val number = (binding.etCardNumberInput.text ?: "").toString().replace(" ", "")
+                val valid = (binding.etValidInput.text ?: "").toString().replace("/", "")
+                val cvv = (binding.etCvvInput.text ?: "").toString()
+                val holder = (binding.etCardHolderInput.text ?: "").toString().trim()
+
+                viewModel.addCard(
+                    Card(
+                        number, holder, valid, cvv
+                    )
+                )
+
+                dialog.cancel()
+
             }
             etCardNumberInput.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -131,19 +150,6 @@ class ConfirmationFragment :
                     start: Int,
                     count: Int,
                     after: Int
-                val holder = binding.etCardHolderInput.text.toString().trim()
-                val cardNumber = binding.etCardNumberInput.text.toString().trim()
-                val valid = binding.etValidInput.text.toString().trim()
-                val cvv = binding.etCvvInput.text.toString().trim()
-                    val card = Card(cardNumber, holder, valid, cvv)
-                    viewModel.addCard(card)
-                    dialog.cancel()
-
-            }
-            etCardNumberInput.doOnTextChanged { text, start, before, count ->
-                val inputLength = text.toString().length
-                if (before == 0 && inputLength == 4 ||
-                    inputLength == 9 || inputLength == 14
                 ) {
                 }
 
@@ -179,7 +185,8 @@ class ConfirmationFragment :
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
                     validateInput(binding)
@@ -208,7 +215,8 @@ class ConfirmationFragment :
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
                     validateInput(binding)

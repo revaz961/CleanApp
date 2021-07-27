@@ -20,6 +20,7 @@ import com.example.cleanapp.models.City
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
+import com.example.cleanapp.utils.LocationSettings
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*

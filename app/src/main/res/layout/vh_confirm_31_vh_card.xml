@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/main_margin_TB"
     android:paddingEnd="@dimen/main_margin_LR"
     android:paddingBottom="@dimen/main_margin_TB"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:layout_margin="@dimen/main_margin_extra_small">
 
     <ImageView
         android:id="@+id/imgCard"
@@ -20,7 +21,7 @@
     <TextView
         android:id="@+id/tvCardDigits"
         style="@style/Text.MediumDark"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/card_digits"
         android:layout_weight="1"

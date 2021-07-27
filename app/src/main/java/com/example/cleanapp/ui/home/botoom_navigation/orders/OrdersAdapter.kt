@@ -21,6 +21,7 @@ class OrdersAdapter : BaseAdapter<Order>() {
     lateinit var chooseOrder: ChooseOrder
 
     fun setItems(list: List<Order>) {
+        items.clear()
         items.addAll(list)
         notifyDataSetChanged()
     }

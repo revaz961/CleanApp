@@ -38,6 +38,10 @@ class ChooserCategoryAdapter : BaseAdapter<MasterCategory>() {
             if (data.price > 0)
                 binding.editPrice.setText(data.price.toString())
 
+            binding.checkCategory.setOnClickListener {
+//                binding.editPrice.
+            }
+
             binding.editPrice.doOnTextChanged { text, start, before, count ->
                 items[adapterPosition].price = text.toString().toFloat()
             }
