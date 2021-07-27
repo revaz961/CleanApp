@@ -5,19 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/main_margin_small"
-    android:background="@drawable/ic_bg_chat_receiver">
+    android:background="@drawable/ic_bg_chat_receiver"
+    android:layout_margin="@dimen/main_margin_extra_small">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgMessageAuthor"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@color/orange"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/Circular" />
 
     <TextView
-        android:id="@+id/tvMessageAuthorName"
+        android:id="@+id/tvMessage"
         style="@style/Text.MediumDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

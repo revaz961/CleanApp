@@ -1,32 +1,47 @@
 package com.example.cleanapp.ui.home.botoom_navigation.inbox.chat
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.example.cleanapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.databinding.ChatFragmentBinding
+import com.example.cleanapp.models.Chat
+import com.example.cleanapp.models.ResultHandler
+import dagger.hilt.android.AndroidEntryPoint
 
-class ChatFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ChatFragment()
-    }
+@AndroidEntryPoint
+class ChatFragment : BaseFragment<ChatFragmentBinding>(ChatFragmentBinding::inflate) {
 
     private lateinit var viewModel: ChatViewModel
+    private lateinit var adapter: ChatAdapter
+    private lateinit var chat: Chat
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.chat_fragment2, container, false)
+
+    override fun start() {
+        chat = arguments?.getParcelable("chat")!!
+        initRecycler()
+        observes()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ChatViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun initRecycler(){
+        adapter = ChatAdapter().apply {
+            currentUserId = viewModel.getCurrentUserId()
+        }
+
+        binding.rvMessages.adapter = adapter
+        binding.rvMessages.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.getMessages(chat.chatId)
     }
 
+    private fun observes(){
+        viewModel.messagesLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                    adapter.setItems(it.data!!)
+                }
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {}
+            }
+        })
+    }
 }

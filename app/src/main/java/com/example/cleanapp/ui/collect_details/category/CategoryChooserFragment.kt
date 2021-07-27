@@ -44,7 +44,7 @@ class CategoryChooserFragment :
                 val order = Order()
                 order.category = it
 
-                shareViewModel.setFragmentTitle(it.categoryEn)
+                shareViewModel.setFragmentTitle("it.categoryEn")
 
 
                 findNavController().navigate(

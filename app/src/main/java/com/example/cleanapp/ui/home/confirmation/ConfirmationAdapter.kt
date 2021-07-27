@@ -153,7 +153,7 @@ class ConfirmationAdapter(
             with(binding) {
                 val categoryPrice =
                     master.categories?.find { it.category?.categoryEn == order.category?.categoryEn }?.price
-                        ?: 0
+                        ?: 0f
                 tvCatPriceValue.setTextById(R.string.price_value, categoryPrice)
 
                 tvDurationValue.setTextById(

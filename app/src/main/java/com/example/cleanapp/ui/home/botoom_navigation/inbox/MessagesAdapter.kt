@@ -6,9 +6,7 @@ import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.base.BaseAdapter
 import com.example.cleanapp.base.BaseViewHolder
 import com.example.cleanapp.databinding.VhInboxBinding
-import com.example.cleanapp.extensions.hide
-import com.example.cleanapp.extensions.load
-import com.example.cleanapp.extensions.show
+import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Chat
 
 typealias ChooseMessage = (message: Chat)->Unit
@@ -18,6 +16,7 @@ class MessagesAdapter : BaseAdapter<Chat>() {
     lateinit var chooseMessage: ChooseMessage
 
     fun setItems(list: List<Chat>) {
+        items.clear()
         items.addAll(list)
         notifyDataSetChanged()
     }
@@ -38,10 +37,11 @@ class MessagesAdapter : BaseAdapter<Chat>() {
     inner class MessageViewHolder(private val binding: VhInboxBinding) :
         BaseViewHolder<Chat, VhInboxBinding>(binding) {
         override fun bind(data: Chat) {
-            if (data.isRead) binding.imgRead.show() else binding.imgRead.hide()
-            binding.imgMessageAuthor.load(data.senderImage)
+            binding.imgRead.showIf(!data.isRead)
+            binding.imgMessageAuthor.loadFromStorage(data.senderImage)
             binding.tvMessageAuthorName.text = data.senderName
             binding.tvMessageContent.text = data.lastMessage?.message
+            binding.tvDate.text = data.timestamp.toDateFormat("MMM dd hh:mm a")
             binding.root.setOnClickListener {
                 chooseMessage(data)
             }

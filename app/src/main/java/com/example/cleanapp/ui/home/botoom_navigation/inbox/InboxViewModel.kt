@@ -18,7 +18,7 @@ class InboxViewModel @Inject constructor(private val inboxRepo: InboxRepository)
 
     fun getChats(){
         inboxRepo.getChats {
-            _chatsLiveData.postValue(ResultHandler.Success(it))
+            _chatsLiveData.postValue(it)
         }
     }
 }

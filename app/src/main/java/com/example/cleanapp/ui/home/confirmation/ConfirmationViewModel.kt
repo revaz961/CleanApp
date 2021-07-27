@@ -5,13 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cleanapp.models.Card
-import com.example.cleanapp.models.Order
-import com.example.cleanapp.models.ResultHandler
+import com.example.cleanapp.models.*
+import com.example.cleanapp.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ConfirmationViewModel @Inject constructor(
     private val confirmationRepo: ConfirmationRepository,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val userRepo: UserRepository
 ) : ViewModel() {
 
     private val _confirmationLiveData = MutableLiveData<ResultHandler<Order>>()
@@ -36,13 +35,17 @@ class ConfirmationViewModel @Inject constructor(
 
     var currentCard = Card()
 
+    private var user: User? = null
+
     var cards = mutableListOf<Card>()
 
-    fun getUserId() = auth.currentUser?.uid
+    fun getUser() = user
+
+    fun getUserId() = auth.currentUser?.uid!!
 
     fun confirmOrder(order: Order) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 confirmationRepo.confirmOrder(order) {
                     _confirmationLiveData.postValue(it)
                 }
@@ -52,13 +55,12 @@ class ConfirmationViewModel @Inject constructor(
 
     fun getCards() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-//                delay(1000)
+            withContext(Dispatchers.IO) {
                 confirmationRepo.getCards {
                     if (it is ResultHandler.Success) {
                         cards.clear()
                         cards.addAll(it.data!!)
-                        d("cardsLog","in viewmodel size:${cards.size}")
+                        d("cardsLog", "in viewmodel size:${cards.size}")
                     }
                     _cardsLiveData.postValue(it)
                 }
@@ -68,7 +70,7 @@ class ConfirmationViewModel @Inject constructor(
 
     fun addCard(card: Card) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 confirmationRepo.addCard(card) {
                     if (it is ResultHandler.Success)
                         cards.add(card)
@@ -79,9 +81,25 @@ class ConfirmationViewModel @Inject constructor(
         }
     }
 
-    fun sendMessage(message: String) {
-//        confirmationRepo.sendMessage(message) {
-//            _messageSendLiveData.postValue(ResultHandler.Success(it))
-//        }
+    fun getCurrentUser() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                userRepo.getUser {
+                    if (it is ResultHandler.Success)
+                        user = it.data!!
+                }
+
+            }
+        }
+    }
+
+    fun sendMessage(message: Message, chat: Chat, chatFilter: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                confirmationRepo.sendMessage(message, chat, chatFilter) {
+                    _messageSendLiveData.postValue(it)
+                }
+            }
+        }
     }
 }

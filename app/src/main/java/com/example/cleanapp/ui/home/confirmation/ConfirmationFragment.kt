@@ -16,10 +16,7 @@ import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ConfirmationFragmentBinding
 import com.example.cleanapp.databinding.FragmentNewCardBinding
 import com.example.cleanapp.extensions.init
-import com.example.cleanapp.models.Card
-import com.example.cleanapp.models.Master
-import com.example.cleanapp.models.Order
-import com.example.cleanapp.models.ResultHandler
+import com.example.cleanapp.models.*
 import com.example.cleanapp.utils.ConfirmationViewTypes
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -34,14 +31,29 @@ class ConfirmationFragment :
     override fun start() {
         val order = arguments?.getParcelable<Order>("order")!!
         val master = arguments?.getParcelable<Master>("master")!!
+        viewModel.getCurrentUser()
         initRecycler(master, order)
         observes()
     }
 
     private fun initRecycler(master: Master, order: Order) {
         adapter = ConfirmationAdapter(master, order).apply {
-            sendMessage = {
-                viewModel.sendMessage(it)
+            sendMessage = { message ->
+                viewModel.getUser()?.let {
+                    val message = Message(
+                        message,
+                        it.uid!!,
+                        it.name!!,
+                        it.imgUrl!!,
+                        Date().time,
+                        false
+                    )
+                    viewModel.sendMessage(
+                        message,
+                        Chat(Date().time, message, it.imgUrl!!, it.name, it.uid, false),
+                        "${it.uid}_${master.user?.uid!!}"
+                    )
+                } ?: showErrorDialog("User is unknown")
             }
             addCard = {
                 showCardDialog()
@@ -98,6 +110,18 @@ class ConfirmationFragment :
                     R.id.action_confirmationFragment_to_orderDetailsFragment2,
                     bundleOf("order" to it.data)
                 )
+
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {
+                }
+            }
+        })
+
+        viewModel.messageSendLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                }
 
                 is ResultHandler.Error -> showErrorDialog(it.message)
 

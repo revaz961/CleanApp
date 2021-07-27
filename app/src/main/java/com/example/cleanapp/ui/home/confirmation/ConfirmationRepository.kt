@@ -1,10 +1,11 @@
 package com.example.cleanapp.ui.home.confirmation
 
-import com.example.cleanapp.models.Card
-import com.example.cleanapp.models.Order
-import com.example.cleanapp.models.ResultHandler
+import com.example.cleanapp.models.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import javax.inject.Inject
 
@@ -36,13 +37,36 @@ class ConfirmationRepository @Inject constructor(
     }
 
 
-//    fun sendMessage(message: Message, action: OnLoad) {
-//        val uid = auth.currentUser!!.uid
-//        val key = dbRef.push().key
-//        val map = hashMapOf<String, Any>("users/$uid/cards/$key" to card,"masters/$uid/user/cards/$key" to card)
-//        dbRef.updateChildren(map)
-//        //todo send notification
-//    }
+    fun sendMessage(message: Message, chat: Chat, firstMember: String, action: OnLoad) {
+
+        dbRef.child("members").orderByChild(firstMember).equalTo(true)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val map = mutableMapOf<String, Any>()
+                    val newKey = dbRef.push().key
+                    if (snapshot.exists()) {
+                        val key = snapshot.children.first { it.exists() }.key
+                        map["chats/$key"] = chat
+                        map["messages/$key/$newKey"] = message
+                    } else {
+                        val usersId = firstMember.split('_')
+                        val secondMember = usersId.reversed().joinToString("_")
+                        map["chats/$newKey"] = chat
+                        map["messages/$newKey/$newKey"] = message
+                        map["members/$newKey/$firstMember"] = true
+                        map["members/$newKey/$secondMember"] = true
+                        map["members/$newKey/${usersId[0]}"] = true
+                        map["members/$newKey/${usersId[1]}"] = true
+                    }
+                    dbRef.updateChildren(map)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    action(ResultHandler.Error(null, error.message!!))
+                }
+
+            })
+    }
 
 
     fun getCards(action: OnCardsLoad) {
