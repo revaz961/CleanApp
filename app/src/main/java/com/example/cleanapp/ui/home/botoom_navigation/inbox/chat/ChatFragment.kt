@@ -1,5 +1,6 @@
 package com.example.cleanapp.ui.home.botoom_navigation.inbox.chat
 
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ChatFragmentBinding
@@ -11,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChatFragment : BaseFragment<ChatFragmentBinding>(ChatFragmentBinding::inflate) {
 
-    private lateinit var viewModel: ChatViewModel
+    private val viewModel: ChatViewModel by viewModels()
     private lateinit var adapter: ChatAdapter
     private lateinit var chat: Chat
 

@@ -16,7 +16,7 @@ class ChatAdapter : BaseAdapter<Message>() {
         const val OTHER_USER = 2
     }
 
-    var currentUserId: String = ""
+    lateinit var currentUserId: String
 
 
     fun setItems(list: List<Message>) {
