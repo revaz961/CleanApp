@@ -89,7 +89,7 @@ class CityChooserFragment :
                     sharedViewModel.setFragmentTitle(city.cityEn)
                     order.city = city
                     navigateTo(
-                        R.id.action_chooserFragment_to_masterReservationContainerFragment,
+                        R.navigation.master_reservation,
                         order
                     )
                 }

@@ -22,8 +22,8 @@ class ConfirmationViewModel @Inject constructor(
     private val auth: FirebaseAuth
 ) : ViewModel() {
 
-    private val _confirmationLiveData = MutableLiveData<ResultHandler<Boolean>>()
-    val confirmationLiveData: LiveData<ResultHandler<Boolean>> = _confirmationLiveData
+    private val _confirmationLiveData = MutableLiveData<ResultHandler<Order>>()
+    val confirmationLiveData: LiveData<ResultHandler<Order>> = _confirmationLiveData
 
     private val _cardsLiveData = MutableLiveData<ResultHandler<List<Card>>>()
     val cardsLiveData: LiveData<ResultHandler<List<Card>>> = _cardsLiveData

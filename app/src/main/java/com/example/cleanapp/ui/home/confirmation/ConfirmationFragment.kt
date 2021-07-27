@@ -6,8 +6,10 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
@@ -82,6 +84,20 @@ class ConfirmationFragment :
         viewModel.cardAddLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> adapter.setCards(viewModel.cards)
+
+                is ResultHandler.Error -> showErrorDialog(it.message)
+
+                is ResultHandler.Loading -> {
+                }
+            }
+        })
+
+        viewModel.confirmationLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> findNavController().navigate(
+                    R.id.action_confirmationFragment_to_orderDetailsFragment2,
+                    bundleOf("order" to it.data)
+                )
 
                 is ResultHandler.Error -> showErrorDialog(it.message)
 

@@ -22,7 +22,7 @@ class ChooserFragment : BaseFragment<ChooserFragmentBinding>(ChooserFragmentBind
         })
         viewModel.navigateLiveData.observe(viewLifecycleOwner, {
             findNavController().setGraph(
-                R.navigation.master_reservation,
+                it.first,
                 bundleOf("order" to it.second)
             )
         })

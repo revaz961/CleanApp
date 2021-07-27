@@ -10,17 +10,18 @@ import javax.inject.Inject
 
 typealias OnLoad = (ResultHandler<Boolean>) -> Unit
 typealias OnCardsLoad = (ResultHandler<List<Card>>) -> Unit
+typealias onOrderLoad = (ResultHandler<Order>) -> Unit
 
 class ConfirmationRepository @Inject constructor(
     private val auth: FirebaseAuth,
     private val dbRef: DatabaseReference
 ) {
-    fun confirmOrder(order: Order, action: OnLoad) {
+    fun confirmOrder(order: Order, action: onOrderLoad) {
         val uid = auth.currentUser!!.uid
         dbRef.child("orders/$uid").push().setValue(order).addOnSuccessListener {
-            action(ResultHandler.Success(true))
+            action(ResultHandler.Success(order))
         }.addOnFailureListener {
-            action(ResultHandler.Error(false,it.message!!))
+            action(ResultHandler.Error(null, it.message!!))
         }
         //todo send notification
     }
@@ -30,7 +31,7 @@ class ConfirmationRepository @Inject constructor(
         dbRef.child("cards/$uid").push().setValue(card).addOnSuccessListener {
             action(ResultHandler.Success(true))
         }.addOnFailureListener {
-            action(ResultHandler.Error(null,it.message!!))
+            action(ResultHandler.Error(null, it.message!!))
         }
     }
 
@@ -47,11 +48,11 @@ class ConfirmationRepository @Inject constructor(
     fun getCards(action: OnCardsLoad) {
         val uid = auth.currentUser!!.uid
         dbRef.child("cards/$uid").get().addOnSuccessListener {
-            val map = it.getValue<HashMap<String,Card>>()
+            val map = it.getValue<HashMap<String, Card>>()
             val values = map!!.values.toList()
             action(ResultHandler.Success(values))
         }.addOnFailureListener {
-            action(ResultHandler.Error(null,it.message!!))
+            action(ResultHandler.Error(null, it.message!!))
         }
     }
 }

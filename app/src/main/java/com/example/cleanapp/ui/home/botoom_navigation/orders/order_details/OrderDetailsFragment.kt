@@ -3,6 +3,7 @@ package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.OrderDetailsFragmentBinding
@@ -26,6 +27,13 @@ class OrderDetailsFragment :
         order = arguments?.getParcelable("order")!!
         order.masterUid?.let { viewModel.getMaster(it) }
         observes()
+        setListeners()
+    }
+
+    private fun setListeners(){
+        binding.btnBack.setOnClickListener {
+            findNavController().setGraph(R.navigation.bottom_navigation)
+        }
     }
 
     private fun initView() {

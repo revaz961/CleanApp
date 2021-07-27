@@ -88,7 +88,11 @@
         android:id="@+id/confirmationFragment"
         android:name="com.example.cleanapp.ui.home.confirmation.ConfirmationFragment"
         android:label="confirmation_fragment2"
-        tools:layout="@layout/confirmation_fragment" />
+        tools:layout="@layout/confirmation_fragment" >
+        <action
+            android:id="@+id/action_confirmationFragment_to_orderDetailsFragment2"
+            app:destination="@id/orderDetailsFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/availabilityFragment"
         android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.availability.AvailabilityFragment"
@@ -106,5 +110,10 @@
         app:exitAnim="@anim/to_bottom"
         app:popEnterAnim="@anim/to_top"
         app:popExitAnim="@anim/to_bottom" />
+    <fragment
+        android:id="@+id/orderDetailsFragment2"
+        android:name="com.example.cleanapp.ui.home.botoom_navigation.orders.order_details.OrderDetailsFragment"
+        android:label="order_details_fragment"
+        tools:layout="@layout/order_details_fragment" />
 
 </navigation>
