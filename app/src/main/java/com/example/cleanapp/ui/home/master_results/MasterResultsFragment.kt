@@ -2,6 +2,7 @@ package com.example.cleanapp.ui.home.master_results
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
@@ -22,7 +23,10 @@ class MasterResultsFragment :
     private lateinit var order: Order
 
     override fun start() {
-        order = arguments?.getParcelable<Order>("order")!!
+        order = arguments?.getParcelable("order")!!
+        binding.fabBack.setOnClickListener {
+
+        }
         observes()
         initRecycler()
     }

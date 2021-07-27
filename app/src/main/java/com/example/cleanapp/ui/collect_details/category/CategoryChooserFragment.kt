@@ -1,6 +1,5 @@
 package com.example.cleanapp.ui.collect_details.category
 
-import android.graphics.Bitmap
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -23,8 +22,6 @@ class CategoryChooserFragment :
     private val shareViewModel: ChooserViewModel by activityViewModels()
     private lateinit var adapter: CategoryAdapter
 
-    private lateinit var bitmap: Bitmap
-
     override fun start() {
         initRecycler()
         observes()
@@ -34,6 +31,7 @@ class CategoryChooserFragment :
     private fun setListeners() {
         binding.btnBack.setOnClickListener {
             requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
+            shareViewModel.setFragmentTitle(getString(R.string.category_title))
         }
     }
 
@@ -43,10 +41,7 @@ class CategoryChooserFragment :
 
                 val order = Order()
                 order.category = it
-
-                shareViewModel.setFragmentTitle(it.categoryEn)
-
-
+                shareViewModel.setFragmentTitle(getString(R.string.date_title))
                 findNavController().navigate(
                     R.id.action_categoryChooserFragment_to_chooserDateFragment,
                     bundleOf("order" to order)
@@ -68,7 +63,8 @@ class CategoryChooserFragment :
 
                 is ResultHandler.Error -> showErrorDialog(it.message)
 
-                is ResultHandler.Loading -> {}
+                is ResultHandler.Loading -> {
+                }
             }
         })
     }

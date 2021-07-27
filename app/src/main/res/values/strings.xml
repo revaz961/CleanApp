@@ -139,6 +139,31 @@
     <string name="date_title">When do you want your place to get cleaned?</string>
     <string name="rooms_title">How many rooms do you want to clean?</string>
     <string name="city_title">Whic city are you in?</string>
+    <string name="default_notification_channel_id">CHANNEL_ID</string>
+
+    <!-- Preference Titles -->
+    <string name="account_settings">Account settings</string>
+    <string name="hosting">Hosting</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="profile">Profile</string>
+    <string name="payments_and_payouts">Payments and payouts</string>
+    <string name="notifications">Notifications</string>
+    <string name="change_language">Change language</string>
+    <string name="switch_to_master">Switch to master</string>
+    <string name="your_guidebook">Your guidebook</string>
+    <string name="personal_information">Personal information</string>
+    <string name="contact_support">Contact support</string>
+    <string name="sign_out">Sign out</string>
 
 
 </resources>

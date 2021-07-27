@@ -38,6 +38,7 @@ class ChooserDateFragment :
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
         binding.btnBack.setOnClickListener {
+            chooserViewModel.setFragmentTitle(getString(R.string.category_title))
             findNavController().navigateUp()
         }
 
@@ -56,7 +57,7 @@ class ChooserDateFragment :
             order.date = calendar.timeInMillis
 
 
-            chooserViewModel.setFragmentTitle(order.date!!.toDateFormat("MMMM dd, hh:mm aaa"))
+            chooserViewModel.setFragmentTitle(getString(R.string.rooms_title))
 
             if (order.category?.categoryEn != "Garden")
                 findNavController().navigate(

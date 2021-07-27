@@ -4,13 +4,8 @@ import android.animation.ValueAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.view.View
-import android.view.animation.TranslateAnimation
-import android.widget.LinearLayout
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import com.example.cleanapp.R
 
 fun View.show() {
     visibility = View.VISIBLE
@@ -79,6 +74,15 @@ fun View.collapseIf(isValid: Boolean = height != 0) {
         expand()
 }
 
+//fun View.slide(multiplier: Float = 3 / 5f, duration: Long = 300) {
+//    val translate = -height * multiplier
+//    animate().duration = duration
+//    if (translationY == 0f)
+//        animate().translationY(0f)
+//    else
+//        animate().translationY(translate)
+//}
+
 fun View.slide(multiplier: Float = 3 / 5f, duration: Long = 300) {
     val translate = -height * multiplier
     animate().duration = duration
@@ -96,13 +100,13 @@ fun View.setBorder(width: Int = 1, color: String = "#FFFFFF", radius: Float = 20
     background = shape
 }
 
-fun View.setTintColor(hexColor:String){
+fun View.setTintColor(hexColor: String) {
     val color = Color.parseColor(hexColor)
     backgroundTintList = ColorStateList.valueOf(color)
 }
 
 
-fun View.setTintColor(id:Int){
-    val color = ContextCompat.getColor(context,id)
+fun View.setTintColor(id: Int) {
+    val color = ContextCompat.getColor(context, id)
     backgroundTintList = ColorStateList.valueOf(color)
 }

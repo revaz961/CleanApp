@@ -10,16 +10,20 @@
         android:layout_height="0dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
+        android:id="@+id/detailsView"
         android:background="@drawable/bot_round"
+        android:layout_marginTop="@dimen/main_margin_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivMaster"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/main_margin_TB"
+        app:shapeAppearanceOverlay="@style/RoundSquare_small"
         android:layout_marginStart="@dimen/rv_master_iv_side_margin"
         android:layout_marginEnd="@dimen/rv_master_iv_side_margin"
         app:layout_constraintDimensionRatio="3:2"
@@ -27,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerCrop"
-        android:background="@color/orange"
         android:src="@drawable/master"/>
 
     <LinearLayout
@@ -45,7 +48,6 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_bookmark"
             android:background="@android:color/transparent"
-            android:translationY="-15dp"
             />
         <ImageButton
             android:layout_width="wrap_content"
@@ -53,7 +55,6 @@
             app:srcCompat="@drawable/ic_bookmark"
             app:tint="@color/calendar_selected"
             android:background="@android:color/transparent"
-            android:translationY="-15dp"
             />
         <ImageButton
             android:layout_width="wrap_content"
@@ -61,7 +62,6 @@
             app:srcCompat="@drawable/ic_bookmark"
             android:background="@android:color/transparent"
             app:tint="@color/background_blue"
-            android:translationY="-15dp"
             />
     </LinearLayout>
 

@@ -64,15 +64,22 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
             binding.ivMaster.setOnClickListener(this)
             data.user?.imgUrl?.let { binding.ivMaster.loadFromStorage(it) }
 
-            binding.llBookmarks.children.forEach {
-                it.setOnClickListener { bookmark ->
-                    bookmark.slide()
+//            binding.llBookmarks.children.forEach {
+//                it.setOnClickListener { bookmark ->
+//                    bookmark.slide()
+//                }
+//            }
+
+            binding.detailsView.setOnClickListener {
+                binding.tvDescription.collapseIf()
+                binding.llBookmarks.children.forEach {
+                    it.slide()
                 }
             }
 
-            binding.ivStar.setOnClickListener {
-                binding.tvDescription.collapseIf()
-            }
+//            binding.ivStar.setOnClickListener {
+//
+//            }
         }
 
         override fun onClick(v: View?) {

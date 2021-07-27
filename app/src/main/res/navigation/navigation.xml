@@ -144,5 +144,5 @@
         android:id="@+id/masterReservationContainerFragment"
         android:name="com.example.cleanapp.MasterReservationContainerFragment"
         android:label="master_reservation_container_fragment"
-        tools:layout="@layout/master_reservation_container_fragment" />
+        tools:layout="@layout/master_reservation_container_fragment" /><action android:id="@+id/action_global_masterReservationContainerFragment" app:destination="@id/masterReservationContainerFragment"/>
 </navigation>
