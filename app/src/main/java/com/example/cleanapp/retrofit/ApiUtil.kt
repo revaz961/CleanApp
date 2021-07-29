@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiUtil {
 
-    private const val BASE_URL = "https://fcm.googleapis.com/fcm/send"
+    private const val BASE_URL = "https://fcm.googleapis.com/"
 
     fun apiService(): NotificationApi {
         return Retrofit.Builder().baseUrl(BASE_URL)
