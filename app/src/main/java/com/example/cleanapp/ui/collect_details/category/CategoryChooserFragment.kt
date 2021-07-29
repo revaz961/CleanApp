@@ -32,10 +32,7 @@ class CategoryChooserFragment :
 
     private fun setListeners() {
         binding.btnBack.setOnClickListener {
-//            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
-//            shareViewModel.setFragmentTitle(getString(R.string.category_title))
-
-
+            requireActivity().findNavController(R.id.nav_host_fragment).navigateUp()
         }
     }
 

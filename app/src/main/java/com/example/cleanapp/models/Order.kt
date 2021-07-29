@@ -56,16 +56,10 @@ data class Order(
     var reservationDate: Long? = null
 
 ) : Parcelable {
-     fun getDuration(): Int {
-        return if (duration != null)
-            duration as Int
-        else
-            0
-    }
 
      fun getCleaningPrice(): Float {
         return if (duration != null)
-            duration!! * price
+            duration!! / 60 * price
         else
             price
     }

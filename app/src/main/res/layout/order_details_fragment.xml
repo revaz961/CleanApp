@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_gradient"
     android:orientation="vertical"
-    android:overScrollMode="ifContentScrolls"
-    android:padding="@dimen/main_margin_TB"
-    tools:context=".ui.home.botoom_navigation.orders.order_details.OrderDetailsFragment">
+    android:overScrollMode="never"
+    android:scrollbars="none"
+    android:padding="@dimen/main_margin_medium">
 
 
     <ScrollView
@@ -35,7 +35,6 @@
                 style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTotal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvTotal" />
@@ -120,12 +119,11 @@
                 style="@style/Text.SmallerLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
                 android:text="@string/ongoing"
-                android:textColor="@color/selection"
-                android:textStyle="italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+                android:textColor="@color/category_garden"
+                android:textStyle="italic|bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvFullname"
@@ -133,7 +131,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
-                android:text="Nino Ninidze"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus" />
@@ -155,7 +152,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_extra_small"
-                android:text="after party &#183; 654gel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvFullname" />
 
@@ -165,7 +161,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_extra_small"
-                android:text="Tbilis, Leselidzestr 45"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCatPrice" />
 
@@ -230,7 +225,6 @@
                 style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/tvReservationDate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -251,7 +245,6 @@
                 style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/tvCleaningTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvCleaningTime"
@@ -284,7 +277,6 @@
                 style="@style/Text.SmallLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/tvCleaningDay"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -298,7 +290,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/main_margin_small"
-                android:text="Cleaning day"
                 app:layout_constraintEnd_toStartOf="@+id/tvCleaningDayValue"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"

@@ -35,18 +35,8 @@
             app:popEnterAnim="@anim/to_top"
             app:popExitAnim="@anim/to_bottom" />
         <action
-            android:id="@+id/action_masterReserveFragment_to_reportFragment"
-            app:destination="@id/reportFragment"
-            app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
-            app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
-        <action
             android:id="@+id/action_masterReserveFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment"
-            app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
-            app:popEnterAnim="@anim/to_top"
             app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
@@ -63,11 +53,7 @@
         app:popExitAnim="@anim/to_bottom" />
     <action
         android:id="@+id/action_masterResultsFragment_to_masterReserveFragment"
-        app:destination="@id/masterReserveFragment"
-        app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
-        app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:destination="@id/masterReserveFragment" />
     <fragment
         android:id="@+id/orderDetailsFragment2"
         android:name="com.example.cleanapp.ui.home.botoom_navigation.orders.order_details.OrderDetailsFragment"
@@ -76,13 +62,6 @@
     <action
         android:id="@+id/action_confirmationFragment_to_orderDetailsFragment2"
         app:destination="@id/orderDetailsFragment2" />
-    <action
-        android:id="@+id/action_masterReserveFragment_to_reportFragment"
-        app:destination="@id/reportFragment"
-        app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
-        app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
     <fragment
         android:id="@+id/availabilityFragment"
         android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.availability.AvailabilityFragment"
@@ -90,18 +69,10 @@
         tools:layout="@layout/availability_fragment" />
     <action
         android:id="@+id/action_global_masterReserveFragment"
-        app:destination="@id/masterReserveFragment"
-        app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
-        app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:destination="@id/masterReserveFragment" />
     <action
         android:id="@+id/action_masterReserveFragment_to_confirmationFragment"
-        app:destination="@id/confirmationFragment"
-        app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
-        app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:destination="@id/confirmationFragment" />
     <action
         android:id="@+id/action_masterReserveFragment_to_contactMasterFragment"
         app:destination="@id/contactMasterFragment"
@@ -112,11 +83,6 @@
     <action
         android:id="@+id/action_masterReserveFragment_to_allCommentsFragment"
         app:destination="@id/allCommentsFragment" />
-    <fragment
-        android:id="@+id/reportFragment"
-        android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.report.ReportFragment"
-        android:label="report_fragment"
-        tools:layout="@layout/report_fragment" />
     <fragment
         android:id="@+id/cancellationFragment"
         android:name="com.example.cleanapp.ui.home.master_reserve.aditional_actions.cancellation.CancellationFragment"
@@ -142,10 +108,7 @@
         <action
             android:id="@+id/action_masterResultsFragment_to_masterReserveFragment"
             app:destination="@id/masterReserveFragment"
-            app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
-            app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:exitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/confirmationFragment"
@@ -179,11 +142,7 @@
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_chooserFragment"
-            app:destination="@id/chooserFragment"
-            app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
-            app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:destination="@id/chooserFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooserFragment"
@@ -235,11 +194,7 @@
     </fragment>
     <action
         android:id="@+id/action_global_chooserFragment"
-        app:destination="@id/chooserFragment"
-        app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
-        app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:destination="@id/chooserFragment" />
 
     <action
         android:id="@+id/action_global_homeFragment"
@@ -286,10 +241,6 @@
     <action
         android:id="@+id/action_global_masterResultsFragment"
         app:destination="@id/masterResultsFragment"
-        app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
-        app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom"
-        />
+        app:enterAnim="@anim/fade_in" />
 
 </navigation>
