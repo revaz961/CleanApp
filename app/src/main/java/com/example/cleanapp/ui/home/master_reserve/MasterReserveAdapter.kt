@@ -134,15 +134,24 @@ class MasterReserveAdapter(
                 selectedMaster.rating ?: 0f,
                 selectedMaster.nReviews
             )
-            selectedMaster.lastComments?.get(0)?.let {
-                binding.tvMasterName.text = it.author ?: ""
-                binding.imgAuthor.load(it.imageUrl)
-                binding.tvCommentDate.text = it.dateAt?.toDateFormat("MMMM YYYY") ?: ""
-                binding.tvComment.text = it.comment
-            }
-
-            binding.btnAllComments.setOnClickListener {
-                navigateClick(ReservationClickTypes.SHOW_COMMENTS.type)
+            if (selectedMaster.reviews == null) {
+                with(binding) {
+                    imgAuthor.gone()
+                    tvMasterName.gone()
+                    tvCommentDate.gone()
+                    tvComment.gone()
+                    btnAllComments.gone()
+                }
+            } else {
+                selectedMaster.lastComments?.get(0)?.let {
+                    binding.tvMasterName.text = it.author ?: ""
+                    binding.imgAuthor.load(it.imageUrl)
+                    binding.tvCommentDate.text = it.dateAt?.toDateFormat("MMMM YYYY") ?: ""
+                    binding.tvComment.text = it.comment
+                }
+                binding.btnAllComments.setOnClickListener {
+                    navigateClick(ReservationClickTypes.SHOW_COMMENTS.type)
+                }
             }
         }
     }
@@ -168,11 +177,6 @@ class MasterReserveAdapter(
         override fun bind() {
             binding.tvTitle.setText(R.string.availability)
             binding.tvDescription.text = order.date?.toDateFormat("MMMM dd, K:mm a")
-
-
-            binding.root.setOnClickListener {
-                navigateClick(ReservationClickTypes.CANCELLATION.type)
-            }
         }
     }
 
@@ -183,9 +187,8 @@ class MasterReserveAdapter(
             val cancellationDate =
                 order.date!! + selectedMaster.cancelPeriod!! * 60 * 60 * 24 * 1000
             binding.tvDescription.text = cancellationDate.toDateFormat("MMMM dd, K:mm a")
-
             binding.root.setOnClickListener {
-                navigateClick(ReservationClickTypes.REPORT.type)
+                navigateClick(ReservationClickTypes.CANCELLATION.type)
             }
         }
     }
@@ -193,6 +196,9 @@ class MasterReserveAdapter(
     inner class ViewHolderReport(private val binding: VhReserve4ReportBinding) :
         BaseViewHolderType<VhReserve4ReportBinding>(binding) {
         override fun bind() {
+            binding.root.setOnClickListener {
+                navigateClick(ReservationClickTypes.REPORT.type)
+            }
 
         }
     }

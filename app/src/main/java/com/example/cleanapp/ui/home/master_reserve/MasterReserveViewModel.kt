@@ -29,4 +29,12 @@ class MasterReserveViewModel @Inject constructor(private val masterReserveRepo: 
             }
         }
     }
+
+    fun reportMaster(master: Master) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                //todo report master
+            }
+        }
+    }
 }

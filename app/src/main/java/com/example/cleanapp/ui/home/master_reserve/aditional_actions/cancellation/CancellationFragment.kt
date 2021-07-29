@@ -6,27 +6,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
+import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.databinding.CancellationFragmentBinding
+import com.example.cleanapp.databinding.FragmentReserveBinding
+import com.example.cleanapp.extensions.toDateFormat
+import com.example.cleanapp.extensions.toDateFormatMinusDays
+import com.example.cleanapp.models.Master
 
-class CancellationFragment : Fragment() {
+class CancellationFragment :
+    BaseFragment<CancellationFragmentBinding>(CancellationFragmentBinding::inflate) {
 
-    companion object {
-        fun newInstance() = CancellationFragment()
-    }
+    override fun start() {
+        val days =  arguments?.getInt("days")
+        val date = arguments?.getLong("date")
 
-    private lateinit var viewModel: CancellationViewModel
+        val fullRefDate = days?.let { date!!.toLong().toDateFormatMinusDays("MMM dd", it) }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.cancellation_fragment, container, false)
-    }
+        binding.tvDateFullRefund.text = fullRefDate
+        if (date != null) {
+            binding.tvDateSemiRefund.text = date.toLong().toDateFormat("MMM dd")
+        }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CancellationViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
     }
 
 }

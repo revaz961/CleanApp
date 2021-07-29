@@ -1,8 +1,6 @@
 package com.example.cleanapp.ui.home.confirmation
 
 import android.app.Dialog
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -31,6 +29,9 @@ class ConfirmationFragment :
     private lateinit var adapter: ConfirmationAdapter
 
     override fun start() {
+        binding.fabBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         val order = arguments?.getParcelable<Order>("order")!!
         val master = arguments?.getParcelable<Master>("master")!!
         viewModel.getCurrentUser()
@@ -155,12 +156,6 @@ class ConfirmationFragment :
         })
     }
 
-    private fun createCard() {
-//        validateInput()
-
-    }
-
-
     private fun showCardDialog() {
         val bindingDialog = FragmentNewCardBinding.inflate(layoutInflater)
         val cardDialog = Dialog(requireContext())
@@ -179,14 +174,8 @@ class ConfirmationFragment :
         }
 
         setListeners(bindingDialog, cardDialog)
-
-
-        // Set error text
-//        passwordLayout.error = getString(R.string.error)
-
-// Clear error text
-//        passwordLayout.error = null
     }
+
 
     private fun setListeners(binding: FragmentNewCardBinding, dialog: Dialog) {
         with(binding) {
@@ -282,7 +271,8 @@ class ConfirmationFragment :
             binding.etCardNumberInput.error = null
 
         /** Check card expiration date */
-        if (valid.isNotEmpty() && (!valid.isDigitsOnly() || valid.substring(0, 1).toInt() > 12
+        if (valid.isNotEmpty() && (!valid.isDigitsOnly() || valid.substring(0, 1)
+                .toInt() > 12
                     || (valid.length > 2 && valid.substring(2).toInt() < 21))
         ) {
             binding.etValidInput.error = getString(R.string.error)

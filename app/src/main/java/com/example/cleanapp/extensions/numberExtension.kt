@@ -15,3 +15,10 @@ fun Int.minuteToHourString() = "${this / 60} hours : ${this % 60} minutes"
 fun Int.minuteToHoursFloat() = this / 60f
 
 fun Float.roundToDecimal() = (this * 10).roundToInt() / 10f
+
+fun Long.toDateFormatMinusDays(pattern: String, days: Int): String {
+    this - 24 * 60 * 60 * 1000 * days
+    val date = Date(this)
+    val format = SimpleDateFormat(pattern)
+    return format.format(date)
+}
