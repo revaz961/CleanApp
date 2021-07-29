@@ -8,6 +8,7 @@ import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.models.User
 import com.example.cleanapp.repository.UserRepository
+import com.example.cleanapp.user_data.UserData
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,9 +16,11 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val auth: FirebaseAuth,
-    private val userRepo: UserRepository
+    private val userRepo: UserRepository,
+    private val userData: UserData
 ) : ViewModel() {
     fun signOut() {
+        userData.deleteUser()
         auth.signOut()
     }
 

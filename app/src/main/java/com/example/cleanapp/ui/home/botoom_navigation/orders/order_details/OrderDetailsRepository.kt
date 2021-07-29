@@ -20,10 +20,16 @@ class OrderDetailsRepository @Inject constructor(
         }
     }
 
-    fun cancelReservation(order: Order) {
-        dbRef.child("orders/${order.masterUid}/${order.orderId}/status")
-            .setValue(OrderStatusEnum.CANCELLED.status).addOnSuccessListener {
-                //todo send notification to master
-            }
+    fun cancelReservation(order: Order, action: (ResultHandler<Int>) -> Unit) {
+        val map =
+            hashMapOf<String, Any>(
+                "orders/${order.masterUid}/${order.orderId}/status" to OrderStatusEnum.CANCELLED.status,
+                "orders/${order.clientUid}/${order.orderId}/status" to OrderStatusEnum.CANCELLED.status
+            )
+        dbRef.updateChildren(map).addOnSuccessListener {
+            action(ResultHandler.Success(OrderStatusEnum.CANCELLED.status))
+        }.addOnFailureListener {
+            action(ResultHandler.Error(null, it.message!!))
+        }
     }
 }

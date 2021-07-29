@@ -1,6 +1,5 @@
 package com.example.cleanapp.ui.collect_details.category
 
-import android.graphics.Bitmap
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -10,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CategoryChooserFragmentBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
@@ -60,11 +61,18 @@ class CategoryChooserFragment :
     private fun observes() {
         viewModel.categoryLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> adapter.setItems(it.data!!)
+                is ResultHandler.Success -> {
+                    adapter.setItems(it.data!!)
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
                 is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
                 }
             }
         })

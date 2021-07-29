@@ -3,11 +3,11 @@ package com.example.cleanapp.ui.home.confirmation
 import android.app.Dialog
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.text.isDigitsOnly
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +15,8 @@ import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ConfirmationFragmentBinding
 import com.example.cleanapp.databinding.FragmentNewCardBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
 import com.example.cleanapp.extensions.init
 import com.example.cleanapp.models.*
 import com.example.cleanapp.utils.ConfirmationViewTypes
@@ -38,10 +40,10 @@ class ConfirmationFragment :
 
     private fun initRecycler(master: Master, order: Order) {
         adapter = ConfirmationAdapter(master, order).apply {
-            sendMessage = { message ->
-                viewModel.getUser()?.let {
+            sendMessage = { text ->
+                viewModel.getCurrentUser().let {
                     val message = Message(
-                        message,
+                        text,
                         it.uid!!,
                         it.name!!,
                         it.imgUrl!!,
@@ -50,7 +52,7 @@ class ConfirmationFragment :
                     )
                     viewModel.sendMessage(
                         message,
-                        Chat(Date().time, message, it.imgUrl!!, it.name, it.uid, false),
+                        Chat(message),
                         "${it.uid}_${master.user?.uid!!}"
                     )
                 } ?: showErrorDialog("User is unknown")
@@ -82,38 +84,55 @@ class ConfirmationFragment :
             when (it) {
                 is ResultHandler.Success -> {
                     adapter.setCards(it.data!!)
-
-                    Log.d("cardsLog", "in observes size:${it.data.size}")
+                    binding.progress.gone()
                 }
 
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
                 is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
                 }
             }
         })
 
         viewModel.cardAddLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> adapter.setCards(viewModel.cards)
+                is ResultHandler.Success -> {
+                    adapter.setCards(viewModel.cards)
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
                 is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
                 }
             }
         })
 
         viewModel.confirmationLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> findNavController().navigate(
-                    R.id.action_confirmationFragment_to_orderDetailsFragment2,
-                    bundleOf("order" to it.data)
-                )
+                is ResultHandler.Success -> {
+                    findNavController().navigate(
+                        R.id.action_confirmationFragment_to_orderDetailsFragment2,
+                        bundleOf("order" to it.data)
+                    )
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
                 is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
                 }
             }
         })
@@ -121,11 +140,16 @@ class ConfirmationFragment :
         viewModel.messageSendLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> {
+                    binding.progress.gone()
                 }
 
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
                 is ResultHandler.Loading -> {
+                    binding.progress.goneIf(it.loading)
                 }
             }
         })
@@ -182,88 +206,55 @@ class ConfirmationFragment :
                 )
 
                 dialog.cancel()
-
             }
-            etCardNumberInput.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
+
+            etCardNumberInput.doOnTextChanged { s, start, before, n ->
+                validateInput(binding)
+                val inputLength = s.toString().length
+                if ((inputLength == 4 ||
+                            inputLength == 9 || inputLength == 14) && before == 0
                 ) {
-                }
+                    binding.etCardNumberInput.setText(s.toString() + " ")
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
-                    validateInput(binding)
-                    val inputLength = s.toString().length
-                    if ((inputLength == 4 ||
-                                inputLength == 9 || inputLength == 14) && before == 0
-                    ) {
-                        binding.etCardNumberInput.setText(s.toString() + " ")
+                    val pos = binding.etCardNumberInput.text?.length
+                    binding.etCardNumberInput.setSelection(pos!!)
 
-                        val pos = binding.etCardNumberInput.text?.length
-                        binding.etCardNumberInput.setSelection(pos!!)
-
-                    } else if ((inputLength == 4 ||
-                                inputLength == 9 || inputLength == 14) && before == 1
-                    ) {
-                        binding.etCardNumberInput.setText(
-                            binding.etCardNumberInput.text.toString().dropLast(1)
-                        )
-                        val pos = binding.etCardNumberInput.text?.length
-                        binding.etCardNumberInput.setSelection(pos!!)
-
-                    }
-                }
-
-                override fun afterTextChanged(s: Editable?) {}
-            })
-
-            etValidInput.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
+                } else if ((inputLength == 4 ||
+                            inputLength == 9 || inputLength == 14) && before == 1
                 ) {
+                    binding.etCardNumberInput.setText(
+                        binding.etCardNumberInput.text.toString().dropLast(1)
+                    )
+                    val pos = binding.etCardNumberInput.text?.length
+                    binding.etCardNumberInput.setSelection(pos!!)
+
                 }
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
-                    validateInput(binding)
-                    val inputLength = s.toString().length
-                    if (inputLength == 2 && before == 0) {
-                        binding.etValidInput.setText(s.toString() + "/")
 
-                        val pos = binding.etValidInput.text?.length
-                        binding.etValidInput.setSelection(pos!!)
+            etValidInput.doOnTextChanged { s, start, before, n ->
+                validateInput(binding)
+                val inputLength = s.toString().length
+                if (inputLength == 2 && before == 0) {
+                    binding.etValidInput.setText(s.toString() + "/")
 
-                    } else if (inputLength == 2 && before == 1) {
-                        binding.etValidInput.setText(
-                            binding.etValidInput.text.toString().dropLast(1)
-                        )
-                        val pos = binding.etValidInput.text?.length
-                        binding.etValidInput.setSelection(pos!!)
-                    }
+                    val pos = binding.etValidInput.text?.length
+                    binding.etValidInput.setSelection(pos!!)
+
+                } else if (inputLength == 2 && before == 1) {
+                    binding.etValidInput.setText(
+                        binding.etValidInput.text.toString().dropLast(1)
+                    )
+                    val pos = binding.etValidInput.text?.length
+                    binding.etValidInput.setSelection(pos!!)
                 }
+            }
 
-                override fun afterTextChanged(s: Editable?) {}
-            })
 
-            etCardHolderInput.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
+            etCardHolderInput.doOnTextChanged { s, start, before, n ->
+                validateInput(binding)
+            }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, n: Int) {
-                    validateInput(binding)
-                }
-
-                override fun afterTextChanged(s: Editable?) {}
-            })
         }
     }
 

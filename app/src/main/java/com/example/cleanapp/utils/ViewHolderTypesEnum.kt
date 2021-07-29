@@ -1,6 +1,6 @@
 package com.example.cleanapp.utils
 
-enum class ReservationClickTypes (val type : Int) {
+enum class ReservationClickTypes(val type: Int) {
     SHOW_COMMENTS(0),
     CONTACT_MASTER(1),
     AVAILABILITY(2),
@@ -9,17 +9,31 @@ enum class ReservationClickTypes (val type : Int) {
     MORE_MASTERS(5)
 }
 
-enum class ReservationViewTypes (val type: Int) {
+enum class ReservationViewTypes(val type: Int) {
     HEADER(0),
     REVIEWS(1),
     LANGUAGES(2),
     INFO_EDIT(3),
     REPORT(4),
     MORE(5),
-    CANCELLATION(6)
+    CANCELLATION(6);
+
+    companion object {
+        fun typeToList(): List<Int> {
+            return listOf(
+                HEADER.type,
+                REVIEWS.type,
+                LANGUAGES.type,
+                INFO_EDIT.type,
+                CANCELLATION.type,
+                REPORT.type,
+                MORE.type
+            )
+        }
+    }
 }
 
-enum class ConfirmationViewTypes (val type: Int) {
+enum class ConfirmationViewTypes(val type: Int) {
     HEADER(0),
     ARRIVAL_DETAILS(1),
     PRICE_DETAILS(2),

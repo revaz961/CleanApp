@@ -44,11 +44,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_end_city"
         app:layout_constraintStart_toStartOf="@+id/guideline_start_city"
-        app:layout_constraintTop_toBottomOf="@+id/etFindCity"
-        android:overScrollMode="never"/>
+        app:layout_constraintTop_toBottomOf="@+id/etFindCity" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_start_city"
@@ -63,5 +63,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/main_margin_LR" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/progress"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/progress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,5 +31,11 @@ class MainActivity : AppCompatActivity() {
             d("FCM", token.toString())
             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
+
+        init()
+    }
+
+    private fun init(){
+
     }
 }

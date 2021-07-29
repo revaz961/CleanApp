@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.InboxFragmentBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
+import com.example.cleanapp.extensions.hide
+import com.example.cleanapp.extensions.show
+import com.example.cleanapp.models.Chat
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,11 +28,20 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
 
     private fun initRecycler() {
         adapter = MessagesAdapter().apply {
-            chooseMessage = {
-                findNavController().navigate(R.id.action_inboxFragment_to_chatFragment,
-                    bundleOf("chat" to it)
+            chooseChat = { chat ->
+                chat.lastMessage?.let {
+                    val userId = viewModel.getCurrentUserId()
+                    if (!it.isRead && it.senderId != userId)
+                        viewModel.checkReadMessage(chat)
+                }
+
+                findNavController().navigate(
+                    R.id.action_inboxFragment_to_chatFragment,
+                    bundleOf("chat" to chat)
                 )
             }
+
+            userId = viewModel.getCurrentUserId()
         }
 
         binding.rvMessages.adapter = adapter
@@ -35,15 +49,53 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
         viewModel.getChats()
     }
 
+    private fun setUnreadMessageCount(chats: List<Chat>) {
+        val count =
+            chats.count {
+                !it.lastMessage!!.isRead ?: false
+                        && it.lastMessage!!.senderId != viewModel.getCurrentUserId()
+            }
+        if (count > 0) {
+            binding.tvNMessages.text = "$count"
+            binding.tvNMessages.show()
+        } else {
+            binding.tvNMessages.text = "$count"
+            binding.tvNMessages.hide()
+        }
+    }
+
     private fun observes() {
         viewModel.chatsLiveData.observe(viewLifecycleOwner, {
             when (it) {
                 is ResultHandler.Success -> {
-                    adapter.setItems(it.data!!)
+                    setUnreadMessageCount(it.data!!)
+                    adapter.setItems(it.data)
+                    binding.progress.gone()
                 }
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Loading -> {}
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
+            }
+        })
+
+        viewModel.checkChatLiveData.observe(viewLifecycleOwner, {
+            when (it) {
+                is ResultHandler.Success -> {
+                    binding.progress.gone()
+                }
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
     }

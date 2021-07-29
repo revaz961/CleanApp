@@ -26,6 +26,7 @@ class RoomChooserViewModel @Inject constructor(
     fun getRooms() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
+                _roomLiveData.postValue(ResultHandler.Loading(true))
 
                 chooserRepo.getRooms {
                     if (it is ResultHandler.Success) {

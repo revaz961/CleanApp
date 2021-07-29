@@ -40,31 +40,50 @@ class SignUpViewModel @Inject constructor(
     }
 
     private fun register(email: String, password: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _liveData.postValue(ResultHandler.Loading(true))
 
-        authRepository.register(email, password) { user, errorMessage ->
-            if (user != null)
-                _liveData.postValue(ResultHandler.Success(user))
-            else
-                _liveData.postValue(ResultHandler.Error(null, errorMessage))
+                authRepository.register(email, password) { user, errorMessage ->
+                    if (user != null)
+                        _liveData.postValue(ResultHandler.Success(user))
+                    else
+                        _liveData.postValue(ResultHandler.Error(null, errorMessage))
+                }
+            }
         }
     }
 
     fun registerAsMaster(email: String, password: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _masterLiveData.postValue(ResultHandler.Loading(true))
 
-        authRepository.register(email, password) { user, errorMessage ->
-            if (user != null)
-                _masterLiveData.postValue(ResultHandler.Success(user))
-            else
-                _masterLiveData.postValue(ResultHandler.Error(null, errorMessage))
+                authRepository.register(email, password) { user, errorMessage ->
+                    if (user != null)
+                        _masterLiveData.postValue(ResultHandler.Success(user))
+                    else
+                        _masterLiveData.postValue(ResultHandler.Error(null, errorMessage))
+                }
+            }
+
         }
     }
 
     fun setUserProfile(profile: User) {
-        authRepository.setUserProfile(profile)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                authRepository.setUserProfile(profile)
+            }
+        }
     }
 
 
-    fun uploadImage(uri: Uri){
-        authRepository.uploadImage(uri)
+    fun uploadImage(uri: Uri) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                authRepository.uploadImage(uri)
+            }
+        }
     }
 }

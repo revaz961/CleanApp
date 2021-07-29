@@ -18,8 +18,13 @@ class ConfirmationRepository @Inject constructor(
     private val dbRef: DatabaseReference
 ) {
     fun confirmOrder(order: Order, action: onOrderLoad) {
-        val uid = auth.currentUser!!.uid
-        dbRef.child("orders/$uid").push().setValue(order).addOnSuccessListener {
+        val key = dbRef.push().key!!
+        order.orderId = key
+        val map = hashMapOf<String,Any>(
+            "orders/${order.clientUid}/$key" to order,
+            "orders/${order.masterUid}/$key" to order
+        )
+        dbRef.updateChildren(map).addOnSuccessListener {
             action(ResultHandler.Success(order))
         }.addOnFailureListener {
             action(ResultHandler.Error(null, it.message!!))
@@ -44,11 +49,14 @@ class ConfirmationRepository @Inject constructor(
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val map = mutableMapOf<String, Any>()
                     val newKey = dbRef.push().key
+                    message.messageId = newKey
                     if (snapshot.exists()) {
                         val key = snapshot.children.first { it.exists() }.key
+                        chat.chatId = key!!
                         map["chats/$key"] = chat
                         map["messages/$key/$newKey"] = message
                     } else {
+                        chat.chatId = newKey!!
                         val usersId = firstMember.split('_')
                         val secondMember = usersId.reversed().joinToString("_")
                         map["chats/$newKey"] = chat
@@ -71,10 +79,13 @@ class ConfirmationRepository @Inject constructor(
 
     fun getCards(action: OnCardsLoad) {
         val uid = auth.currentUser!!.uid
-        dbRef.child("cards/$uid").get().addOnSuccessListener {
-            val map = it.getValue<HashMap<String, Card>>()
-            val values = map!!.values.toList()
-            action(ResultHandler.Success(values))
+        dbRef.child("cards/$uid").get().addOnSuccessListener { dataSnapshot ->
+            val map = dataSnapshot.getValue<HashMap<String, Card>>()
+
+            map?.let {
+                action(ResultHandler.Success(it.values.toList()))
+            }
+
         }.addOnFailureListener {
             action(ResultHandler.Error(null, it.message!!))
         }

@@ -8,6 +8,8 @@ import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ChooserDialogBinding
 import com.example.cleanapp.databinding.SignUpMasterFragmentBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
 import com.example.cleanapp.extensions.init
 import com.example.cleanapp.extensions.setTintColor
 import com.example.cleanapp.models.Master
@@ -121,9 +123,10 @@ class SignUpMasterFragment :
 
         dialogBinding.btnChoose.setOnClickListener {
             dialog.cancel()
-            val text = viewModel.categories.filter { it.category!!.isChecked }.fold("") { acc, categoryMaster ->
-                "$acc, ${categoryMaster.category!!.categoryEn}"
-            }.drop(1)
+            val text = viewModel.categories.filter { it.category!!.isChecked }
+                .fold("") { acc, categoryMaster ->
+                    "$acc, ${categoryMaster.category!!.categoryEn}"
+                }.drop(1)
             binding.editCategory.text = text
         }
         dialog.show()
@@ -140,7 +143,7 @@ class SignUpMasterFragment :
 
         dialogBinding.rvChooser.adapter = languageAdapter
         dialogBinding.rvChooser.layoutManager = LinearLayoutManager(requireContext())
-        dialogBinding.ivIcon.setImageResource(R.drawable.ic_category)
+        dialogBinding.ivIcon.setImageResource(R.drawable.ic_language)
         dialogBinding.btnChoose.text = getString(R.string.choose)
 
 
@@ -157,25 +160,73 @@ class SignUpMasterFragment :
     private fun observers() {
         viewModel.citiesLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> cityAdapter.setItems(it.data!!)
+                is ResultHandler.Success -> {
+                    cityAdapter.setItems(it.data!!)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
 
         viewModel.categoriesLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> categoryAdapter.setItems(it.data!!)
+                is ResultHandler.Success -> {
+                    categoryAdapter.setItems(it.data!!)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
 
         viewModel.languagesLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> languageAdapter.setItems(it.data!!)
+                is ResultHandler.Success -> {
+                    languageAdapter.setItems(it.data!!)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
 
         viewModel.masterCreateLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> if(it.data!!) findNavController().navigate(R.id.action_signUpMasterFragment_to_homeFragment)
+                is ResultHandler.Success -> {
+                    binding.progress.gone()
+                    if (it.data!!) findNavController().navigate(R.id.action_signUpMasterFragment_to_homeFragment)
+                }
+
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
     }

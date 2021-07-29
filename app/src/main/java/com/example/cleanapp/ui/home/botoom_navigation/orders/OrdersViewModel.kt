@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.yield
 import javax.inject.Inject
 
 
@@ -20,8 +21,11 @@ class OrdersViewModel @Inject constructor(private val ordersRepo: OrdersReposito
     val ordersLiveData: LiveData<ResultHandler<List<Order>>> = _ordersLiveData
 
     fun getOrders() {
+
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
+                _ordersLiveData.postValue(ResultHandler.Loading(true))
+
                 ordersRepo.getOrders {
                     _ordersLiveData.postValue(it)
                 }

@@ -48,7 +48,7 @@ class OrdersAdapter : BaseAdapter<Order>() {
             }
 
             val category = data.category?.categoryEn?: "category not found"
-            val date = data.date!!.toDateFormat("MMMM DD")
+            val date = data.date?.toDateFormat("MMMM dd") ?: "####"
             binding.tvCatDate.setTextById(R.string.category_date, category, date)
 
             with(binding.tvPrice) {
@@ -58,11 +58,11 @@ class OrdersAdapter : BaseAdapter<Order>() {
                         setTextColor(Color.RED)
                     }
                     OrderStatusEnum.FINISHED.status -> {
-                        setResourceHtmlText(R.string.price_value, data.price)
+                        setTextById(R.string.finished)
                         binding.tvPrice.setTextColor(Color.GRAY)
                     }
                     OrderStatusEnum.ONGOING.status -> {
-                        setResourceHtmlText(R.string.price_value, data.price)
+                        setTextById(R.string.ongoing)
                         binding.tvPrice.setTextColor(Color.GREEN)
                     }
                 }

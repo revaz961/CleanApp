@@ -3,10 +3,10 @@ package com.example.cleanapp.ui.home.botoom_navigation.orders
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import javax.inject.Inject
 
@@ -20,12 +20,18 @@ class OrdersRepository @Inject constructor(
         val uid = auth.currentUser!!.uid
 
         dbRef.child("orders/$uid")
-            .get().addOnSuccessListener {
-                val map = it.getValue<HashMap<String,Order>>()
-                val values = map?.values?.toList()
-                action(ResultHandler.Success(values!!))
-            }.addOnFailureListener {
-                action(ResultHandler.Error(null,it.message!!))
-            }
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val map = snapshot.getValue<HashMap<String, Order>>()
+
+                    map?.values?.toList()?.let {
+                        action(ResultHandler.Success(it))
+                    } ?: action(ResultHandler.Error(null,"You don't have any order"))
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    action(ResultHandler.Error(null, error.message))
+                }
+            })
     }
 }

@@ -164,6 +164,8 @@
     <string name="personal_information">Personal information</string>
     <string name="contact_support">Contact support</string>
     <string name="sign_out">Sign out</string>
+    <string name="user_data">user_data</string>
+    <string name="seen">seen</string>
 
 
 </resources>

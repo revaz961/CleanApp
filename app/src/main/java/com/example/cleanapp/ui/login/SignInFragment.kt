@@ -1,12 +1,11 @@
 package com.example.cleanapp.ui.login
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.SignInFragmentBinding
-import com.example.cleanapp.extensions.isEmail
+import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,10 +42,10 @@ class SignInFragment : BaseFragment<SignInFragmentBinding>(SignInFragmentBinding
         val email = binding.editEmail.text.toString().trim()
         val password = binding.editPassword.text.toString().trim()
 
-        if(!email.isEmail())
+        if (!email.isEmail())
             result += "Invalid Email\n"
 
-        if(password.length < 6)
+        if (password.length < 6)
             result += "Invalid Password"
 
         return result
@@ -55,9 +54,17 @@ class SignInFragment : BaseFragment<SignInFragmentBinding>(SignInFragmentBinding
     private fun observes() {
         viewModel.liveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> findNavController().navigate(R.id.action_SignInFragment_to_homeFragment)
-                is ResultHandler.Error -> showErrorDialog(it.message)
-                is ResultHandler.Loading -> Log.d("userInfo", it.loading.toString())
+                is ResultHandler.Success -> {
+                    findNavController().navigate(R.id.action_SignInFragment_to_homeFragment)
+                    binding.progress.hide()
+                }
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.hide()
+                }
+                is ResultHandler.Loading -> {
+                    binding.progress.showIf(it.loading)
+                }
             }
         })
     }

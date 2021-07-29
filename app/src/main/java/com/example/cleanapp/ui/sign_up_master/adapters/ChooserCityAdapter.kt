@@ -36,7 +36,6 @@ class ChooserCityAdapter : BaseAdapter<City>() {
         BaseViewHolder<City, CityViewHolderBinding>(binding) {
         override fun bind(data: City) {
             binding.cityName.text = data.cityEn
-            binding.cityName.setTextColor(Color.WHITE)
             binding.root.setOnClickListener {
                 onClick(items[adapterPosition])
             }

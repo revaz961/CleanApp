@@ -9,13 +9,17 @@ import android.text.TextWatcher
 import android.util.Log.d
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.CityChooserFragmentBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
 import com.example.cleanapp.models.City
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
@@ -84,10 +88,8 @@ class CityChooserFragment :
                 clickListener = { city ->
                     sharedViewModel.setFragmentTitle(city.cityEn)
                     order.city = city
-                    navigateTo(
-                        R.navigation.master_reservation,
-                        order
-                    )
+
+                    navigateTo(R.id.action_global_masterResultsFragment, order)
                 }
             }
         binding.recyclerCities.layoutManager = LinearLayoutManager(requireActivity())
@@ -97,7 +99,10 @@ class CityChooserFragment :
     }
 
     private fun navigateTo(id: Int, order: Order) {
-        sharedViewModel.navigate(id, order)
+        requireActivity().findNavController(R.id.nav_host_fragment).navigate(
+            R.id.action_global_masterResultsFragment,
+            bundleOf("order" to order)
+        )
     }
 
     private fun filter(input: String) {
@@ -118,11 +123,17 @@ class CityChooserFragment :
             when (it) {
                 is ResultHandler.Success -> {
                     cities = it.data!!.toMutableList()
-                    adapter.setItem(it.data!!)
+                    adapter.setItem(it.data)
+                    binding.progress.gone()
                 }
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Loading -> {}
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
     }

@@ -23,6 +23,7 @@ class CityChooserViewModel @Inject constructor(private val chooserRepo: ChooserR
     fun getCities() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
+                _citiesLiveData.postValue(ResultHandler.Loading(true))
 
                 chooserRepo.getCities {
                     _citiesLiveData.postValue(it)

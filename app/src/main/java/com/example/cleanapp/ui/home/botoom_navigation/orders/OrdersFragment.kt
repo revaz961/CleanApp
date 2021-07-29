@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.OrdersFragmentBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
+import com.example.cleanapp.extensions.show
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +27,8 @@ class OrdersFragment : BaseFragment<OrdersFragmentBinding>(OrdersFragmentBinding
     private fun initRecycler() {
         adapter = OrdersAdapter().apply {
             chooseOrder = {
-                findNavController().navigate(R.id.action_ordersFragment_to_orderDetailsFragment,
+                findNavController().navigate(
+                    R.id.action_ordersFragment_to_orderDetailsFragment,
                     bundleOf("order" to it)
                 )
             }
@@ -41,6 +45,16 @@ class OrdersFragment : BaseFragment<OrdersFragmentBinding>(OrdersFragmentBinding
             when (it) {
                 is ResultHandler.Success -> {
                     adapter.setItems(it.data!!)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
+
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
                 }
             }
         })

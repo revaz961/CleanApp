@@ -49,7 +49,7 @@ data class Order(
 
     @get:PropertyName("order_id")
     @set:PropertyName("order_id")
-    var orderId: Int? = null,
+    var orderId: String? = null,
 
     @get:PropertyName("reservation_date")
     @set:PropertyName("reservation_date")

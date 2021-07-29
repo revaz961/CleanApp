@@ -3,8 +3,12 @@ package com.example.cleanapp.ui.sign_up_master
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,10 +34,16 @@ class SignUpMasterViewModel @Inject constructor(private val signUpMasterRepo: Si
     val masterCreateLiveData: LiveData<ResultHandler<Boolean>> = _masterCreateLiveData
 
     fun getCities() {
-        signUpMasterRepo.getCities {
-            cities.clear()
-            cities.addAll(it)
-            _citiesLiveData.postValue(ResultHandler.Success(cities))
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                _citiesLiveData.postValue(ResultHandler.Loading(true))
+
+                signUpMasterRepo.getCities {
+                    cities.clear()
+                    cities.addAll(it)
+                    _citiesLiveData.postValue(ResultHandler.Success(cities))
+                }
+            }
         }
     }
 
@@ -47,18 +57,30 @@ class SignUpMasterViewModel @Inject constructor(private val signUpMasterRepo: Si
     }
 
     fun getLanguages() {
-        signUpMasterRepo.getLanguages { list ->
-            languages.clear()
-            list.forEach {
-                languages.add(Pair(it, false))
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _languagesLiveData.postValue(ResultHandler.Loading(true))
+
+                signUpMasterRepo.getLanguages { list ->
+                    languages.clear()
+                    list.forEach {
+                        languages.add(Pair(it, false))
+                    }
+                    _languagesLiveData.postValue(ResultHandler.Success(languages))
+                }
             }
-            _languagesLiveData.postValue(ResultHandler.Success(languages))
         }
     }
 
     fun setMaster(master:Master){
-        signUpMasterRepo.setMaster(master){
-            _masterCreateLiveData.postValue(ResultHandler.Success(true))
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _masterCreateLiveData.postValue(ResultHandler.Loading(true))
+
+                signUpMasterRepo.setMaster(master) {
+                    _masterCreateLiveData.postValue(ResultHandler.Success(true))
+                }
+            }
         }
     }
 }

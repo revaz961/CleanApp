@@ -24,8 +24,10 @@ class MasterResultsViewModel @Inject constructor(private val masterResultsRepo: 
     fun getMaster(query: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
+                _exploreLiveData.postValue(ResultHandler.Loading(true))
+
                 masterResultsRepo.getMasters(query) {
-                    if(it is ResultHandler.Success) {
+                    if (it is ResultHandler.Success) {
                         masters.clear()
                         masters.addAll(it.data!!)
                     }

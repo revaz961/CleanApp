@@ -2,17 +2,18 @@ package com.example.cleanapp.ui.home.master_results
 
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.MasterResultsFragmentBinding
+import com.example.cleanapp.extensions.gone
+import com.example.cleanapp.extensions.goneIf
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.ResultHandler
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
+import java.util.*
 
 @AndroidEntryPoint
 class MasterResultsFragment :
@@ -29,6 +30,13 @@ class MasterResultsFragment :
         }
         observes()
         initRecycler()
+        setListeners()
+    }
+
+    private fun setListeners(){
+        binding.fabBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun initRecycler() {
@@ -58,11 +66,19 @@ class MasterResultsFragment :
     private fun observes() {
         masterResultsViewModel.exploreLiveData.observe(viewLifecycleOwner, {
             when (it) {
-                is ResultHandler.Success -> masterAdapter.setItems(it.data!!)
+                is ResultHandler.Success -> {
+                    masterAdapter.setItems(it.data!!)
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Error -> showErrorDialog(it.message)
+                is ResultHandler.Error -> {
+                    showErrorDialog(it.message)
+                    binding.progress.gone()
+                }
 
-                is ResultHandler.Loading -> {}
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(!it.loading)
+                }
             }
         })
     }

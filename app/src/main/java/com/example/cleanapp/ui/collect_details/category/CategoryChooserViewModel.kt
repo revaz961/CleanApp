@@ -23,6 +23,8 @@ class CategoryChooserViewModel @Inject constructor(private val chooserRepo: Choo
     fun getCategory() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
+                _categoryLiveData.postValue(ResultHandler.Loading(true))
+
                 chooserRepo.getCategory {
                     _categoryLiveData.postValue(it)
                 }

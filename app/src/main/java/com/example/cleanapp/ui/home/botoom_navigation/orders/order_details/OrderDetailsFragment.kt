@@ -30,7 +30,7 @@ class OrderDetailsFragment :
         setListeners()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.btnBack.setOnClickListener {
             findNavController().setGraph(R.navigation.bottom_navigation)
         }
@@ -61,11 +61,15 @@ class OrderDetailsFragment :
                     master.user!!.surname
                 )
             }
-            tvCatPrice.setResourceHtmlText(R.string.cat_price, order.category?.categoryEn, order.price)
+            tvCatPrice.setResourceHtmlText(
+                R.string.cat_price,
+                order.category?.categoryEn,
+                order.price
+            )
             tvAddress.text = order.address
 
             imgAuthor.loadFromStorage(master.user?.imgUrl!!)
-            tvRating.text = master.rating.toString()
+            tvRating.text = master.rating?.toString() ?: "0.0"
 
             tvReservationDateValue.text = order.reservationDate?.toDateFormat("MMM dd") ?: "error"
             tvCleaningDayValue.text = order.date?.toDateFormat("MMM dd") ?: "error"
@@ -80,7 +84,7 @@ class OrderDetailsFragment :
                 order.duration!!.minuteToHoursFloat()
             )
             tvServiceFeeValue.text = cleaningFee.roundToDecimal().toString()
-            tvServiceFeeValue.text = serviceFee.roundToDecimal().toString()
+            tvCategoryFeeValue.text = serviceFee.roundToDecimal().toString()
             tvTotalValue.text = totalFee.roundToDecimal().toString()
 
             if (order.status == OrderStatusEnum.ONGOING.status) {
@@ -108,6 +112,35 @@ class OrderDetailsFragment :
                     is ResultHandler.Success -> {
                         master = it.data!!
                         initView()
+                        binding.progress.gone()
+                    }
+
+                    is ResultHandler.Error -> {
+                        showErrorDialog(it.message)
+                        binding.progress.gone()
+                    }
+
+                    is ResultHandler.Loading -> {
+                        binding.progress.goneIf(!it.loading)
+                    }
+                }
+            })
+
+            viewModel.orderStatusLiveData.observe(viewLifecycleOwner, {
+                when (it) {
+                    is ResultHandler.Success -> {
+                        order.status = it.data!!
+                        initView()
+                        binding.progress.gone()
+                    }
+
+                    is ResultHandler.Error -> {
+                        showErrorDialog(it.message)
+                        binding.progress.gone()
+                    }
+
+                    is ResultHandler.Loading -> {
+                        binding.progress.goneIf(!it.loading)
                     }
                 }
             })
