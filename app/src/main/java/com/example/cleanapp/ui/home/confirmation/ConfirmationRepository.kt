@@ -70,7 +70,7 @@ class ConfirmationRepository @Inject constructor(
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    action(ResultHandler.Error(null, error.message!!))
+                    action(ResultHandler.Error(null, error.message))
                 }
 
             })
