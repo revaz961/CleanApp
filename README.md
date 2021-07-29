@@ -20,9 +20,11 @@ On the other hand, any user can activate their master's profile, where they can 
 - Dagger hilt
 - Coroutines
 - Navigation
+- Livedata
 - Retrofit
 - Google play services
 - Firebase realtime database
+- Firebase authorization
 - Firebase cloud messaging
 - Glide
 - Lottie
