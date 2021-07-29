@@ -55,4 +55,27 @@ data class Order(
     @set:PropertyName("reservation_date")
     var reservationDate: Long? = null
 
-) : Parcelable
+) : Parcelable {
+     fun getDuration(): Int {
+        return if (duration != null)
+            duration as Int
+        else
+            0
+    }
+
+     fun getCleaningPrice(): Float {
+        return if (duration != null)
+            duration!! * price
+        else
+            price
+    }
+
+
+     fun getServiceFee(): Float {
+        return getCleaningPrice() * 0.18f
+    }
+
+     fun getTotalPrice(): Float {
+        return getCleaningPrice() + getServiceFee()
+    }
+}

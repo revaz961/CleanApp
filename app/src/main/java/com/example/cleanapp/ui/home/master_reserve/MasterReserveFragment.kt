@@ -13,11 +13,13 @@ import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ContactMasterDialogBinding
 import com.example.cleanapp.databinding.FragmentReserveBinding
+import com.example.cleanapp.databinding.ReportMasterDialogBinding
 import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
+import com.google.android.material.snackbar.Snackbar
 
 class MasterReserveFragment :
     BaseFragment<FragmentReserveBinding>(FragmentReserveBinding::inflate) {
@@ -43,6 +45,7 @@ class MasterReserveFragment :
     }
 
     private fun init() {
+
         order = arguments?.getParcelable("order")!!
 
         adapter =
@@ -53,17 +56,19 @@ class MasterReserveFragment :
                             findNavController().navigate(R.id.action_masterReserveFragment_to_allCommentsFragment)
                         }
                         ReservationClickTypes.CONTACT_MASTER.type -> {
-//                            findNavController().navigate(R.id.action_masterReserveFragment_to_contactMasterFragment)
                             showContactDialog()
                         }
                         ReservationClickTypes.AVAILABILITY.type -> {
                             findNavController().navigate(R.id.action_masterReserveFragment_to_availabilityFragment)
                         }
                         ReservationClickTypes.CANCELLATION.type -> {
-                            findNavController().navigate(R.id.action_masterReserveFragment_to_cancellationFragment)
+                            findNavController().navigate(
+                                R.id.action_masterReserveFragment_to_cancellationFragment,
+                                bundleOf("days" to master.cancelPeriod!!, "date" to order.date!!)
+                            )
                         }
                         ReservationClickTypes.REPORT.type -> {
-                            findNavController().navigate(R.id.action_masterReserveFragment_to_reportFragment)
+                            showReportDialog()
                         }
                     }
                 }
@@ -85,7 +90,9 @@ class MasterReserveFragment :
         )
 
         with(binding) {
-
+            fabBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
             master.categories?.find { it.category?.categoryEn == order.category?.categoryEn }
                 ?.let {
                     tvPrice.setResourceHtmlText(R.string.per_hour, it.price)
@@ -94,7 +101,6 @@ class MasterReserveFragment :
                 }
             tvDateTime.text = order.date?.toDateFormat("MMMM dd, K:mm a")
             btnReserve.setOnClickListener {
-
                 findNavController().navigate(
                     R.id.action_masterReserveFragment_to_confirmationFragment,
                     bundleOf("order" to order, "master" to master)
@@ -120,6 +126,28 @@ class MasterReserveFragment :
         }
 
         contactDialog.show()
+    }
+
+    private fun showReportDialog() {
+        val reportDialog = Dialog(requireContext())
+        val dialogBinding = ReportMasterDialogBinding.inflate(layoutInflater)
+        reportDialog.init(dialogBinding.root)
+        dialogBinding.btnCall.setOnClickListener {
+            dialPhoneNumber(master.user!!.phone!!)
+        }
+
+        dialogBinding.btnReport.setOnClickListener {
+            viewModel.reportMaster(master)
+            Snackbar.make(binding.root, "User reported successfully", Snackbar.LENGTH_SHORT).show()
+            reportDialog.cancel()
+            findNavController().navigate(R.id.homeFragment)
+        }
+
+        dialogBinding.btnClose.setOnClickListener {
+            reportDialog.cancel()
+        }
+
+        reportDialog.show()
     }
 
     private fun dialPhoneNumber(phoneNumber: String) {

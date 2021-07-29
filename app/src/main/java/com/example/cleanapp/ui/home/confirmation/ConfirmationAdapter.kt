@@ -158,14 +158,12 @@ class ConfirmationAdapter(
 
                 tvDurationValue.setTextById(
                     R.string.n_hours,
-                    order.duration?.minuteToHoursFloat() ?: 0f
+                    order.getDuration()?.minuteToHoursFloat() ?: 0f
                 )
 
-                tvCleaningPriceValue.setTextById(R.string.price_value, order.price)
-                val serviceFee = order.price * 0.18f
-                tvServiceFeeValue.setTextById(R.string.price_value, serviceFee.roundToDecimal())
-                val total = order.price + serviceFee
-                tvTotalValue.setTextById(R.string.price_value, total.roundToDecimal())
+                tvCleaningPriceValue.setTextById(R.string.price_value, order.getCleaningPrice())
+                tvServiceFeeValue.setTextById(R.string.price_value, order.getServiceFee().roundToDecimal())
+                tvTotalValue.setTextById(R.string.price_value, order.getTotalPrice().roundToDecimal())
             }
         }
     }
@@ -228,9 +226,7 @@ class ConfirmationAdapter(
                 R.string.cancellation_details,
                 master.cancelPeriod ?: 1
             )
-
             binding.tvCancellationLearnMore.setResourceHtmlText(R.string.cancellation_learn_more)
-
         }
     }
 
@@ -244,7 +240,7 @@ class ConfirmationAdapter(
         }
     }
 
-    inner class ErrorViewHolder(private val binding: VhReserve6ErrorBinding) :
+    inner class ErrorViewHolder(binding: VhReserve6ErrorBinding) :
         BaseViewHolderType<VhReserve6ErrorBinding>(binding) {
         override fun bind() {}
     }

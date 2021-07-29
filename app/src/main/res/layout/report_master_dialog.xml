@@ -3,55 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_main_gradient_stroke_round"
-    android:orientation="vertical">
+    android:background="@drawable/bg_main_white_warning_round"
+    android:orientation="vertical"
+    android:padding="@dimen/main_margin_medium">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <TextView
         android:id="@+id/btnCall"
         style="@style/Text.MediumDark"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/main_margin_small"
-        android:layout_marginStart="@dimen/main_margin_large"
-        android:layout_marginEnd="@dimen/main_margin_large"
+        android:layout_marginTop="@dimen/main_margin_medium"
         android:layout_marginBottom="@dimen/main_margin_small"
-        android:background="@drawable/btn_white_stroke"
-        android:minWidth="300dp"
-        android:text="@string/call_your_master"
-        app:layout_constraintBottom_toTopOf="@+id/btnChat"
-        app:layout_constraintEnd_toEndOf="@+id/btnChat"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/btnChat"
+        android:text="@string/are_you_sure_that_you_want_to_report_this_user"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btnReport"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnClose" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnChat"
+        android:id="@+id/btnReport"
         style="@style/Text.MediumDark"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/btn_white_stroke"
+        android:layout_marginTop="@dimen/main_margin_small"
+        android:layout_marginBottom="@dimen/main_margin_small"
+        android:background="@android:color/transparent"
         android:minWidth="300dp"
-        android:text="@string/open_chat"
+        android:text="Report"
+        android:textColor="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCall"
-        android:layout_marginBottom="@dimen/main_margin_large"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnCall" />
 
     <ImageButton
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/main_margin_small"
-        android:layout_marginTop="@dimen/main_margin_small"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close"
-        android:background="@android:color/transparent"/>
+        app:srcCompat="@drawable/ic_close" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

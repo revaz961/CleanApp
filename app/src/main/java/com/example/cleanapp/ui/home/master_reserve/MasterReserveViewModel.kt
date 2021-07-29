@@ -24,4 +24,12 @@ class MasterReserveViewModel : ViewModel() {
             }
         }
     }
+
+    fun reportMaster(master: Master) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                //todo report master
+            }
+        }
+    }
 }
