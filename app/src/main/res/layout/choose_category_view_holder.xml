@@ -27,7 +27,8 @@
         android:layout_marginEnd="@dimen/main_margin_extra_small"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:hint="@string/_0"
+        android:text="@string/_10"
+        android:inputType="number"
         android:lines="1"
         android:maxLength="5" />
 

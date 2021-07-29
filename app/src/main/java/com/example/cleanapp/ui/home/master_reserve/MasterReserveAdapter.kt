@@ -127,9 +127,11 @@ class MasterReserveAdapter(
     inner class ViewHolderReviews(private val binding: VhReserve1ReviewsBinding) :
         BaseViewHolderType<VhReserve1ReviewsBinding>(binding) {
         override fun bind() {
+            val b = selectedMaster
+
             binding.tvRatingName.setResourceHtmlText(
                 R.string.reviews,
-                selectedMaster.rating,
+                selectedMaster.rating ?: 0f,
                 selectedMaster.nReviews
             )
             if (selectedMaster.reviews == null) {

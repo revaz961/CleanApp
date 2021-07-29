@@ -63,4 +63,8 @@ class UserData @Inject constructor(@ApplicationContext private val context: Cont
         edit.apply()
     }
 
+    fun selectAsMaster() {
+        sharedPreferences.edit().putBoolean(IS_MASTER, true).apply()
+    }
+
 }

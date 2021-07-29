@@ -179,9 +179,6 @@ class ConfirmationAdapter(
                     setCurrentCard(it)
                 }
             }
-            binding.btnCardCollapse.setOnClickListener {
-                binding.rvCards.collapseIf()
-            }
             binding.rvCards.layoutManager = LinearLayoutManager(binding.root.context)
         }
     }

@@ -1,5 +1,6 @@
 package com.example.cleanapp.ui.home.botoom_navigation.profile
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.cleanapp.R
@@ -18,7 +19,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
     override fun start() {
         init()
         observes()
-//        setListeners()
+        setListeners()
         binding.tvSignOut.setOnClickListener {
             profileViewModel.signOut()
             requireActivity().findNavController(R.id.nav_host_fragment)
@@ -28,6 +29,17 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
 
     private fun init() {
         profileViewModel.getUser()
+    }
+
+    private fun setListeners() {
+        binding.tvSwitchToMaster.setOnClickListener {
+            val user = profileViewModel.getCurrentUser()
+            if (!user.isMaster!!)
+                requireActivity().findNavController(R.id.nav_host_fragment).navigate(
+                    R.id.action_global_signUpMasterFragment,
+                    bundleOf("user" to user)
+                )
+        }
     }
 
     private fun observes() {

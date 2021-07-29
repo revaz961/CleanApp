@@ -15,12 +15,14 @@ import com.example.cleanapp.databinding.ContactMasterDialogBinding
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.databinding.ReportMasterDialogBinding
 import com.example.cleanapp.extensions.*
-import com.example.cleanapp.models.Master
-import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.*
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import com.google.android.material.snackbar.Snackbar
 
+@AndroidEntryPoint
 class MasterReserveFragment :
     BaseFragment<FragmentReserveBinding>(FragmentReserveBinding::inflate) {
 
@@ -36,6 +38,7 @@ class MasterReserveFragment :
     override fun start() {
         setData()
         init()
+        observes()
     }
 
     private fun setData() {
@@ -56,6 +59,7 @@ class MasterReserveFragment :
                             findNavController().navigate(R.id.action_masterReserveFragment_to_allCommentsFragment)
                         }
                         ReservationClickTypes.CONTACT_MASTER.type -> {
+//                            findNavController().navigate(R.id.action_masterReserveFragment_to_contactMasterFragment)
                             showContactDialog()
                         }
                         ReservationClickTypes.AVAILABILITY.type -> {
@@ -101,6 +105,7 @@ class MasterReserveFragment :
                 }
             tvDateTime.text = order.date?.toDateFormat("MMMM dd, K:mm a")
             btnReserve.setOnClickListener {
+
                 findNavController().navigate(
                     R.id.action_masterReserveFragment_to_confirmationFragment,
                     bundleOf("order" to order, "master" to master)
@@ -119,6 +124,7 @@ class MasterReserveFragment :
 
         dialogBinding.btnChat.setOnClickListener {
             viewModel.startChat(master)
+            contactDialog.cancel()
         }
 
         dialogBinding.btnClose.setOnClickListener {
@@ -140,6 +146,7 @@ class MasterReserveFragment :
             viewModel.reportMaster(master)
             Snackbar.make(binding.root, "User reported successfully", Snackbar.LENGTH_SHORT).show()
             reportDialog.cancel()
+            viewModel.setLoading(false)
             findNavController().navigate(R.id.homeFragment)
         }
 
@@ -155,5 +162,23 @@ class MasterReserveFragment :
             data = Uri.parse("tel:$phoneNumber")
         }
         startActivity(intent)
+    }
+
+    private fun observes(){
+        viewModel.chatLiveData.observe(viewLifecycleOwner,{
+            when(it){
+                is ResultHandler.Success -> {
+                    binding.progress.gone()
+                    findNavController().navigate(R.id.action_masterReserveFragment_to_chatFragment2,
+                    bundleOf("chat" to it.data!!))
+                }
+                is ResultHandler.Error -> {
+                    binding.progress.gone()
+                }
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(it.loading)
+                }
+            }
+        })
     }
 }

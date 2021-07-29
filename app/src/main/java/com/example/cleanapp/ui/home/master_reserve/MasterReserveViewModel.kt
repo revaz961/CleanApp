@@ -7,20 +7,29 @@ import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.Chat
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.ResultHandler
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MasterReserveViewModel : ViewModel() {
+@HiltViewModel
+class MasterReserveViewModel @Inject constructor(private val masterReserveRepo: MasterReserveRepository) :
+    ViewModel() {
     private val _chatLiveData = MutableLiveData<ResultHandler<Chat>>()
     val chatLiveData: LiveData<ResultHandler<Chat>> = _chatLiveData
 
+    fun setLoading(loading:Boolean){
+        _chatLiveData.postValue(ResultHandler.Loading(loading))
+    }
+
     fun startChat(master: Master) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 _chatLiveData.postValue(ResultHandler.Loading(true))
-
-
+                masterReserveRepo.startChat(master) {
+                    _chatLiveData.postValue(it)
+                }
             }
         }
     }

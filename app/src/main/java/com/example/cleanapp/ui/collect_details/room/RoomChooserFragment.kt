@@ -70,14 +70,16 @@ class RoomChooserFragment :
 
         binding.btnApply.setOnClickListener {
             order.roomCount = viewModel.roomCounters.filter { it.count != 0 }
-            order.duration = order.roomCount?.fold(0) { acc, roomCounter ->
-                acc + roomCounter.count * order.category!!.categoryDuration
-            }
-            sharedViewModel.setFragmentTitle(getString(R.string.city_title))
-            findNavController().navigate(
-                R.id.action_roomChooserFragment_to_cityChooserFragment,
-                bundleOf("order" to order)
-            )
+            if (!order.roomCount.isNullOrEmpty()) {
+                order.duration = order.roomCount?.fold(0) { acc, roomCounter ->
+                    acc + roomCounter.count * order.category!!.categoryDuration
+                }
+                sharedViewModel.setFragmentTitle(getString(R.string.city_title))
+                findNavController().navigate(
+                    R.id.action_roomChooserFragment_to_cityChooserFragment,
+                    bundleOf("order" to order)
+                )
+            } else showErrorDialog("Choose at least one room")
         }
 
         binding.btnBack.setOnClickListener {

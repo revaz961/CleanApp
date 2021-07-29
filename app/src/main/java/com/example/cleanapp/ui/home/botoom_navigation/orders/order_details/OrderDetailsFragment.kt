@@ -3,6 +3,7 @@ package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
@@ -32,7 +33,7 @@ class OrderDetailsFragment :
 
     private fun setListeners() {
         binding.btnBack.setOnClickListener {
-            findNavController().setGraph(R.navigation.bottom_navigation)
+            requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
         }
     }
 

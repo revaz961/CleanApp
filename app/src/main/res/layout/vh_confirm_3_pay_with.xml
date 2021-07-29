@@ -23,7 +23,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCards"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="500dp"
         android:layout_marginTop="@dimen/main_margin_TB"
         android:paddingBottom="@dimen/main_padding_small"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,16 +52,4 @@
         android:text="@string/add_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line" />
-
-<androidx.appcompat.widget.AppCompatImageButton
-    android:id="@+id/btnCardCollapse"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    app:srcCompat="@drawable/ic_arrow_drop_down"
-    android:scaleType="centerCrop"
-    android:background="@android:color/transparent"
-    app:layout_constraintBottom_toBottomOf="@id/rvCards"
-    app:layout_constraintStart_toStartOf="@id/rvCards"
-    app:layout_constraintEnd_toEndOf="@id/rvCards"
-    />
 </androidx.constraintlayout.widget.ConstraintLayout>

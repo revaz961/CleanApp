@@ -1,6 +1,7 @@
 package com.example.cleanapp.models
 
 import android.os.Parcelable
+import com.example.cleanapp.extensions.minuteToHoursFloat
 import com.google.firebase.database.PropertyName
 import kotlinx.parcelize.Parcelize
 
@@ -59,7 +60,7 @@ data class Order(
 
      fun getCleaningPrice(): Float {
         return if (duration != null)
-            duration!! / 60 * price
+            duration!!.minuteToHoursFloat() * price
         else
             price
     }
