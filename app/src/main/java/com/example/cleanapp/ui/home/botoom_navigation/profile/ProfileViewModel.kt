@@ -35,6 +35,8 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun getCurrentUser() = userData.getUser()
+
     fun getUser() {
         userRepo.getUser {
             if (it is ResultHandler.Success)

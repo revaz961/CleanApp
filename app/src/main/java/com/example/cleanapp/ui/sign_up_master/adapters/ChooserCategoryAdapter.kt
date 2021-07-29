@@ -10,7 +10,6 @@ import com.example.cleanapp.databinding.ChooseCategoryViewHolderBinding
 import com.example.cleanapp.models.MasterCategory
 
 class ChooserCategoryAdapter : BaseAdapter<MasterCategory>() {
-
     fun setItems(items: List<MasterCategory>) {
         this.items.clear()
         this.items.addAll(items)
@@ -35,15 +34,14 @@ class ChooserCategoryAdapter : BaseAdapter<MasterCategory>() {
         override fun bind(data: MasterCategory) {
             binding.checkCategory.text = data.category!!.categoryEn
             binding.checkCategory.isChecked = data.category.isChecked
-            if (data.price > 0)
+            if (data.price >= 0)
                 binding.editPrice.setText(data.price.toString())
 
-            binding.checkCategory.setOnClickListener {
-//                binding.editPrice.
-            }
-
             binding.editPrice.doOnTextChanged { text, start, before, count ->
-                items[adapterPosition].price = text.toString().toFloat()
+                if (text.isNullOrEmpty())
+                    items[adapterPosition].price = 0f
+                else
+                    items[adapterPosition].price = binding.editPrice.text.toString().toFloat()
             }
 
             binding.checkCategory.setOnCheckedChangeListener { buttonView, isChecked ->

@@ -1,5 +1,8 @@
 package com.example.cleanapp.extensions
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.cleanapp.R
@@ -28,4 +31,9 @@ fun ImageView.loadFromStorage(
         .placeholder(placeholder)
         .error(error)
         .into(this)
+}
+
+fun ImageView.setImageTintColor(hexColor: String) {
+    val color = Color.parseColor(hexColor)
+    imageTintList = ColorStateList.valueOf(color)
 }

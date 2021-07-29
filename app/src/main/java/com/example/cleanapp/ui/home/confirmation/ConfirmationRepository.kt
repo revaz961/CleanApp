@@ -20,7 +20,7 @@ class ConfirmationRepository @Inject constructor(
     fun confirmOrder(order: Order, action: onOrderLoad) {
         val key = dbRef.push().key!!
         order.orderId = key
-        val map = hashMapOf<String,Any>(
+        val map = hashMapOf<String, Any>(
             "orders/${order.clientUid}/$key" to order,
             "orders/${order.masterUid}/$key" to order
         )
@@ -66,7 +66,9 @@ class ConfirmationRepository @Inject constructor(
                         map["members/$newKey/${usersId[0]}"] = true
                         map["members/$newKey/${usersId[1]}"] = true
                     }
-                    dbRef.updateChildren(map)
+                    dbRef.updateChildren(map).addOnCompleteListener {
+                        action(ResultHandler.Success(true))
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -84,7 +86,7 @@ class ConfirmationRepository @Inject constructor(
 
             map?.let {
                 action(ResultHandler.Success(it.values.toList()))
-            }
+            } ?: action(ResultHandler.Error(null, "You don't have any card"))
 
         }.addOnFailureListener {
             action(ResultHandler.Error(null, it.message!!))

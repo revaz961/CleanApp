@@ -43,26 +43,6 @@
         app:layout_constraintEnd_toEndOf="@id/ivMaster"
         app:layout_constraintHorizontal_bias="0.8"
         >
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_bookmark"
-            android:background="@android:color/transparent"
-            />
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_bookmark"
-            app:tint="@color/calendar_selected"
-            android:background="@android:color/transparent"
-            />
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_bookmark"
-            android:background="@android:color/transparent"
-            app:tint="@color/background_blue"
-            />
     </LinearLayout>
 
     <TextView

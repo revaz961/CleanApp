@@ -14,11 +14,13 @@ import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ContactMasterDialogBinding
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.extensions.*
-import com.example.cleanapp.models.Master
-import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.*
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
+@AndroidEntryPoint
 class MasterReserveFragment :
     BaseFragment<FragmentReserveBinding>(FragmentReserveBinding::inflate) {
 
@@ -127,5 +129,23 @@ class MasterReserveFragment :
             data = Uri.parse("tel:$phoneNumber")
         }
         startActivity(intent)
+    }
+
+    private fun observes(){
+        viewModel.chatLiveData.observe(viewLifecycleOwner,{
+            when(it){
+                is ResultHandler.Success -> {
+                    binding.progress.gone()
+                    findNavController().navigate(R.id.action_masterReserveFragment_to_chatFragment2,
+                    bundleOf("chat" to it.data!!))
+                }
+                is ResultHandler.Error -> {
+                    binding.progress.gone()
+                }
+                is ResultHandler.Loading -> {
+                    binding.progress.goneIf(it.loading)
+                }
+            }
+        })
     }
 }

@@ -8,10 +8,7 @@ import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseAdapterViewType
 import com.example.cleanapp.base.BaseViewHolderType
 import com.example.cleanapp.databinding.*
-import com.example.cleanapp.extensions.load
-import com.example.cleanapp.extensions.loadFromStorage
-import com.example.cleanapp.extensions.setResourceHtmlText
-import com.example.cleanapp.extensions.toDateFormat
+import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.ui.home.master_results.MasterAdapter
@@ -130,9 +127,11 @@ class MasterReserveAdapter(
     inner class ViewHolderReviews(private val binding: VhReserve1ReviewsBinding) :
         BaseViewHolderType<VhReserve1ReviewsBinding>(binding) {
         override fun bind() {
+            val b = selectedMaster
+
             binding.tvRatingName.setResourceHtmlText(
                 R.string.reviews,
-                selectedMaster.rating,
+                selectedMaster.rating ?: 0f,
                 selectedMaster.nReviews
             )
             selectedMaster.lastComments?.get(0)?.let {

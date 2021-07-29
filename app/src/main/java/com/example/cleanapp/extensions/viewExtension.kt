@@ -44,7 +44,7 @@ fun View.expand() {
 
     val targetHeight = measuredHeight
 
-    ValueAnimator.ofFloat(0f, targetHeight.toFloat()).apply {
+    ValueAnimator.ofFloat(height.toFloat(), targetHeight.toFloat()).apply {
         addUpdateListener {
             val params = layoutParams
             params.height = (it.animatedValue as Float).toInt()
@@ -104,6 +104,8 @@ fun View.setTintColor(hexColor: String) {
     val color = Color.parseColor(hexColor)
     backgroundTintList = ColorStateList.valueOf(color)
 }
+
+
 
 
 fun View.setTintColor(id: Int) {

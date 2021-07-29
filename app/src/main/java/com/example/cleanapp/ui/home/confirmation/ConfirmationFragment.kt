@@ -149,7 +149,7 @@ class ConfirmationFragment :
                 }
 
                 is ResultHandler.Loading -> {
-                    binding.progress.goneIf(it.loading)
+                    binding.progress.goneIf(!it.loading)
                 }
             }
         })

@@ -76,7 +76,9 @@ class SignUpMasterFragment :
             master.ownSupplements = haveSupplement
             master.city = city
             master.user!!.isMaster = true
-            viewModel.setMaster(master)
+            if (master.city != null && master.categories != null && master.languages != null)
+                viewModel.setMaster(master)
+            else showErrorDialog("fill all input")
         }
     }
 

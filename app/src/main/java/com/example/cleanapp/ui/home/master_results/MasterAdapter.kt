@@ -1,9 +1,14 @@
 package com.example.cleanapp.ui.home.master_results
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.core.view.children
+import androidx.core.view.setMargins
+import androidx.core.view.setPadding
 import androidx.viewbinding.ViewBinding
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseAdapter
@@ -63,12 +68,21 @@ class MasterAdapter(private val masterClickListener: MasterClickListener) :
 
             binding.ivMaster.setOnClickListener(this)
             data.user?.imgUrl?.let { binding.ivMaster.loadFromStorage(it) }
-
-//            binding.llBookmarks.children.forEach {
-//                it.setOnClickListener { bookmark ->
-//                    bookmark.slide()
-//                }
-//            }
+            binding.llBookmarks.removeAllViews()
+            data.categories?.forEach {
+                val bookmark = ImageButton(binding.root.context)
+                bookmark.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(0)
+                }
+                bookmark.setPadding(0)
+                bookmark.setImageResource(R.drawable.ic_bookmark)
+                bookmark.setImageTintColor(it.category!!.color)
+                bookmark.setBackgroundColor(Color.TRANSPARENT)
+                binding.llBookmarks.addView(bookmark)
+            }
 
             binding.detailsView.setOnClickListener {
                 binding.tvDescription.collapseIf()
