@@ -1,12 +1,12 @@
 package com.example.cleanapp.utils
 
-enum class CardSystemEnum (val system: Int) {
-    AMEX(3),
-    VISA(4),
-    MASTERCARD(5);
+enum class CardSystemEnum (val system: Char) {
+    AMEX('3'),
+    VISA('4'),
+    MASTERCARD('5');
 
     companion object {
-        fun toTypeList(): List<Int> {
+        fun toTypeList(): List<Char> {
             return listOf(
                 CardSystemEnum.AMEX.system,
                 CardSystemEnum.VISA.system,

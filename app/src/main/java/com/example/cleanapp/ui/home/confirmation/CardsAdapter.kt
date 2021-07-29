@@ -11,6 +11,7 @@ import com.example.cleanapp.extensions.setBorder
 import com.example.cleanapp.extensions.setResourceHtmlText
 import com.example.cleanapp.extensions.setTextById
 import com.example.cleanapp.models.Card
+import com.example.cleanapp.utils.CardSystemEnum
 
 class CardsAdapter : BaseAdapter<Card>() {
 
@@ -39,15 +40,15 @@ class CardsAdapter : BaseAdapter<Card>() {
             binding.tvTitle.setResourceHtmlText(R.string.edit)
             binding.root.setOnClickListener {
                 selectCard(data)
-                it.setBorder(2, "#000000",0f)
+                it.setBorder(2, "#000000", 0f)
             }
 
             when (data.cardNumber[0]) {
-
+                CardSystemEnum.AMEX.system -> binding.imgCard.setImageResource(R.drawable.ic_amex)
+                CardSystemEnum.MASTERCARD.system -> binding.imgCard.setImageResource(R.drawable.ic_mastercard)
+                CardSystemEnum.VISA.system -> binding.imgCard.setImageResource(R.drawable.ic_visa)
+                else -> binding.imgCard.setImageResource(R.drawable.ic_amex)
             }
-//            binding.imgCard.
-
-
         }
     }
 }

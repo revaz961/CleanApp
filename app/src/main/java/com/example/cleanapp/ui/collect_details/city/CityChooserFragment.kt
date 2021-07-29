@@ -99,6 +99,7 @@ class CityChooserFragment :
     }
 
     private fun navigateTo(id: Int, order: Order) {
+        binding.etFindCity.clearFocus()
         requireActivity().findNavController(R.id.nav_host_fragment).navigate(
             R.id.action_global_masterResultsFragment,
             bundleOf("order" to order)
