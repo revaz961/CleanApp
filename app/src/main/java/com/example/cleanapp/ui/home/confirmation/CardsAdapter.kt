@@ -45,9 +45,6 @@ class CardsAdapter : BaseAdapter<Card>() {
             when (data.cardNumber[0]) {
 
             }
-//            binding.imgCard.
-
-
         }
     }
 }
