@@ -22,7 +22,8 @@ On the other hand, any user can activate their master's profile, where they can 
 - Navigation
 - Retrofit
 - Google play services
-- Firebase
+- Firebase realtime database
+- Firebase cloud messaging
 - Glide
 - Lottie
 
