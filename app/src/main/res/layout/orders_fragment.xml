@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/reservation_background"
+    android:background="@drawable/main_bg_gradient"
     android:paddingTop="@dimen/main_margin_TB"
     tools:context=".ui.home.botoom_navigation.orders.OrdersFragment">
 

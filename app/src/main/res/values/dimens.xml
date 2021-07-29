@@ -25,4 +25,5 @@
     <dimen name="main_margin_small">20dp</dimen>
     <dimen name="main_margin_medium">40dp</dimen>
     <dimen name="main_margin_large">60dp</dimen>
+    <dimen name="rv_tb_padding">10dp</dimen>
 </resources>

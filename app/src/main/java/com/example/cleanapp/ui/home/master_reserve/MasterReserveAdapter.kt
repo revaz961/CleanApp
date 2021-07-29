@@ -16,18 +16,19 @@ import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.ui.home.master_results.MasterAdapter
 import com.example.cleanapp.ui.home.master_results.MasterClickListener
+import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
 
 
 class MasterReserveAdapter(
     private var selectedMaster: Master,
     private val moreMasters: MutableList<Master>,
-    private val order: Order,
-    private val masterReserveClickListener: MasterReserveClickListener
+    private val order: Order
 ) :
     BaseAdapterViewType<Int>() {
 
     lateinit var onSelectMaster: () -> Unit
+    lateinit var navigateClick: (Int) -> Unit
 
     fun setItems(viewTypeOrder: List<Int>) {
         this.items.clear()
@@ -140,6 +141,10 @@ class MasterReserveAdapter(
                 binding.tvCommentDate.text = it.dateAt?.toDateFormat("MMMM YYYY") ?: ""
                 binding.tvComment.text = it.comment
             }
+
+            binding.btnAllComments.setOnClickListener {
+                navigateClick(ReservationClickTypes.SHOW_COMMENTS.type)
+            }
         }
     }
 
@@ -152,6 +157,10 @@ class MasterReserveAdapter(
                     "$acc, $s"
                 }?.drop(1) ?: "Georgian"
             )
+
+            binding.btnContactMaster.setOnClickListener {
+                navigateClick(ReservationClickTypes.CONTACT_MASTER.type)
+            }
         }
     }
 
@@ -160,6 +169,11 @@ class MasterReserveAdapter(
         override fun bind() {
             binding.tvTitle.setText(R.string.availability)
             binding.tvDescription.text = order.date?.toDateFormat("MMMM dd, K:mm a")
+
+
+            binding.root.setOnClickListener {
+                navigateClick(ReservationClickTypes.CANCELLATION.type)
+            }
         }
     }
 
@@ -170,6 +184,10 @@ class MasterReserveAdapter(
             val cancellationDate =
                 order.date!! + selectedMaster.cancelPeriod!! * 60 * 60 * 24 * 1000
             binding.tvDescription.text = cancellationDate.toDateFormat("MMMM dd, K:mm a")
+
+            binding.root.setOnClickListener {
+                navigateClick(ReservationClickTypes.REPORT.type)
+            }
         }
     }
 

@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_main_gradient_stroke_round"
     android:orientation="vertical"
-    android:padding="@dimen/main_margin_large"
-    tools:context=".ui.home.master_reserve.aditional_actions.contact_master.ContactMasterFragment">
+    android:padding="@dimen/main_margin_large">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
+        android:id="@+id/btnCall"
         style="@style/Text.MediumDark"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/btn_white_stroke"
+        android:minWidth="300dp"
         android:text="@string/call_your_master" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
+        android:id="@+id/btnChat"
         style="@style/Text.MediumDark"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/main_margin_small"
         android:background="@drawable/btn_white_stroke"
+        android:minWidth="300dp"
         android:text="@string/open_chat" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnClose"
+        style="@style/Text.MediumDark"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/main_margin_small"
+        android:background="@drawable/btn_white_stroke"
+        android:text="@string/close" />
 </LinearLayout>

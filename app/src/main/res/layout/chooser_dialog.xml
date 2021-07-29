@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/reservation_background"
+    android:background="@drawable/main_bg_gradient"
     android:minWidth="250dp"
     android:orientation="vertical"
     android:padding="@dimen/main_padding_small">

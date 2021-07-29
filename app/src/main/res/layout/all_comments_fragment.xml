@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/main_margin_TB"
+    android:background="@drawable/main_bg_gradient"
     tools:context=".ui.home.master_reserve.aditional_actions.all_comments.AllCommentsFragment">
 
     <ImageView

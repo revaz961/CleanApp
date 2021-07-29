@@ -17,6 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        init()
+    }
+
+    private fun init(){
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 w("FCM", "Fetching FCM registration token failed", task.exception)
@@ -31,11 +35,5 @@ class MainActivity : AppCompatActivity() {
             d("FCM", token.toString())
             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         })
-
-        init()
-    }
-
-    private fun init(){
-
     }
 }

@@ -1,5 +1,8 @@
 package com.example.cleanapp.ui.home.master_reserve
 
+import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -8,17 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
+import com.example.cleanapp.databinding.ContactMasterDialogBinding
 import com.example.cleanapp.databinding.FragmentReserveBinding
-import com.example.cleanapp.extensions.minuteToHoursFloat
-import com.example.cleanapp.extensions.roundToDecimal
-import com.example.cleanapp.extensions.setResourceHtmlText
-import com.example.cleanapp.extensions.toDateFormat
+import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
 
-class MasterReserveFragment : BaseFragment<FragmentReserveBinding>(FragmentReserveBinding::inflate) {
+class MasterReserveFragment :
+    BaseFragment<FragmentReserveBinding>(FragmentReserveBinding::inflate) {
 
     private val viewModel: MasterReserveViewModel by viewModels()
 
@@ -41,17 +43,18 @@ class MasterReserveFragment : BaseFragment<FragmentReserveBinding>(FragmentReser
     }
 
     private fun init() {
-        order = arguments?.getParcelable<Order>("order")!!
+        order = arguments?.getParcelable("order")!!
 
         adapter =
-            MasterReserveAdapter(master, moreMasters, order, object : MasterReserveClickListener {
-                override fun onClick(type: Int, subType: Int) {
+            MasterReserveAdapter(master, moreMasters, order).apply {
+                navigateClick = { type ->
                     when (type) {
                         ReservationClickTypes.SHOW_COMMENTS.type -> {
                             findNavController().navigate(R.id.action_masterReserveFragment_to_allCommentsFragment)
                         }
                         ReservationClickTypes.CONTACT_MASTER.type -> {
-                            findNavController().navigate(R.id.action_masterReserveFragment_to_contactMasterFragment)
+//                            findNavController().navigate(R.id.action_masterReserveFragment_to_contactMasterFragment)
+                            showContactDialog()
                         }
                         ReservationClickTypes.AVAILABILITY.type -> {
                             findNavController().navigate(R.id.action_masterReserveFragment_to_availabilityFragment)
@@ -63,14 +66,14 @@ class MasterReserveFragment : BaseFragment<FragmentReserveBinding>(FragmentReser
                             findNavController().navigate(R.id.action_masterReserveFragment_to_reportFragment)
                         }
                     }
-
                 }
-            })
-        adapter.setItems(ReservationViewTypes.typeToList())
 
-        adapter.onSelectMaster = {
-            binding.recycler.scrollToPosition(0)
-        }
+                onSelectMaster = {
+                    binding.recycler.scrollToPosition(0)
+                }
+
+                setItems(ReservationViewTypes.typeToList())
+            }
 
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
@@ -98,5 +101,31 @@ class MasterReserveFragment : BaseFragment<FragmentReserveBinding>(FragmentReser
                 )
             }
         }
+    }
+
+    private fun showContactDialog() {
+        val contactDialog = Dialog(requireContext())
+        val dialogBinding = ContactMasterDialogBinding.inflate(layoutInflater)
+        contactDialog.init(dialogBinding.root)
+        dialogBinding.btnCall.setOnClickListener {
+            dialPhoneNumber(master.user!!.phone!!)
+        }
+
+        dialogBinding.btnChat.setOnClickListener {
+            viewModel.startChat(master)
+        }
+
+        dialogBinding.btnClose.setOnClickListener {
+            contactDialog.cancel()
+        }
+
+        contactDialog.show()
+    }
+
+    private fun dialPhoneNumber(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:$phoneNumber")
+        }
+        startActivity(intent)
     }
 }
