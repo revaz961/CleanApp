@@ -38,6 +38,7 @@ class MasterReserveFragment :
     override fun start() {
         setData()
         init()
+        observes()
     }
 
     private fun setData() {
@@ -123,6 +124,7 @@ class MasterReserveFragment :
 
         dialogBinding.btnChat.setOnClickListener {
             viewModel.startChat(master)
+            contactDialog.cancel()
         }
 
         dialogBinding.btnClose.setOnClickListener {
@@ -144,6 +146,7 @@ class MasterReserveFragment :
             viewModel.reportMaster(master)
             Snackbar.make(binding.root, "User reported successfully", Snackbar.LENGTH_SHORT).show()
             reportDialog.cancel()
+            viewModel.setLoading(false)
             findNavController().navigate(R.id.homeFragment)
         }
 

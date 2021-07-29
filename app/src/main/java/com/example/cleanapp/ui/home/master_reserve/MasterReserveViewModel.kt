@@ -19,6 +19,10 @@ class MasterReserveViewModel @Inject constructor(private val masterReserveRepo: 
     private val _chatLiveData = MutableLiveData<ResultHandler<Chat>>()
     val chatLiveData: LiveData<ResultHandler<Chat>> = _chatLiveData
 
+    fun setLoading(loading:Boolean){
+        _chatLiveData.postValue(ResultHandler.Loading(loading))
+    }
+
     fun startChat(master: Master) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {

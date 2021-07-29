@@ -158,7 +158,7 @@ class ConfirmationAdapter(
 
                 tvDurationValue.setTextById(
                     R.string.n_hours,
-                    order.getDuration()?.minuteToHoursFloat() ?: 0f
+                    order.duration?.minuteToHoursFloat() ?: 0f
                 )
 
                 tvCleaningPriceValue.setTextById(R.string.price_value, order.getCleaningPrice())

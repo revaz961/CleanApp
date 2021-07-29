@@ -53,7 +53,9 @@ class MasterReserveRepository @Inject constructor(
                         map["members/$newKey/${usersId[0]}"] = true
                         map["members/$newKey/${usersId[1]}"] = true
                     }
-                    dbRef.updateChildren(map).addOnCompleteListener {
+                    dbRef.updateChildren(map).addOnSuccessListener {
+                        action(ResultHandler.Success(chat))
+                    }.addOnFailureListener {
                         action(ResultHandler.Success(chat))
                     }
                 }
