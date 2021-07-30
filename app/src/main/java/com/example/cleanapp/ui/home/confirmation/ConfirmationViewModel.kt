@@ -1,12 +1,10 @@
 package com.example.cleanapp.ui.home.confirmation
 
-import android.util.Log.d
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cleanapp.models.*
-import com.example.cleanapp.repository.UserRepository
 import com.example.cleanapp.user_data.UserData
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -85,12 +83,12 @@ class ConfirmationViewModel @Inject constructor(
         }
     }
 
-    fun sendMessage(message: Message, chat: Chat, chatFilter: String) {
+    fun sendMessage(message: Message, chat: Chat, user: User, master: Master) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 _messageSendLiveData.postValue(ResultHandler.Loading(true))
 
-                confirmationRepo.sendMessage(message, chat, chatFilter) {
+                confirmationRepo.sendMessage(message, chat, user, master) {
                     _messageSendLiveData.postValue(it)
                 }
             }

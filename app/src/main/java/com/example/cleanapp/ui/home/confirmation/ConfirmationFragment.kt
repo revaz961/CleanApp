@@ -54,7 +54,7 @@ class ConfirmationFragment :
                     viewModel.sendMessage(
                         message,
                         Chat(message),
-                        "${it.uid}_${master.user?.uid!!}"
+                        it, master
                     )
                 } ?: showErrorDialog("User is unknown")
             }
@@ -62,6 +62,23 @@ class ConfirmationFragment :
                 showCardDialog()
             }
             confirm = {
+                viewModel.getCurrentUser().let {
+                    val message = Message(
+                        "hi, ${master.user!!.name}",
+                        it.uid!!,
+                        it.name!!,
+                        it.imgUrl!!,
+                        Date().time,
+                        false
+                    )
+                    viewModel.sendMessage(
+                        message,
+                        Chat(message),
+                        it, master
+                    )
+                } ?: showErrorDialog("User is unknown")
+
+
                 order.masterUid = master.user?.uid
                 order.clientUid = viewModel.getUserId()
                 order.reservationDate = Date().time

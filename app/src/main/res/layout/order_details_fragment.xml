@@ -328,6 +328,19 @@
                 app:layout_constraintTop_toBottomOf="@id/line6"
                 tools:layout_editor_absoluteY="623dp" />
 
+            <TextView
+                android:id="@+id/tvAddReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_margin_small"
+                android:text="@string/add_review"
+                android:visibility="gone"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@+id/line6"
+                app:layout_constraintStart_toStartOf="@+id/line6"
+                app:layout_constraintTop_toBottomOf="@id/line6"
+                tools:layout_editor_absoluteY="623dp" />
+
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/progress"

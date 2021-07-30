@@ -30,7 +30,7 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
         adapter = MessagesAdapter().apply {
             chooseChat = { chat ->
                 chat.lastMessage?.let {
-                    val userId = viewModel.getCurrentUserId()
+                    val userId = viewModel.getCurrentUser().uid
                     if (!it.isRead && it.senderId != userId)
                         viewModel.checkReadMessage(chat)
                 }
@@ -40,8 +40,10 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
                     bundleOf("chat" to chat)
                 )
             }
-
-            userId = viewModel.getCurrentUserId()
+            viewModel.getCurrentUser().let {
+                userId = it.uid!!
+                userName = it.name!!
+            }
         }
 
         binding.rvMessages.adapter = adapter
@@ -53,7 +55,7 @@ class InboxFragment : BaseFragment<InboxFragmentBinding>(InboxFragmentBinding::i
         val count =
             chats.count {
                 !it.lastMessage!!.isRead ?: false
-                        && it.lastMessage!!.senderId != viewModel.getCurrentUserId()
+                        && it.lastMessage!!.senderId != viewModel.getCurrentUser().uid
             }
         if (count > 0) {
             binding.tvNMessages.text = "$count"

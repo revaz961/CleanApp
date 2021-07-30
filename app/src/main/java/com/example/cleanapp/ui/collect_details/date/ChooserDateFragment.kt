@@ -1,6 +1,5 @@
 package com.example.cleanapp.ui.collect_details.date
 
-import android.annotation.SuppressLint
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ChooserDateFragmentBinding
-import com.example.cleanapp.extensions.toDateFormat
 import com.example.cleanapp.models.Order
 import com.example.cleanapp.models.RoomCounter
 import com.example.cleanapp.ui.collect_details.ChooserViewModel
@@ -31,11 +29,11 @@ class ChooserDateFragment :
 
     override fun start() {
         initRecyclers()
-        observes()
         setListeners()
+
+        binding.Calendar.minDate = Date().time
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
         binding.btnBack.setOnClickListener {
             chooserViewModel.setFragmentTitle(getString(R.string.category_title))
@@ -95,36 +93,4 @@ class ChooserDateFragment :
         val minuteLinearSnapHelper = LinearSnapHelper()
         minuteLinearSnapHelper.attachToRecyclerView(binding.rvMinute)
     }
-
-    private fun observes() {
-    }
 }
-
-
-//        binding.root.setOnTouchListener { v, event ->
-//            var recentY = 0f
-//
-//            d("onTouchEvent","Y: ${event.rawY}")
-//            when(event.actionMasked){
-//                MotionEvent.ACTION_DOWN ->{
-//                    recentY = event.rawY
-//                    d("onTouchEvent","X: ${event.rawX}")
-//                    d("onTouchEvent","Y: ${event.rawY}")
-//                }
-//
-//                MotionEvent.ACTION_MOVE ->{
-//                    d("onTouchEvent","recentY: ${recentY}")
-//                    val dY = recentY - event.rawY
-//                    recentY = event.rawY
-//                    d("onTouchEvent","dY: ${dY}")
-//                    d("onTouchEvent","Y: ${event.rawY}")
-//                }
-//
-//                MotionEvent.ACTION_UP ->{
-//
-//                    d("onTouchEvent","X: ${event.rawX}")
-//                    d("onTouchEvent","Y: ${event.rawY}")
-//                }
-//            }
-//            true
-//        }

@@ -17,6 +17,7 @@ class MessagesAdapter : BaseAdapter<Chat>() {
 
     lateinit var chooseChat: ChooseChat
     lateinit var userId: String
+    lateinit var userName: String
 
     fun setItems(list: List<Chat>) {
         items.clear()
@@ -44,7 +45,8 @@ class MessagesAdapter : BaseAdapter<Chat>() {
                 !data.lastMessage!!.isRead && data.lastMessage!!.senderId != userId
             )
             binding.imgMessageAuthor.loadFromStorage(data.lastMessage!!.senderImage)
-            binding.tvMessageAuthorName.text = data.lastMessage!!.senderName
+            binding.tvMessageAuthorName.text =
+                if (data.memberOne != userName) data.memberOne else data.memberTwo
             binding.tvMessageContent.text = data.lastMessage?.message
             binding.tvDate.text = data.lastMessage!!.timestamp!!.toDateFormat("MMM dd hh:mm a")
             binding.root.setOnClickListener {

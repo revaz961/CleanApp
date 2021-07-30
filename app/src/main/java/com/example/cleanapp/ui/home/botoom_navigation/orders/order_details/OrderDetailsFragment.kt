@@ -1,13 +1,13 @@
 package com.example.cleanapp.ui.home.botoom_navigation.orders.order_details
 
-import android.graphics.Bitmap
+import android.app.Dialog
 import android.graphics.Color
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.OrderDetailsFragmentBinding
+import com.example.cleanapp.databinding.ReportMasterDialogBinding
 import com.example.cleanapp.extensions.*
 import com.example.cleanapp.models.Master
 import com.example.cleanapp.models.Order
@@ -22,7 +22,7 @@ class OrderDetailsFragment :
     private val viewModel: OrderDetailsViewModel by viewModels()
     private lateinit var order: Order
     private lateinit var master: Master
-    private lateinit var bitmap: Bitmap
+    private lateinit var starAdapter: ReviewStarAdapter
 
     override fun start() {
         order = arguments?.getParcelable("order")!!
@@ -35,6 +35,17 @@ class OrderDetailsFragment :
         binding.btnBack.setOnClickListener {
             requireActivity().findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_homeFragment)
         }
+
+        binding.tvAddReview.setOnClickListener {
+            showReviewDialog()
+        }
+    }
+
+    private fun showReviewDialog(){
+        val reviewDialog = Dialog(requireContext())
+        val dialogBinding = ReportMasterDialogBinding.inflate(layoutInflater)
+        reviewDialog.init(dialogBinding.root)
+
     }
 
     private fun initView() {
@@ -89,11 +100,13 @@ class OrderDetailsFragment :
             tvTotalValue.text = totalFee.roundToDecimal().toString()
 
             if (order.status == OrderStatusEnum.ONGOING.status) {
+                tvAddReview.gone()
                 tvCancelReservation.setOnClickListener {
                     cancelReservation(order)
                 }
             } else {
                 tvCancelReservation.gone()
+                tvAddReview.show()
             }
 //            btnSavePdf.setOnClickListener {
 //                saveAsPdf(binding.root)

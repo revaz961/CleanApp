@@ -2,8 +2,8 @@ package com.example.cleanapp.extensions
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.view.View
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.cleanapp.R
 import com.google.firebase.ktx.Firebase
@@ -35,5 +35,10 @@ fun ImageView.loadFromStorage(
 
 fun ImageView.setImageTintColor(hexColor: String) {
     val color = Color.parseColor(hexColor)
+    imageTintList = ColorStateList.valueOf(color)
+}
+
+fun ImageView.setImageTintColor(id: Int) {
+    val color = ContextCompat.getColor(context, id)
     imageTintList = ColorStateList.valueOf(color)
 }

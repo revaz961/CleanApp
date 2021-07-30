@@ -169,6 +169,8 @@
     <string name="_10">10</string>
     <string name="rating_start">rating_start</string>
     <string name="are_you_sure_that_you_want_to_report_this_user">Are you sure that you want to report this user?</string>
+    <string name="ok">OK</string>
+    <string name="add_review">Add review</string>
 
 
 </resources>

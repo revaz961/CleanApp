@@ -1,6 +1,7 @@
 package com.example.cleanapp.ui.home.confirmation
 
 import com.example.cleanapp.models.*
+import com.example.cleanapp.user_data.UserData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,7 +16,8 @@ typealias onOrderLoad = (ResultHandler<Order>) -> Unit
 
 class ConfirmationRepository @Inject constructor(
     private val auth: FirebaseAuth,
-    private val dbRef: DatabaseReference
+    private val dbRef: DatabaseReference,
+    private val userData: UserData
 ) {
     fun confirmOrder(order: Order, action: onOrderLoad) {
         val key = dbRef.push().key!!
@@ -42,14 +44,18 @@ class ConfirmationRepository @Inject constructor(
     }
 
 
-    fun sendMessage(message: Message, chat: Chat, firstMember: String, action: OnLoad) {
+    fun sendMessage(message: Message, chat: Chat, user: User, master: Master, action: OnLoad) {
 
-        dbRef.child("members").orderByChild(firstMember).equalTo(true)
+        dbRef.child("members").orderByChild("${user.uid}_${master.user!!.uid}").equalTo(true)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val map = mutableMapOf<String, Any>()
                     val newKey = dbRef.push().key
                     message.messageId = newKey
+                    chat.memberOne = user.name
+                    chat.memberTwo = master.user!!.name
+                    val firstMember = "${user.uid}_${master.user!!.uid}"
+
                     if (snapshot.exists()) {
                         val key = snapshot.children.first { it.exists() }.key
                         chat.chatId = key!!
@@ -74,7 +80,6 @@ class ConfirmationRepository @Inject constructor(
                 override fun onCancelled(error: DatabaseError) {
                     action(ResultHandler.Error(null, error.message))
                 }
-
             })
     }
 

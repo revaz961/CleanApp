@@ -2,10 +2,8 @@ package com.example.cleanapp.extensions
 
 import android.graphics.Color
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
-import com.example.cleanapp.R
 
 fun TextView.setResourceHtmlText(id: Int, vararg args: Any?) {
     val txt = context.getString(id,*args)

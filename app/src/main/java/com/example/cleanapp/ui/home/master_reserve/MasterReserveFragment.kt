@@ -15,12 +15,13 @@ import com.example.cleanapp.databinding.ContactMasterDialogBinding
 import com.example.cleanapp.databinding.FragmentReserveBinding
 import com.example.cleanapp.databinding.ReportMasterDialogBinding
 import com.example.cleanapp.extensions.*
-import com.example.cleanapp.models.*
+import com.example.cleanapp.models.Master
+import com.example.cleanapp.models.Order
+import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.utils.ReservationClickTypes
 import com.example.cleanapp.utils.ReservationViewTypes
-import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MasterReserveFragment :
@@ -33,7 +34,6 @@ class MasterReserveFragment :
 
     private lateinit var master: Master
     private var moreMasters = mutableListOf<Master>()
-
 
     override fun start() {
         setData()
@@ -146,7 +146,6 @@ class MasterReserveFragment :
             viewModel.reportMaster(master)
             Snackbar.make(binding.root, "User reported successfully", Snackbar.LENGTH_SHORT).show()
             reportDialog.cancel()
-            viewModel.setLoading(false)
             findNavController().navigate(R.id.homeFragment)
         }
 
@@ -164,13 +163,19 @@ class MasterReserveFragment :
         startActivity(intent)
     }
 
-    private fun observes(){
-        viewModel.chatLiveData.observe(viewLifecycleOwner,{
-            when(it){
+    private fun observes() {
+        viewModel.chatLiveData.observe(viewLifecycleOwner, {
+            when (it) {
                 is ResultHandler.Success -> {
                     binding.progress.gone()
-                    findNavController().navigate(R.id.action_masterReserveFragment_to_chatFragment2,
-                    bundleOf("chat" to it.data!!))
+                    if (!viewModel.fromChat) {
+                        findNavController().navigate(
+                            R.id.action_masterReserveFragment_to_chatFragment2,
+                            bundleOf("chat" to it.data!!)
+                        )
+                        viewModel.fromChat = true
+                    } else
+                        viewModel.fromChat = false
                 }
                 is ResultHandler.Error -> {
                     binding.progress.gone()

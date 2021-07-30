@@ -25,7 +25,7 @@ class InboxViewModel @Inject constructor(
     private val _checkChatLiveData = MutableLiveData<ResultHandler<Chat>>()
     val checkChatLiveData: LiveData<ResultHandler<Chat>> = _checkChatLiveData
 
-    fun getCurrentUserId() = userData.getUser().uid!!
+    fun getCurrentUser() = userData.getUser()!!
 
     fun getChats() {
         viewModelScope.launch {

@@ -29,7 +29,7 @@ class MasterReserveRepository @Inject constructor(
             false
         )
 
-        val chat = Chat(message)
+        val chat = Chat(message,memberOne = user.name,memberTwo = master.user!!.name)
 
         dbRef.child("members").orderByChild(firstMember).equalTo(true)
             .addListenerForSingleValueEvent(object : ValueEventListener {

@@ -16,12 +16,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MasterReserveViewModel @Inject constructor(private val masterReserveRepo: MasterReserveRepository) :
     ViewModel() {
+
+    var fromChat = false
+
     private val _chatLiveData = MutableLiveData<ResultHandler<Chat>>()
     val chatLiveData: LiveData<ResultHandler<Chat>> = _chatLiveData
-
-    fun setLoading(loading:Boolean){
-        _chatLiveData.postValue(ResultHandler.Loading(loading))
-    }
 
     fun startChat(master: Master) {
         viewModelScope.launch {
