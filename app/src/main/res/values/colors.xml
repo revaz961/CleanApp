@@ -30,6 +30,7 @@
     <color name="text_auth_secondary">#8E8E8E</color>
     <color name="text_red">#E04646</color>
     <color name="text_blue">#002174</color>
+    <color name="text_green">#004003</color>
 
 <!--    categories-->
     <color name="category_party">#FDD835</color>

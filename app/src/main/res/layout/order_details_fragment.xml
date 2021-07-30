@@ -1,332 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_gradient"
     android:orientation="vertical"
-    android:overScrollMode="ifContentScrolls"
-    android:padding="@dimen/main_margin_TB"
-    tools:context=".ui.home.botoom_navigation.orders.order_details.OrderDetailsFragment">
+    android:overScrollMode="never"
+    android:padding="@dimen/main_margin_medium"
+    android:scrollbars="none">
 
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/main_margin_small">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
+            android:id="@+id/line6"
             android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@color/gray_dark"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotal"
+            tools:layout_editor_absoluteX="-16dp" />
+
+        <TextView
+            android:id="@+id/tvTotalValue"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/main_margin_small">
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTotal" />
 
-            <View
-                android:id="@+id/line6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:background="@color/gray_dark"
-                app:layout_constraintTop_toBottomOf="@+id/tvTotal"
-                tools:layout_editor_absoluteX="-16dp" />
+        <TextView
+            android:id="@+id/tvTotal"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:text="@string/total"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line5" />
 
-            <TextView
-                android:id="@+id/tvTotalValue"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTotal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvTotal" />
+        <View
+            android:id="@+id/line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@color/gray_dark"
+            app:layout_constraintTop_toBottomOf="@+id/tvServiceFee"
+            tools:layout_editor_absoluteX="0dp" />
 
-            <TextView
-                android:id="@+id/tvTotal"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="@string/total"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line5" />
+        <TextView
+            android:id="@+id/tvServiceFee"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_extra_small"
+            android:text="@string/service_fee"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategoryFee" />
 
-            <View
-                android:id="@+id/line5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:background="@color/gray_dark"
-                app:layout_constraintTop_toBottomOf="@+id/tvServiceFee"
-                tools:layout_editor_absoluteX="0dp" />
+        <TextView
+            android:id="@+id/tvServiceFeeValue"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvServiceFee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategoryFee" />
 
-            <TextView
-                android:id="@+id/tvServiceFee"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_extra_small"
-                android:text="@string/service_fee"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCategoryFee" />
+        <TextView
+            android:id="@+id/tvCategoryFee"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:text="@string/cleaning_fee"
+            app:layout_constraintEnd_toStartOf="@+id/tvCategoryFeeValue"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvYouPaid" />
 
-            <TextView
-                android:id="@+id/tvServiceFeeValue"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/tvServiceFee"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCategoryFee" />
+        <TextView
+            android:id="@+id/tvCategoryFeeValue"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCategoryFee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvCategoryFee"
+            app:layout_constraintTop_toTopOf="@+id/tvCategoryFee" />
 
-            <TextView
-                android:id="@+id/tvCategoryFee"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="@string/cleaning_fee"
-                app:layout_constraintEnd_toStartOf="@+id/tvCategoryFeeValue"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvYouPaid" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back_arrow"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvCategoryFeeValue"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCategoryFee"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvCategoryFee"
-                app:layout_constraintTop_toTopOf="@+id/tvCategoryFee" />
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            style="@style/Text.SmallerLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ongoing"
+            android:textColor="#003902"
+            android:textStyle="italic|bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/back_arrow"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvFullname"
+            style="@style/Text.BigDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus" />
 
-            <TextView
-                android:id="@+id/tvOrderStatus"
-                style="@style/Text.SmallerLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="@string/ongoing"
-                android:textColor="@color/selection"
-                android:textStyle="italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+        <TextView
+            android:id="@+id/tvYouPaid"
+            style="@style/Text.BigDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_medium"
+            android:text="@string/you_paid"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line4" />
 
-            <TextView
-                android:id="@+id/tvFullname"
-                style="@style/Text.BigDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="Nino Ninidze"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus" />
+        <TextView
+            android:id="@+id/tvCatPrice"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_extra_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFullname" />
 
-            <TextView
-                android:id="@+id/tvYouPaid"
-                style="@style/Text.BigDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_medium"
-                android:text="@string/you_paid"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line4" />
-
-            <TextView
-                android:id="@+id/tvCatPrice"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_extra_small"
-                android:text="after party &#183; 654gel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFullname" />
-
-            <TextView
-                android:id="@+id/tvAddress"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_extra_small"
-                android:text="Tbilis, Leselidzestr 45"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCatPrice" />
+        <TextView
+            android:id="@+id/tvAddress"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_extra_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCatPrice" />
 
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imgAuthor"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                android:src="@color/orange"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvFullname"
-                app:shapeAppearanceOverlay="@style/Circular" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgAuthor"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@color/orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvFullname"
+            app:shapeAppearanceOverlay="@style/Circular" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_star"
-                app:layout_constraintBottom_toBottomOf="@+id/tvRating"
-                app:layout_constraintEnd_toStartOf="@+id/tvRating"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@+id/imgAuthor"
-                app:layout_constraintTop_toTopOf="@+id/tvRating" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRating"
+            app:layout_constraintEnd_toStartOf="@+id/tvRating"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/imgAuthor"
+            app:layout_constraintTop_toTopOf="@+id/tvRating" />
 
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/main_margin_extra_small"
-                android:layout_marginTop="@dimen/main_margin_extra_small"
-                android:text="4.9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toBottomOf="@+id/imgAuthor" />
+        <TextView
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_margin_extra_small"
+            android:layout_marginTop="@dimen/main_margin_extra_small"
+            android:text="4.9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/imgAuthor" />
 
-            <View
-                android:id="@+id/line1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:background="@color/gray_dark"
-                app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@color/gray_dark"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
 
-            <TextView
-                android:id="@+id/tvReservationDate"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="@string/reservation_date"
-                app:layout_constraintEnd_toStartOf="@+id/tvReservationDateValue"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line1" />
+        <TextView
+            android:id="@+id/tvReservationDate"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:text="@string/reservation_date"
+            app:layout_constraintEnd_toStartOf="@+id/tvReservationDateValue"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
 
-            <TextView
-                android:id="@+id/tvReservationDateValue"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/tvReservationDate"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvReservationDate"
-                app:layout_constraintTop_toTopOf="@+id/tvReservationDate" />
+        <TextView
+            android:id="@+id/tvReservationDateValue"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvReservationDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvReservationDate"
+            app:layout_constraintTop_toTopOf="@+id/tvReservationDate" />
 
-            <View
-                android:id="@+id/line3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:background="@color/gray_dark"
-                app:layout_constraintTop_toBottomOf="@+id/tvCleaningDay"
-                tools:layout_editor_absoluteX="-2dp" />
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@color/gray_dark"
+            app:layout_constraintTop_toBottomOf="@+id/tvCleaningDay"
+            tools:layout_editor_absoluteX="-2dp" />
 
-            <TextView
-                android:id="@+id/tvCleaningTimeValue"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCleaningTime"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvCleaningTime"
-                app:layout_constraintTop_toTopOf="@+id/tvCleaningTime" />
+        <TextView
+            android:id="@+id/tvCleaningTimeValue"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCleaningTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvCleaningTime"
+            app:layout_constraintTop_toTopOf="@+id/tvCleaningTime" />
 
-            <TextView
-                android:id="@+id/tvCleaningTime"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="@string/cleaning_time"
-                app:layout_constraintEnd_toStartOf="@+id/tvCleaningTimeValue"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line3" />
+        <TextView
+            android:id="@+id/tvCleaningTime"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:text="@string/cleaning_time"
+            app:layout_constraintEnd_toStartOf="@+id/tvCleaningTimeValue"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line3" />
 
-            <View
-                android:id="@+id/line4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:background="@color/gray_dark"
-                app:layout_constraintTop_toBottomOf="@+id/tvCleaningTime"
-                tools:layout_editor_absoluteX="-1dp" />
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@color/gray_dark"
+            app:layout_constraintTop_toBottomOf="@+id/tvCleaningTime"
+            tools:layout_editor_absoluteX="-1dp" />
 
-            <TextView
-                android:id="@+id/tvCleaningDayValue"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/tvCleaningDay"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvCleaningDay"
-                app:layout_constraintTop_toTopOf="@+id/tvCleaningDay" />
+        <TextView
+            android:id="@+id/tvCleaningDayValue"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCleaningDay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvCleaningDay"
+            app:layout_constraintTop_toTopOf="@+id/tvCleaningDay" />
 
 
-            <TextView
-                android:id="@+id/tvCleaningDay"
-                style="@style/Text.SmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="Cleaning day"
-                app:layout_constraintEnd_toStartOf="@+id/tvCleaningDayValue"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line2" />
+        <TextView
+            android:id="@+id/tvCleaningDay"
+            style="@style/Text.SmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:text="Cleaning date"
+            app:layout_constraintEnd_toStartOf="@+id/tvCleaningDayValue"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
 
 
-            <View
-                android:id="@+id/line2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:background="@color/gray_dark"
-                app:layout_constraintTop_toBottomOf="@+id/tvReservationDate"
-                tools:layout_editor_absoluteX="-7dp" />
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:background="@color/gray_dark"
+            app:layout_constraintTop_toBottomOf="@+id/tvReservationDate"
+            tools:layout_editor_absoluteX="-7dp" />
 
-            <TextView
-                android:id="@+id/tvCancelReservation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_margin_small"
-                android:text="@string/cancel_reservation"
-                android:textColor="@color/text_red"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="@+id/line6"
-                app:layout_constraintStart_toStartOf="@+id/line6"
-                app:layout_constraintTop_toBottomOf="@id/line6"
-                tools:layout_editor_absoluteY="623dp" />
+        <TextView
+            android:id="@+id/tvCancelReservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/main_margin_small"
+            android:text="@string/cancel_reservation"
+            android:textColor="@color/text_red"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/line6"
+            app:layout_constraintStart_toStartOf="@+id/line6"
+            app:layout_constraintTop_toBottomOf="@id/line6"
+            tools:layout_editor_absoluteY="623dp" />
 
             <TextView
                 android:id="@+id/tvAddReview"
@@ -342,24 +330,21 @@
                 tools:layout_editor_absoluteY="623dp" />
 
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/progress"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/progress" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progress"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/progress" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </ScrollView>
-
-
-</LinearLayout>
+</ScrollView>

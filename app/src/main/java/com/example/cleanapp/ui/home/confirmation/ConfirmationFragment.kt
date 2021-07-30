@@ -62,6 +62,14 @@ class ConfirmationFragment :
                 showCardDialog()
             }
             confirm = {
+                if (viewModel.cards.isEmpty()) {
+                    showErrorDialog("Add card")
+                } else {
+                    order.masterUid = master.user?.uid
+                    order.clientUid = viewModel.getUserId()
+                    order.reservationDate = Date().time
+                    viewModel.confirmOrder(order)
+                }
                 viewModel.getCurrentUser().let {
                     val message = Message(
                         "hi, ${master.user!!.name}",
@@ -84,6 +92,7 @@ class ConfirmationFragment :
                 order.reservationDate = Date().time
                 viewModel.confirmOrder(order)
             }
+
             setCurrentCard = {
                 viewModel.currentCard = it
             }
@@ -106,7 +115,6 @@ class ConfirmationFragment :
                 }
 
                 is ResultHandler.Error -> {
-                    showErrorDialog(it.message)
                     binding.progress.gone()
                 }
 
@@ -180,10 +188,10 @@ class ConfirmationFragment :
             bindingDialog.root,
             width = ViewGroup.LayoutParams.MATCH_PARENT
         )
+        bindingDialog.btnAdd.isClickable = false
 
         cardDialog.show()
         with(cardDialog) {
-
             window?.attributes?.windowAnimations = R.style.DialogAnimation
             window?.setGravity(Gravity.BOTTOM)
             bindingDialog.btnClose.setOnClickListener {
@@ -205,18 +213,20 @@ class ConfirmationFragment :
                 val cvv = (binding.etCvvInput.text ?: "").toString()
                 val holder = (binding.etCardHolderInput.text ?: "").toString().trim()
 
-                viewModel.addCard(
-                    Card(
-                        number, holder, valid, cvv
+                if (number.length == 16 || valid.length == 4 || cvv.length == 3 || holder.length > 3) {
+                    viewModel.addCard(
+                        Card(
+                            number, holder, valid, cvv
+                        )
                     )
-                )
-
+                }
                 dialog.cancel()
             }
 
             etCardNumberInput.doOnTextChanged { s, start, before, n ->
                 validateInput(binding)
                 val inputLength = s.toString().length
+                binding.btnAdd.isClickable = s.toString().replace(" ", "").length == 16
                 if ((inputLength == 4 ||
                             inputLength == 9 || inputLength == 14) && before == 0
                 ) {
@@ -241,6 +251,7 @@ class ConfirmationFragment :
             etValidInput.doOnTextChanged { s, start, before, n ->
                 validateInput(binding)
                 val inputLength = s.toString().length
+                binding.btnAdd.isClickable = s.toString().replace("/", "").length == 4
                 if (inputLength == 2 && before == 0) {
                     binding.etValidInput.setText(s.toString() + "/")
 
@@ -258,7 +269,16 @@ class ConfirmationFragment :
 
 
             etCardHolderInput.doOnTextChanged { s, start, before, n ->
+                if (s != null) {
+                    binding.btnAdd.isClickable = s.toString().replace(" ", "").length > 2
+                }
                 validateInput(binding)
+            }
+
+            etCvvInput.doOnTextChanged { s, start, before, n ->
+                if (s != null) {
+                    binding.btnAdd.isClickable = s.toString().replace(" ", "").length == 3
+                }
             }
 
         }

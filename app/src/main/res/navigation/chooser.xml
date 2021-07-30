@@ -14,9 +14,9 @@
             android:id="@+id/action_cityChooserFragment_to_roomChooserFragment"
             app:destination="@id/roomChooserFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
     </fragment>
     <fragment
         android:id="@+id/categoryChooserFragment"
@@ -27,9 +27,9 @@
             android:id="@+id/action_categoryChooserFragment_to_chooserDateFragment"
             app:destination="@id/chooserDateFragment2"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
     </fragment>
     <fragment
         android:id="@+id/chooserDateFragment2"
@@ -40,23 +40,23 @@
             android:id="@+id/action_chooserDateFragment_to_roomChooserFragment"
             app:destination="@id/roomChooserFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_chooserDateFragment_to_categoryChooserFragment"
             app:destination="@id/categoryChooserFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_chooserDateFragment_to_cityChooserFragment"
             app:destination="@id/cityChooserFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
     </fragment>
     <fragment
         android:id="@+id/roomChooserFragment"
@@ -67,15 +67,15 @@
             android:id="@+id/action_roomChooserFragment_to_cityChooserFragment"
             app:destination="@id/cityChooserFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_roomChooserFragment_to_chooserDateFragment"
             app:destination="@id/chooserDateFragment2"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
     </fragment>
 </navigation>
