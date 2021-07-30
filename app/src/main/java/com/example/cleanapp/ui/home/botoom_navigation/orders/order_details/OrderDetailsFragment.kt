@@ -59,23 +59,22 @@ class OrderDetailsFragment :
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         dialogBinding.btnAddReview.setOnClickListener {
-            if (starAdapter.selectStar < 0 || dialogBinding.etComment.text.isEmpty())
-                return
+            if (starAdapter.selectStar >= 0 && dialogBinding.etComment.text.isNotEmpty()) {
 
-            val user = viewModel.getCurrentUser()
-            val comment = Comment(
-                dialogBinding.etComment.text.toString(),
-                user.name,
-                user.imgUrl,
-                Date().time,
-            )
-            val realStars = starAdapter.selectStar + 1
-            viewModel.addReview(comment, realStars, user, master, order)
-            reviewDialog.cancel()
+                val user = viewModel.getCurrentUser()
+                val comment = Comment(
+                    dialogBinding.etComment.text.toString(),
+                    user.name,
+                    user.imgUrl,
+                    Date().time,
+                )
+                val realStars = starAdapter.selectStar + 1
+                viewModel.addReview(comment, realStars, user, master, order)
+                reviewDialog.cancel()
+            }
+
+            reviewDialog.show()
         }
-
-        reviewDialog.show()
-
     }
 
     private fun initView() {

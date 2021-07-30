@@ -26,6 +26,11 @@ class ChatFragment : BaseFragment<ChatFragmentBinding>(ChatFragmentBinding::infl
         setListeners()
         initRecycler()
         observes()
+        binding.tvTitle.text =
+            if (viewModel.getCurrentUser().name == chat.memberOne)
+                chat.memberTwo
+            else
+                chat.memberOne
     }
 
     private fun setListeners() {
