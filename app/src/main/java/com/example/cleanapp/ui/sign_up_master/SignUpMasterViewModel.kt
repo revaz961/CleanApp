@@ -40,6 +40,7 @@ class SignUpMasterViewModel @Inject constructor(
     private val _masterCreateLiveData = MutableLiveData<ResultHandler<Boolean>>()
     val masterCreateLiveData: LiveData<ResultHandler<Boolean>> = _masterCreateLiveData
 
+
     fun getCities() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {

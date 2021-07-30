@@ -172,6 +172,11 @@
     <string name="sign_up">Sign up</string>
     <string name="rate_your_master">Rate your master</string>
     <string name="leave_comment">Leave comment</string>
+    <string name="ok">Ok</string>
+    <string name="button_close">button_close</string>
+    <string name="choose_your_city">Choose your city</string>
+    <string name="choose_your_categories">Choose your categories</string>
+    <string name="choose_your_languages">Which languages do you speak?</string>
 
 
 </resources>
