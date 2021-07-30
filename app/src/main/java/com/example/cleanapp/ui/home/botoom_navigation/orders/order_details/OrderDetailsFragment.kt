@@ -43,7 +43,7 @@ class OrderDetailsFragment :
             when (order.status) {
                 OrderStatusEnum.ONGOING.status -> {
                     tvOrderStatus.setTextById(R.string.ongoing)
-                    tvOrderStatus.setTextColor(Color.GREEN)
+                    tvOrderStatus.setTextColor(resources.getColor(R.color.text_green))
                 }
                 OrderStatusEnum.FINISHED.status -> {
                     tvOrderStatus.setTextById(R.string.finished)
@@ -84,9 +84,13 @@ class OrderDetailsFragment :
                 order.price,
                 order.duration!!.minuteToHoursFloat()
             )
-            tvServiceFeeValue.text = cleaningFee.roundToDecimal().toString()
-            tvCategoryFeeValue.text = serviceFee.roundToDecimal().toString()
-            tvTotalValue.text = totalFee.roundToDecimal().toString()
+//
+//            tvServiceFeeValue.text = cleaningFee.roundToDecimal().toString()
+//            tvCategoryFeeValue.text = serviceFee.roundToDecimal().toString()
+//            tvTotalValue.text = totalFee.roundToDecimal().toString()
+            tvServiceFeeValue.text = order.getServiceFee().roundToDecimal().toString()
+            tvCategoryFeeValue.text = order.getCleaningPrice().roundToDecimal().toString()
+            tvTotalValue.text = order.getTotalPrice().roundToDecimal().toString()
 
             if (order.status == OrderStatusEnum.ONGOING.status) {
                 tvCancelReservation.setOnClickListener {

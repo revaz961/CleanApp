@@ -20,7 +20,7 @@
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/to_top</item>
-        <item name="android:windowExitAnimation">@anim/to_bottom</item>
+        <item name="android:windowExitAnimation">@anim/pivot_out</item>
     </style>
 
     <style name="Chooser.Instructions" parent="Widget.AppCompat.TextView">

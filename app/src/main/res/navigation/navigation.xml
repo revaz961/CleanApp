@@ -17,20 +17,20 @@
             android:id="@+id/action_masterReserveFragment_to_availabilityFragment"
             app:destination="@id/availabilityFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_masterReserveFragment_to_cancellationFragment"
             app:destination="@id/cancellationFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_masterReserveFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_masterReserveFragment_to_chatFragment2"
             app:destination="@id/chatFragment2" />
@@ -44,9 +44,9 @@
         android:id="@+id/action_masterReserveFragment_to_cancellationFragment"
         app:destination="@id/cancellationFragment"
         app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
+        app:exitAnim="@anim/pivot_out"
         app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:popExitAnim="@anim/pivot_out" />
     <action
         android:id="@+id/action_masterResultsFragment_to_masterReserveFragment"
         app:destination="@id/masterReserveFragment" />
@@ -81,9 +81,9 @@
         android:id="@+id/action_masterReserveFragment_to_availabilityFragment"
         app:destination="@id/availabilityFragment"
         app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
+        app:exitAnim="@anim/pivot_out"
         app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:popExitAnim="@anim/pivot_out" />
     <fragment
         android:id="@+id/masterResultsFragment"
         android:name="com.example.cleanapp.ui.home.master_results.MasterResultsFragment"
@@ -92,7 +92,10 @@
         <action
             android:id="@+id/action_masterResultsFragment_to_masterReserveFragment"
             app:destination="@id/masterReserveFragment"
-            app:exitAnim="@anim/fade_out" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/confirmationFragment"
@@ -142,17 +145,17 @@
             android:id="@+id/action_SignInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/pivot_out"
             app:popUpTo="@id/navigation" />
         <action
             android:id="@+id/action_SignInFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/pivot_out"
             app:popUpTo="@id/navigation" />
     </fragment>
     <fragment
@@ -164,17 +167,17 @@
             android:id="@+id/action_signUpFragment_to_SignInFragment"
             app:destination="@id/SignInFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom"
+            app:popExitAnim="@anim/pivot_out"
             app:popUpTo="@id/navigation" />
         <action
             android:id="@+id/action_signUpFragment_to_signUpMasterFragment"
             app:destination="@id/signUpMasterFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
     </fragment>
     <action
         android:id="@+id/action_global_chooserFragment"
@@ -184,9 +187,9 @@
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
         app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
+        app:exitAnim="@anim/pivot_out"
         app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom"
+        app:popExitAnim="@anim/pivot_out"
         app:popUpTo="@id/navigation" />
     <fragment
         android:id="@+id/signUpMasterFragment"
@@ -197,31 +200,31 @@
             android:id="@+id/action_signUpMasterFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
         <action
             android:id="@+id/action_signUpMasterFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/to_top"
-            app:exitAnim="@anim/to_bottom"
+            app:exitAnim="@anim/pivot_out"
             app:popEnterAnim="@anim/to_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:popExitAnim="@anim/pivot_out" />
     </fragment>
     <action
         android:id="@+id/action_global_SignInFragment"
         app:destination="@id/SignInFragment"
         app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
+        app:exitAnim="@anim/pivot_out"
         app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:popExitAnim="@anim/pivot_out" />
     <action
         android:id="@+id/action_global_signUpMasterFragment"
         app:destination="@id/signUpMasterFragment"
         app:enterAnim="@anim/to_top"
-        app:exitAnim="@anim/to_bottom"
+        app:exitAnim="@anim/pivot_out"
         app:popEnterAnim="@anim/to_top"
-        app:popExitAnim="@anim/to_bottom" />
+        app:popExitAnim="@anim/pivot_out" />
     <action
         android:id="@+id/action_global_masterResultsFragment"
         app:destination="@id/masterResultsFragment"

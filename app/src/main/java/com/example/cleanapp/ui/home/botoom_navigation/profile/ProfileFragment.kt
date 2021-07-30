@@ -6,6 +6,8 @@ import androidx.navigation.findNavController
 import com.example.cleanapp.R
 import com.example.cleanapp.base.BaseFragment
 import com.example.cleanapp.databinding.ProfileFragmentBinding
+import com.example.cleanapp.extensions.load
+import com.example.cleanapp.extensions.loadFromStorage
 import com.example.cleanapp.models.ResultHandler
 import com.example.cleanapp.models.User
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,10 +27,12 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
             requireActivity().findNavController(R.id.nav_host_fragment)
                 .navigate(R.id.action_global_SignInFragment)
         }
+
     }
 
     private fun init() {
         profileViewModel.getUser()
+
     }
 
     private fun setListeners() {
@@ -47,6 +51,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>(ProfileFragmentBind
             when (it) {
                 is ResultHandler.Success -> {
                     user = it.data!!
+                    it.data.imgUrl?.let { it1 -> binding.imgAuthor2.loadFromStorage(it1) }
                 }
                 is ResultHandler.Error -> showErrorDialog(it.message)
                 is ResultHandler.Loading -> {

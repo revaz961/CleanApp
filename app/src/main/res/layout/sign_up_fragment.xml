@@ -20,7 +20,7 @@
             android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sing_up"
+            android:text="@string/sign_up"
             android:textColor="@color/text_auth_primary"
             android:textSize="40sp"
             android:textStyle="bold"
@@ -29,16 +29,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btnImage"
-            android:layout_width="50dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_add_circle"
-            app:layout_constraintTop_toTopOf="@id/tvSignUp"
-            app:shapeAppearanceOverlay="@style/Circular"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:scaleType="centerCrop"
+            android:src="@drawable/ic_empty_img"
             app:layout_constraintBottom_toBottomOf="@id/tvSignUp"
-            app:layout_constraintStart_toEndOf="@id/tvSignUp"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="@id/tvSignUp"
+            app:shapeAppearanceOverlay="@style/Circular" />
 
         <EditText
             android:id="@+id/editName"
