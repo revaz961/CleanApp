@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanapp.R
 import com.example.cleanapp.databinding.VhReviewStarBinding
-import com.example.cleanapp.extensions.setImageTintColor
 
 class ReviewStarAdapter : RecyclerView.Adapter<ReviewStarAdapter.StarViewHolder>() {
     companion object {
         const val MAX_STAR_COUNT = 5
-        var selectStar = -1
     }
+
+    var selectStar = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StarViewHolder {
         return StarViewHolder(
@@ -34,7 +34,9 @@ class ReviewStarAdapter : RecyclerView.Adapter<ReviewStarAdapter.StarViewHolder>
         fun bind() {
 
             if (adapterPosition <= selectStar)
-                binding.root.setImageTintColor(R.color.category_party)
+                binding.root.setImageResource(R.drawable.ic_star_fill)
+            else
+                binding.root.setImageResource(R.drawable.ic_star_outline)
 
             binding.root.setOnClickListener {
                 selectStar = adapterPosition

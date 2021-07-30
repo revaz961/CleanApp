@@ -31,7 +31,6 @@ class ConfirmationRepository @Inject constructor(
         }.addOnFailureListener {
             action(ResultHandler.Error(null, it.message!!))
         }
-        //todo send notification
     }
 
     fun addCard(card: Card, action: OnLoad) {

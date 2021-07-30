@@ -47,11 +47,23 @@ data class Review(
 
     @get:PropertyName("stars")
     @set:PropertyName("stars")
-    var stars: List<Float>? = null
+    var stars: List<Float>? = null,
+
+    @get:PropertyName("review_id")
+    @set:PropertyName("review_id")
+    var reviewId: String? = null
 ) : Parcelable
 
 @Parcelize
 data class Comment(
+    @get:PropertyName("comment")
+    @set:PropertyName("comment")
+    var comment: String? = null,
+
+    @get:PropertyName("author")
+    @set:PropertyName("author")
+    var author: String? = null,
+
     @get:PropertyName("img_url")
     @set:PropertyName("img_url")
     var imageUrl: String? = null,
@@ -60,13 +72,10 @@ data class Comment(
     @set:PropertyName("date_at")
     var dateAt: Long? = null,
 
-    @get:PropertyName("author")
-    @set:PropertyName("author")
-    var author: String? = null,
+    @get:PropertyName("comment_id")
+    @set:PropertyName("comment_id")
+    var commentId: String? = null
 
-    @get:PropertyName("comment")
-    @set:PropertyName("comment")
-    var comment: String? = null,
 ) : Parcelable
 
 @Parcelize

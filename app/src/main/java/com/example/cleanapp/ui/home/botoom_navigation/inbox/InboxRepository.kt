@@ -14,8 +14,7 @@ typealias OnLoad = (ResultHandler<String>) -> Unit
 
 class InboxRepository @Inject constructor(
     private val auth: FirebaseAuth,
-    private val dbRef: DatabaseReference,
-    private val dbHelperRepo: RealTimeDBHelperRepository
+    private val dbRef: DatabaseReference
 ) {
 
     fun getChats(action: OnLoadChats) {

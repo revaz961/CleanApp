@@ -8,7 +8,7 @@
     android:padding="@dimen/main_margin_medium">
 
     <TextView
-        android:id="@+id/btnCall"
+        android:id="@+id/tvTitle"
         style="@style/Text.MediumDark"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -27,20 +27,20 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnReport"
+        android:id="@+id/btnAddReview"
         style="@style/Text.MediumDark"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:minWidth="300dp"
-        android:text="Ok"
+        android:text="@string/ok"
         android:textColor="@color/skip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/etComment" />
 
     <ImageButton
         android:id="@+id/btnClose"
@@ -53,17 +53,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStars"
-        android:layout_width="95dp"
-        android:layout_height="275dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginBottom="@dimen/main_margin_medium"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/etComment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCall" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etComment"
         style="@style/Text.MediumDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:maxWidth="150dp"
         android:maxLines="2"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/btnReport"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddReview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
