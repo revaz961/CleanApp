@@ -86,7 +86,6 @@ class ConfirmationFragment :
                         )
                     }
 
-
                     order.masterUid = master.user?.uid
                     order.clientUid = viewModel.getUserId()
                     order.reservationDate = Date().time

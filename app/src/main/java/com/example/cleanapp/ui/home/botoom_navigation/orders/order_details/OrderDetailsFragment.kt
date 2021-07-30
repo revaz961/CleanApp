@@ -50,6 +50,8 @@ class OrderDetailsFragment :
         val dialogBinding = ReviewDialogBinding.inflate(layoutInflater)
         reviewDialog.init(dialogBinding.root)
 
+        reviewDialog.show()
+
         dialogBinding.btnClose.setOnClickListener {
             reviewDialog.cancel()
         }
@@ -72,8 +74,6 @@ class OrderDetailsFragment :
                 viewModel.addReview(comment, realStars, user, master, order)
                 reviewDialog.cancel()
             }
-
-            reviewDialog.show()
         }
     }
 
