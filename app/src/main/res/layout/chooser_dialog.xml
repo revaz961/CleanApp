@@ -4,18 +4,27 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/main_bg_gradient"
+    android:background="@drawable/bg_main_white_blue_round"
     android:minWidth="250dp"
     android:orientation="vertical"
     android:padding="@dimen/main_padding_small">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/main_margin_small"
-        android:tint="@color/background_blue" />
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/ivIcon"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginBottom="@dimen/main_margin_small"-->
+<!--        android:tint="@color/background_blue" />-->
+
+    <EditText
+        android:id="@+id/etInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/choose_your_city"
+        android:textColorHint="@color/orange_light"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChooser"
@@ -28,7 +37,11 @@
         android:id="@+id/btnChoose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_gravity="center"
+        android:background="@drawable/btn_blue"
         android:layout_marginTop="@dimen/main_margin_small" />
+
+
 
 </LinearLayout>

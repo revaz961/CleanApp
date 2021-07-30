@@ -105,7 +105,7 @@ class SignUpMasterFragment :
         }
         dialogBinding.rvChooser.adapter = cityAdapter
         dialogBinding.rvChooser.layoutManager = LinearLayoutManager(requireContext())
-        dialogBinding.ivIcon.setImageResource(R.drawable.ic_city)
+        dialogBinding.etInput.hint = getString(R.string.choose_your_city)
         dialogBinding.btnChoose.text = getString(R.string.close)
         dialogBinding.btnChoose.setOnClickListener {
             dialog.cancel()
@@ -120,7 +120,8 @@ class SignUpMasterFragment :
         dialog.init(dialogBinding.root)
         dialogBinding.rvChooser.adapter = categoryAdapter
         dialogBinding.rvChooser.layoutManager = LinearLayoutManager(requireContext())
-        dialogBinding.ivIcon.setImageResource(R.drawable.ic_category)
+        dialogBinding.etInput.setText(getString(R.string.choose_your_categories))
+        dialogBinding.etInput.isEnabled = false
         dialogBinding.btnChoose.text = getString(R.string.choose)
 
         dialogBinding.btnChoose.setOnClickListener {
@@ -145,10 +146,9 @@ class SignUpMasterFragment :
 
         dialogBinding.rvChooser.adapter = languageAdapter
         dialogBinding.rvChooser.layoutManager = LinearLayoutManager(requireContext())
-        dialogBinding.ivIcon.setImageResource(R.drawable.ic_language)
+        dialogBinding.etInput.setText(getString(R.string.choose_your_categories))
+        dialogBinding.etInput.isEnabled = false
         dialogBinding.btnChoose.text = getString(R.string.choose)
-
-
         dialogBinding.btnChoose.setOnClickListener {
             dialog.cancel()
             val text = viewModel.languages.filter { it.second }.fold("") { acc, language ->

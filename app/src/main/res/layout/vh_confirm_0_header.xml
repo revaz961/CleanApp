@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/main_margin_extra_small"
@@ -36,21 +37,20 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/main_margin_extra_small"
+        android:contentDescription="@string/rating_start"
         app:layout_constraintBottom_toBottomOf="@+id/tvRatingName"
-        app:layout_constraintEnd_toStartOf="@+id/tvRatingName"
+        app:layout_constraintStart_toStartOf="@+id/tvRooms"
         app:layout_constraintTop_toTopOf="@+id/tvRatingName"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_star"
-        android:contentDescription="@string/rating_start" />
+        app:srcCompat="@drawable/ic_star" />
 
     <TextView
         android:id="@+id/tvRatingName"
         style="@style/Text.MediumDark"
-        android:layout_marginEnd="@dimen/main_margin_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rating_name"
-        app:layout_constraintEnd_toStartOf="@+id/imgAuthor"
+        android:layout_marginStart="@dimen/main_margin_extra_small"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/tvRooms" />
 </androidx.constraintlayout.widget.ConstraintLayout>
