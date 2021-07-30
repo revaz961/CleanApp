@@ -44,7 +44,9 @@ class MessagesAdapter : BaseAdapter<Chat>() {
             binding.imgRead.showIf(
                 !data.lastMessage!!.isRead && data.lastMessage!!.senderId != userId
             )
-            binding.imgMessageAuthor.loadFromStorage(data.lastMessage!!.senderImage)
+            binding.imgMessageAuthor.loadFromStorage(
+                if (data.memberOne!! == userName) data.memberTwoImage!! else data.memberOneImage!!
+            )
             binding.tvMessageAuthorName.text =
                 if (data.memberOne != userName) data.memberOne else data.memberTwo
             binding.tvMessageContent.text = data.lastMessage?.message

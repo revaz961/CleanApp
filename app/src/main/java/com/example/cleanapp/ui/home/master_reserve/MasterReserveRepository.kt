@@ -20,7 +20,7 @@ class MasterReserveRepository @Inject constructor(
     fun startChat(master: Master, action: (ResultHandler<Chat>) -> Unit) {
         val user = userData.getUser()
         val firstMember = "${user.uid}_${master.user!!.uid}"
-        val message =Message(
+        val message = Message(
             "hi ${master.user!!.name}",
             user.uid!!,
             user.name!!,
@@ -29,7 +29,13 @@ class MasterReserveRepository @Inject constructor(
             false
         )
 
-        val chat = Chat(message,memberOne = user.name,memberTwo = master.user!!.name)
+        val chat = Chat(
+            message,
+            memberOne = user.name,
+            memberTwo = master.user!!.name,
+            memberOneImage = user.imgUrl,
+            memberTwoImage = master.user!!.imgUrl
+        )
 
         dbRef.child("members").orderByChild(firstMember).equalTo(true)
             .addListenerForSingleValueEvent(object : ValueEventListener {

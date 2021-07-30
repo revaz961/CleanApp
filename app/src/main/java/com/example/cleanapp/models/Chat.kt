@@ -13,15 +13,23 @@ data class Chat(
 
     @get:PropertyName("chat_id")
     @set:PropertyName("chat_id")
-    var chatId:String = "",
+    var chatId: String = "",
 
     @get:PropertyName("member_one")
     @set:PropertyName("member_one")
-    var memberOne:String? = null,
+    var memberOne: String? = null,
 
     @get:PropertyName("member_two")
     @set:PropertyName("member_two")
-    var memberTwo:String? = null
+    var memberTwo: String? = null,
+
+    @get:PropertyName("member_one_image")
+    @set:PropertyName("member_one_image")
+    var memberOneImage: String? = null,
+
+    @get:PropertyName("member_two_image")
+    @set:PropertyName("member_two_image")
+    var memberTwoImage: String? = null
 
 ) : Parcelable
 
@@ -45,10 +53,10 @@ data class Message(
 
     @get:PropertyName("is_read")
     @set:PropertyName("is_read")
-    var isRead:Boolean = false,
+    var isRead: Boolean = false,
 
     @get:PropertyName("message_id")
     @set:PropertyName("message_id")
-    var messageId:String? = null
+    var messageId: String? = null
 
 ) : Parcelable

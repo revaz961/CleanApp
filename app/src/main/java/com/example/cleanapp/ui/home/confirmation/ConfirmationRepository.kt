@@ -53,6 +53,8 @@ class ConfirmationRepository @Inject constructor(
                     message.messageId = newKey
                     chat.memberOne = user.name
                     chat.memberTwo = master.user!!.name
+                    chat.memberOneImage = user.imgUrl
+                    chat.memberTwoImage = master.user!!.imgUrl
                     val firstMember = "${user.uid}_${master.user!!.uid}"
 
                     if (snapshot.exists()) {
