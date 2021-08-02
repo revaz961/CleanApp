@@ -52,8 +52,11 @@ class MasterResultsRepository @Inject constructor(
 
                                         dbRef.child("reviews/$key/comments").orderByKey()
                                             .limitToFirst(1).get()
-                                            .addOnSuccessListener {
-                                                master?.lastComments = it.getValue<List<Comment>>()
+                                            .addOnSuccessListener { it ->
+                                                val map = it.getValue<HashMap<String,Comment>>()
+                                                map?.values?.toList().let{ comments ->
+                                                    master?.lastComments = comments
+                                                }
                                             }.addOnCompleteListener {
                                                 syncList[1] = true
                                                 if (syncList.all { it } && masters.size == masterCount)
